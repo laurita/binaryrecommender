@@ -10,7 +10,7 @@ import models.User;
 public class Users extends Controller {
 	
 	public static Result list() {
-		List<User> users = User.findAll();
+		List<User> users = User.find.all();
 		return ok(list.render(users));
 	}
 	
