@@ -9,15 +9,24 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Movie title</th>
-								<th>Movie description</th>	
+								<th>Movie</th>
+								<th></th>	
+								<th>Rating</th>	
 							</tr>
 						</thead>
 						<tbody>
 							@for(movie <- movies) {
 								<tr>
-									<td><a href="@routes.Movies.details(movie.id)">@movie.title</a></td>
-									<td>@movie.description</td>
+									<td>
+										<figure>
+										    <img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+										    <figcaption><a href="@routes.Movies.details(movie.id)">@movie.title</a></figcaption>
+										</figure>
+									</td>
+									<td>
+										@movie.description
+									</td>
+									<td>stars</td>
 								</tr>
 							}
 						</tbody>
