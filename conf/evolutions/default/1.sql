@@ -5,7 +5,6 @@
 
 create table user (
   email                     varchar(255) not null,
-  password                  varchar(255),
   constraint pk_user primary key (email))
 ;
 

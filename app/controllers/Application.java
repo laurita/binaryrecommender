@@ -11,11 +11,10 @@ public class Application extends Controller {
 	
 	public static class Login {
 		public String email;
-		public String password;
 
 		public String validate() {
-			if (User.authenticate(email, password) == null) {
-				return "Invalid email or/and password";
+			if (User.authenticate(email) == null) {
+				return "Invalid email";
 			}
 			return null;
 		}

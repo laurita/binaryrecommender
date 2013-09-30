@@ -1,0 +1,11 @@
+
+# Users
+
+- &bob !!models.User
+    email:      bob@example.com
+
+- &jane !!models.User
+    email:      jane@example.com
+
+- &jeff !!models.User
+    email:      jeff@example.com

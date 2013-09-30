@@ -5,32 +5,24 @@ users:
 
     - !!models.User
         email:      user1@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user2@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user3@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user4@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user5@gmail.com
-        password:   secret
     
     - !!models.User
         email:      user6@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user7@gmail.com
-        password:   secret
 
     - !!models.User
         email:      user8@gmail.com
-        password:   secret

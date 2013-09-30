@@ -39,17 +39,14 @@ public class User extends Model {
 		
 	@Id
 	public String email;
-	@Constraints.Required
-	public String password; 
 	
 	//@Constraints.Required
 	//@Constraints.Email
 	
 	public User() {}
 	
-	public User(String email, String password) {
+	public User(String email) {
 		this.email = email;
-		this.password = password;
 	}
 	
 	public static Finder<String,User> find = new Finder<String,User>(
@@ -72,9 +69,8 @@ public class User extends Model {
 		return null;
 	}
 	
-	public static User authenticate(String email, String password) {
-		return find.where().eq("email", email)
-			.eq("password", password).findUnique();
+	public static User authenticate(String email) {
+		return find.where().eq("email", email).findUnique();
 	}
 
 	public static boolean remove(User user) {
