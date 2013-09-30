@@ -47,7 +47,7 @@ public class Application extends Controller {
 		Form<Register> registerForm = form(Register.class).bindFromRequest();
 		String email = registerForm.field("email").value();
 		if (registerForm.hasErrors()) {
-			flash("error", String.format("User %s could not be saved. Maybe the user with such email already exists.", email));
+			flash("error", String.format("User %s already exists.", email));
 			return badRequest(register.render(registerForm));
 		} else {
 			Ebean.save(new User(email));
