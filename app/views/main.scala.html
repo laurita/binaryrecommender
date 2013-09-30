@@ -28,6 +28,15 @@
 						<li><a href="#contact">Contact</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
+				
+				@if(session.get("email")) {
+					<div class="nav-collapse collapse">
+						<p class="navbar-text pull-right">
+							<a href="@routes.Application.logout()" class="navbar-link">Log out</a>
+						</p>
+					</div><!--/.nav-collapse -->
+				}
+				
 			</div>
 		</div>
 	</div>

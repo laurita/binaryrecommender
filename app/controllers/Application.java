@@ -24,11 +24,19 @@ public class Application extends Controller {
 	public static Result index() {
 		return ok(
 			index.render("Index")
-		);
+				);
 	}
 		
 	public static Result login() {
 		return ok(login.render(form(Login.class)));
+	}
+	
+	public static Result logout() {
+		session().clear();
+		flash("success", "You've been logged out");
+		return redirect(
+			routes.Application.login()
+		);
 	}
 	
 	public static Result authenticate() {
@@ -43,7 +51,7 @@ public class Application extends Controller {
 
 			return redirect(
 				routes.Application.index()
-			);
+					);
 				
 		}
 	}
