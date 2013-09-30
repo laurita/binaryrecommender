@@ -44,6 +44,7 @@ public class Application extends Controller {
 		Form<Login> loginForm = form(Login.class).bindFromRequest();
 		
 		if (loginForm.hasErrors()) {
+			flash("error", String.format("User %s does not exist", loginForm.field("email").value()));
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
