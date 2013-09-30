@@ -3,58 +3,40 @@ package models;
 import play.data.validation.Constraints;
 import java.util.List;
 import java.util.ArrayList;
+import javax.persistence.*;
+import play.db.ebean.*;
 
-public class Movie {
+@Entity
+public class Movie extends Model {
 	
-	private static List<Movie> movies;
-	  static {
-	    movies = new ArrayList<Movie>();
-	    movies.add(new Movie("2710", "Blair Witch Project, The (1999)", ""));
-	    movies.add(new Movie("1924", "Plan 9 from Outer Space (1958)", ""));
-	    movies.add(new Movie("231", "Dumb & Dumber (1994)", ""));
-	    movies.add(new Movie("2657", "Rocky Horror Picture Show, The (1975)", ""));
-	    movies.add(new Movie("288", "Natural Born Killers (1994)", ""));
-			movies.add(new Movie("2700", "South Park: Bigger, Longer and Uncut (1999)", ""));
-			movies.add(new Movie("2712", "Eyes Wide Shut (1999)", ""));
-			movies.add(new Movie("1676", "Starship Troopers (1997)", ""));
-			movies.add(new Movie("1917", "Armageddon (1998)", ""));
-			movies.add(new Movie("1721", "Titanic (1997)", ""));
-			movies.add(new Movie("2427", "Thin Red Line, The (1998)", ""));
-			movies.add(new Movie("1391", "Mars Attacks! (1996)", ""));
-			movies.add(new Movie("2628", "Star Wars: Episode I - The Phantom Menace (1999)", ""));
-			movies.add(new Movie("2459", "Texas Chainsaw Massacre, The (1974)", ""));
-			movies.add(new Movie("1183", "English Patient, The (1996)", ""));
-			movies.add(new Movie("2683", "Austin Powers: The Spy Who Shagged Me (1999)", ""));
-			movies.add(new Movie("3785", "Scary Movie (2000)", ""));
-			movies.add(new Movie("2384", "Babe: Pig in the City (1998)", ""));
-			movies.add(new Movie("327", "Tank Girl (1995)", ""));
-			movies.add(new Movie("3608", "Pee-wee's Big Adventure (1985)", ""));
-		}
-	
+	@Id
 	@Constraints.Required
 	public String id;
 	@Constraints.Required
-	public String name;
+	public String title;
 	public String description;
 	
 	public Movie() {}
 	
-	public Movie(String id, String name, String description) {
+	public Movie(String id, String title, String description) {
 		this.id = id;
-		this.name = name;
+		this.title = title;
 		this.description = description;
 	}
 	
 	public String toString() {
-		return String.format("%s - %s", id, name);
+		return String.format("%s - %s", id, title);
 	}
+	
+	public static Finder<String,Movie> find = new Finder<String,Movie>(
+		String.class, Movie.class);
 
 	public static List<Movie> findAll() {
-		return new ArrayList<Movie>(movies);
+		return find.all();
 	}
 	
 	public static Movie findById(String id) {
-		for (Movie candidate : movies) {
+		for (Movie candidate : find.all()) {
 			if (candidate.id.equals(id)) {
 				return candidate;
 			}
@@ -62,10 +44,10 @@ public class Movie {
 		return null;
 	}
 			
-	public static List<Movie> findByName(String term) {
+	public static List<Movie> findByTitle(String title) {
 		final List<Movie> results = new ArrayList<Movie>();
-		for (Movie candidate : movies) {
-			if (candidate.name.toLowerCase().contains(term.toLowerCase())) {
+		for (Movie candidate : find.all()) {
+			if (candidate.title.toLowerCase().contains(title.toLowerCase())) {
 				results.add(candidate);
 			}
 		}
@@ -73,16 +55,16 @@ public class Movie {
 	}
 	
 	public static boolean remove(Movie movie) {
-		return movies.remove(movie);
+		return find.all().remove(movie);
 	}
 	
 	public static void add(Movie movie) {
-		movies.add(movie);
+		find.all().add(movie);
 	}
 	
 	public void save() {
-		movies.remove(findById(this.id));
-		movies.add(this);
+		find.all().remove(findById(this.id));
+		find.all().add(this);
 	}
 
 }

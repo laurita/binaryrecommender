@@ -26,3 +26,85 @@ users:
 
     - !!models.User
         email:      user8@gmail.com
+
+movies:
+
+    - !!models.Movie
+        id:         2710
+        title:      'Blair Witch Project, The (1999)'
+
+    - !!models.Movie
+        id:         1924
+        title:      'Plan 9 from Outer Space (1958)'
+
+    - !!models.Movie
+        id:         231
+        title:      'Dumb & Dumber (1994)'
+
+    - !!models.Movie
+        id:         2657
+        title:      'Rocky Horror Picture Show, The (1975)'
+
+    - !!models.Movie
+        id:         288
+        title:      'Natural Born Killers (1994)'
+
+    - !!models.Movie
+        id:         2700
+        title:      'South Park: Bigger, Longer and Uncut (1999)'
+
+    - !!models.Movie
+        id:         2712
+        title:      'Eyes Wide Shut (1999)'
+
+    - !!models.Movie
+        id:         1676
+        title:      'Starship Troopers (1997)'
+
+    - !!models.Movie
+        id:         1917
+        title:      'Armageddon (1998)'
+
+    - !!models.Movie
+        id:         1721
+        title:      'Titanic (1997)'
+
+    - !!models.Movie
+        id:         2427
+        title:      'Thin Red Line, The (1998)'
+
+    - !!models.Movie
+        id:         1391
+        title:      'Mars Attacks! (1996)'
+
+    - !!models.Movie
+        id:         2628
+        title:      'Star Wars: Episode I - The Phantom Menace (1999)'
+
+    - !!models.Movie
+        id:         2459
+        title:      'Texas Chainsaw Massacre, The (1974)'
+
+    - !!models.Movie
+        id:         1183
+        title:      'English Patient, The (1996)'
+
+    - !!models.Movie
+        id:         2683
+        title:      'Austin Powers: The Spy Who Shagged Me (1999)'
+
+    - !!models.Movie
+        id:         3785
+        title:      'Scary Movie (2000)'
+
+    - !!models.Movie
+        id:         2384
+        title:      'Babe: Pig in the City (1998)'
+
+    - !!models.Movie
+        id:         327
+        title:      'Tank Girl (1995)'
+
+    - !!models.Movie
+        id:         3608
+        title:      'Pee-wee''s Big Adventure (1985)'

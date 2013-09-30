@@ -15,8 +15,11 @@ public class Global extends GlobalSettings {
 			@SuppressWarnings("unchecked")
 			Map<String,List<Object>> all = (Map<String,List<Object>>) yaml.load("initial-data.yml");
 		
-			// Insert users first
+			// Insert users
 			Ebean.save(all.get("users"));
+			
+			// Insert movies
+			Ebean.save(all.get("movies"));
 
 		}
 	}

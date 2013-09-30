@@ -16,7 +16,7 @@
 						<tbody>
 							@for(movie <- movies) {
 								<tr>
-									<td><a href="@routes.Movies.details(movie.id)">@movie.name</a></td>
+									<td><a href="@routes.Movies.details(movie.id)">@movie.title</a></td>
 									<td>@movie.description</td>
 								</tr>
 							}
