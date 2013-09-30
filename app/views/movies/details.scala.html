@@ -1,0 +1,14 @@
+@(movie: Movie)
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Movie details") {
+  <h1>Movie details</h1>
+	<dt>
+		<a href="@routes.Movies.details(movie.id)">
+			@movie.id - @movie.name
+		</a>
+	</dt>
+	<dd>@movie.description</dd>
+}

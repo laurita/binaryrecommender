@@ -1,0 +1,41 @@
+@(movies: List[Movie])
+
+@main("Movies list") {	
+	<div class="container">
+		<h2>Movie List</h2>
+		<div class="row">
+			<div class="span12">
+				<div id="list-movie" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Movie title</th>
+								<th>Movie description</th>	
+							</tr>
+						</thead>
+						<tbody>
+							@for(movie <- movies) {
+								<tr>
+									<td><a href="@routes.Movies.details(movie.id)">@movie.name</a></td>
+									<td>@movie.description</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+        
+		<div class="row">
+			<div class="span12">
+				<div class="pagination">
+					<ul>
+						<g:paginate total="${movieTotal}" />
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
