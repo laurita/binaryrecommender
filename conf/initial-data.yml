@@ -3,128 +3,330 @@
 
 users:
 
-    - !!models.User
+    - &user1 !!models.User
         email:      user1@gmail.com
 
-    - !!models.User
+    - &user2 !!models.User
         email:      user2@gmail.com
 
-    - !!models.User
+    - &user3 !!models.User
         email:      user3@gmail.com
 
-    - !!models.User
+    - &user4 !!models.User
         email:      user4@gmail.com
 
-    - !!models.User
+    - &user5 !!models.User
         email:      user5@gmail.com
     
-    - !!models.User
+    - &user6 !!models.User
         email:      user6@gmail.com
 
-    - !!models.User
+    - &user7 !!models.User
         email:      user7@gmail.com
 
-    - !!models.User
+    - &user8 !!models.User
         email:      user8@gmail.com
 
 movies:
 
-    - !!models.Movie
-        id:         2710
+    - &blair !!models.Movie
+        movieId:         2710
         title:      'Blair Witch Project, The (1999)'
         description:  'Three film students go missing after traveling into the woods of Maryland to make a documentary about the local Blair Witch legend leaving only their footage behind.'
 
-    - !!models.Movie
-        id:         1924
+    - &plan9 !!models.Movie
+        movieId:         1924
         title:      'Plan 9 from Outer Space (1958)'
         description:  'Aliens resurrect dead humans as zombies and vampires to stop human kind from creating the Solaranite (a sort of sun-driven bomb).'
 
-    - !!models.Movie
-        id:         231
+    - &dumb !!models.Movie
+        movieId:         231
         title:      'Dumb & Dumber (1994)'
         description:  'The cross-country adventures of two good-hearted but incredibly stupid friends.'
 
-    - !!models.Movie
-        id:         2657
+    - &rocky !!models.Movie
+        movieId:         2657
         title:      'Rocky Horror Picture Show, The (1975)'
-        description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre residence of Dr. Frank-N-Furter.'
+        description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre resmovieIdence of Dr. Frank-N-Furter.'
 
-    - !!models.Movie
-        id:         288
+    - &natural !!models.Movie
+        movieId:         288
         title:      'Natural Born Killers (1994)'
         description:  'Two victims of traumatized childhoods become lovers and psychopathic serial murderers irresponsibly glorified by the mass media.'
 
-    - !!models.Movie
-        id:         2700
+    - &south !!models.Movie
+        movieId:         2700
         title:      'South Park: Bigger, Longer and Uncut (1999)'
         description: 'When the four boys see an R-rated movie featuring Canadians Terrance & Phillip, they are pronounced "corrupted", and their parents pressure the United States to wage war against Canada.'
 
-    - !!models.Movie
-        id:         2712
-        title:      'Eyes Wide Shut (1999)'
+    - &eyes !!models.Movie
+        movieId:         2712
+        title:      'Eyes WmovieIde Shut (1999)'
         description:  'A New York City doctor, who is married to an art curator, pushes himself on a harrowing and dangerous night-long odyssey of sexual and moral discovery after his wife admits that she once almost cheated on him.'
 
-    - !!models.Movie
-        id:         1676
+    - &starship !!models.Movie
+        movieId:         1676
         title:      'Starship Troopers (1997)'
         description:  'Humans in a fascistic, militaristic future do battle with giant alien bugs in a fight for survival.'
 
-    - !!models.Movie
-        id:         1917
+    - &armageddon !!models.Movie
+        movieId:         1917
         title:      'Armageddon (1998)'
-        description:  'After discovering that an asteroid the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
+        description:  'After discovering that an asteromovieId the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
 
-    - !!models.Movie
-        id:         1721
+    - &titanic !!models.Movie
+        movieId:         1721
         title:      'Titanic (1997)'
         description:  'A seventeen-year-old aristocrat, expecting to be married to a rich claimant by her mother, falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.'
 
-    - !!models.Movie
-        id:         2427
+    - &thin !!models.Movie
+        movieId:         2427
         title:      'Thin Red Line, The (1998)'
         description:  'Terrence Malick''s adaptation of James Jones'' autobiographical 1962 novel, focusing on the conflict at Guadalcanal during the second World War.'
 
-    - !!models.Movie
-        id:         1391
+    - &mars !!models.Movie
+        movieId:         1391
         title:      'Mars Attacks! (1996)'
         description:  'The Earth is invaded by Martians with irresistible weapons and a cruel sense of humor.'
 
-    - !!models.Movie
-        id:         2628
+    - &star !!models.Movie
+        movieId:         2628
         title:      'Star Wars: Episode I - The Phantom Menace (1999)'
         description:  'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
 
-    - !!models.Movie
-        id:         2459
+    - &texas !!models.Movie
+        movieId:         2459
         title:      'Texas Chainsaw Massacre, The (1974)'
         description:  'Five friends visiting their grandpa''s old house are hunted down and terrorized by a chainsaw wielding killer and his family of grave-robbing cannibals.'
 
-    - !!models.Movie
-        id:         1183
+    - &english !!models.Movie
+        movieId:         1183
         title:      'English Patient, The (1996)'
         description:  'At the close of WWII, a young nurse tends to a badly-burned plane crash victim. His past is shown in flashbacks, revealing an involvement in a fateful love affair.'
 
-    - !!models.Movie
-        id:         2683
+    - &austin !!models.Movie
+        movieId:         2683
         title:      'Austin Powers: The Spy Who Shagged Me (1999)'
         description:  'Dr. Evil is back...and has invented a new time machine that allows him to go back to the 60''s and steal Austin Powers''s mojo, inadvertently leaving him "shagless".'
 
-    - !!models.Movie
-        id:         3785
+    - &scary !!models.Movie
+        movieId:         3785
         title:      'Scary Movie (2000)'
-        description:  'A year after disposing the body of a man they accidently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
+        description:  'A year after disposing the body of a man they accmovieIdently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
 
-    - !!models.Movie
-        id:         2384
+    - &babe !!models.Movie
+        movieId:         2384
         title:      'Babe: Pig in the City (1998)'
         description:  'Babe, fresh from his victory in the sheepherding contest, returns to Farmer Hoggett''s farm, but after Farmer Hoggett is injured and unable to work, Babe has to go to the big city to save the farm.'
 
-    - !!models.Movie
-        id:         327
+    - &tank !!models.Movie
+        movieId:         327
         title:      'Tank Girl (1995)'
-        description:  'Based on the British cult comic-strip, our tank-riding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
+        description:  'Based on the British cult comic-strip, our tank-rmovieIding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
 
-    - !!models.Movie
-        id:         3608
+    - &pee !!models.Movie
+        movieId:         3608
         title:      'Pee-wee''s Big Adventure (1985)'
         description:  'When eccentric man-child Pee-Wee Herman gets his beloved bike stolen in broad daylight, he sets out across the U.S. on the adventure of his life.'
+
+ratings:
+
+    - !!models.Rating
+        user:       *user1
+        movie:      *blair
+        value:      4
+
+    - !!models.Rating
+        user:       *user1
+        movie:      *texas
+        value:      5
+
+    - !!models.Rating
+        user:       *user1
+        movie:      *eyes
+        value:      5
+
+    - !!models.Rating
+        user:       *user1
+        movie:      *titanic
+        value:      1
+
+    - !!models.Rating
+        user:       *user1
+        movie:      *english
+        value:      3
+
+    - !!models.Rating
+        user:       *user2
+        movie:      *blair
+        value:      1
+
+    - !!models.Rating
+        user:       *user2
+        movie:      *plan9
+        value:      4
+
+    - !!models.Rating
+        user:       *user2
+        movie:      *dumb
+        value:      2
+
+    - !!models.Rating
+        user:       *user2
+        movie:      *starship
+        value:      5
+
+    - !!models.Rating
+        user:       *user2
+        movie:      *tank
+        value:      1
+
+    - !!models.Rating
+        user:       *user3
+        movie:      *pee
+        value:      5
+
+    - !!models.Rating
+        user:       *user3
+        movie:      *babe
+        value:      4
+
+    - !!models.Rating
+        user:       *user3
+        movie:      *scary
+        value:      5
+
+    - !!models.Rating
+        user:       *user3
+        movie:      *star
+        value:      2
+
+    - !!models.Rating
+        user:       *user3
+        movie:      *eyes
+        value:      1
+
+    - !!models.Rating
+        user:       *user4
+        movie:      *natural
+        value:      3
+
+    - !!models.Rating
+        user:       *user4
+        movie:      *armageddon
+        value:      5
+
+    - !!models.Rating
+        user:       *user4
+        movie:      *mars
+        value:      4
+
+    - !!models.Rating
+        user:       *user4
+        movie:      *tank
+        value:      2
+
+    - !!models.Rating
+        user:       *user4
+        movie:      *thin
+        value:      4
+
+    - !!models.Rating
+        user:       *user5
+        movie:      *blair
+        value:      3
+
+    - !!models.Rating
+        user:       *user5
+        movie:      *plan9
+        value:      4
+
+    - !!models.Rating
+        user:       *user5
+        movie:      *eyes
+        value:      5
+
+    - !!models.Rating
+        user:       *user5
+        movie:      *thin
+        value:      4
+
+    - !!models.Rating
+        user:       *user5
+        movie:      *english
+        value:      4
+
+    - !!models.Rating
+        user:       *user6
+        movie:      *blair
+        value:      2
+
+    - !!models.Rating
+        user:       *user6
+        movie:      *austin
+        value:      3
+
+    - !!models.Rating
+        user:       *user6
+        movie:      *dumb
+        value:      3
+
+    - !!models.Rating
+        user:       *user6
+        movie:      *starship
+        value:      4
+
+    - !!models.Rating
+        user:       *user6
+        movie:      *tank
+        value:      1
+
+    - !!models.Rating
+        user:       *user7
+        movie:      *pee
+        value:      5
+
+    - !!models.Rating
+        user:       *user7
+        movie:      *babe
+        value:      3
+
+    - !!models.Rating
+        user:       *user7
+        movie:      *scary
+        value:      4
+
+    - !!models.Rating
+        user:       *user7
+        movie:      *texas
+        value:      3
+
+    - !!models.Rating
+        user:       *user7
+        movie:      *eyes
+        value:      2
+
+    - !!models.Rating
+        user:       *user8
+        movie:      *natural
+        value:      2
+
+    - !!models.Rating
+        user:       *user8
+        movie:      *armageddon
+        value:      4
+
+    - !!models.Rating
+        user:       *user8
+        movie:      *mars
+        value:      4
+
+    - !!models.Rating
+        user:       *user8
+        movie:      *babe
+        value:      2
+
+    - !!models.Rating
+        user:       *user8
+        movie:      *thin
+        value:      3

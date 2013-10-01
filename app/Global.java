@@ -20,6 +20,9 @@ public class Global extends GlobalSettings {
 			
 			// Insert movies
 			Ebean.save(all.get("movies"));
+			
+			// Insert ratings
+			Ebean.save(all.get("ratings"));
 
 		}
 	}

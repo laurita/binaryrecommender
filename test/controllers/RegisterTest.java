@@ -15,7 +15,18 @@ public class RegisterTest extends WithApplication {
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
 		Yaml yaml = new Yaml();
-		Ebean.save((List) yaml.load("test-data.yml"));
+		
+		@SuppressWarnings("unchecked")
+		Map<String,List<Object>> all = (Map<String,List<Object>>) yaml.load("test-data.yml");
+	
+		// Insert users
+		Ebean.save(all.get("users"));
+		
+		// Insert movies
+		Ebean.save(all.get("movies"));
+		
+		// Insert ratings
+		Ebean.save(all.get("ratings"));
 	}
 
 	@Test
@@ -34,7 +45,7 @@ public class RegisterTest extends WithApplication {
 		Result result = callAction(
 			controllers.routes.ref.Application.submit(),
 				fakeRequest().withFormUrlEncodedBody(ImmutableMap.of(
-					"email", "bob@example.com"))
+					"email", "user1@gmail.com"))
 						);
 		assertEquals(Http.Status.BAD_REQUEST, status(result));
 		assertNull(session(result).get("email"));

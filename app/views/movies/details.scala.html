@@ -6,12 +6,43 @@
 @main("Movie details") {
   <h1>Movie details</h1>
 	<dt>
-		<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+		<img src="@routes.Assets.at("images/movies/" + movie.movieId + ".jpg")" />
 	</dt>
 	<dt>
-		<a href="@routes.Movies.details(movie.id)">
+		<a href="@routes.Movies.details(movie.movieId)">
 			@movie.title
 		</a>
 	</dt>
-	<dd>@movie.description</dd>
+	<dt>@movie.description</dt>
+	
+	<div class="container">
+		<h2>Movie Rating List</h2>
+		<div class="row">
+			<div class="span12">
+				<div id="list-rating" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Rating</th>	
+							</tr>
+						</thead>
+						<tbody>
+							@for(rating <- movie.getRatings()) {
+								<tr>
+									<td>
+										@rating.user.email
+									</td>
+									<td>
+										@rating.value
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+	</div>
 }

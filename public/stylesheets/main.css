@@ -92,3 +92,23 @@ body {
 code {
 	font-size: 80%;
 }
+
+
+/* Stars
+-------------------------------------------------- */
+
+div.stars { font-size: 50px; }
+
+span.clicked.hover, span.hover { color: #8B0000; }
+
+span.clicked { color: #FF0000; }
+
+.btn.clicked {
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  -webkit-transition: background-position 0.1s linear;
+     -moz-transition: background-position 0.1s linear;
+       -o-transition: background-position 0.1s linear;
+          transition: background-position 0.1s linear;
+}

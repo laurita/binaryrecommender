@@ -18,5 +18,8 @@ GET			/movies/:id									controllers.Movies.details(id:String)
 GET			/users											controllers.Users.list()
 GET			/users/:id									controllers.Users.details(id:String)
 
+# Ratings
+GET			/ratings										controllers.Ratings.list()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

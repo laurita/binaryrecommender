@@ -5,7 +5,7 @@ import play.mvc.Result;
 import views.html.users.list;
 import views.html.users.details;
 import java.util.List;
-import models.User;
+import models.*;
 
 public class Users extends Controller {
 	
@@ -20,6 +20,10 @@ public class Users extends Controller {
 			return notFound(String.format("User %s does not exist.", email));
 		}
 		return ok(details.render(user));
+	}
+	
+	public static Result rateMovie() {
+		return ok();
 	}
 	
 }
