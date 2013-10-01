@@ -1,17 +1,21 @@
 package controllers;
 
-import play.mvc.Controller;
-import play.mvc.Result;
 import views.html.movies.list;
 import views.html.movies.details;
 import java.util.List;
-import models.Movie;
+import models.*;
+import play.*;
+import play.mvc.*;
 
 public class Movies extends Controller {
 	
+	@Security.Authenticated(Secured.class)
 	public static Result list() {
 		List<Movie> movies = Movie.findAll();
-		return ok(list.render(movies));
+		User user = User.find.byId(session().get("userId"));
+		System.out.println("session userId " + session().get("userId"));
+		System.out.println("user " + user);
+		return ok(list.render(movies, user));
 	}
 	
 	public static Result details(String id) {

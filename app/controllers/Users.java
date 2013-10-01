@@ -23,6 +23,32 @@ public class Users extends Controller {
 	}
 	
 	public static Result rateMovie() {
+		if (request().method() == "POST") {
+			int value = Integer.parseInt(request().body().asFormUrlEncoded().get("rating")[0]);
+			User user = User.find.byId(session().get("userId"));
+			Movie movie = Movie.find.byId(request().body().asFormUrlEncoded().get("movieId")[0]);
+			Rating r = Rating.find.where().eq("user", user).eq("movie", movie).findUnique();
+			if (r != null) {
+				r.value = value;
+				r.save();
+			} else {
+				Rating rating = Rating.create(user, movie, value);
+			}
+			System.out.println("user.ratings: ");
+			for (Rating it : user.getRatings()) {
+				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
+			} 
+			/**
+			System.out.println("movie.ratings: ");
+			for (Rating it : movie.getRatings()) {
+				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
+			} 
+			System.out.println("Rating.list(): ");
+			for (Rating it : Rating.find.all()) {
+				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
+			} 
+			**/
+		}
 		return ok();
 	}
 	

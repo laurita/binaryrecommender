@@ -21,6 +21,13 @@ create table rating (
 create table user (
   user_id                   bigint not null,
   email                     varchar(255),
+  created_at                timestamp,
+  experiment_group          integer,
+  stage1done                boolean,
+  question1                 varchar(255),
+  question2                 varchar(255),
+  question3                 varchar(255),
+  question4                 varchar(255),
   constraint pk_user primary key (user_id))
 ;
 

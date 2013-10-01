@@ -1,8 +1,8 @@
-@(movies: List[Movie])
+@(movies: List[Movie], user: User)
 
 @main("Movies list") {	
 	<div class="container">
-		<h2>Movie List</h2>
+		<h4>Rate as many movies as you can.</h4>
 		<div class="row">
 			<div class="span12">
 				<div id="list-movie" class="content scaffold-list" role="main">
@@ -37,15 +37,20 @@
 			</div>
 		</div>
         
+		@if((user != null) && !user.stage1Done) {			
+			<div class="row">
+				<div class="span2 offset5">
+					<a class="btn btn-primary" href="@routes.Application.doneStage1()">I am finished with the rating</a>
+				</div>
+			</div>
+		}
+        
 		<div class="row">
 			<div class="span12">
 				<div class="pagination">
-					<ul>
-						<g:paginate total="${movieTotal}" />
-					</ul>
+					
 				</div>
 			</div>
 		</div>
-	</div>
 }
 

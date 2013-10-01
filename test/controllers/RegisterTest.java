@@ -9,6 +9,7 @@ import play.test.*;
 import static play.test.Helpers.*;
 import com.avaje.ebean.Ebean;
 import com.google.common.collect.ImmutableMap;
+import models.*;	
 
 public class RegisterTest extends WithApplication {
 	@Before
@@ -37,7 +38,8 @@ public class RegisterTest extends WithApplication {
 					"email", "laura@example.com"))
 						);
 		assertEquals(Http.Status.SEE_OTHER, status(result));
-		assertEquals("laura@example.com", session(result).get("email"));
+		System.out.println(session(result).get("userId"));
+		assertEquals("laura@example.com", User.find.byId(session(result).get("userId")).email);
 	}
 	
 	@Test
@@ -48,7 +50,7 @@ public class RegisterTest extends WithApplication {
 					"email", "user1@gmail.com"))
 						);
 		assertEquals(Http.Status.BAD_REQUEST, status(result));
-		assertNull(session(result).get("email"));
+		assertNull(session(result).get("userId"));
 	}
 	
 	@Test
@@ -65,6 +67,6 @@ public class RegisterTest extends WithApplication {
 					"email", "laura@example.com"))
 						);
 		assertEquals(Http.Status.SEE_OTHER, status(result));
-		assertEquals("laura@example.com", session(result).get("email"));
+		assertEquals("laura@example.com", User.find.byId(session(result).get("userId")).email);
 	}    
 }

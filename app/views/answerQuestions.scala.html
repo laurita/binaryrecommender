@@ -1,0 +1,36 @@
+@(form: Form[Application.AnswerQuestions])
+
+@main("Answer Questions") {
+	@helper.form(routes.Application.submitAnswers(), 'method -> "post") {
+		<h2 class="form-signin-heading">Answer the questions</h2>
+		<div class="row">
+			<div class="span4">1. I have fun using the system</div>
+			<div class="span6 offset2">
+				@likertScale(1)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">2. Using the system is a pleasant experience</div>
+			<div class="span6 offset2">
+				@likertScale(2)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">3. The system makes me more aware of my choice options</div>
+			<div class="span6 offset2">
+				@likertScale(3)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">4. I feel bored when I am using the system</div>
+			<div class="span6 offset2">
+				@likertScale(4)
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2 offset5">
+				<button class="btn btn-large btn-primary" type="submit">Finish</button>
+			</div>
+		</div>
+	}
+}

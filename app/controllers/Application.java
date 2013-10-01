@@ -6,7 +6,9 @@ import models.*;
 import play.data.*;
 import static play.data.Form.*;
 import views.html.*;
+import views.html.movies.*;
 import com.avaje.ebean.*;
+import java.util.*;
 
 public class Application extends Controller {
 	
@@ -31,16 +33,47 @@ public class Application extends Controller {
 			return null;
 		}
 	}
+	
+	public static class AnswerQuestions {
+		public String q1Answer;
+		public String q2Answer;
+		public String q3Answer;
+		public String q4Answer;
+	}
 
 	@Security.Authenticated(Secured.class)
 	public static Result index() {
-		return ok(
-			index.render("Index")
-				);
+		return redirect(
+			routes.Movies.list()
+		);
 	}
 	
 	public static Result register() {
 		return ok(register.render(form(Register.class)));			
+	}
+	
+	public static Result doneStage1() {
+		if (session().get("userId") != null) {
+			User user = User.find.byId(session().get("userId"));
+			user.stage1Done = true;
+		}	else {
+			return redirect(routes.Application.login());
+		}
+		return redirect(routes.Application.answerQuestions());			
+	}
+	
+	public static Result answerQuestions() {
+		return ok(answerQuestions.render(form(AnswerQuestions.class)));
+	}
+	
+	public static Result submitAnswers() {
+		Form<AnswerQuestions> answerForm = form(AnswerQuestions.class).bindFromRequest();
+		User user = User.find.byId(session().get("userId"));
+		user.question1 = answerForm.field("likertScaleRadios1").value();
+		user.question2 = answerForm.field("likertScaleRadios2").value();
+		user.question3 = answerForm.field("likertScaleRadios3").value();
+		user.question4 = answerForm.field("likertScaleRadios4").value();
+		return ok("questions answered");
 	}
 	
 	public static Result submit() {
@@ -54,8 +87,8 @@ public class Application extends Controller {
 			User user = User.find.where().eq("email", email).findUnique();
 			flash("success", String.format("Successfully created user %s", user.email));
 			session().clear();
-			session("email", email);
-			return redirect(routes.Application.index());
+			session("userId", String.valueOf(user.userId));
+			return redirect(routes.Movies.list());
 		}
 	}
 		
@@ -80,13 +113,19 @@ public class Application extends Controller {
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
-			session("email", loginForm.get().email);
-
+			session("userId", String.valueOf(User.findByEmail(loginForm.get().email).userId));
 			return redirect(
 				routes.Application.index()
 					);
 				
 		}
+	}
+	
+	public static Result javascriptRoutes() {
+		response().setContentType("text/javascript");
+		return ok(
+			Routes.javascriptRouter("jsRoutes", controllers.routes.javascript.Users.rateMovie())
+		);
 	}
 
 }

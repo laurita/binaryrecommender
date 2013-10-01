@@ -1,0 +1,24 @@
+@(questionNumber: Integer)
+
+@defining("likertScaleRadios" + questionNumber) { name =>
+	<label class="radio inline">
+		<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+		Strongly agree
+	</label>
+	<label class="radio inline">
+		<input type="radio" name="@name" id="agree" value="agree">
+		Agree
+	</label>
+	<label class="radio inline">
+		<input type="radio" name="@name" id="neutral" value="neutral" checked>
+		Neutral
+	</label>
+	<label class="radio inline">
+		<input type="radio" name="@name" id="disagree" value="disagree">
+		Disagree
+	</label>
+	<label class="radio inline">
+		<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+		Strongly disagree
+	</label>
+}

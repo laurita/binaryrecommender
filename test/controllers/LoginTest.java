@@ -9,6 +9,7 @@ import play.test.*;
 import static play.test.Helpers.*;
 import com.avaje.ebean.Ebean;
 import com.google.common.collect.ImmutableMap;
+import models.*;
 
 public class LoginTest extends WithApplication {
 	@Before
@@ -37,7 +38,7 @@ public class LoginTest extends WithApplication {
 				"email", "user1@gmail.com"))
 		);
 		assertEquals(Http.Status.SEE_OTHER, status(result));
-		assertEquals("user1@gmail.com", session(result).get("email"));
+		assertEquals("user1@gmail.com", User.find.byId(session(result).get("userId")).email);
 	}
 	
 	@Test

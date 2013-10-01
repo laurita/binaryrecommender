@@ -47,7 +47,7 @@ movies:
     - &rocky !!models.Movie
         movieId:         2657
         title:      'Rocky Horror Picture Show, The (1975)'
-        description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre resmovieIdence of Dr. Frank-N-Furter.'
+        description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre residence of Dr. Frank-N-Furter.'
 
     - &natural !!models.Movie
         movieId:         288
@@ -61,7 +61,7 @@ movies:
 
     - &eyes !!models.Movie
         movieId:         2712
-        title:      'Eyes WmovieIde Shut (1999)'
+        title:      'Eyes Wide Shut (1999)'
         description:  'A New York City doctor, who is married to an art curator, pushes himself on a harrowing and dangerous night-long odyssey of sexual and moral discovery after his wife admits that she once almost cheated on him.'
 
     - &starship !!models.Movie
@@ -72,7 +72,7 @@ movies:
     - &armageddon !!models.Movie
         movieId:         1917
         title:      'Armageddon (1998)'
-        description:  'After discovering that an asteromovieId the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
+        description:  'After discovering that an asteroid the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
 
     - &titanic !!models.Movie
         movieId:         1721
@@ -112,7 +112,7 @@ movies:
     - &scary !!models.Movie
         movieId:         3785
         title:      'Scary Movie (2000)'
-        description:  'A year after disposing the body of a man they accmovieIdently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
+        description:  'A year after disposing the body of a man they accidently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
 
     - &babe !!models.Movie
         movieId:         2384
@@ -122,7 +122,7 @@ movies:
     - &tank !!models.Movie
         movieId:         327
         title:      'Tank Girl (1995)'
-        description:  'Based on the British cult comic-strip, our tank-rmovieIding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
+        description:  'Based on the British cult comic-strip, our tank-riding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
 
     - &pee !!models.Movie
         movieId:         3608
