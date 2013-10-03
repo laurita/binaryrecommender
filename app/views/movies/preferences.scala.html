@@ -18,21 +18,25 @@
 						</thead>
 						<tbody>
 							@for(moviePair <- moviePairs) {
-								<tr class="movie-pair-@{moviePair.get(0)}-@{moviePair.get(1)}">
-									<td>
-											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + moviePair.get(0) + ".jpg")" />
-											<a href="@routes.Movies.details(moviePair.get(0))">@Movie.find.byId(moviePair.get(0)).title</a>
-											<span>@Movie.find.byId(moviePair.get(0)).description</span>
-									</td>
-									<td>
-										@slider(moviePair.get(0), moviePair.get(1))
-									</td>
-									<td>
-											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + moviePair.get(1) + ".jpg")" />
-											<a href="@routes.Movies.details(moviePair.get(1))">@Movie.find.byId(moviePair.get(1)).title</a>
-											<span>@Movie.find.byId(moviePair.get(1)).description</span>
-									</td>
-								</tr>
+								@defining(moviePair.get(0)) { m1 =>
+									@defining(moviePair.get(1)) { m2 =>
+										<tr class="movie-pair-@{m1}-@{m2}">
+											<td>
+													<img class="thumbnail" src="@routes.Assets.at("images/movies/" + m1 + ".jpg")" />
+													<a href="@routes.Movies.details(m1)">@Movie.find.byId(m1).title</a>
+													<span>@Movie.find.byId(m1).description</span>
+											</td>
+											<td>
+												@slider(m1, m2)
+											</td>
+											<td>
+													<img class="thumbnail" src="@routes.Assets.at("images/movies/" + m2 + ".jpg")" />
+													<a href="@routes.Movies.details(m2)">@Movie.find.byId(m2).title</a>
+													<span>@Movie.find.byId(m2).description</span>
+											</td>
+										</tr>
+									}
+								}
 							}
 						</tbody>
 					</table>
