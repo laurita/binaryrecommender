@@ -5,12 +5,13 @@ import models.*;
 import java.util.*;
 
 public class Global extends GlobalSettings {
+	
 	@Override
 	public void onStart(Application app) {
-		
+				
 		// Check if the database is empty
 		if (User.find.findRowCount() == 0) {
-			
+						
 			Yaml yaml = new Yaml();
 			
 			@SuppressWarnings("unchecked")

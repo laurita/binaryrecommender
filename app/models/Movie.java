@@ -4,6 +4,7 @@ import play.data.validation.Constraints;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.*;
+import play.db.ebean.Model.*;
 import play.db.ebean.*;
 import models.*;
 
