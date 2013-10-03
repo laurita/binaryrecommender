@@ -1,0 +1,26 @@
+SUMMARY
+================================================================================
+
+These files contain 67,524 anonymous ratings of 100 movies
+made by 5,664 MovieLens users who joined MovieLens in 2000. 
+It is a subset of MovieLens 1M dataset, filtered by taking
+100 movies with highest log(popularity)*variance.
+
+RATINGS FILE DESCRIPTION
+================================================================================
+
+All ratings are contained in the file "pop_ratings.dat" and are in the
+following format:
+
+UserID,MovieID,Rating,Timestamp
+
+- UserIDs range between 1 and 6040 
+- MovieIDs range between 1 and 3952
+- Ratings are made on a 5-star scale (whole-star ratings only)
+- Timestamp is represented in seconds since the epoch as returned by time(2)
+- Each user has at least 20 ratings
+
+MOVIES FILE DESCRIPTION
+================================================================================
+
+Movie id's filtered by log(popularity)*variance are listed in file "bestMovieIds.dat".
