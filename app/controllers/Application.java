@@ -11,7 +11,7 @@ import com.avaje.ebean.*;
 import java.util.*;
 
 public class Application extends Controller {
-	
+		
 	public static class Login {
 		public String email;
 
@@ -52,14 +52,18 @@ public class Application extends Controller {
 		return ok(register.render(form(Register.class)));			
 	}
 	
-	public static Result doneStage1() {
-		if (session().get("userId") != null) {
-			User user = User.find.byId(session().get("userId"));
-			user.stage1Done = true;
-		}	else {
+	public static Result start() {
+		User user = User.find.byId(session().get("userId"));
+		System.out.println("user is " + user);
+		if (user == null) {
 			return redirect(routes.Application.login());
+		} else {
+			switch (user.experimentGroup) {
+				case 1: return redirect(routes.Movies.list());
+				case 2: return redirect(routes.Movies.preferences());
+				default: return redirect(routes.Application.login());
+			}
 		}
-		return redirect(routes.Application.answerQuestions());			
 	}
 	
 	public static Result answerQuestions() {
@@ -68,12 +72,21 @@ public class Application extends Controller {
 	
 	public static Result submitAnswers() {
 		Form<AnswerQuestions> answerForm = form(AnswerQuestions.class).bindFromRequest();
-		User user = User.find.byId(session().get("userId"));
-		user.question1 = answerForm.field("likertScaleRadios1").value();
-		user.question2 = answerForm.field("likertScaleRadios2").value();
-		user.question3 = answerForm.field("likertScaleRadios3").value();
-		user.question4 = answerForm.field("likertScaleRadios4").value();
-		return ok("questions answered");
+		if (session().get("userId") != null) {
+			User user = User.find.byId(session().get("userId"));
+			user.stage1Done = true;
+			user.question1 = answerForm.field("likertScaleRadios1").value();
+			user.question2 = answerForm.field("likertScaleRadios2").value();
+			user.question3 = answerForm.field("likertScaleRadios3").value();
+			user.question4 = answerForm.field("likertScaleRadios4").value();
+		}	else {
+			return redirect(routes.Application.login());
+		}
+		return redirect(routes.Application.finish1());
+	}
+	
+	public static Result finish1() {
+		return ok(finish1.render());
 	}
 	
 	public static Result submit() {
@@ -83,13 +96,18 @@ public class Application extends Controller {
 			flash("error", String.format("User %s already exists.", email));
 			return badRequest(register.render(registerForm));
 		} else {
-			Ebean.save(new User(email));
-			User user = User.find.where().eq("email", email).findUnique();
+			User user = new User(email);
+			user.save();
+			//user = User.find.where().eq("email", email).findUnique();
 			flash("success", String.format("Successfully created user %s", user.email));
 			session().clear();
 			session("userId", String.valueOf(user.userId));
-			return redirect(routes.Movies.list());
+			return redirect(routes.Application.about());
 		}
+	}
+	
+	public static Result about() {
+		return ok(about.render());
 	}
 		
 	public static Result login() {

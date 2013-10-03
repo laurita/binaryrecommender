@@ -11,10 +11,13 @@ GET			/register										controllers.Application.register()
 POST		/submit											controllers.Application.submit()
 GET			/answerQuestions						controllers.Application.answerQuestions()
 POST		/submitAnswers							controllers.Application.submitAnswers()
-GET			/doneStage1									controllers.Application.doneStage1()
+GET			/finish1										controllers.Application.finish1()
+GET			/start											controllers.Application.start()
+GET			/about											controllers.Application.about()
 
 # Movies
 GET			/movies											controllers.Movies.list()
+GET			/preferences								controllers.Movies.preferences()
 GET			/movies/:id									controllers.Movies.details(id:String)
 
 # Users

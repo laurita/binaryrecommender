@@ -1,0 +1,88 @@
+@(moviePairs: List[List[String]], user: User)
+
+@import models.Movie
+
+@main("Movies Pair list") {	
+	<div class="container">
+		<h4>Give preferences for as many movies as you can.</h4>
+		<div class="row">
+			<div class="span12">
+				<div id="list-movie" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Movie</th>
+								<th></th>	
+								<th>Movie</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for(moviePair <- moviePairs) {
+								<tr class="movie-pair-@{moviePair.get(0)}-@{moviePair.get(1)}">
+									<td>
+											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + moviePair.get(0) + ".jpg")" />
+											<a href="@routes.Movies.details(moviePair.get(0))">@Movie.find.byId(moviePair.get(0)).title</a>
+											<span>@Movie.find.byId(moviePair.get(0)).description</span>
+									</td>
+									<td>
+										@slider(moviePair.get(0), moviePair.get(1))
+									</td>
+									<td>
+											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + moviePair.get(1) + ".jpg")" />
+											<a href="@routes.Movies.details(moviePair.get(1))">@Movie.find.byId(moviePair.get(1)).title</a>
+											<span>@Movie.find.byId(moviePair.get(1)).description</span>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+        
+		@if((user != null) && !user.stage1Done) {			
+			<div class="row">
+				<div class="span2 offset5">
+					<a class="btn btn-primary" href="@routes.Application.answerQuestions()">I am finished with the rating</a>
+				</div>
+			</div>
+		}
+        
+		<div class="row">
+			<div class="span12">
+				<div class="pagination">
+					
+				</div>
+			</div>
+		</div>
+		
+		<script>
+  
+		// When the browser is ready...
+		$(function() {
+  
+			// Create a new jQuery UI Slider element
+			// and set some default parameters.
+			$( ".slider" ).slider({
+				range: "min",
+				value: 50,
+				min: 0,
+				max: 100,
+				slide: function( event, ui ) {
+      
+					// While sliding, update the value in the #amount div element
+					$( "#amount" ).html( ui.value );
+        
+				}
+			});
+    
+			// Set the initial slider amount in the #amount div element
+			var value = $( "#slider" ).slider( "value" );
+			$( "#amount" ).html( value );
+    
+		});
+  
+		</script>
+}
+

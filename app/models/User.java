@@ -42,7 +42,8 @@ public class User extends Model {
 	@Override
 	public void save() {
 		createdAt();
-		this.save();
+		addExperimentGroup();
+		super.save();
 	}
 	
   @PrePersist
@@ -52,7 +53,7 @@ public class User extends Model {
 	
 	private void addExperimentGroup() {
 		int experimentGroup = 1;
-		User lastUser = User.find.orderBy().desc("dateCreated").setMaxRows(1).findUnique();
+		User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
 		int lastExperimentGroup = (lastUser != null) ? lastUser.experimentGroup : 0;
 		if (lastExperimentGroup != 0) {
 			experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
