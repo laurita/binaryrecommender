@@ -229,6 +229,12 @@ movies:
        title:       'Dirty Dancing (1987)'
        description:  'Spending the summer in a holiday camp with her family, Frances "Baby" Houseman falls in love with the camp''s dance instructor Johnny Castle.'
 
+    - &serial !!models.Movie
+       movieId:          532
+       title:       'Serial Mom (1994)'
+       description:  'A sweet mother takes a little too much at heart for the defence of her family.'
+
+
     - &mission !!models.Movie
        movieId:          3623
        title:       'Mission: Impossible 2 (2000)'
