@@ -11,6 +11,8 @@ import com.avaje.ebean.*;
 import java.util.*;
 
 public class Application extends Controller {
+	
+	public static int stage = 2;
 		
 	public static class Login {
 		public String email;
