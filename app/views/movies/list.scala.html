@@ -36,6 +36,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="pagination"></div>
         
 		@if((user != null) && !user.stage1Done) {			
 			<div class="row">
@@ -44,13 +46,30 @@
 				</div>
 			</div>
 		}
-        
-		<div class="row">
-			<div class="span12">
-				<div class="pagination">
+		
+		
+		<script type="text/javascript">
+		
+		$(document).ready(function () {
+					$('.table tbody tr').hide();
+					$('.table tbody tr').slice(0, 9).show();
 					
-				</div>
-			</div>
-		</div>
+
+	        var options = {
+	            currentPage: 1,
+	            totalPages: 10,
+							alignment: "center",
+							onPageChanged:
+								function (event, oldPage, newPage) {
+									$('.table tbody tr').slice((newPage - 1) * 10, (newPage - 1) * 10 + 9).show();
+									$('.table tbody tr').slice((oldPage - 1) * 10, (oldPage - 1) * 10 + 9).hide();
+								}
+	        }
+
+	        $('.pagination').bootstrapPaginator(options);
+			
+		});
+		
+		</script>
 }
 
