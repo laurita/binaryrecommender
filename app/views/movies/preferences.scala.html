@@ -6,33 +6,31 @@
 	<div class="container">		
 		<script>
 		$(document).ready(function(){
-			$('.slide_this_shit').slider({
-				min: -4,
-				max: 4,
-				step: 1,
-				tooltip: 'show',
-				value: 0,
-				formater:
-					function (value) {						
-						if (value < 0) {
-							return "I like " + $(this.element).attr("data-title_1") + " more than " + $(this.element).attr("data-title_2");
-						}
-						else if (value > 0) {
-							return "I like " + $(this.element).attr("data-title_2") + " more than " + $(this.element).attr("data-title_1");
-							
-						}
-						
-						return "The same";
-					}
-			});
+			
 		});
 		</script> 
 		
 		<h4>Give preferences for as many movies as you can.</h4>
+		<ul id="pair_list" style="display: none">
+			@for(moviePair <- moviePairs) {
+				@defining(moviePair.get(0)) { m1 =>
+					@defining(moviePair.get(1)) { m2 =>
+						<li data-movie_1="@{m1}"
+								data-title_1="@Movie.find.byId(m1).title" 
+								data-descr_1="@Movie.find.byId(m1).description" 
+								data-movie_2="@{m2}" 
+								data-title_2="@Movie.find.byId(m2).title"
+								data-descr_2="@Movie.find.byId(m2).description"
+								>none</li>
+					}
+				}
+			}
+		</ul>
+		
 		<div class="row">
 			<div class="span12">
 				<div id="list-movie" class="content scaffold-list" role="main">
-					<table id="example" class="table table-striped">
+					<table id="pref_table" class="table table-striped">
 						<thead>
 							<tr>
 								<th>Movie</th>
@@ -41,33 +39,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for(moviePair <- moviePairs) {
-								@defining(moviePair.get(0)) { m1 =>
-									@defining(moviePair.get(1)) { m2 =>
-										<tr class="movie-pair-@{m1}-@{m2}">
-											<td>
-												<img class="thumbnail" src="@routes.Assets.at("images/movies/" + m1 + ".jpg")" />
-												<a href="@routes.Movies.details(m1)">@Movie.find.byId(m1).title</a>
-												<span>@Movie.find.byId(m1).description</span>
-											</td>
-											<td>
-												<div class="slider slider-horizontal slide_this_shit" data-movie_1="@{m1}" data-title_1="@Movie.find.byId(m1).title" data-movie_2="@{m2}" data-title_2="@Movie.find.byId(m2).title" style="width: 200px;"></div>
-											</td>
-											<td>
-												<img class="thumbnail" src="@routes.Assets.at("images/movies/" + m2 + ".jpg")" />
-												<a href="@routes.Movies.details(m2)">@Movie.find.byId(m2).title</a>
-												<span>@Movie.find.byId(m2).description</span>
-											</td>
-										</tr>
-									}
-								}
-							}
+							
 						</tbody>
 					</table>
 					
 				</div>
 			</div>
 		</div>
+		
+		<div class="pagination"></div>
 		
 		<div id="click_me">click me</div>
 		<div id="micro_content"></div>	
@@ -81,34 +61,136 @@
 		}
         
 		<div id="example"></div>
-		    <script type='text/javascript'>
+		<script type='text/javascript'>
 				
-				$(document).ready(function() {
-					$("#click_me").click(
-						function () {
-							$("#micro_content").html("<div class=\"slider slider-horizontal\" id=\"yey\" data-omg=\"lolz\"></div>");
-							$("#yey").slider({
-								min: -4,
-								max: 4,
-								step: 1,
-								tooltip: 'show',
-								value: 0,
-								formater:
-									function (value) {						
-										if (value < 0) {
-											return $(this.element).attr("data-omg");
-										}										
-										else if (value > 0) {
-											return "b";							
-										}
+		$(document).ready(function() {
+			$("#click_me").click(
+				function () {
+					$("#micro_content").html("<div class=\"slider slider-horizontal\" id=\"yey\" data-omg=\"lolz\"></div>");
+					$("#yey").slider({
+						min: -4,
+						max: 4,
+						step: 1,
+						tooltip: 'show',
+						value: 0,
+						formater:
+						function (value) {						
+							if (value < 0) {
+								return $(this.element).attr("data-omg");
+							}										
+							else if (value > 0) {
+								return "b";							
+							}
 						
-										return "lygybė";
-									}
-							});
+							return "lygybė";
 						}
-					)
+					});
+				}
+			)
+		});
+				
+		</script>
+				
+		<script type="text/javascript">
+		
+		function create_movie_td(id, title, descr) {
+			var td = $("<td></td>");
+			var img = $("<img></img>");
+			img.attr('class', 'thumbnail').attr('src', "/assets/images/movies/" + id + ".jpg")
+			var a = $("<a></a>");
+			a.attr('href', "movies/" + id);
+			a.text(title);
+			var span = $("<span></span>");
+			span.text(descr);
+			td = td.append(img);
+			td = td.append(a);
+			td = td.append(span);
+			return td;
+		}
+		
+		function create_slider_td(id1, title1, id2, title2) {
+			var td = $("<td></td>");
+			var div = $("<div></div>");
+			div.attr({
+			'class': "slider slider-horizontal",
+			'data-movie_1': id1,
+			'data-title_1': title1,
+			'data-movie_2': id2,
+			'data-title_2': title2,
+			'style': "width: 200px;"
+			});
+			td = td.append(div);
+			return td;
+		}
+		
+		$(document).ready(function () {
+			$('#pref_table tbody').html(function() {
+				var $new = $();
+				var $lst = $( '#pair_list li:nth-child(10)' ).map(function() {
+					return $(this).prevAll().andSelf().get();
+				});
+				$.each($lst, function( index, elem ) {
+				  // this: the current, raw DOM element
+				  // index: the current element's index in the selection
+				  // elem: the current, raw DOM element (same as this)
+					var m1 = $(elem).attr('data-movie_1');
+					var m2 = $(elem).attr('data-movie_2');
+					var title1 = $(elem).attr('data-title_1');
+					var title2 = $(elem).attr('data-title_2');
+					var descr1 = $(elem).attr('data-descr_1');
+					var descr2 = $(elem).attr('data-descr_2');
+					var tr = $("<tr></tr>");
+					tr.attr('data-movie_1', m1);
+					tr.attr('data-movie_2', m2);
+					tr = tr.append(create_movie_td(m1, title1, descr1));
+					tr = tr.append(create_slider_td(m1, title1, m2, title2));
+					tr = tr.append(create_movie_td(m2, title2, descr2));
+				  $new = $new.add( tr );
 				});
 				
-		    </script>
+				return $new;
+			});
+			
+			$('.slider').slider({
+				min: -4,
+				max: 4,
+				step: 1,
+				tooltip: 'show',
+				value: 0,
+				formater:
+				function (value) {						
+					if (value < 0) {
+						return "I like " + $(this.element).attr("data-title_1") + " more than " + $(this.element).attr("data-title_2");
+					}
+					else if (value > 0) {
+						return "I like " + $(this.element).attr("data-title_2") + " more than " + $(this.element).attr("data-title_1");		
+					}
+					return "The same";
+				}
+			}).on('slideStop', function() {
+				var $m1 = $(this).attr('data-movie_1');
+				var $m2 = $(this).attr('data-movie_2');
+				var value = $(this).data('slider').getValue();
+				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
+			});
+					
+
+			var options = {
+				currentPage: 1,
+				totalPages: 495,
+				alignment: "center",
+				onPageChanged:
+				function (event, oldPage, newPage) {
+					
+					$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
+					$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
+				}
+			}
+
+			$('.pagination').bootstrapPaginator(options);
+			
+		});
+		
+		</script>
 	}
 
