@@ -112,3 +112,11 @@ span.clicked { color: #FF0000; }
        -o-transition: background-position 0.1s linear;
           transition: background-position 0.1s linear;
 }
+
+
+/* Higher tooltip
+-------------------------------------------------- */
+
+.tooltip .tooltip-inner {
+    max-width: none;
+}

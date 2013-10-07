@@ -18,7 +18,7 @@ public class Movies extends Controller {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result preferences() {
-		String sql = "select movie1_id, movie2_id from moviePairs limit 1";
+		String sql = "select movie1_id, movie2_id from moviePairs limit 10";
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();
 		List<List<String>> moviePairs = new ArrayList<List<String>>();

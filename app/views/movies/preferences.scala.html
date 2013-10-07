@@ -15,14 +15,14 @@
 				formater:
 					function (value) {						
 						if (value < 0) {
-							return $(this.element).attr("data-movie_1");
+							return "I like " + $(this.element).attr("data-title_1") + " more than " + $(this.element).attr("data-title_2");
 						}
 						else if (value > 0) {
-							return $(this.element).attr("data-movie_2");
+							return "I like " + $(this.element).attr("data-title_2") + " more than " + $(this.element).attr("data-title_1");
 							
 						}
 						
-						return "lygybė";
+						return "The same";
 					}
 			});
 		});
@@ -51,7 +51,7 @@
 												<span>@Movie.find.byId(m1).description</span>
 											</td>
 											<td>
-												<div class="slider slider-horizontal slide_this_shit" data-movie_1="@{m1}" data-movie_2="@{m2}" style="width: 200px;"></div>
+												<div class="slider slider-horizontal slide_this_shit" data-movie_1="@{m1}" data-title_1="@Movie.find.byId(m1).title" data-movie_2="@{m2}" data-title_2="@Movie.find.byId(m2).title" style="width: 200px;"></div>
 											</td>
 											<td>
 												<img class="thumbnail" src="@routes.Assets.at("images/movies/" + m2 + ".jpg")" />
