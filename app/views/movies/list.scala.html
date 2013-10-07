@@ -52,7 +52,7 @@
 		
 		$(document).ready(function () {
 					$('.table tbody tr').hide();
-					$('.table tbody tr').slice(0, 9).show();
+					$('.table tbody tr').slice(0, 10).show();
 					
 
 	        var options = {
@@ -61,8 +61,8 @@
 							alignment: "center",
 							onPageChanged:
 								function (event, oldPage, newPage) {
-									$('.table tbody tr').slice((newPage - 1) * 10, (newPage - 1) * 10 + 9).show();
-									$('.table tbody tr').slice((oldPage - 1) * 10, (oldPage - 1) * 10 + 9).hide();
+									$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
+									$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
 								}
 	        }
 
