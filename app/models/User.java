@@ -22,6 +22,9 @@ public class User extends Model {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
 	private List<Rating> userRatings = new ArrayList<Rating>();
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+	private List<Preference> userPreferences = new ArrayList<Preference>();
+	
 	// group: 1 (MF / ratings) or 2 (UP / preferences)
 	public int experimentGroup;
 	
@@ -70,6 +73,10 @@ public class User extends Model {
 	
 		public List<Rating> getRatings() {
 			return Rating.find.where().eq("user", this).findList();
+		}
+		
+		public List<Preference> getPreferences() {
+			return Preference.find.where().eq("user", this).findList();
 		}
 
 		public static List<User> findAll() {

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import play.db.ebean.Model.*;
 import play.db.ebean.*;
 import models.*;
+import com.avaje.ebean.Expr;
 
 @Entity
 @Table(name="movie")
@@ -24,6 +25,12 @@ public class Movie extends Model {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="movie")
 	private List<Rating> movieRatings;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="movie1")
+	private List<Preference> movie1Preferences;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="movie2")
+	private List<Preference> movie2Preferences;
+	
 	public Movie() {}
 	
 		public Movie(String id, String title, String description) {
@@ -38,6 +45,13 @@ public class Movie extends Model {
 	
 		public List<Rating> getRatings() {
 			return Rating.find.where().eq("movie", this).findList();
+		}
+		
+		public List<Preference> getPreferences() {
+			return Preference.find.where().or(
+				Expr.eq("movie1", this),
+				Expr.eq("movie2", this)
+			).findList();
 		}
 	
 		public static Finder<String,Movie> find = new Finder<String,Movie>(
