@@ -58,7 +58,7 @@ public class LoginTest extends WithApplication {
 	        controllers.routes.ref.Application.index(),
 	        fakeRequest().withSession("email", "user1@gmail.com")
 	    );
-	    assertEquals(Http.Status.OK, status(result));
+	    assertEquals(Http.Status.SEE_OTHER, status(result));
 	}    
 	
 	@Test
