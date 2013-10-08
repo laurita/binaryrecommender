@@ -41,10 +41,6 @@ public class Users extends Controller {
 			} else {
 				Rating rating = Rating.create(user, movie, value);
 			}
-			System.out.println("user.ratings: ");
-			for (Rating it : user.getRatings()) {
-				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
-			} 
 		}
 		return ok();
 	}
@@ -60,11 +56,8 @@ public class Users extends Controller {
 					Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asText());
 					int value = jsonPref.get("value").asInt();
 					Preference pref = Preference.create(user, movie1, movie2, value);
-					System.out.println("preferences in db");
-					System.out.println(Preference.find.all());
 				}
-			}
-			
+			}			
 		}
 		return ok();
 	}
