@@ -123,12 +123,10 @@
 			return td;
 		}
 		
-		$(document).ready(function () {
+		function create_table_rows(from, to) {
 			$('#pref_table tbody').html(function() {
 				var $new = $();
-				var $lst = $( '#pair_list li:nth-child(10)' ).map(function() {
-					return $(this).prevAll().andSelf().get();
-				});
+				var $lst = $( '#pair_list li' ).slice(from, to);
 				$.each($lst, function( index, elem ) {
 				  // this: the current, raw DOM element
 				  // index: the current element's index in the selection
@@ -147,10 +145,11 @@
 					tr = tr.append(create_movie_td(m2, title2, descr2));
 				  $new = $new.add( tr );
 				});
-				
 				return $new;
 			});
-			
+		}
+		
+		function start_slider() {
 			$('.slider').slider({
 				min: -4,
 				max: 4,
@@ -173,8 +172,12 @@
 				var value = $(this).data('slider').getValue();
 				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
 			});
-					
-
+		}
+		
+		$(document).ready(function () {
+			create_table_rows(0, 10);
+			start_slider();
+	
 			var options = {
 				currentPage: 1,
 				totalPages: 495,
@@ -182,8 +185,8 @@
 				onPageChanged:
 				function (event, oldPage, newPage) {
 					
-					$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
-					$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
+					create_table_rows((newPage - 1) * 10, newPage * 10);
+					start_slider();
 				}
 			}
 
