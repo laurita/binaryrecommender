@@ -48,9 +48,6 @@
 		</div>
 		
 		<div class="pagination"></div>
-		
-		<div id="click_me">click me</div>
-		<div id="micro_content"></div>	
         
 		@if((user != null) && !user.stage1Done) {			
 			<div class="row">
@@ -59,37 +56,6 @@
 				</div>
 			</div>
 		}
-        
-		<div id="example"></div>
-		<script type='text/javascript'>
-				
-		$(document).ready(function() {
-			$("#click_me").click(
-				function () {
-					$("#micro_content").html("<div class=\"slider slider-horizontal\" id=\"yey\" data-omg=\"lolz\"></div>");
-					$("#yey").slider({
-						min: -4,
-						max: 4,
-						step: 1,
-						tooltip: 'show',
-						value: 0,
-						formater:
-						function (value) {						
-							if (value < 0) {
-								return $(this.element).attr("data-omg");
-							}										
-							else if (value > 0) {
-								return "b";							
-							}
-						
-							return "lygybė";
-						}
-					});
-				}
-			)
-		});
-				
-		</script>
 				
 		<script type="text/javascript">
 		
@@ -180,7 +146,7 @@
 	
 			var options = {
 				currentPage: 1,
-				totalPages: 495,
+				totalPages: Math.ceil($('#pair_list li').length / 10),
 				alignment: "center",
 				onPageChanged:
 				function (event, oldPage, newPage) {
