@@ -33,6 +33,10 @@ public class Preference extends Model {
 		this.value = value;
 	}
 	
+	public String toString() {
+		return String.format("%d - %s - %s - %d", user.userId, movie1.movieId, movie2.movieId, value);
+	}
+	
 	public static Preference create(User user, Movie movie1, Movie movie2, int value) {
 		Preference p = Preference.find.where().eq("user", user)
 			.eq("movie1", movie1).eq("movie2", movie2).findUnique();

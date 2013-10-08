@@ -42,19 +42,40 @@ public class ModelsTest extends WithApplication {
 	
 	@Test
 	public void ratingsTotal() {
-		assertEquals(40, Rating.find.findRowCount());
+		assertEquals(38, Rating.find.findRowCount());
+	}
+	
+	@Test
+	public void prefrencesTotal() {
+		assertEquals(5, Preference.find.findRowCount());
 	}
 	
 	@Test
 	public void usersRatingsTotal() {
 		User user = User.find.where().eq("email", "user1@gmail.com").findUnique();
 		assertEquals(5, user.getRatings().size());
+		user = User.find.where().eq("email", "user8@gmail.com").findUnique();
+		assertEquals(3, user.getRatings().size());
+	}
+	
+	@Test
+	public void usersPrefrencesTotal() {
+		User user = User.find.where().eq("email", "user1@gmail.com").findUnique();
+		assertEquals(0, user.getPreferences().size());
+		user = User.find.where().eq("email", "user8@gmail.com").findUnique();
+		assertEquals(5, user.getPreferences().size());
 	}
 	
 	@Test
 	public void moviesRatingsTotal() {
 		Movie movie = Movie.find.where().eq("movieId", 2710).findUnique();
 		assertEquals(4, movie.getRatings().size());
+	}
+	
+	@Test
+	public void moviesPreferencesTotal() {
+		Movie movie = Movie.find.where().eq("movieId", 1721).findUnique();
+		assertEquals(2, movie.getPreferences().size());
 	}
 	
 	@Test
@@ -65,8 +86,19 @@ public class ModelsTest extends WithApplication {
 		Rating rating = Rating.create(user, movie, 5);
 		rating.save();
 		int sizeAfter = movie.getRatings().size();
+		assertEquals(sizeBefore, sizeAfter);	
+	}
+	
+	@Test
+	public void moviesPreferenceTotalAfterModifyingPreference() {
+		User user = User.find.where().eq("email", "user8@gmail.com").findUnique();
+		Movie movie1 = Movie.find.where().eq("movieId", "2712").findUnique();
+		Movie movie2 = Movie.find.where().eq("movieId", "1721").findUnique();
+		int sizeBefore = movie2.getPreferences().size();
+		Preference pref = Preference.create(user, movie1, movie2, -3);
+		pref.save();
+		int sizeAfter = movie2.getPreferences().size();
 		assertEquals(sizeBefore, sizeAfter);
-		
 	}
 	
 	@Test
@@ -77,6 +109,18 @@ public class ModelsTest extends WithApplication {
 		Rating rating = Rating.create(user, movie, 5);
 		rating.save();
 		int sizeAfter = movie.getRatings().size();
+		assertEquals(sizeBefore + 1, sizeAfter);
+	}
+	
+	@Test
+	public void moviesPreferenceTotalAfterAddingPreference() {
+		User user = User.find.where().eq("email", "user8@gmail.com").findUnique();
+		Movie movie1 = Movie.find.where().eq("movieId", "2712").findUnique();
+		Movie movie2 = Movie.find.where().eq("movieId", "1183").findUnique();
+		int sizeBefore = movie1.getPreferences().size();
+		Preference pref = Preference.create(user, movie1, movie2, -1);
+		pref.save();
+		int sizeAfter = movie1.getPreferences().size();
 		assertEquals(sizeBefore + 1, sizeAfter);
 	}
 		

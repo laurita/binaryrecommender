@@ -61,7 +61,7 @@ movies:
 
     - &eyes !!models.Movie
         movieId:         2712
-        title:      'Eyes WmovieIde Shut (1999)'
+        title:      'Eyes Wide Shut (1999)'
         description:  'A New York City doctor, who is married to an art curator, pushes himself on a harrowing and dangerous night-long odyssey of sexual and moral discovery after his wife admits that she once almost cheated on him.'
 
     - &starship !!models.Movie
@@ -318,15 +318,35 @@ ratings:
 
     - !!models.Rating
         user:       *user8
-        movie:      *mars
-        value:      4
-
-    - !!models.Rating
-        user:       *user8
-        movie:      *babe
-        value:      2
-
-    - !!models.Rating
-        user:       *user8
         movie:      *thin
         value:      3
+
+    - !!models.Preference
+        user:       *user8
+        movie1:     *eyes
+        movie2:     *titanic
+        value:      -4
+
+    - !!models.Preference
+        user:       *user8
+        movie1:     *south
+        movie2:     *starship
+        value:      -3
+
+    - !!models.Preference
+        user:       *user8
+        movie1:     *blair
+        movie2:     *dumb
+        value:      -3
+
+    - !!models.Preference
+        user:       *user8
+        movie1:     *babe
+        movie2:     *english
+        value:      3
+
+    - !!models.Preference
+        user:       *user8
+        movie1:     *titanic
+        movie2:     *blair
+        value:      2
