@@ -16,12 +16,12 @@
 				@defining(moviePair.get(0)) { m1 =>
 					@defining(moviePair.get(1)) { m2 =>
 						<li data-movie_1="@{m1}"
-								data-title_1="@Movie.find.byId(m1).title" 
-								data-descr_1="@Movie.find.byId(m1).description" 
-								data-movie_2="@{m2}" 
-								data-title_2="@Movie.find.byId(m2).title"
-								data-descr_2="@Movie.find.byId(m2).description"
-								>none</li>
+						data-title_1="@Movie.find.byId(m1).title" 
+						data-descr_1="@Movie.find.byId(m1).description" 
+						data-movie_2="@{m2}" 
+						data-title_2="@Movie.find.byId(m2).title"
+						data-descr_2="@Movie.find.byId(m2).description"
+						>none</li>
 					}
 				}
 			}
@@ -78,12 +78,12 @@
 			var td = $("<td></td>");
 			var div = $("<div></div>");
 			div.attr({
-			'class': "slider slider-horizontal",
-			'data-movie_1': id1,
-			'data-title_1': title1,
-			'data-movie_2': id2,
-			'data-title_2': title2,
-			'style': "width: 200px;"
+				'class': "slider slider-horizontal",
+				'data-movie_1': id1,
+				'data-title_1': title1,
+				'data-movie_2': id2,
+				'data-title_2': title2,
+				'style': "width: 200px;"
 			});
 			td = td.append(div);
 			return td;
@@ -94,9 +94,9 @@
 				var $new = $();
 				var $lst = $( '#pair_list li' ).slice(from, to);
 				$.each($lst, function( index, elem ) {
-				  // this: the current, raw DOM element
-				  // index: the current element's index in the selection
-				  // elem: the current, raw DOM element (same as this)
+					// this: the current, raw DOM element
+					// index: the current element's index in the selection
+					// elem: the current, raw DOM element (same as this)
 					var m1 = $(elem).attr('data-movie_1');
 					var m2 = $(elem).attr('data-movie_2');
 					var title1 = $(elem).attr('data-title_1');
@@ -109,7 +109,7 @@
 					tr = tr.append(create_movie_td(m1, title1, descr1));
 					tr = tr.append(create_slider_td(m1, title1, m2, title2));
 					tr = tr.append(create_movie_td(m2, title2, descr2));
-				  $new = $new.add( tr );
+					$new = $new.add( tr );
 				});
 				return $new;
 			});
