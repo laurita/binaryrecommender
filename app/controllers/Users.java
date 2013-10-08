@@ -6,6 +6,13 @@ import views.html.users.list;
 import views.html.users.details;
 import java.util.List;
 import models.*;
+import play.mvc.BodyParser;
+import play.libs.Json;
+import play.libs.Json.*;                        
+import static play.libs.Json.toJson;
+import com.fasterxml.jackson.databind.JsonNode;           
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 
 public class Users extends Controller {
 	
@@ -38,16 +45,26 @@ public class Users extends Controller {
 			for (Rating it : user.getRatings()) {
 				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
 			} 
-			/**
-			System.out.println("movie.ratings: ");
-			for (Rating it : movie.getRatings()) {
-				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
-			} 
-			System.out.println("Rating.list(): ");
-			for (Rating it : Rating.find.all()) {
-				System.out.println("user: "+ it.user.email +", movie: "+ it.movie.title +", rating: "+ it.value);
-			} 
-			**/
+		}
+		return ok();
+	}
+	
+	@BodyParser.Of(BodyParser.Json.class)
+	public static Result addPreferences() {
+		if (request().method() == "POST") {
+			User user = User.find.byId(session().get("userId"));
+			if (user != null) {
+				JsonNode jsonPrefs = request().body().asJson().get("prefs");
+				for(JsonNode jsonPref : jsonPrefs) {
+					Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asText());
+					Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asText());
+					int value = jsonPref.get("value").asInt();
+					Preference pref = Preference.create(user, movie1, movie2, value);
+					System.out.println("preferences in db");
+					System.out.println(Preference.find.all());
+				}
+			}
+			
 		}
 		return ok();
 	}

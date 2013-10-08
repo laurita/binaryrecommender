@@ -45,7 +45,7 @@
 		@if((user != null) && !user.stage1Done) {			
 			<div class="row">
 				<div class="span2 offset5">
-					<a class="btn btn-primary" href="@routes.Application.answerQuestions()">I am finished with the preferences</a>
+					<a id="add-prefs-btn" class="btn btn-primary" >I am finished with the preferences</a>
 				</div>
 			</div>
 		}
@@ -145,6 +145,28 @@
 				}
 			}
 			$('.pagination').bootstrapPaginator(options);
+			
+			$('#add-prefs-btn').on('click', function() {
+				var lst = $('#pair_list li').filter(function (){
+				    return $(this).text() != 'none';
+				});
+				var array = [];
+				$.each(lst, function( index, elem ) {
+					var pref = {};
+					pref.movie1 = $(elem).attr('data-movie_1');
+					pref.movie2 = $(elem).attr('data-movie_2');
+					pref.value = $(elem).text();
+					array.push(pref)
+				});
+				console.log(array);
+				$.ajax({
+					type: "POST",
+					url: "users/addPreferences",
+					data: JSON.stringify({"prefs" : array}),
+					contentType: 'application/json'
+				});
+				console.log(JSON.stringify({"prefs" : array}))
+			});
 		});
 		
 		</script>
