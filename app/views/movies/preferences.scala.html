@@ -4,12 +4,6 @@
 
 @main("Movies Pair list") {	
 	<div class="container">		
-		<script>
-		$(document).ready(function(){
-			
-		});
-		</script> 
-		
 		<h4>Give preferences for as many movies as you can.</h4>
 		<ul id="pair_list" style="display: none">
 			@for(moviePair <- moviePairs) {
@@ -42,7 +36,6 @@
 							
 						</tbody>
 					</table>
-					
 				</div>
 			</div>
 		</div>
@@ -94,9 +87,6 @@
 				var $new = $();
 				var $lst = $( '#pair_list li' ).slice(from, to);
 				$.each($lst, function( index, elem ) {
-					// this: the current, raw DOM element
-					// index: the current element's index in the selection
-					// elem: the current, raw DOM element (same as this)
 					var m1 = $(elem).attr('data-movie_1');
 					var m2 = $(elem).attr('data-movie_2');
 					var title1 = $(elem).attr('data-title_1');
@@ -150,14 +140,11 @@
 				alignment: "center",
 				onPageChanged:
 				function (event, oldPage, newPage) {
-					
 					create_table_rows((newPage - 1) * 10, newPage * 10);
 					start_slider();
 				}
 			}
-
 			$('.pagination').bootstrapPaginator(options);
-			
 		});
 		
 		</script>
