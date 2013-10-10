@@ -55,8 +55,8 @@ public class Movie extends Model {
 					).findList();
 	}
 	
-	public static Finder<String,Movie> find = new Finder<String,Movie>(
-		String.class, Movie.class);
+	public static Finder<Integer,Movie> find = new Finder<Integer,Movie>(
+		Integer.class, Movie.class);
 
 	public static List<Movie> findAll() {
 		return find.all();
@@ -71,15 +71,15 @@ public class Movie extends Model {
 		return null;
 	}
 	
-	public static List<List<String>> selectBestMoviePairs(int n) {
+	public static List<List<Integer>> selectBestMoviePairs(int n) {
 		String sql = String.format("select movie1_id, movie2_id from moviePairs limit %d", n);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();
-		List<List<String>> moviePairs = new ArrayList<List<String>>();
+		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
 		for (SqlRow row : list) {
-			List<String> l = new ArrayList<String>();
-			l.add(row.getString("movie1_id"));
-			l.add(row.getString("movie2_id"));
+			List<Integer> l = new ArrayList<Integer>();
+			l.add(row.getInteger("movie1_id"));
+			l.add(row.getInteger("movie2_id"));
 			moviePairs.add(l);
 		}
 		return moviePairs;

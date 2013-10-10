@@ -33,7 +33,7 @@ public class Users extends Controller {
 		if (request().method() == "POST") {
 			int value = Integer.parseInt(request().body().asFormUrlEncoded().get("rating")[0]);
 			User user = User.find.byId(session().get("userId"));
-			Movie movie = Movie.find.byId(request().body().asFormUrlEncoded().get("movieId")[0]);
+			Movie movie = Movie.find.byId(Integer.parseInt(request().body().asFormUrlEncoded().get("movieId")[0]));
 			Rating r = Rating.find.where().eq("user", user).eq("movie", movie).findUnique();
 			if (r != null) {
 				r.value = value;
@@ -52,8 +52,8 @@ public class Users extends Controller {
 			if (user != null) {
 				JsonNode jsonPrefs = request().body().asJson().get("prefs");
 				for(JsonNode jsonPref : jsonPrefs) {
-					Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asText());
-					Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asText());
+					Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
+					Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
 					int value = jsonPref.get("value").asInt();
 					Preference pref = Preference.create(user, movie1, movie2, value);
 				}

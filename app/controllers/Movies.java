@@ -17,7 +17,7 @@ public class Movies extends Controller {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result preferences() {
-		List<List<String>> moviePairs = Movie.selectBestMoviePairs(30);
+		List<List<Integer>> moviePairs = Movie.selectBestMoviePairs(30);
 		User user = User.find.byId(session().get("userId"));
 		return ok(preferences.render(moviePairs, user));
 	}
