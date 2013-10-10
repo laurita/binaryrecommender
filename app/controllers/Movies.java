@@ -5,7 +5,6 @@ import java.util.*;
 import models.*;
 import play.*;
 import play.mvc.*;
-import com.avaje.ebean.*;
 
 public class Movies extends Controller {
 	
@@ -18,16 +17,7 @@ public class Movies extends Controller {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result preferences() {
-		String sql = "select movie1_id, movie2_id from moviePairs limit 30";
-		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-		List<SqlRow> list = sqlQuery.findList();
-		List<List<String>> moviePairs = new ArrayList<List<String>>();
-		for (SqlRow row : list) {
-			List<String> l = new ArrayList<String>();
-			l.add(row.getString("movie1_id"));
-			l.add(row.getString("movie2_id"));
-			moviePairs.add(l);
-		}
+		List<List<String>> moviePairs = Movie.selectBestMoviePairs(30);
 		User user = User.find.byId(session().get("userId"));
 		return ok(preferences.render(moviePairs, user));
 	}
