@@ -1,8 +1,7 @@
 package models;
 
 import play.data.validation.Constraints;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.Model.*;
 import play.db.ebean.*;
@@ -16,7 +15,7 @@ public class Movie extends Model {
 	
 	@Id
 	@Constraints.Required
-		public String movieId;
+		public int id;
 	
 	@Constraints.Required
 		public String title;
@@ -35,14 +34,14 @@ public class Movie extends Model {
 	public Movie() {
 	}
 	
-	public Movie(String id, String title, String description) {
-		this.movieId = id;
+	public Movie(int id, String title, String description) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 	}
 	
 	public String toString() {
-		return String.format("%s - %s", movieId, title);
+		return String.format("%s - %s", id, title);
 	}
 	
 	public List<Rating> getRatings() {
@@ -63,9 +62,9 @@ public class Movie extends Model {
 		return find.all();
 	}
 	
-	public static Movie findById(String id) {
+	public static Movie findById(int id) {
 		for (Movie candidate : find.all()) {
-			if (candidate.movieId.equals(id)) {
+			if (candidate.id == id) {
 				return candidate;
 			}
 		}
@@ -105,7 +104,7 @@ public class Movie extends Model {
 	}
 	
 	public void save() {
-		find.all().remove(findById(this.movieId));
+		find.all().remove(findById(this.id));
 		find.all().add(this);
 	}
 

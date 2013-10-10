@@ -30,503 +30,503 @@ users:
 movies:
 
     - &blair !!models.Movie
-        movieId:         2710
+        id:         2710
         title:      'Blair Witch Project, The (1999)'
         description:  'Three film students go missing after traveling into the woods of Maryland to make a documentary about the local Blair Witch legend leaving only their footage behind.'
 
     - &plan9 !!models.Movie
-        movieId:         1924
+        id:         1924
         title:      'Plan 9 from Outer Space (1958)'
         description:  'Aliens resurrect dead humans as zombies and vampires to stop human kind from creating the Solaranite (a sort of sun-driven bomb).'
 
     - &dumb !!models.Movie
-        movieId:         231
+        id:         231
         title:      'Dumb & Dumber (1994)'
         description:  'The cross-country adventures of two good-hearted but incredibly stupid friends.'
 
     - &rocky !!models.Movie
-        movieId:         2657
+        id:         2657
         title:      'Rocky Horror Picture Show, The (1975)'
         description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre residence of Dr. Frank-N-Furter.'
 
     - &natural !!models.Movie
-        movieId:         288
+        id:         288
         title:      'Natural Born Killers (1994)'
         description:  'Two victims of traumatized childhoods become lovers and psychopathic serial murderers irresponsibly glorified by the mass media.'
 
     - &south !!models.Movie
-        movieId:         2700
+        id:         2700
         title:      'South Park: Bigger, Longer and Uncut (1999)'
         description: 'When the four boys see an R-rated movie featuring Canadians Terrance & Phillip, they are pronounced "corrupted", and their parents pressure the United States to wage war against Canada.'
 
     - &eyes !!models.Movie
-        movieId:         2712
+        id:         2712
         title:      'Eyes Wide Shut (1999)'
         description:  'A New York City doctor, who is married to an art curator, pushes himself on a harrowing and dangerous night-long odyssey of sexual and moral discovery after his wife admits that she once almost cheated on him.'
 
     - &starship !!models.Movie
-        movieId:         1676
+        id:         1676
         title:      'Starship Troopers (1997)'
         description:  'Humans in a fascistic, militaristic future do battle with giant alien bugs in a fight for survival.'
 
     - &armageddon !!models.Movie
-        movieId:         1917
+        id:         1917
         title:      'Armageddon (1998)'
         description:  'After discovering that an asteroid the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
 
     - &titanic !!models.Movie
-        movieId:         1721
+        id:         1721
         title:      'Titanic (1997)'
         description:  'A seventeen-year-old aristocrat, expecting to be married to a rich claimant by her mother, falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.'
 
     - &thin !!models.Movie
-        movieId:         2427
+        id:         2427
         title:      'Thin Red Line, The (1998)'
         description:  'Terrence Malick''s adaptation of James Jones'' autobiographical 1962 novel, focusing on the conflict at Guadalcanal during the second World War.'
 
     - &mars !!models.Movie
-        movieId:         1391
+        id:         1391
         title:      'Mars Attacks! (1996)'
         description:  'The Earth is invaded by Martians with irresistible weapons and a cruel sense of humor.'
 
     - &star !!models.Movie
-        movieId:         2628
+        id:         2628
         title:      'Star Wars: Episode I - The Phantom Menace (1999)'
         description:  'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
 
     - &texas !!models.Movie
-        movieId:         2459
+        id:         2459
         title:      'Texas Chainsaw Massacre, The (1974)'
         description:  'Five friends visiting their grandpa''s old house are hunted down and terrorized by a chainsaw wielding killer and his family of grave-robbing cannibals.'
 
     - &english !!models.Movie
-        movieId:         1183
+        id:         1183
         title:      'English Patient, The (1996)'
         description:  'At the close of WWII, a young nurse tends to a badly-burned plane crash victim. His past is shown in flashbacks, revealing an involvement in a fateful love affair.'
 
     - &austin !!models.Movie
-        movieId:         2683
+        id:         2683
         title:      'Austin Powers: The Spy Who Shagged Me (1999)'
         description:  'Dr. Evil is back...and has invented a new time machine that allows him to go back to the 60''s and steal Austin Powers''s mojo, inadvertently leaving him "shagless".'
 
     - &scary !!models.Movie
-        movieId:         3785
+        id:         3785
         title:      'Scary Movie (2000)'
         description:  'A year after disposing the body of a man they accidently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
 
     - &babe !!models.Movie
-        movieId:         2384
+        id:         2384
         title:      'Babe: Pig in the City (1998)'
         description:  'Babe, fresh from his victory in the sheepherding contest, returns to Farmer Hoggett''s farm, but after Farmer Hoggett is injured and unable to work, Babe has to go to the big city to save the farm.'
 
     - &tank !!models.Movie
-        movieId:         327
+        id:         327
         title:      'Tank Girl (1995)'
         description:  'Based on the British cult comic-strip, our tank-riding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
 
     - &pee !!models.Movie
-        movieId:         3608
+        id:         3608
         title:      'Pee-wee''s Big Adventure (1985)'
         description:  'When eccentric man-child Pee-Wee Herman gets his beloved bike stolen in broad daylight, he sets out across the U.S. on the adventure of his life.'
 
     - &fromdusk !!models.Movie
-       movieId:          70
+       id:          70
        title:       'From Dusk Till Dawn (1996)'
        description:  'Two criminals and their hostages unknowingly seek temporary refuge in an establishment populated by vampires, with chaotic results.'
 
     - &face !!models.Movie
-       movieId:          1573
+       id:          1573
        title:       'Face/Off (1997)'
        description:  'To foil an extortion plot, an FBI agent undergoes a face-transplant surgery and assumes the identity and physical appearance of a ruthless terrorist, but the plan backfires when the same criminal impersonates the cop with the same method.'
 
     - &day !!models.Movie
-       movieId:          2483
+       id:          2483
        title:       'Day of the Beast, The (El Dia de la bestia) (1995)'
        description:  'A basque priest finds by means of a cabalistic study of the bible that the anti-christ is going to be born on Christmas day in Madrid. He will try to invoke the devil to find out the place of birth and kill the baby.'
 
     - &dune !!models.Movie
-       movieId:          2021
+       id:          2021
        title:       'Dune (1984)'
        description:  'A Duke''s son leads desert warriors against the galactic emperor and his father''s evil nemesis when they assassinate his father and free their desert world from the emperor''s rule.'
 
     - &spaceballs !!models.Movie
-       movieId:          3033
+       id:          3033
        title:       'Spaceballs (1987)'
        description:  'Planet Spaceball''s President Skroob sends Lord Dark Helmet to steal Planet Druidia''s abundant supply of air to replenish their own, and only Lone Starr can stop them.'
 
     - &gojira !!models.Movie
-       movieId:          3864
+       id:          3864
        title:       'Godzilla 2000 (Gojira ni-sen mireniamu) (1999)'
        description:  'Godzilla saves Tokyo from a flying saucer that transforms into the beast Orga.'
 
     - &bicent !!models.Movie
-       movieId:          3156
+       id:          3156
        title:       'Bicentennial Man (1999)'
        description:  'An android endeavors to become human as he gradually acquires emotions.'
 
     - &billy !!models.Movie
-       movieId:          216
+       id:          216
        title:       'Billy Madison (1995)'
        description:  'In order to inherit his fed up father''s hotel empire, an immature and lazy man must repeat grades 1-12 all over again.'
 
     - &indep !!models.Movie
-       movieId:          780
+       id:          780
        title:       'Independence Day (ID4) (1996)'
        description:  'The aliens are coming and their goal is to invade and destroy. Fighting superior technology, Man''s best weapon is the will to survive.'
 
     - &american !!models.Movie
-       movieId:          3535
+       id:          3535
        title:       'American Psycho (2000)'
        description:  'A wealthy New York investment banking executive hides his alternate psychopathic ego from his co-workers and friends as he escalates deeper into his illogical, gratuitous fantasies.'
 
     - &braindead !!models.Movie
-       movieId:          1241
+       id:          1241
        title:       'Braindead (1992)'
        description:  'A young man''s mother is bitten by a Sumatran rat-monkey. She gets sick and dies, at which time she comes back to life, killing and eating dogs, nurses, friends, and neighbors.'
 
     - &transform !!models.Movie
-       movieId:          1205
+       id:          1205
        title:       'Transformers: The Movie, The (1986)'
        description:  'The Autobots must stop a colossal planet consuming robot who goes after the Autobot Matrix of Leadership. At the same time, they must defend themselves against an all-out attack from the Decepticons.'
 
     - &patch !!models.Movie
-       movieId:          2431
+       id:          2431
        title:       'Patch Adams (1998)'
        description:  'A medical student in the 70''s treats patients, illegally, using humor.'
 
     - &toys !!models.Movie
-       movieId:          2253
+       id:          2253
        title:       'Toys (1992)'
        description:  'When a military general inherits a toy making company and begins making war toys, his employees band together to stop him before he ruins the name of Zevo Toys forever.'
 
     - &bringing !!models.Movie
-       movieId:          2976
+       id:          2976
        title:       'Bringing Out the Dead (1999)'
        description:  'A Manhattan ambulance paramedic, overworked and haunted by visions of his failures, fights to keep a tenuous grip on his clarity.'
 
     - &magnolia !!models.Movie
-       movieId:          3160
+       id:          3160
        title:       'Magnolia (1999)'
        description:  'An epic mosaic of interrelated characters in search of love, forgiveness, and meaning in the San Fernando Valley.'
 
     - &idle !!models.Movie
-       movieId:          2606
+       id:          2606
        title:       'Idle Hands (1999)'
        description:  'Lazy Anton''s right hand becomes possessed with murderous intent.'
 
     - &waterboy !!models.Movie
-       movieId:          2335
+       id:          2335
        title:       'Waterboy, The (1998)'
        description:  'A waterboy for a college football team discovers he has a unique tackling ability and becomes a member of the team.'
 
     - &grateful !!models.Movie
-       movieId:          1421
+       id:          1421
        title:       'Grateful Dead (1995)'
        description:  'A series of photographs taken by ''Linda McCartney'' of the Grateful Dead at the Dead''s house in Haight-Ashbury and at a concert in Central Park, both in the early days of the band. Panning, morphing, and other techniques are used to impart some motion.'
 
     - &dirty !!models.Movie
-       movieId:          1088
+       id:          1088
        title:       'Dirty Dancing (1987)'
        description:  'Spending the summer in a holiday camp with her family, Frances "Baby" Houseman falls in love with the camp''s dance instructor Johnny Castle.'
 
     - &serial !!models.Movie
-       movieId:          532
+       id:          532
        title:       'Serial Mom (1994)'
        description:  'A sweet mother takes a little too much at heart for the defence of her family.'
 
 
     - &mission !!models.Movie
-       movieId:          3623
+       id:          3623
        title:       'Mission: Impossible 2 (2000)'
        description:  'A secret agent is sent to Sydney, to find and destroy a genetically modified disease called "Chimera"'
 
     - &evita !!models.Movie
-       movieId:          1416
+       id:          1416
        title:       'Evita (1996)'
        description:  'The hit musical based on the life of Evita Duarte, a B-picture Argentinian actress who eventually became the wife of Argentinian president Juan Perón, and the most beloved and hated woman in Argentina.'
 
     - &mystery !!models.Movie
-       movieId:          2723
+       id:          2723
        title:       'Mystery Men (1999)'
        description:  'A group of inept amateur superheroes must try to save the day when a supervillian threatens to destroy a major superhero and the city.'
 
     - &fear !!models.Movie
-       movieId:          1884
+       id:          1884
        title:       'Fear and Loathing in Las Vegas (1998)'
        description:  'An oddball journalist and his psychopathic lawyer travel to Las Vegas for a series of psychedelic escapades.'
 
     - &very !!models.Movie
-       movieId:          2387
+       id:          2387
        title:       'Very Bad Things (1998)'
        description:  'A prostitute is killed during a bachelor party and the attendees turn on each other as the wedding approaches.'
 
     - &me !!models.Movie
-       movieId:          3752
+       id:          3752
        title:       'Me, Myself and Irene (2000)'
        description:  'A nice-guy cop with dissociative identity disorder must protect a woman on the run from a corrupt ex-boyfriend and his associates.'
 
     - &night !!models.Movie
-       movieId:          968
+       id:          968
        title:       'Night of the Living Dead (1968)'
        description:  'A group of people hide from bloodthirsty zombies in a farmhouse.'
 
     - &beloved !!models.Movie
-       movieId:          2314
+       id:          2314
        title:       'Beloved (1998)'
        description:  'Based on the book by Toni Morrison, in which a slave is visited by the spirit of her deceased daughter.'
 
     - &beavis !!models.Movie
-       movieId:          1405
+       id:          1405
        title:       'Beavis and Butt-head Do America (1996)'
        description:  'The dimwitted teen duo of Beavis and Butt-Head travel across America in search of their stolen television set.'
 
     - &clockwork !!models.Movie
-       movieId:          1206
+       id:          1206
        title:       'Clockwork Orange, A (1971)'
        description:  'In future Britain, charismatic delinquent Alex DeLarge is jailed and volunteers for an experimental aversion therapy developed by the government in an effort to solve society''s crime problem... but not all goes to plan.'
 
     - &hellraiser !!models.Movie
-       movieId:          3917
+       id:          3917
        title:       'Hellraiser (1987)'
        description:  'An unfaithful wife encounters the zombie of her dead lover, who''s being chased by demons after he escaped from their sado-masochistic Hell.'
 
     - &sound !!models.Movie
-       movieId:          1035
+       id:          1035
        title:       'Sound of Music, The (1965)'
        description:  'A woman leaves an Austrian convent to become a governess to the children of a Naval officer widower.'
 
     - &bloodline !!models.Movie
-       movieId:          611
+       id:          611
        title:       'Hellraiser: Bloodline (1996)'
        description:  'In the 22nd century, a scientist attempts to right the wrong his ancestor created: the puzzle box that opens the gates of Hell and unleashes Pinhead and his Cenobite legions.'
 
     - &there !!models.Movie
-       movieId:          1923
+       id:          1923
        title:       'There''s Something About Mary (1998)'
        description:  'A man gets a chance to meet up with his dream girl from highschool, even though his date with her back then was a complete disaster.'
 
     - &adventures !!models.Movie
-       movieId:          3070
+       id:          3070
        title:       'Adventures of Buckaroo Bonzai Across the 8th Dimension, The (1984)'
        description:  'Adventurer/surgeon/rock musician Buckaroo Banzai and his band of men, the Hong Kong Cavaliers, take on evil alien invaders from the 8th dimension.'
 
     - &nightmare !!models.Movie
-       movieId:          1347
+       id:          1347
        title:       'Nightmare on Elm Street, A (1984)'
        description:  'In the dreams of his victims, a spectral child murderer stalks the children of the members of the lynch mob that killed him.'
 
     - &ace !!models.Movie
-       movieId:          344
+       id:          344
        title:       'Ace Ventura: Pet Detective (1994)'
        description:  'A goofy detective specializing in animals goes in search of a missing dolphin mascot of a football team.'
 
     - &happy !!models.Movie
-       movieId:          104
+       id:          104
        title:       'Happy Gilmore (1996)'
        description:  'A rejected hockey player puts his skills to the golf course to save his grandmother''s house.'
 
     - &crash !!models.Movie
-       movieId:          1483
+       id:          1483
        title:       'Crash (1996)'
        description:  'After getting into a serious car accident, a TV director discovers an underground sub-culture of scarred, omnisexual car-crash victims who use car accidents and the raw sexual energy they produce to try to rejuvenate his sex life with his wife.'
 
     - &deuce !!models.Movie
-       movieId:          3146
+       id:          3146
        title:       'Deuce Bigalow: Male Gigolo (1999)'
        description:  'A man becomes a male gigolo after being mistaken for one while housesitting a male gigolo''s house. '
 
     - &13th !!models.Movie
-       movieId:          2826
+       id:          2826
        title:       '13th Warrior, The (1999)'
        description:  'In A.D. 922, an Arab ambassador is exiled from his homeland and ends up meeting a group of warrior Norseman, who he soon discovers he is destined join.'
 
     - &for !!models.Movie
-       movieId:          2861
+       id:          2861
        title:       'For Love of the Game (1999)'
        description:  'A washed up pitcher flashes through his career.'
 
     - &fifth !!models.Movie
-       movieId:          1527
+       id:          1527
        title:       'Fifth Element, The (1997)'
        description:  'In the colorful future, a cab driver unwittingly becomes the central figure in the search for a legendary cosmic weapon to keep Evil and Mr Zorg at bay.'
 
     - &barenaked !!models.Movie
-       movieId:          3913
+       id:          3913
        title:       'Barenaked in America (1999)'
        description:  'A rockumentary about the Canadian rock band Barenaked Ladies''s life, in a nutshell.'
 
     - &pie !!models.Movie
-       movieId:          2706
+       id:          2706
        title:       'American Pie (1999)'
        description:  'Four teenage boys enter a pact to lose their virginity by prom night.'
 
     - &lebowski !!models.Movie
-       movieId:          1732
+       id:          1732
        title:       'Big Lebowski, The (1998)'
        description:  '"Dude" Lebowski, mistaken for a millionaire Lebowski, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.'
 
     - &dogma !!models.Movie
-       movieId:          3052
+       id:          3052
        title:       'Dogma (1999)'
        description:  'An abortion clinic worker with a special heritage is called upon to save the existence of humanity from being negated by two renegade angels trying to exploit a loophole and re-enter Heaven.'
 
     - &trek !!models.Movie
-       movieId:          1373
+       id:          1373
        title:       'Star Trek V: The Final Frontier (1989)'
        description:  'Captain Kirk and his crew must deal with Mr. Spock''s long-lost half-brother who hijacks the Enterprise for an obsessive search for God at the center of the galaxy. '
 
     - &twister !!models.Movie
-       movieId:          736
+       id:          736
        title:       'Twister (1996)'
        description:  'Bill and Jo Harding, advanced storm chasers on the brink of divorce, must join together to create an advanced weather alert system by putting themselves in the cross-hairs of extremely violent tornadoes.'
 
     - &fight !!models.Movie
-       movieId:          2959
+       id:          2959
        title:       'Fight Club (1999)'
        description:  'An insomniac office worker looking for a way to change his life crosses paths with a devil-may-care soap maker and they form an underground fight club that evolves into something much, much more...'
 
     - &eraserheah !!models.Movie
-       movieId:          3676
+       id:          3676
        title:       'Eraserhead (1977)'
        description:  'Henry Spencer tries to survive his industrial environment, his angry girlfriend, and the unbearable screams of his newly born mutant child.'
 
     - &pink !!models.Movie
-       movieId:          2361
+       id:          2361
        title:       'Pink Flamingos (1972)'
        description:  'Notorious Baltimore criminal and underground figure Divine goes up against Connie & Raymond Marble, a sleazy married couple who make a passionate attempt to humiliate her and seize her tabloid-given title as "The Filthiest Person Alive".'
 
     - &idiots !!models.Movie
-       movieId:          3569
+       id:          3569
        title:       'Idiots, The (Idioterne) (1998)'
        description:  'The group of people gather at the house in Copenhagen suburb to break all the limitations and to bring out the "inner idiot" in themselves.'
 
     - &wes !!models.Movie
-       movieId:          366
+       id:          366
        title:       'Wes Craven''s New Nightmare (1994)'
        description:  'A demonic force has chosen Freddy Krueger as its portal to the real world. Can Heather play the part of Nancy one last time and trap the evil trying to enter our world?'
 
     - &mummy !!models.Movie
-       movieId:          2617
+       id:          2617
        title:       'Mummy, The (1999)'
        description:  'An American serving in the French Foreign Legion on an archaeological dig at the ancient city of Hamunaptra accidentally awakens a Mummy.'
 
     - &samurai !!models.Movie
-       movieId:          2275
+       id:          2275
        title:       'Six-String Samurai (1998)'
        description:  'In the post-apocalyptic world of 1960s Nevada, a rock ''n'' roll samurai takes a young boy under his protection.'
 
     - &romeo !!models.Movie
-       movieId:          1059
+       id:          1059
        title:       'William Shakespeare''s Romeo and Juliet (1996)'
        description:  'Shakespeare''s famous play is updated to the hip modern suburb of Verona still retaining its original dialogue.'
 
     - &ripley !!models.Movie
-       movieId:          3176
+       id:          3176
        title:       'Talented Mr. Ripley, The (1999)'
        description:  'In late 1950s New York, Tom Ripley, a young underachiever, is sent to Italy to retrieve a rich and spoiled millionaire playboy, named Dickie Greenleaf. But when the errand fails, Ripley takes extreme measures.'
 
     - &powers !!models.Movie
-       movieId:          1517
+       id:          1517
        title:       'Austin Powers: International Man of Mystery (1997)'
        description:  'A 1960s hipster secret agent is brought out of cryofreeze to oppose his greatest enemy in the 1990s, where his social attitudes are glaringly out of place.'
 
     - &lost !!models.Movie
-       movieId:          1544
+       id:          1544
        title:       'Lost World: Jurassic Park, The (1997)'
        description:  'A research team is sent to the Jurassic Park Site B island to study the dinosaurs there while another team approaches with another agenda.'
 
     - &existenz !!models.Movie
-       movieId:          2600
+       id:          2600
        title:       'eXistenZ (1999)'
        description:  'A game designer on the run from assassins must play her latest virtual reality creation with a marketing trainee to determine if the game has been damaged.'
 
     - &bullwinkle !!models.Movie
-       movieId:          3754
+       id:          3754
        title:       'Adventures of Rocky and Bullwinkle, The (2000)'
        description:  'Rocky and Bullwinkle have been living off the finances made from the reruns of their cartoon show. They must stop Boris, Natasha and Fearless Leader before they wreak havoc.'
 
     - &missionmars !!models.Movie
-       movieId:          3354
+       id:          3354
        title:       'Mission to Mars (2000)'
        description:  'When the first manned mission to Mars meets with a catastrophic and mysterious disaster, a rescue mission is launched to investigate the tragedy and bring back any survivors.'
 
     - &kingpin !!models.Movie
-       movieId:          785
+       id:          785
        title:       'Kingpin (1996)'
        description:  'A star bowler whose career was prematurely "cut off" hopes to ride a new prodigy to success and riches.'
 
     - &grease !!models.Movie
-       movieId:          1380
+       id:          1380
        title:       'Grease (1978)'
        description:  'Good girl Sandy and greaser Danny fell in love over the summer. But when they unexpectedly discover they''re now in the same high school, will they be able to rekindle their romance?'
 
     - &dacer !!models.Movie
-       movieId:          3910
+       id:          3910
        title:       'Dancer in the Dark (2000)'
        description:  'An east European girl goes to America with her young son, expecting it to be like a Hollywood film.'
 
     - &nature !!models.Movie
-       movieId:          19
+       id:          19
        title:       'Ace Ventura: When Nature Calls (1995)'
        description:  'Pet detective Ace Ventura comes out of retirement to investigate the disappearance of a rare white bat, the symbol of an African tribe.'
 
     - &water !!models.Movie
-       movieId:          208
+       id:          208
        title:       'Waterworld (1995)'
        description:  'In a future where the polar ice caps have melted and most of Earth is underwater, a mutated mariner fights starvation and outlaw "smokers," and reluctantly helps a woman and a young girl try to find dry land.'
 
     - &scream !!models.Movie
-       movieId:          3273
+       id:          3273
        title:       'Scream 3 (2000)'
        description:  'Ghostface pays Sidney and her friends a third visit while they visit the set of "Stab 3", the third movie based upon the Woodsboro murders.'
 
     - &exorcist !!models.Movie
-       movieId:          1997
+       id:          1997
        title:       'Exorcist, The (1973)'
        description:  'When the devil possesses a teenage girl, her only hope is an exorcism.'
 
     - &godzilla !!models.Movie
-       movieId:          2363
+       id:          2363
        title:       'Godzilla (Gojira) (1954)'
        description:  'American nuclear weapons testing results in the creation of a seemingly unstoppable, dinosaur-like beast.'
 
     - &vegas !!models.Movie
-       movieId:          25
+       id:          25
        title:       'Leaving Las Vegas (1995)'
        description:  'Ben Sanderson, an alcoholic Hollywood screenwriter who lost everything because of his drinking, arrives in Las Vegas to drink himself to death. There, he meets and forms an uneasy friendship and non-interference pact with prostitute Sera.'
 
     - &superstar !!models.Movie
-       movieId:          2907
+       id:          2907
        title:       'Superstar (1999)'
        description:  'A nerdy Catholic schoolgirl, Mary Katherine Gallagher, dreams of superstardom.'
 
     - &barbarella !!models.Movie
-       movieId:          674
+       id:          674
        title:       'Barbarella (1968)'
        description:  'In the far future, a highly sexual woman is tasked with finding and stopping the evil Durand-Durand. Along the way she encounters various unusual people.'
 
     - &dawn !!models.Movie
-       movieId:          3225
+       id:          3225
        title:       'Down to You (2000)'
        description:  'A young man wins and loses the first serious love of his life. '
 
     - &postman !!models.Movie
-       movieId:          1726
+       id:          1726
        title:       'Postman, The (1997)'
        description:  'A drifter with no name finds a jeep with the skeleton of a postman and a bag of mail and dons the postman''s uniform and bag of mail as he begins a quest to inspire hope to the survivors living in the post apocalyptic America.'
 
     - &christ !!models.Movie
-       movieId:          2022
+       id:          2022
        title:       'Last Temptation of Christ, The (1988)'
        description:  'The life of Jesus Christ, His journey through life as He faces the temptations that all humans face during their lives, and His final temptation upon the cross.'
 
     - &rushmore !!models.Movie
-       movieId:          2395
+       id:          2395
        title:       'Rushmore (1998)'
        description:  'The king of Rushmore prep school is put on academic probation.'
 
     - &bride !!models.Movie
-       movieId:          2315
+       id:          2315
        title:       'Bride of Chucky (1998)'
        description:  'Chucky, the doll possessed by a serial killer, discovers the perfect mate to kill and revive into the body of another doll.'
 

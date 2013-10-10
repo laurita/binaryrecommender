@@ -18,7 +18,7 @@ GET			/about											controllers.Application.about()
 # Movies
 GET			/movies											controllers.Movies.list()
 GET			/preferences								controllers.Movies.preferences()
-GET			/movies/:id									controllers.Movies.details(id:String)
+GET			/movies/:id									controllers.Movies.details(id:Integer)
 
 # Users
 GET			/users											controllers.Users.list()

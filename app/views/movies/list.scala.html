@@ -15,15 +15,15 @@
 						</thead>
 						<tbody>
 							@for(movie <- movies) {
-								<tr class="movie-id-@{movie.movieId}">
+								<tr class="movie-id-@{movie.id}">
 									<td>
 										<figure>
-											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.movieId + ".jpg")" />
+											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
 										</figure>
 									</td>
 									<td>
 										<h3>
-											<a href="@routes.Movies.details(movie.movieId)">@movie.title</a>
+											<a href="@routes.Movies.details(movie.id)">@movie.title</a>
 										</h3>
 										<span>@stars()</span>
 										<span>@movie.description</span>

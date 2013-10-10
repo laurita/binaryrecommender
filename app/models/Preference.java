@@ -10,7 +10,7 @@ import play.data.validation.Constraints;
 public class Preference extends Model {
 	
 	@Id
-	public Long prefId;
+	public Long id;
 	
 	@Constraints.Required
 	public int value;
@@ -34,7 +34,7 @@ public class Preference extends Model {
 	}
 	
 	public String toString() {
-		return String.format("%d - %s - %s - %d", user.userId, movie1.movieId, movie2.movieId, value);
+		return String.format("%d - %s - %s - %d", user.id, movie1.id, movie2.id, value);
 	}
 	
 	public static Preference create(User user, Movie movie1, Movie movie2, int value) {

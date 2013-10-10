@@ -22,7 +22,7 @@ public class Movies extends Controller {
 		return ok(preferences.render(moviePairs, user));
 	}
 	
-	public static Result details(String id) {
+	public static Result details(int id) {
 		final Movie movie = Movie.findById(id);
 		if (movie == null) {
 			return notFound(String.format("Movie %s does not exist.", id));

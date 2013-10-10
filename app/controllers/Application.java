@@ -103,7 +103,7 @@ public class Application extends Controller {
 			user = User.find.where().eq("email", email).findUnique();
 			flash("success", String.format("Successfully created user %s", user.email));
 			session().clear();
-			session("userId", String.valueOf(user.userId));
+			session("userId", String.valueOf(user.id));
 			return redirect(routes.Application.about());
 		}
 	}
@@ -133,7 +133,7 @@ public class Application extends Controller {
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
-			session("userId", String.valueOf(User.findByEmail(loginForm.get().email).userId));
+			session("userId", String.valueOf(User.findByEmail(loginForm.get().email).id));
 			return redirect(
 				routes.Application.index()
 					);

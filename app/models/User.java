@@ -11,7 +11,7 @@ import models.*;
 public class User extends Model {
 	
 	@Id
-	public Long userId;
+	public int id;
 	
 	@Constraints.Required
 	public String email;

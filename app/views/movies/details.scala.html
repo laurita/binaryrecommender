@@ -6,10 +6,10 @@
 @main("Movie details") {
   <h1>Movie details</h1>
 	<dt>
-		<img src="@routes.Assets.at("images/movies/" + movie.movieId + ".jpg")" />
+		<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
 	</dt>
 	<dt>
-		<a href="@routes.Movies.details(movie.movieId)">
+		<a href="@routes.Movies.details(movie.id)">
 			@movie.title
 		</a>
 	</dt>

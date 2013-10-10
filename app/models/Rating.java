@@ -10,7 +10,7 @@ import play.data.validation.Constraints;
 public class Rating extends Model {
 	
 	@Id
-	public Long ratingId;
+	public int id;
 	
 	@Constraints.Required
 	public int value;
