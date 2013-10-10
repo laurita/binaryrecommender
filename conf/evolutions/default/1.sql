@@ -7,6 +7,7 @@ create table movie (
   id                        integer not null,
   title                     varchar(255),
   description               varchar(255),
+  logpopvar                 double,
   constraint pk_movie primary key (id))
 ;
 

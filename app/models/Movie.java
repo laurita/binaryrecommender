@@ -22,6 +22,8 @@ public class Movie extends Model {
 	
 	public String description;
 	
+	public double logpopvar;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="movie")
 	private List<Rating> movieRatings;
 	

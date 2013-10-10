@@ -10,7 +10,7 @@ public class Movies extends Controller {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result list() {
-		List<Movie> movies = Movie.findAll();
+		List<Movie> movies = Movie.find.orderBy("logpopvar desc").findList();
 		User user = User.find.byId(session().get("userId"));
 		return ok(list.render(movies, user));
 	}

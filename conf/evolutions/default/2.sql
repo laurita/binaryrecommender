@@ -15,6 +15,8 @@ create table ml_ratings (
 as select *
 from csvread('data/pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 ;
+
+
 	
 # --- !Downs
 

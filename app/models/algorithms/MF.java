@@ -350,7 +350,6 @@ public class MF extends Model {
 			map.put(m, pred);
 		}
 		sorted_map.putAll(map);
-		System.out.println(sorted_map);
 		return sorted_map.keySet();
 	}
 
