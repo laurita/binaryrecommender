@@ -1,0 +1,39 @@
+@(rankedMovieIds: List[Movie], user: User)
+
+@main("Recommended list of movies") {	
+	<div class="container">
+		<h4>Recommended movies</h4>
+		<div class="row">
+			<div class="span12">
+				<div id="list-movie" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>	
+							</tr>
+						</thead>
+						<tbody>
+							@for(movie <- rankedMovieIds) {
+								<tr class="movie-id-@{movie.id}">
+									<td>
+										<figure>
+											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+										</figure>
+									</td>
+									<td>
+										<h3>
+											<a href="@routes.Movies.details(movie.id)">@movie.title</a>
+										</h3>
+										<span>@movie.description</span>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+}
+

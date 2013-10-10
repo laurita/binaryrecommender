@@ -14,6 +14,7 @@ POST		/submitAnswers							controllers.Application.submitAnswers()
 GET			/finish1										controllers.Application.finish1()
 GET			/start											controllers.Application.start()
 GET			/about											controllers.Application.about()
+GET			/recommendation							controllers.MFController.recommend()
 
 # Movies
 GET			/movies											controllers.Movies.list()

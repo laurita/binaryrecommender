@@ -14,7 +14,7 @@ public class User extends Model {
 	public int id;
 	
 	@Constraints.Required
-	public String email;
+		public String email;
 	
 	@Column(name = "created_at")
 	public Date createdAt;
@@ -38,31 +38,31 @@ public class User extends Model {
 	
 	public User() {}
 	
-	public User(String email) {
-		this.email = email;
-	}
-	
-	@Override
-	public void save() {
-		createdAt();
-		addExperimentGroup();
-		super.save();
-	}
-	
-  @PrePersist
- 	void createdAt() {
- 		this.createdAt = new Date();
-	}
-	
-	private void addExperimentGroup() {
-		int experimentGroup = 1;
-		User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
-		int lastExperimentGroup = (lastUser != null) ? lastUser.experimentGroup : 0;
-		if (lastExperimentGroup != 0) {
-			experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
+		public User(String email) {
+			this.email = email;
 		}
-		this.experimentGroup = experimentGroup;
-	}
+	
+		@Override
+		public void save() {
+			createdAt();
+			addExperimentGroup();
+			super.save();
+		}
+	
+		@PrePersist
+		void createdAt() {
+			this.createdAt = new Date();
+		}
+	
+		private void addExperimentGroup() {
+			int experimentGroup = 1;
+			User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
+			int lastExperimentGroup = (lastUser != null) ? lastUser.experimentGroup : 0;
+			if (lastExperimentGroup != 0) {
+				experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
+			}
+			this.experimentGroup = experimentGroup;
+		}
 	
 		public static Finder<String,User> find = new Finder<String,User>(
 			String.class, User.class);
@@ -73,6 +73,26 @@ public class User extends Model {
 	
 		public List<Rating> getRatings() {
 			return Rating.find.where().eq("user", this).findList();
+		}
+		
+		
+		public List<Integer> getRatedMovieIds() {
+			List<Rating> userRatings = Rating.find.fetch("movie").where().eq("user", this).findList();
+			List<Integer> movieIds = new ArrayList<Integer>();
+			for (Rating r : userRatings) {
+				movieIds.add(r.movie.id);
+			}
+			return movieIds;
+		}
+		
+		public List<Integer> getUnratedMovieIds() {
+			List<Movie> all = Movie.find.all();
+			List<Integer> allIds = new ArrayList<Integer>();
+			for (Movie m : all) {
+				allIds.add(m.id);
+			}
+			allIds.removeAll(this.getRatedMovieIds());
+			return allIds;
 		}
 		
 		public List<Preference> getPreferences() {
