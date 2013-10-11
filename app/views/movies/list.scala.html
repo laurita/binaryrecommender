@@ -1,5 +1,7 @@
 @(movies: List[Movie], user: User)
 
+@import models.User
+
 @main("Movies list") {	
 	<div class="container">
 		<h4>Rate as many movies as you can.</h4>
@@ -15,20 +17,22 @@
 						</thead>
 						<tbody>
 							@for(movie <- movies) {
-								<tr class="movie-id-@{movie.id}">
-									<td>
-										<figure>
-											<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
-										</figure>
-									</td>
-									<td>
-										<h3>
-											<a href="@routes.Movies.details(movie.id)">@movie.title</a>
-										</h3>
-										<span>@stars()</span>
-										<span>@movie.description</span>
-									</td>
-								</tr>
+								@defining(user.getMovieRating(movie.id)) { rating =>
+									<tr class="movie-id-@{movie.id} @{if(rating != 0) rating + "stars"}">
+										<td>
+											<figure>
+												<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+											</figure>
+										</td>
+										<td>
+											<h3>
+												<a href="@routes.Movies.details(movie.id)">@movie.title</a>
+											</h3>
+											<span>@stars()</span>
+											<span>@movie.description</span>
+										</td>
+									</tr>
+								}
 							}
 						</tbody>
 					</table>
@@ -51,25 +55,25 @@
 		<script type="text/javascript">
 		
 		$(document).ready(function () {
-					$('.table tbody tr').hide();
-					$('.table tbody tr').slice(0, 10).show();
+			$('.table tbody tr').hide();
+			$('.table tbody tr').slice(0, 10).show();
 					
 
-	        var options = {
-	            currentPage: 1,
-	            totalPages: 10,
-							alignment: "center",
-							onPageChanged:
-								function (event, oldPage, newPage) {
-									$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
-									$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
-								}
-	        }
+			var options = {
+				currentPage: 1,
+				totalPages: 10,
+				alignment: "center",
+				onPageChanged:
+				function (event, oldPage, newPage) {
+					$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
+					$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
+				}
+			}
 
-	        $('.pagination').bootstrapPaginator(options);
+			$('.pagination').bootstrapPaginator(options);
 			
 		});
 		
 		</script>
-}
+	}
 

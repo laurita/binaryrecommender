@@ -75,6 +75,17 @@ public class User extends Model {
 			return Rating.find.where().eq("user", this).findList();
 		}
 		
+		public int getMovieRating(int movieId) {
+			Rating rating = Rating.find.where()
+				.eq("user", this)
+				.eq("movie", Movie.find.byId(movieId))
+				.findUnique();
+			int r = 0;
+			if (rating != null) { 
+				r = rating.value; }
+			return r;
+		} 
+		
 		
 		public List<Integer> getRatedMovieIds() {
 			List<Rating> userRatings = Rating.find.fetch("movie").where().eq("user", this).findList();
