@@ -8,6 +8,10 @@ create table movie (
   title                     varchar(255),
   description               varchar(255),
   logpopvar                 double,
+  trailer_link              varchar(255),
+  length                    integer,
+  imdb_link                 varchar(255),
+  genres                    varchar(255),
   constraint pk_movie primary key (id))
 ;
 

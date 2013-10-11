@@ -113,6 +113,9 @@ span.clicked { color: #FF0000; }
           transition: background-position 0.1s linear;
 }
 
+/* add space before row */
+.top-buffer { margin-top:10px; }
+
 
 /* Higher tooltip
 -------------------------------------------------- */

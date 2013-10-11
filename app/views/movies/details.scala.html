@@ -4,43 +4,35 @@
 @import helper.twitterBootstrap._
 
 @main("Movie details") {
-  <h1>Movie details</h1>
-	<dt>
-		<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
-	</dt>
-	<dt>
-		<a href="@routes.Movies.details(movie.id)">
-			@movie.title
-		</a>
-	</dt>
-	<dt>@movie.description</dt>
-	
-	<div class="container">
-		<h2>Movie Rating List</h2>
+	<div class="hero-unit">
 		<div class="row">
-			<div class="span12">
-				<div id="list-rating" class="content scaffold-list" role="main">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>User</th>
-								<th>Rating</th>	
-							</tr>
-						</thead>
-						<tbody>
-							@for(rating <- movie.getRatings()) {
-								<tr>
-									<td>
-										@rating.user.email
-									</td>
-									<td>
-										@rating.value
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
+			<div class="span3">
+				<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+			</div>
+			<div class="span5 offset1">
+				<div class="row">
+					<h4>
+						<a href="@routes.Movies.details(movie.id)">
+							@movie.title
+						</a>
+					</h4>
+				</div>
+				<div class="row">
+					<div class="span2">
+						@movie.length Min
+					</div>
+					<div class="span1">
+						<a href="@movie.imdbLink" target="_blank">
+							IMDb
+						</a>
+					</div>
+					<div class="span2">
+						<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
+					</div>
+				</div>
 					
+				<div class="row">
+					@movie.description
 				</div>
 			</div>
 		</div>

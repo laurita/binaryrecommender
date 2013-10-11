@@ -24,6 +24,14 @@ public class Movie extends Model {
 	
 	public double logpopvar;
 	
+	public String trailerLink;
+	
+	public int length;
+	
+	public String imdbLink;
+	
+	public String genres;
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="movie")
 	private List<Rating> movieRatings;
 	

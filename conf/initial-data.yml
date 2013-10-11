@@ -34,265 +34,440 @@ movies:
         title:      'Blair Witch Project, The (1999)'
         description:  'Three film students go missing after traveling into the woods of Maryland to make a documentary about the local Blair Witch legend leaving only their footage behind.'
         logpopvar:  12.34
+        trailerLink:  'http://www.youtube.com/watch?v=a_Hw4bAUj8A'
+        length:  81
+        imdbLink:    'http://www.imdb.com/title/tt0185937'
+        genres:  'Horror'
 
     - &plan9 !!models.Movie
         id:         1924
         title:      'Plan 9 from Outer Space (1958)'
         description:  'Aliens resurrect dead humans as zombies and vampires to stop human kind from creating the Solaranite (a sort of sun-driven bomb).'
         logpopvar:  11.70
+        trailerLink:  'http://www.youtube.com/embed?v=u2ukRYsYPmo'
+        length:  79
+        imdbLink:    'http://www.imdb.com/title/tt0052077'
+        genres:  'Horror|Sci-Fi'
 
     - &dumb !!models.Movie
         id:         231
         title:      'Dumb & Dumber (1994)'
         description:  'The cross-country adventures of two good-hearted but incredibly stupid friends.'
         logpopvar:  11.33
+        trailerLink:  'http://www.youtube.com/embed?v=q0zGXZa2dG0'
+        length:  107
+        imdbLink:    'http://www.imdb.com/title/tt0109686'
+        genres:  'Comedy'
 
     - &rocky !!models.Movie
         id:         2657
         title:      'Rocky Horror Picture Show, The (1975)'
         description:  'A newly engaged couple have a breakdown in an isolated area and must pay a call to the bizarre residence of Dr. Frank-N-Furter.'
         logpopvar:  11.30
+        trailerLink:  'http://www.youtube.com/embed?v=dEBQ3haBi3c'
+        length:  100
+        imdbLink:    'http://www.imdb.com/title/tt0073629'
+        genres:  'Comedy|Horror|Musical|Sci-Fi'
 
     - &natural !!models.Movie
         id:         288
         title:      'Natural Born Killers (1994)'
         description:  'Two victims of traumatized childhoods become lovers and psychopathic serial murderers irresponsibly glorified by the mass media.'
         logpopvar:  11.19
+        trailerLink:  'http://www.youtube.com/embed?v=YTCL0I2nK4A'
+        length:  118
+        imdbLink:    'http://www.imdb.com/title/tt0110632'
+        genres:  'Action|Thriller'
 
     - &south !!models.Movie
         id:         2700
         title:      'South Park: Bigger, Longer and Uncut (1999)'
         description: 'When the four boys see an R-rated movie featuring Canadians Terrance & Phillip, they are pronounced "corrupted", and their parents pressure the United States to wage war against Canada.'
         logpopvar:  10.91
+        trailerLink:  'http://www.youtube.com/embed?v=aes3Iz8QPgA'
+        length:  81
+        imdbLink:    'http://www.imdb.com/title/tt0158983'
+        genres:  'Animation|Comedy'
 
     - &eyes !!models.Movie
         id:         2712
         title:      'Eyes Wide Shut (1999)'
         description:  'A New York City doctor, who is married to an art curator, pushes himself on a harrowing and dangerous night-long odyssey of sexual and moral discovery after his wife admits that she once almost cheated on him.'
         logpopvar:  10.87
+        trailerLink:  'http://www.youtube.com/embed?v=YEfyfcEdW4Y'
+        length:  159
+        imdbLink:    'http://www.imdb.com/title/tt0120663'
+        genres:  'Drama'
 
     - &starship !!models.Movie
         id:         1676
         title:      'Starship Troopers (1997)'
         description:  'Humans in a fascistic, militaristic future do battle with giant alien bugs in a fight for survival.'
         logpopvar:  10.22
+        trailerLink:  'http://www.youtube.com/embed?v=Y07I_KER5fE'
+        length:  129
+        imdbLink:    'http://www.imdb.com/title/tt0120201'
+        genres:  'Action|Adventure|Sci-Fi|War'
 
     - &armageddon !!models.Movie
         id:         1917
         title:      'Armageddon (1998)'
         description:  'After discovering that an asteroid the size of Texas is going to impact Earth in less than a month, N.A.S.A. recruits a misfit team of deep core drillers to save the planet.'
         logpopvar:  10.16
+        trailerLink:  'http://www.youtube.com/embed?v=kg_jH47u480'
+        length:  151
+        imdbLink:    'http://www.imdb.com/title/tt0120591'
+        genres:  'Action|Adventure|Sci-Fi|Thriller'
 
     - &titanic !!models.Movie
         id:         1721
         title:      'Titanic (1997)'
         description:  'A seventeen-year-old aristocrat, expecting to be married to a rich claimant by her mother, falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.'
         logpopvar:  10.01
+        trailerLink:  'http://www.youtube.com/embed?v=zCy5WQ9S4c0'
+        length:  194
+        imdbLink:    'http://www.imdb.com/title/tt0120338'
+        genres:  'Drama|Romance'
 
     - &thin !!models.Movie
         id:         2427
         title:      'Thin Red Line, The (1998)'
         description:  'Terrence Malick''s adaptation of James Jones'' autobiographical 1962 novel, focusing on the conflict at Guadalcanal during the second World War.'
         logpopvar:  9.88
+        trailerLink:  'http://www.youtube.com/embed?v=AYsQyIOFsiA'
+        length:  170
+        imdbLink:    'http://www.imdb.com/title/tt0120863'
+        genres:  'Action|Drama|War'
 
     - &mars !!models.Movie
         id:         1391
         title:      'Mars Attacks! (1996)'
         description:  'The Earth is invaded by Martians with irresistible weapons and a cruel sense of humor.'
         logpopvar:  9.81
+        trailerLink:  'http://www.youtube.com/embed?v=LIcmHPTG4-s'
+        length:  106
+        imdbLink:    'http://www.imdb.com/title/tt0116996'
+        genres:  'Action|Comedy|Sci-Fi|War'
 
     - &star !!models.Movie
         id:         2628
         title:      'Star Wars: Episode I - The Phantom Menace (1999)'
         description:  'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
         logpopvar:  9.7819
+        trailerLink:  'http://www.youtube.com/embed?v=qV1T2DJBwIs'
+        length:  136
+        imdbLink:    'http://www.imdb.com/title/tt0120915'
+        genres:  'Action|Adventure|Fantasy|Sci-Fi'
 
     - &texas !!models.Movie
         id:         2459
         title:      'Texas Chainsaw Massacre, The (1974)'
         description:  'Five friends visiting their grandpa''s old house are hunted down and terrorized by a chainsaw wielding killer and his family of grave-robbing cannibals.'
         logpopvar:  9.7814
+        trailerLink:  'http://www.youtube.com/embed?v=Vs3981DoINw'
+        length:  83
+        imdbLink:    'http://www.imdb.com/title/tt0072271'
+        genres:  'Horror'
 
     - &english !!models.Movie
         id:         1183
         title:      'English Patient, The (1996)'
         description:  'At the close of WWII, a young nurse tends to a badly-burned plane crash victim. His past is shown in flashbacks, revealing an involvement in a fateful love affair.'
         logpopvar:  9.70
+        trailerLink:  'http://www.youtube.com/embed?v=dr_xAhg_qV4'
+        length:  162
+        imdbLink:    'http://www.imdb.com/title/tt0116209'
+        genres:  'Drama|Romance|War'
 
     - &austin !!models.Movie
         id:         2683
         title:      'Austin Powers: The Spy Who Shagged Me (1999)'
         description:  'Dr. Evil is back...and has invented a new time machine that allows him to go back to the 60''s and steal Austin Powers''s mojo, inadvertently leaving him "shagless".'
         logpopvar:  9.63
+        trailerLink:  'http://www.youtube.com/embed?v=tZCkksmJ0YI'
+        length:  95
+        imdbLink:    'http://www.imdb.com/title/tt0145660'
+        genres:  'Comedy'
 
     - &scary !!models.Movie
         id:         3785
         title:      'Scary Movie (2000)'
         description:  'A year after disposing the body of a man they accidently killed, a group of dumb teenagers are stalked by a bumbling serial killer.'
         logpopvar:  9.616
+        trailerLink:  'http://www.youtube.com/embed?v=sSWewFbFTl4'
+        length:  88
+        imdbLink:    'http://www.imdb.com/title/tt0175142'
+        genres:  'Comedy|Horror'
 
     - &babe !!models.Movie
         id:         2384
         title:      'Babe: Pig in the City (1998)'
         description:  'Babe, fresh from his victory in the sheepherding contest, returns to Farmer Hoggett''s farm, but after Farmer Hoggett is injured and unable to work, Babe has to go to the big city to save the farm.'
         logpopvar:  9.615
+        trailerLink:  'http://www.youtube.com/embed?v=mARmXtTkVvY'
+        length:  97
+        imdbLink:    'http://www.imdb.com/title/tt0120595'
+        genres:  'Children''s|Comedy'
 
     - &tank !!models.Movie
         id:         327
         title:      'Tank Girl (1995)'
         description:  'Based on the British cult comic-strip, our tank-riding anti-heroine fights a mega-corporation, which controls the world''s water supply.'
         logpopvar:  9.60
+        trailerLink:  'http://www.youtube.com/embed?v=9mTl4KPRXJ8'
+        length:  104
+        imdbLink:    'http://www.imdb.com/title/tt0114614'
+        genres:  'Action|Comedy|Musical|Sci-Fi'
 
     - &pee !!models.Movie
         id:         3608
         title:      'Pee-wee''s Big Adventure (1985)'
         description:  'When eccentric man-child Pee-Wee Herman gets his beloved bike stolen in broad daylight, he sets out across the U.S. on the adventure of his life.'
         logpopvar:  9.50
+        trailerLink:  'http://www.youtube.com/embed?v=ZrzqBwuxHV8'
+        length:  90
+        imdbLink:    'http://www.imdb.com/title/tt0089791'
+        genres:  'Comedy'
 
     - &fromdusk !!models.Movie
        id:          70
        title:       'From Dusk Till Dawn (1996)'
        description:  'Two criminals and their hostages unknowingly seek temporary refuge in an establishment populated by vampires, with chaotic results.'
        logpopvar:  9.47
+       trailerLink:  'http://www.youtube.com/embed?v=-bBay_1dKK8'
+       length:  108
+       imdbLink:    'http://www.imdb.com/title/tt0116367'
+       genres:  'Action|Comedy|Crime|Horror|Thriller'
 
     - &face !!models.Movie
        id:          1573
        title:       'Face/Off (1997)'
        description:  'To foil an extortion plot, an FBI agent undergoes a face-transplant surgery and assumes the identity and physical appearance of a ruthless terrorist, but the plan backfires when the same criminal impersonates the cop with the same method.'
        logpopvar:  9.372
+       trailerLink:  'http://www.youtube.com/embed?v=YiwA3C2qeRo'
+       length:  138
+       imdbLink:    'http://www.imdb.com/title/tt0119094'
+       genres:  'Action|Sci-Fi|Thriller'
 
     - &day !!models.Movie
        id:          2483
        title:       'Day of the Beast, The (El Dia de la bestia) (1995)'
        description:  'A basque priest finds by means of a cabalistic study of the bible that the anti-christ is going to be born on Christmas day in Madrid. He will try to invoke the devil to find out the place of birth and kill the baby.'
        logpopvar:  9.37
+       trailerLink:  'http://www.youtube.com/embed?v=hA2FjEOyl9I'
+       length:  99
+       imdbLink:    'http://www.imdb.com/title/tt0112922'
+       genres:  'Comedy|Horror|Thriller'
 
     - &dune !!models.Movie
        id:          2021
        title:       'Dune (1984)'
        description:  'A Duke''s son leads desert warriors against the galactic emperor and his father''s evil nemesis when they assassinate his father and free their desert world from the emperor''s rule.'
        logpopvar:  9.3367
+       trailerLink:  'http://www.youtube.com/embed?v=KwPTIEWTYEI'
+       length:  137
+       imdbLink:    'http://www.imdb.com/title/tt0087182'
+       genres:  'Fantasy|Sci-Fi'
 
     - &spaceballs !!models.Movie
        id:          3033
        title:       'Spaceballs (1987)'
        description:  'Planet Spaceball''s President Skroob sends Lord Dark Helmet to steal Planet Druidia''s abundant supply of air to replenish their own, and only Lone Starr can stop them.'
        logpopvar:  9.3360
+       trailerLink:  'http://www.youtube.com/embed?v=0uzEgsHypgM'
+       length:  96
+       imdbLink:    'http://www.imdb.com/title/tt0094012'
+       genres:  'Comedy|Sci-Fi'
 
     - &gojira !!models.Movie
        id:          3864
        title:       'Godzilla 2000 (Gojira ni-sen mireniamu) (1999)'
        description:  'Godzilla saves Tokyo from a flying saucer that transforms into the beast Orga.'
        logpopvar:  9.24
+       trailerLink:  'http://www.youtube.com/embed?v=UnVajjMrqd0'
+       length:  99
+       imdbLink:    'http://www.imdb.com/title/tt0188640'
+       genres:  'Action|Adventure|Sci-Fi'
 
     - &bicent !!models.Movie
        id:          3156
        title:       'Bicentennial Man (1999)'
        description:  'An android endeavors to become human as he gradually acquires emotions.'
        logpopvar:  9.23
+       trailerLink:  'http://www.youtube.com/embed?v=z5YMEwX2-88'
+       length:  132
+       imdbLink:    'http://www.imdb.com/title/tt0182789'
+       genres:  'Comedy|Drama|Sci-Fi'
 
     - &billy !!models.Movie
        id:          216
        title:       'Billy Madison (1995)'
        description:  'In order to inherit his fed up father''s hotel empire, an immature and lazy man must repeat grades 1-12 all over again.'
        logpopvar:  9.17
+       trailerLink:  'http://www.youtube.com/embed?v=_-PZeKhMdiQ'
+       length:  89
+       imdbLink:    'http://www.imdb.com/title/tt0112508'
+       genres:  'Comedy'
 
     - &indep !!models.Movie
        id:          780
        title:       'Independence Day (ID4) (1996)'
        description:  'The aliens are coming and their goal is to invade and destroy. Fighting superior technology, Man''s best weapon is the will to survive.'
        logpopvar:  9.15
+       trailerLink:  'http://www.youtube.com/embed?v=NZZvtQtdbzM'
+       length:  145
+       imdbLink:    'http://www.imdb.com/title/tt0116629'
+       genres:  'Action|Sci-Fi|War'
 
     - &american !!models.Movie
        id:          3535
        title:       'American Psycho (2000)'
        description:  'A wealthy New York investment banking executive hides his alternate psychopathic ego from his co-workers and friends as he escalates deeper into his illogical, gratuitous fantasies.'
        logpopvar:  9.14
+       trailerLink:  'http://www.youtube.com/embed?v=2GIsExb5jJU'
+       length:  102
+       imdbLink:    'http://www.imdb.com/title/tt0144084'
+       genres:  'Comedy|Horror|Thriller'
 
     - &braindead !!models.Movie
        id:          1241
        title:       'Braindead (1992)'
        description:  'A young man''s mother is bitten by a Sumatran rat-monkey. She gets sick and dies, at which time she comes back to life, killing and eating dogs, nurses, friends, and neighbors.'
        logpopvar:  9.12
+       trailerLink:  'http://www.youtube.com/embed?v=QtmqGe7740g'
+       length:  104
+       imdbLink:    'http://www.imdb.com/title/tt0103873'
+       genres:  'Comedy|Horror'
 
     - &transform !!models.Movie
        id:          1205
        title:       'Transformers: The Movie, The (1986)'
        description:  'The Autobots must stop a colossal planet consuming robot who goes after the Autobot Matrix of Leadership. At the same time, they must defend themselves against an all-out attack from the Decepticons.'
        logpopvar:  9.10
+       trailerLink:  'http://www.youtube.com/embed?v=zaEWLuVJee0'
+       length:  84
+       imdbLink:    'http://www.imdb.com/title/tt0092106'
+       genres:  'Action|Animation|Children''s|Sci-Fi|Thriller|War'
 
     - &patch !!models.Movie
        id:          2431
        title:       'Patch Adams (1998)'
        description:  'A medical student in the 70''s treats patients, illegally, using humor.'
        logpopvar:  9.07
+       trailerLink:  'http://www.youtube.com/embed?v=_ZgdyDvPCDE'
+       length:  115
+       imdbLink:    'http://www.imdb.com/title/tt0129290'
+       genres:  'Comedy|Drama'
 
     - &toys !!models.Movie
        id:          2253
        title:       'Toys (1992)'
        description:  'When a military general inherits a toy making company and begins making war toys, his employees band together to stop him before he ruins the name of Zevo Toys forever.'
        logpopvar:  9.043
+       trailerLink:  'http://www.youtube.com/embed?v=Juk8R28_RuM'
+       length:  118
+       imdbLink:    'http://www.imdb.com/title/tt0105629'
+       genres:  'Action|Comedy|Fantasy'
 
     - &bringing !!models.Movie
        id:          2976
        title:       'Bringing Out the Dead (1999)'
        description:  'A Manhattan ambulance paramedic, overworked and haunted by visions of his failures, fights to keep a tenuous grip on his clarity.'
        logpopvar:  9.041
+       trailerLink:  'http://www.youtube.com/embed?v=sfUwvmRmMtw'
+       length:  121
+       imdbLink:    'http://www.imdb.com/title/tt0163988'
+       genres:  'Drama|Horror'
 
     - &magnolia !!models.Movie
        id:          3160
        title:       'Magnolia (1999)'
        description:  'An epic mosaic of interrelated characters in search of love, forgiveness, and meaning in the San Fernando Valley.'
        logpopvar:  8.992
+       trailerLink:  'http://www.youtube.com/embed?v=zwXDHSrNFbQ'
+       length:  188
+       imdbLink:    'http://www.imdb.com/title/tt0175880'
+       genres:  'Drama'
 
     - &idle !!models.Movie
        id:          2606
        title:       'Idle Hands (1999)'
        description:  'Lazy Anton''s right hand becomes possessed with murderous intent.'
        logpopvar:  8.99
+       trailerLink:  'http://www.youtube.com/embed?v=JPwJ5B3Jq1w'
+       length:  92
+       imdbLink:    'http://www.imdb.com/title/tt0138510'
+       genres:  'Comedy|Horror'
 
     - &waterboy !!models.Movie
        id:          2335
        title:       'Waterboy, The (1998)'
        description:  'A waterboy for a college football team discovers he has a unique tackling ability and becomes a member of the team.'
        logpopvar:  8.98
+       trailerLink:  'http://www.youtube.com/embed?v=z8yv9eq5s14'
+       length:  90
+       imdbLink:    'http://www.imdb.com/title/tt0120484'
+       genres:  'Comedy'
 
     - &grateful !!models.Movie
        id:          1421
        title:       'Grateful Dead (1995)'
        description:  'A series of photographs taken by ''Linda McCartney'' of the Grateful Dead at the Dead''s house in Haight-Ashbury and at a concert in Central Park, both in the early days of the band. Panning, morphing, and other techniques are used to impart some motion.'
        logpopvar:  8.97
+       trailerLink:  'http://www.youtube.com/embed?v=9SoCxf2zE0c'
+       length:  10
+       imdbLink:    'http://www.imdb.com/title/tt0113212'
+       genres:  'Documentary'
 
     - &dirty !!models.Movie
        id:          1088
        title:       'Dirty Dancing (1987)'
        description:  'Spending the summer in a holiday camp with her family, Frances "Baby" Houseman falls in love with the camp''s dance instructor Johnny Castle.'
        logpopvar:  8.93
+       trailerLink:  'http://www.youtube.com/embed?v=95IlLCfg8_g'
+       length:  100
+       imdbLink:    'http://www.imdb.com/title/tt0092890'
+       genres:  'Musical|Romance'
 
     - &serial !!models.Movie
        id:          532
        title:       'Serial Mom (1994)'
        description:  'A sweet mother takes a little too much at heart for the defence of her family.'
        logpopvar:  8.92
-
+       trailerLink:  'http://www.youtube.com/embed?v=OAcimdt8Po0'
+       length:  95
+       imdbLink:    'http://www.imdb.com/title/tt0111127'
+       genres:  'Comedy|Crime|Horror'
 
     - &mission !!models.Movie
        id:          3623
        title:       'Mission: Impossible 2 (2000)'
        description:  'A secret agent is sent to Sydney, to find and destroy a genetically modified disease called "Chimera"'
        logpopvar:  8.87
+       trailerLink:  'http://www.youtube.com/embed?v=0B3KWAAPGYY'
+       length:  123
+       imdbLink:    'http://www.imdb.com/title/tt0120755'
+       genres:  'Action|Thriller'
 
     - &evita !!models.Movie
        id:          1416
        title:       'Evita (1996)'
        description:  'The hit musical based on the life of Evita Duarte, a B-picture Argentinian actress who eventually became the wife of Argentinian president Juan Perón, and the most beloved and hated woman in Argentina.'
        logpopvar:  8.87
+       trailerLink:  'http://www.youtube.com/embed?v=znosqX0zFmg'
+       length:  135
+       imdbLink:    'http://www.imdb.com/title/tt0116250'
+       genres:  'Drama|Musical'
 
     - &mystery !!models.Movie
        id:          2723
        title:       'Mystery Men (1999)'
        description:  'A group of inept amateur superheroes must try to save the day when a supervillian threatens to destroy a major superhero and the city.'
        logpopvar:  8.86
+       trailerLink:  'http://www.youtube.com/embed?v=LRfqwQKLfdk'
+       length:  121
+       imdbLink:    'http://www.imdb.com/title/tt0132347'
+       genres:  'Action|Adventure|Comedy'
 
     - &fear !!models.Movie
        id:          1884

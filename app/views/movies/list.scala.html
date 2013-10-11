@@ -12,7 +12,6 @@
 						<thead>
 							<tr>
 								<th></th>
-								<th></th>	
 							</tr>
 						</thead>
 						<tbody>
@@ -20,16 +19,43 @@
 								@defining(user.getMovieRating(movie.id)) { rating =>
 									<tr class="movie-id-@{movie.id} @{if(rating != 0) rating + "stars"}">
 										<td>
-											<figure>
-												<img class="thumbnail" src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
-											</figure>
-										</td>
-										<td>
-											<h3>
-												<a href="@routes.Movies.details(movie.id)">@movie.title</a>
-											</h3>
-											<span>@stars()</span>
-											<span>@movie.description</span>
+											<div class="hero-unit">
+												<div class="row">
+													<div class="span3">
+														<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+													</div>
+													<div class="span5 offset1">
+														<div class="row">
+															<h4>
+																<a href="@routes.Movies.details(movie.id)">
+																	@movie.title
+																</a>
+															</h4>
+														</div>
+														<div class="row">
+															<div class="span2">
+																@movie.length Min
+															</div>
+															<div class="span1">
+																<a href="@movie.imdbLink" target="_blank">
+																	IMDb
+																</a>
+															</div>
+															<div class="span2">
+																<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
+															</div>
+														</div>
+					
+														<div class="row top-buffer">
+															@stars()
+														</div>
+													
+														<div class="row">
+															@movie.description
+														</div>
+													</div>
+												</div>
+											</div>
 										</td>
 									</tr>
 								}

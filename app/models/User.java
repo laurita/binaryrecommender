@@ -82,7 +82,8 @@ public class User extends Model {
 				.findUnique();
 			int r = 0;
 			if (rating != null) { 
-				r = rating.value; }
+				r = rating.value;
+			}
 			return r;
 		} 
 		
