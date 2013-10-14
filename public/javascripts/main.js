@@ -46,7 +46,7 @@ $(document).ready(function () {
 			var rating = $(this).parent().children().filter(".clicked").last().attr("class").match(/\d+/)[0];
 			$.ajax({
 				type: "POST",
-				url: "users/rateMovie",
+				url: "/users/rateMovie",
 				data: {
 					"movieId" : movieId,
 					"rating" : rating

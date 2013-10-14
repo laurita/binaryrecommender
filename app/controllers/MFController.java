@@ -5,6 +5,7 @@ import views.html.movies.*;
 import java.util.*;
 import play.*;
 import models.User;
+import models.Rating;
 import models.Movie;
 import models.Recommendation;
 import play.mvc.*;
