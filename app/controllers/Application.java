@@ -42,30 +42,33 @@ public class Application extends Controller {
 		public String q3Answer;
 		public String q4Answer;
 	}
-
-	@Security.Authenticated(Secured.class)
-	public static Result index() {
-		return redirect(
-			routes.Movies.list()
-		);
-	}
 	
 	public static Result register() {
 		return ok(register.render(form(Register.class)));			
 	}
 	
-	public static Result start() {
+	@Security.Authenticated(Secured.class)
+	public static Result index() {
 		User user = User.find.byId(session().get("userId"));
 		System.out.println("user is " + user);
 		if (user == null) {
 			return redirect(routes.Application.login());
 		} else {
-			switch (user.experimentGroup) {
-				case 1: return redirect(routes.Movies.list());
-				case 2: return redirect(routes.Movies.preferences());
-				default: return redirect(routes.Application.login());
+			if (stage == 1) {
+				if (!user.stage1Done) {
+					return ok(about.render());
+				} else {
+					return ok(wait.render());
+				}
+			} else if (stage == 2) {
+				if (user.stage1Done) {
+					return ok();
+				} else {
+					return ok();
+				}
 			}
 		}
+		return ok();
 	}
 	
 	public static Result answerQuestions() {
@@ -82,15 +85,10 @@ public class Application extends Controller {
 			user.question3 = answerForm.field("likertScaleRadios3").value();
 			user.question4 = answerForm.field("likertScaleRadios4").value();
 			user.update();
-			System.out.println("stage1Done "+ user.stage1Done);
 		}	else {
 			return redirect(routes.Application.login());
 		}
-		return redirect(routes.Application.finish1());
-	}
-	
-	public static Result finish1() {
-		return ok(finish1.render());
+		return ok(wait.render());
 	}
 	
 	public static Result submit() {
@@ -106,12 +104,17 @@ public class Application extends Controller {
 			flash("success", String.format("Successfully created user %s", user.email));
 			session().clear();
 			session("userId", String.valueOf(user.id));
-			return redirect(routes.Application.about());
+			return redirect(routes.Application.index());
 		}
 	}
 	
-	public static Result about() {
-		return ok(about.render());
+	public static Result startExperiment() {
+		User user = User.find.byId(session().get("userId"));
+		switch (user.experimentGroup) {
+			case 1: return redirect(routes.Movies.list());
+			case 2: return redirect(routes.Movies.preferences());
+			default: return redirect(routes.Application.login());
+		}
 	}
 		
 	public static Result login() {
@@ -135,11 +138,9 @@ public class Application extends Controller {
 			return badRequest(login.render(loginForm));
 		} else {
 			session().clear();
-			session("userId", String.valueOf(User.findByEmail(loginForm.get().email).id));
-			return redirect(
-				routes.Application.index()
-					);
-				
+			User user = User.findByEmail(loginForm.get().email);
+			session("userId", String.valueOf(user.id));
+			return redirect(routes.Application.index());
 		}
 	}
 	
