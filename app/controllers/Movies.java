@@ -12,6 +12,7 @@ public class Movies extends Controller {
 	public static Result list() {
 		List<Movie> movies = Movie.find.orderBy("logpopvar desc").findList();
 		User user = User.find.byId(session().get("userId"));
+		System.out.println("stge1Done: "+ user.stage1Done);
 		return ok(list.render(movies, user));
 	}
 	

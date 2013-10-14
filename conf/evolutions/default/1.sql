@@ -32,6 +32,16 @@ create table rating (
   constraint pk_rating primary key (id))
 ;
 
+create table recommendation (
+  id                        integer not null,
+  rank                      integer,
+  user_id                   integer,
+  movie_id                  integer,
+  good                      boolean,
+  seen                      boolean,
+  constraint pk_recommendation primary key (id))
+;
+
 create table user (
   id                        integer not null,
   email                     varchar(255),
@@ -51,6 +61,8 @@ create sequence preference_seq;
 
 create sequence rating_seq;
 
+create sequence recommendation_seq;
+
 create sequence user_seq;
 
 alter table preference add constraint fk_preference_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
@@ -63,6 +75,10 @@ alter table rating add constraint fk_rating_user_4 foreign key (user_id) referen
 create index ix_rating_user_4 on rating (user_id);
 alter table rating add constraint fk_rating_movie_5 foreign key (movie_id) references movie (id) on delete restrict on update restrict;
 create index ix_rating_movie_5 on rating (movie_id);
+alter table recommendation add constraint fk_recommendation_user_6 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_recommendation_user_6 on recommendation (user_id);
+alter table recommendation add constraint fk_recommendation_movie_7 foreign key (movie_id) references movie (id) on delete restrict on update restrict;
+create index ix_recommendation_movie_7 on recommendation (movie_id);
 
 
 
@@ -76,6 +92,8 @@ drop table if exists preference;
 
 drop table if exists rating;
 
+drop table if exists recommendation;
+
 drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
@@ -85,6 +103,8 @@ drop sequence if exists movie_seq;
 drop sequence if exists preference_seq;
 
 drop sequence if exists rating_seq;
+
+drop sequence if exists recommendation_seq;
 
 drop sequence if exists user_seq;
 

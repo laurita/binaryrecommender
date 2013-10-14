@@ -81,6 +81,8 @@ public class Application extends Controller {
 			user.question2 = answerForm.field("likertScaleRadios2").value();
 			user.question3 = answerForm.field("likertScaleRadios3").value();
 			user.question4 = answerForm.field("likertScaleRadios4").value();
+			user.update();
+			System.out.println("stage1Done "+ user.stage1Done);
 		}	else {
 			return redirect(routes.Application.login());
 		}

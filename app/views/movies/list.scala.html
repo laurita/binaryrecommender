@@ -1,4 +1,4 @@
-@(movies: List[Movie], user: User)
+@(movies: List[Movie], user: User	)
 
 @import models.User
 
@@ -67,12 +67,20 @@
 			</div>
 		</div>
 		
-		<div class="pagination"></div>
-        
-		@if((user != null) && !user.stage1Done) {			
+		@if(movies.length > 10) {
+			<div class="pagination"></div>
+    }
+		  
+		@if(!user.stage1Done) {			
 			<div class="row">
 				<div class="span2 offset5">
 					<a class="btn btn-primary" href="@routes.Application.answerQuestions()">I am finished with the rating</a>
+				</div>
+			</div>
+		} else {
+			<div class="row">
+				<div class="span2 offset5">
+					<a class="btn btn-primary" href="@routes.MFController.recommend()">Continue</a>
 				</div>
 			</div>
 		}
@@ -87,7 +95,7 @@
 
 			var options = {
 				currentPage: 1,
-				totalPages: 10,
+				totalPages: Math.ceil("@movies.length" / 10),
 				alignment: "center",
 				onPageChanged:
 				function (event, oldPage, newPage) {

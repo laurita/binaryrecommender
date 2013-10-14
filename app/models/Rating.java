@@ -37,8 +37,8 @@ public class Rating extends Model {
 		return r;
 	}
 	
-	public static Finder<Long,Rating> find = new Finder<Long,Rating>(
-		Long.class, Rating.class);
+	public static Finder<Integer,Rating> find = new Finder<Integer,Rating>(
+		Integer.class, Rating.class);
 	
 	public static List<Rating> findByUser(User user) {  
 	    return find.where().eq("user", user).findList();  

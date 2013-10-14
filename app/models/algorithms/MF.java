@@ -340,7 +340,7 @@ public class MF extends Model {
 				
 	}
 
-	public Set<Integer> rank(int user, List<Integer> unratedMovies) {
+	public List<Integer> rank(int user, List<Integer> unratedMovies) {
 		HashMap<Integer,Double> map = new HashMap<Integer,Double>();
 		ValueComparator bvc =  new ValueComparator(map);
 		TreeMap<Integer,Double> sorted_map = new TreeMap<Integer,Double>(bvc);
@@ -350,7 +350,8 @@ public class MF extends Model {
 			map.put(m, pred);
 		}
 		sorted_map.putAll(map);
-		return sorted_map.keySet();
+		List<Integer> list = new ArrayList<Integer>(sorted_map.keySet());
+		return list;
 	}
 
 	public List<List<Integer>> predictRankingListWithTies(List<Integer> unratedMovies, int userId) {
