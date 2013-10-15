@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.*;
 import play.data.validation.Constraints;
 import java.util.*;
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import models.*;
 public class User extends Model {
 	
 	@Id
-	public int id;
+	@Constraints.Min(6040)
+		public int id;
 		
 	@Constraints.Required
 		public String email;
@@ -42,104 +44,110 @@ public class User extends Model {
 	public String question3;
 	public String question4;
 	
-	public User() {}
-	
-		public User(String email) {
-			this.email = email;
-		}
-	
-		@Override
-		public void save() {
-			createdAt();
-			addExperimentGroup();
-			super.save();
-		}
-	
-		@PrePersist
-		void createdAt() {
-			this.createdAt = new Date();
-		}
-	
-		private void addExperimentGroup() {
-			int experimentGroup = 1;
-			User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
-			int lastExperimentGroup = (lastUser != null) ? lastUser.experimentGroup : 0;
-			if (lastExperimentGroup != 0) {
-				experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
-			}
-			this.experimentGroup = experimentGroup;
-		}
-	
-		public static Finder<String,User> find = new Finder<String,User>(
-			String.class, User.class);
-	
-		public String toString() {
-			return email;
-		}
-	
-		public List<Rating> getRatings() {
-			return Rating.find.where().eq("user", this).findList();
-		}
-		
-		public int getMovieRating(int movieId) {
-			Rating rating = Rating.find.where()
-				.eq("user", this)
-				.eq("movie", Movie.find.byId(movieId))
-				.findUnique();
-			int r = 0;
-			if (rating != null) { 
-				r = rating.value;
-			}
-			return r;
-		} 
-		
-		
-		public List<Integer> getRatedMovieIds() {
-			List<Rating> userRatings = Rating.find.fetch("movie").where().eq("user", this).findList();
-			List<Integer> movieIds = new ArrayList<Integer>();
-			for (Rating r : userRatings) {
-				movieIds.add(r.movie.id);
-			}
-			return movieIds;
-		}
-		
-		public List<Integer> getUnratedMovieIds() {
-			List<Movie> all = Movie.find.all();
-			List<Integer> allIds = new ArrayList<Integer>();
-			for (Movie m : all) {
-				allIds.add(m.id);
-			}
-			allIds.removeAll(this.getRatedMovieIds());
-			return allIds;
-		}
-		
-		public List<Preference> getPreferences() {
-			return Preference.find.where().eq("user", this).findList();
-		}
-
-		public static List<User> findAll() {
-			return find.all();
-		}
-	
-		public static User findByEmail(String email) {
-			for (User candidate : find.all()) {
-				if (candidate.email.equals(email)) {
-					return candidate;
-				}
-			}
-			return null;
-		}
-	
-		public static User authenticate(String email) {
-			return find.where().eq("email", email).findUnique();
-		}
-
-		public static boolean remove(User user) {
-			return find.all().remove(user);
-		}
-	
-		public static void add(User user) {
-			find.all().add(user);
-		}
-
+	public User(String email) {
+		this.email = email;
 	}
+	
+	@Override
+	public void save() {
+		createdAt();
+		addExperimentGroup();
+		super.save();
+		//increaseId();
+		//super.update(this.id + 6040);
+	}
+	
+	void createdAt() {
+		this.createdAt = new Date();
+	}
+		
+	/*
+		void increaseId() {
+		System.out.println(this.id);
+		this.id = this.id + 6040;
+		}
+		*/
+	
+	private void addExperimentGroup() {
+		int experimentGroup = 1;
+		User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
+		int lastExperimentGroup = (lastUser != null) ? lastUser.experimentGroup : 0;
+		if (lastExperimentGroup != 0) {
+			experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
+		}
+		this.experimentGroup = experimentGroup;
+	}
+	
+	public static Finder<String,User> find = new Finder<String,User>(
+		String.class, User.class);
+	
+	public String toString() {
+		return email;
+	}
+	
+	public List<Rating> getRatings() {
+		return Rating.find.where().eq("user", this).findList();
+	}
+		
+	public int getMovieRating(int movieId) {
+		Rating rating = Rating.find.where()
+			.eq("user", this)
+				.eq("movie", Movie.find.byId(movieId))
+					.findUnique();
+		int r = 0;
+		if (rating != null) { 
+			r = rating.value;
+		}
+		return r;
+	} 
+		
+		
+	public List<Integer> getRatedMovieIds() {
+		List<Rating> userRatings = Rating.find.fetch("movie").where().eq("user", this).findList();
+		List<Integer> movieIds = new ArrayList<Integer>();
+		for (Rating r : userRatings) {
+			movieIds.add(r.movie.id);
+		}
+		return movieIds;
+	}
+		
+	public List<Integer> getUnratedMovieIds() {
+		List<Movie> all = Movie.find.all();
+		List<Integer> allIds = new ArrayList<Integer>();
+		for (Movie m : all) {
+			allIds.add(m.id);
+		}
+		allIds.removeAll(this.getRatedMovieIds());
+		return allIds;
+	}
+		
+	public List<Preference> getPreferences() {
+		return Preference.find.where().eq("user", this).findList();
+	}
+
+	public static List<User> findAll() {
+		return find.all();
+	}
+	
+	public static User findByEmail(String email) {
+		for (User candidate : find.all()) {
+			if (candidate.email.equals(email)) {
+				return candidate;
+			}
+		}
+		return null;
+	}
+	
+	public static User authenticate(String email) {
+		return find.where().eq("email", email).findUnique();
+	}
+
+	public static boolean remove(User user) {
+		return find.all().remove(user);
+	}
+	
+	public static void add(User user) {
+		find.all().add(user);
+	}
+
+}
