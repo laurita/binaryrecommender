@@ -1,7 +1,7 @@
 @(rankedMovieIds: List[Movie], user: User)
 
 @main("Recommended list of movies") {	
-	@defining(if (user.afterUpdate) routes.Recommender.compare() else routes.Recommender.update()) { route =>
+	@defining(routes.Recommender.update()) { route =>
 		@helper.form(route) {
 			<div class="container">
 				<div class="hero-unit">

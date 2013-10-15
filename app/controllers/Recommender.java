@@ -2,6 +2,7 @@ package controllers;
 
 import views.html.recommender.*;
 import views.html.movies.*;
+import views.html.*;
 import java.util.*;
 import play.*;
 import models.User;
@@ -16,6 +17,23 @@ import static play.data.Form.*;
 import play.data.*;
 
 public class Recommender extends Controller {
+	
+	public static class Comparisons {
+		public int q1Answer;
+		public int q2Answer;
+		public int q3Answer;
+		public int q4Answer;
+		public int q5Answer;
+		public int q6Answer;
+		public int q7Answer;
+		public int q8Answer;
+		public int q9Answer;
+		public int q10Answer;
+		public int q11Answer;
+		public int q12Answer;
+		public int q13Answer;
+		public int q14Answer;
+	}
 	
 	@Security.Authenticated(Secured.class)
 	public static Result recommend() {
@@ -56,12 +74,6 @@ public class Recommender extends Controller {
 		System.out.println(map.keySet());
 		String[] goodOnes = map.get("good");
 		String[] seenOnes = map.get("seen");
-		
-		System.out.println("goodOnes");
-		System.out.println(Arrays.toString(goodOnes));
-		
-		System.out.println("seenOnes");		
-		System.out.println(Arrays.toString(seenOnes));
 			
 		List<Integer> good = new ArrayList<Integer>();
 		List<Integer> seen = new ArrayList<Integer>();
@@ -76,15 +88,11 @@ public class Recommender extends Controller {
 				seen.add(Integer.parseInt(s));
 			}
 		}
-		System.out.println("good");
-		System.out.println(good);
-		System.out.println("seen");
-		System.out.println(seen);
 	
 		User user = User.find.byId(session().get("userId"));
 		
 		List<Recommendation> recs = Recommendation.find.fetch("movie")
-			.where().eq("user", user).eq("updated", false).findList();
+			.where().eq("user", user).eq("updated", user.afterUpdate).findList();
 		System.out.println(recs);
 			
 		//TODO: write good recommendations to db
@@ -111,6 +119,9 @@ public class Recommender extends Controller {
 				//TODO: redirect to rate movies list with small list
 				return ok(list.render(seenMovies, user));
 			} else {
+				if (user.afterUpdate) {
+					return redirect(routes.Recommender.compare());
+				}
 				//TODO: redirect to questions with the 1st list (skip list comparison)
 				return ok();
 			}
@@ -141,12 +152,33 @@ public class Recommender extends Controller {
 			.where().eq("user", user).eq("updated", false).findList(); 
 		List<Recommendation> secondList = Recommendation.find.fetch("movie")
 			.where().eq("user", user).eq("updated", true).findList(); 
-		return ok(compare.render(firstList, secondList, user));
+		return ok(views.html.recommender.compare.render(firstList, secondList, user));
 		
 	}
 	
 	@Security.Authenticated(Secured.class)
 	public static Result submitComparisons() {
-		return ok();
+		Form<Comparisons> compareForm = form(Comparisons.class).bindFromRequest();
+		if (session().get("userId") != null) {
+			User user = User.find.byId(session().get("userId"));
+			int listNr = 1;
+			for (int i = 1; i <= 14; i++) {
+				if (i <= 7) { listNr = 1; } else { listNr = 2; };
+				int answer = Integer.parseInt(compareForm.field("likertScaleRadios"+ i).value());
+				int question = (i - 1) % 7 + 1;
+				String sqlString = String.format(
+					"insert into comparisons values (%d, %d, %d, %d)", user.id, question, listNr, answer
+				);
+				SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+				int modifiedCount = Ebean.execute(update);
+ 			 	String msg = "There where " + modifiedCount + "rows updated";
+				System.out.println(msg); 
+				user.stage2Done = true;
+				user.update();
+			}
+		}	else {
+			return redirect(routes.Application.login());
+		}
+		return ok(finish.render());
 	}
 }

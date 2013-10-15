@@ -8,7 +8,7 @@
 			Please answer the questions below.
 		</div>
 		<div class="row">
-			<div class="span4 offset1">
+			<div class="span5">
 				<div id="list-movie-1" class="content scaffold-list" role="main">
 					<h4>Original list</h4>
 					<table class="table table-striped">
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 								
-			<div class="span4 offset1">
+			<div class="span5 offset1">
 				<div id="list-movie-2" class="content scaffold-list" role="main">
 					<h4>Adjusted list</h4>
 					<table class="table table-striped">
@@ -136,7 +136,7 @@
 			
 		@helper.form(routes.Recommender.submitComparisons(), 'method -> "post") {
 			<div class="row">
-				<div class="span4 offset1">
+				<div class="span5">
 					<h4 class="form-signin-heading">Please answer the questions about the Original list</h4>
 					<table class="table table-striped">
 						<thead>
@@ -166,27 +166,27 @@
 								@defining("likertScaleRadios1") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -198,27 +198,27 @@
 								@defining("likertScaleRadios2") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -230,27 +230,27 @@
 								@defining("likertScaleRadios3") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -262,27 +262,27 @@
 								@defining("likertScaleRadios4") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -294,27 +294,27 @@
 								@defining("likertScaleRadios5") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -326,27 +326,27 @@
 								@defining("likertScaleRadios6") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -358,27 +358,27 @@
 								@defining("likertScaleRadios7") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -387,7 +387,7 @@
 					</table>
 				</div>
 			
-				<div class="span4 offset1">
+				<div class="span5 offset1">
 					<h4 class="form-signin-heading">Please answer the questions about the Adjusted list</h4>
 					<table class="table table-striped">
 						<thead>
@@ -417,27 +417,27 @@
 								@defining("likertScaleRadios8") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -449,27 +449,27 @@
 								@defining("likertScaleRadios9") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -481,27 +481,27 @@
 								@defining("likertScaleRadios10") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -513,27 +513,27 @@
 								@defining("likertScaleRadios11") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -545,27 +545,27 @@
 								@defining("likertScaleRadios12") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -577,27 +577,27 @@
 								@defining("likertScaleRadios13") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}
@@ -609,27 +609,27 @@
 								@defining("likertScaleRadios14") { name =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value="agree">
+											<input type="radio" name="@name" id="agree" value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value="neutral" checked>
+											<input type="radio" name="@name" id="neutral" value=3 checked>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value="disagree">
+											<input type="radio" name="@name" id="disagree" value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
 										</label>
 									</td>
 								}

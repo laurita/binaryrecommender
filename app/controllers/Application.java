@@ -61,10 +61,12 @@ public class Application extends Controller {
 					return ok(wait.render());
 				}
 			} else if (stage == 2) {
-				if (user.stage1Done) {
+				if (user.stage2Done) {
+					return ok(finish.render());
+				} else if (user.stage1Done) {
 					return ok(start2Stage.render());
 				} else {
-					return ok();
+					return ok(stage1Unfinished.render());
 				}
 			}
 		}

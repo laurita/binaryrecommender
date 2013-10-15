@@ -16,7 +16,13 @@ as select *
 from csvread('data/pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 ;
 
-
+create table comparisons (
+	user_id										integer not null,
+	question									integer not null,
+	list_nr										integer not null,
+  answer										integer not null,
+	constraint pk_comparisons primary key (user_id, question, list_nr))
+;
 	
 # --- !Downs
 
@@ -24,5 +30,6 @@ SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists moviePairs;
 drop table if exists ml_ratings;
+drop table if exists comparisons;
 
 SET REFERENTIAL_INTEGRITY TRUE;

@@ -31,6 +31,9 @@ public class User extends Model {
 	// true if stage 1 finished
 	public boolean stage1Done = false;
 	
+	// true if stage 2 finished
+	public boolean stage2Done = false;
+	
 	// 1st or 2nd list of recommendations
 	public boolean afterUpdate = false;
 	

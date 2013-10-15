@@ -49,6 +49,7 @@ create table user (
   created_at                timestamp,
   experiment_group          integer,
   stage1done                boolean,
+  stage2done                boolean,
   after_update              boolean,
   question1                 varchar(255),
   question2                 varchar(255),
