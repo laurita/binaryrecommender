@@ -29,20 +29,28 @@ public class Recommendation extends Model {
 	
 	public boolean seen;
 	
-	private Recommendation(User user, Movie movie, int rank) {
+	public boolean updated;
+	
+	private Recommendation(User user, Movie movie, int rank, boolean updated) {
 		this.user = user;
 		this.movie = movie;
 		this.rank = rank;
+		this.updated = updated;
 	}
 	
-	public static Recommendation create(User user, Movie movie, int rank) {
-		Recommendation r = Recommendation.find.where().eq("user", user).eq("movie", movie).findUnique();
+	public static Recommendation create(User user, Movie movie, int rank, boolean updated) {
+		Recommendation r = Recommendation.find.where().eq("user", user).eq("movie", movie)
+			.eq("updated", updated).findUnique();
 		if (r != null) {
 			r.delete();
 		}
-		r = new Recommendation(user, movie, rank);
+		r = new Recommendation(user, movie, rank, updated);
 		r.save();
 		return r;
+	}
+	
+	public String toString() {
+		return String.format("%d - %d - %d - %d - %b - %b - %b", id, rank, user.id, movie.id, good, seen, updated);
 	}
 	
 	public static Finder<Integer,Recommendation> find = new Finder<Integer,Recommendation>(

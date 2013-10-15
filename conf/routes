@@ -12,8 +12,13 @@ POST		/submit											controllers.Application.submit()
 GET			/answerQuestions						controllers.Application.answerQuestions()
 POST		/submitAnswers							controllers.Application.submitAnswers()
 GET			/startExperiment						controllers.Application.startExperiment()
-GET			/recommendation							controllers.MFController.recommend()
-POST		/recommendation/update			controllers.MFController.update()			
+GET			/start2Stage								controllers.Application.start2Stage()
+
+
+GET			/recommendation							controllers.Recommender.recommend()
+POST		/recommendation/update			controllers.Recommender.update()			
+GET			/recommendation/compare			controllers.Recommender.compare()			
+
 
 # Movies
 GET			/movies											controllers.Movies.list()

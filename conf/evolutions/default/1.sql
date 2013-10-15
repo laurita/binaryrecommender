@@ -39,6 +39,7 @@ create table recommendation (
   movie_id                  integer,
   good                      boolean,
   seen                      boolean,
+  updated                   boolean,
   constraint pk_recommendation primary key (id))
 ;
 
@@ -48,6 +49,7 @@ create table user (
   created_at                timestamp,
   experiment_group          integer,
   stage1done                boolean,
+  after_update              boolean,
   question1                 varchar(255),
   question2                 varchar(255),
   question3                 varchar(255),

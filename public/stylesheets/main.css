@@ -123,3 +123,11 @@ span.clicked { color: #FF0000; }
 .tooltip .tooltip-inner {
     max-width: none;
 }
+
+/* Two tables in one page
+-------------------------------------------------- */
+
+.two-tables {
+    float:left;
+    width:50%;
+}

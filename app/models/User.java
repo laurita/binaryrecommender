@@ -12,7 +12,7 @@ public class User extends Model {
 	
 	@Id
 	public int id;
-	
+		
 	@Constraints.Required
 		public String email;
 	
@@ -30,6 +30,9 @@ public class User extends Model {
 	
 	// true if stage 1 finished
 	public boolean stage1Done = false;
+	
+	// 1st or 2nd list of recommendations
+	public boolean afterUpdate = false;
 	
 	public String question1;
 	public String question2;

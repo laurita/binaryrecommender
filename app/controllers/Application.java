@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Application extends Controller {
 	
-	public static int stage = 1;
+	public static int stage = 2;
 		
 	public static class Login {
 		public String email;
@@ -62,7 +62,7 @@ public class Application extends Controller {
 				}
 			} else if (stage == 2) {
 				if (user.stage1Done) {
-					return ok();
+					return ok(start2Stage.render());
 				} else {
 					return ok();
 				}
@@ -115,6 +115,11 @@ public class Application extends Controller {
 			case 2: return redirect(routes.Movies.preferences());
 			default: return redirect(routes.Application.login());
 		}
+	}
+	
+	public static Result start2Stage() {
+		User user = User.find.byId(session().get("userId"));
+		return redirect(routes.Recommender.recommend());
 	}
 		
 	public static Result login() {

@@ -94,6 +94,24 @@ public class Movie extends Model {
 		}
 		return moviePairs;
 	}
+	
+	public static List<List<Integer>> selectMoviePairsInList(List<Integer> lst) {
+		String sql = "select movie1_id, movie2_id from moviePairs";
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> list = sqlQuery.findList();
+		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
+		for (SqlRow row : list) {
+			int m1 = row.getInteger("movie1_id");
+			int m2 = row.getInteger("movie2_id");
+			if (lst.contains(m1) && lst.contains(m2)) {
+				List<Integer> l = new ArrayList<Integer>();
+				l.add(m1);
+				l.add(row.getInteger("movie2_id"));
+				moviePairs.add(l);
+			}
+		}
+		return moviePairs;
+	}
 			
 	public static List<Movie> findByTitle(String title) {
 		final List<Movie> results = new ArrayList<Movie>();
