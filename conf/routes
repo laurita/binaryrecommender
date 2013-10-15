@@ -17,7 +17,8 @@ GET			/start2Stage								controllers.Application.start2Stage()
 
 GET			/recommendation							controllers.Recommender.recommend()
 POST		/recommendation/update			controllers.Recommender.update()			
-GET			/recommendation/compare			controllers.Recommender.compare()			
+GET			/recommendation/compare			controllers.Recommender.compare()
+POST		/recommendation/submitComparisons			controllers.Recommender.submitComparisons()			
 
 
 # Movies

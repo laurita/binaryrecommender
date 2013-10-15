@@ -146,7 +146,7 @@ public class Recommender extends Controller {
 	}
 	
 	@Security.Authenticated(Secured.class)
-	public static Result addComparisons() {
+	public static Result submitComparisons() {
 		return ok();
 	}
 }
