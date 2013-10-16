@@ -12,4 +12,5 @@ public class Movie {
 
     // I added this
     public ArrayList<Integer>   UsersRatedIt;         // Array of usersID's that rated this movie
+    public ArrayList<Integer>   UsersPreferedIt;
 }

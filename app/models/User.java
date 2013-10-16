@@ -12,11 +12,12 @@ import models.*;
 public class User extends Model {
 	
 	@Id
-	@Constraints.Min(6040)
-		public int id;
+	public int id;
+	
+
 		
 	@Constraints.Required
-		public String email;
+	public String email;
 	
 	@Column(name = "created_at")
 	public Date createdAt;
