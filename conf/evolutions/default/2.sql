@@ -23,6 +23,8 @@ create table comparisons (
   answer										integer not null,
 	constraint pk_comparisons primary key (user_id, question, list_nr))
 ;
+
+ ALTER SEQUENCE user_seq RESTART WITH 7000;
 	
 # --- !Downs
 

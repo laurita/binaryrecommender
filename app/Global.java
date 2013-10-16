@@ -18,13 +18,13 @@ public class Global extends GlobalSettings {
 			Map<String,List<Object>> all = (Map<String,List<Object>>) yaml.load("initial-data.yml");
 		
 			// Insert users
-			Ebean.save(all.get("users"));
+			//Ebean.save(all.get("users"));
 			
 			// Insert movies
 			Ebean.save(all.get("movies"));
 			
 			// Insert ratings
-			Ebean.save(all.get("ratings"));
+			//Ebean.save(all.get("ratings"));
 
 		}
 	}
