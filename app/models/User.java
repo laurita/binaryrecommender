@@ -121,6 +121,28 @@ public class User extends Model {
 		allIds.removeAll(this.getRatedMovieIds());
 		return allIds;
 	}
+  
+	public List<Integer> getPreferedMovieIds() {
+		List<Preference> userPrefs = Preference.find.fetch("movie1").fetch("movie2").where().eq("user", this).findList();
+		Set<Integer> movieIds = new TreeSet<Integer>();
+    List<Integer> movieIdList = new ArrayList<Integer>();
+		for (Preference p : userPrefs) {
+			movieIds.add(p.movie1.id);
+      movieIds.add(p.movie2.id);
+		}
+    movieIdList.addAll(movieIds);
+		return movieIdList;
+	}
+		
+	public List<Integer> getUnpreferedMovieIds() {
+		List<Movie> all = Movie.find.all();
+		List<Integer> allIds = new ArrayList<Integer>();
+		for (Movie m : all) {
+			allIds.add(m.id);
+		}
+		allIds.removeAll(this.getPreferedMovieIds());
+		return allIds;
+	}
 		
 	public List<Preference> getPreferences() {
 		return Preference.find.where().eq("user", this).findList();

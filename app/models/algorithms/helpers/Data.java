@@ -6,11 +6,10 @@ public class Data {
     public int          MovieId;
     public byte         Rating;
     public float        Cache;
-    public long         Time;
 
     @Override
     public String toString() {
-        return "CustId: "+ CustId + ", MovieId: "+ MovieId + ", Rating: "+ Rating + ", Time: " + Time;
+        return "CustId: "+ CustId + ", MovieId: "+ MovieId + ", Rating: "+ Rating;
     }
 
 }

@@ -12,8 +12,6 @@ public class BinaryPreference implements Comparable<BinaryPreference>{
 
     private double realValue;
 
-    private long time;
-
     public int getUserId() {
         return userId;
     }
@@ -30,25 +28,18 @@ public class BinaryPreference implements Comparable<BinaryPreference>{
         return value;
     }
 
-    public long getTime() {
-//		return 0;
-        return time;
-    }
-
-    public BinaryPreference(int userId, int item1Id, int item2Id, long time, double value) {
+    public BinaryPreference(int userId, int item1Id, int item2Id, double value) {
         this.userId = userId;
         this.item1Id = item1Id;
         this.item2Id = item2Id;
         this.value = value;
-        this.time = time;
     }
 
-    public BinaryPreference(int userId, int item1Id, int item2Id, long time, double value, double realValue) {
+    public BinaryPreference(int userId, int item1Id, int item2Id, double value, double realValue) {
         this.userId = userId;
         this.item1Id = item1Id;
         this.item2Id = item2Id;
         this.value = value;
-        this.time = time;
         this.realValue = realValue;
     }
 

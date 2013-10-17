@@ -59,8 +59,28 @@ public class Recommender extends Controller {
 				return ok(recommend.render(bestMovies, user));
 			}
 			case 2: {
-				//TODO: do the same with UP model
-				return ok();
+				List<Preference> prefs = UP.loadMLPreferences();
+				List<BinaryPreference> comps = UP.loadComparisons();
+				UP up = new UP(prefs, comps);
+				up.initialize();
+				boolean signCorrected = false;
+				up.calculateKMatrix(user.id, signCorrected);
+				up.updateKMatrixWithPrefs(user.id, signCorrected);
+				List<Integer> unpreferedMovieIds = user.getUnpreferedMovieIds();
+				List<Integer> list = up.predictRankingList(user.id, unpreferedMovieIds, signCorrected).subList(0, 10);
+				boolean updated = user.afterUpdate;
+				System.out.println("afterUpdate "+ updated);
+				List<Movie> bestMovies = new ArrayList<Movie>();
+				for (int i = 0; i <= 9; i++) {
+					Movie movie = Movie.find.byId(list.get(i));
+					
+					Recommendation rec = Recommendation.create(user, movie, i+1, updated);
+					bestMovies.add(movie);
+					System.out.println(rec);
+				}
+				System.out.println("10 best movies");
+				System.out.println(bestMovies);
+				return ok(recommend.render(bestMovies, user));
 			}
 			default: return ok();
 		}
@@ -93,10 +113,9 @@ public class Recommender extends Controller {
 		
 		List<Recommendation> recs = Recommendation.find.fetch("movie")
 			.where().eq("user", user).eq("updated", user.afterUpdate).findList();
-		System.out.println(recs);
 			
-		//TODO: write good recommendations to db
-		//TODO: make a list of seen movies to rate
+		// write good recommendations to db
+		// make a list of seen movies to rate
 		System.out.println("updating");
 		for (Recommendation rec : recs) {
 			Movie m = rec.movie;
@@ -105,9 +124,7 @@ public class Recommender extends Controller {
 			rec.update();
 			System.out.println(rec);
 		}
-		
-		System.out.println(recs);
-		
+				
 		if (user.experimentGroup == 1) {
 			if (seen.size() != 0) {
 				List<Movie> seenMovies = Movie.find.where()
@@ -116,7 +133,7 @@ public class Recommender extends Controller {
 				user.afterUpdate = true;
 				user.update();
 				
-				//TODO: redirect to rate movies list with small list
+				// redirect to rate movies list with small list
 				return ok(list.render(seenMovies, user));
 			} else {
 				if (user.afterUpdate) {
@@ -134,9 +151,12 @@ public class Recommender extends Controller {
 				user.afterUpdate = true;
 				user.update();
 				
-				//TODO: redirect to compare movie pairs with small list
+				// redirect to compare movie pairs with small list
 				return ok(preferences.render(moviePairs, user));
 			} else {
+				if (user.afterUpdate) {
+					return redirect(routes.Recommender.compare());
+				}
 				//TODO: redirect to questions with the 1st list (skip list comparison)
 				return ok();
 			}
@@ -149,9 +169,9 @@ public class Recommender extends Controller {
 	public static Result compare() {
 		User user = User.find.byId(session().get("userId"));
 		List<Recommendation> firstList = Recommendation.find.fetch("movie")
-			.where().eq("user", user).eq("updated", false).findList(); 
+			.where().eq("user", user).eq("updated", false).orderBy("rank").findList(); 
 		List<Recommendation> secondList = Recommendation.find.fetch("movie")
-			.where().eq("user", user).eq("updated", true).findList(); 
+			.where().eq("user", user).eq("updated", true).orderBy("rank").findList(); 
 		return ok(views.html.recommender.compare.render(firstList, secondList, user));
 		
 	}

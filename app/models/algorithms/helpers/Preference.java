@@ -9,9 +9,7 @@ public class Preference implements Comparable<Preference>{
 	private double value;
 	
 	private double realValue;
-	
-	private Long time;
-		
+			
 	public int getUserId() {
 		return userId;
 	}
@@ -24,30 +22,16 @@ public class Preference implements Comparable<Preference>{
 		return value;
 	}
 
-	public long getTime() {
-		//		return 0;
-		return time;
-	}
-	
-
 	public Preference(int userId, int itemId, double value) {
 		this.userId = userId;
 		this.itemId = itemId;
 		this.value = value;
 	}
-
-	public Preference(int userId, int itemId, long time, double value) {
-		this.userId = userId;
-		this.itemId = itemId;
-		this.value = value;
-		this.time = time;
-	}
 	
-	public Preference(int userId, int itemId, long time, double value, double realValue) {
+	public Preference(int userId, int itemId, double value, double realValue) {
 		this.userId = userId;
 		this.itemId = itemId;
 		this.value = value;
-		this.time = time;
 		this.realValue = realValue;
 	}
 

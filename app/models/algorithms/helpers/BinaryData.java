@@ -6,10 +6,9 @@ public class BinaryData {
     public int          Movie2Id;
     public byte         RatingDiff;
     public float        Cache;
-    public long         Time;
 
     @Override
     public String toString() {
-        return "CustId: "+ CustId + ", Movie1Id: "+ Movie1Id + ", Movie2Id: "+ Movie2Id + ", Rating: "+ RatingDiff + ", Time: " + Time;
+        return "CustId: "+ CustId + ", Movie1Id: "+ Movie1Id + ", Movie2Id: "+ Movie2Id + ", Rating: "+ RatingDiff;
     }
 }

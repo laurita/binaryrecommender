@@ -96,19 +96,17 @@ public class UP {
     return prefs;
   }
 	
-  public static List<List<Integer>> loadComparisons() {
-    List<List<Integer>> prefs = new ArrayList<List<Integer>>();
+  public static List<BinaryPreference> loadComparisons() {
+    List<BinaryPreference> prefs = new ArrayList<BinaryPreference>();
     String sql = "select * from preference";
     SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
     List<SqlRow> list = sqlQuery.findList();
-
     for (SqlRow row : list) {
       int userId = row.getInteger("user_id");
       int movie1Id = row.getInteger("movie1_id");
       int movie2Id = row.getInteger("movie2_id");
       int value = row.getInteger("value");
-      Integer[] array = {userId, movie1Id, movie2Id, value};
-      List<Integer> pref = new ArrayList<Integer>(Arrays.asList(array));
+      BinaryPreference pref = new BinaryPreference(userId, movie1Id, movie2Id, value);
       prefs.add(pref);
     }
     return prefs;
@@ -143,7 +141,6 @@ public class UP {
       int movieId = pref.getItemId();
       int custId = pref.getUserId();
       int rating = (int) pref.getValue();
-      long time = pref.getTime();
 
       movieIds.add(movieId);
       customerIds.add(custId);
@@ -156,7 +153,6 @@ public class UP {
       m_aRatings[m_nRatingCount].CustId = custId;
       m_aRatings[m_nRatingCount].Rating = (byte) rating;
       m_aRatings[m_nRatingCount].Cache = 0;
-      m_aRatings[m_nRatingCount].Time = time;
       m_nRatingCount++;
     }
 
@@ -165,7 +161,6 @@ public class UP {
       int movie2Id = binPref.getItem2Id();
       int custId = binPref.getUserId();
       int ratingDiff = (int) binPref.getValue();
-      long time = binPref.getTime();
 
       movieIds.add(movie1Id);
       movieIds.add(movie2Id);
@@ -180,7 +175,6 @@ public class UP {
       m_aBinPrefs[m_nBinPrefCount].CustId = custId;
       m_aBinPrefs[m_nBinPrefCount].RatingDiff = (byte) ratingDiff;
       m_aBinPrefs[m_nBinPrefCount].Cache = 0;
-      m_aBinPrefs[m_nBinPrefCount].Time = time;
       m_nBinPrefCount++;
     }
 
@@ -514,9 +508,7 @@ public class UP {
 
             Data dataI = userItemMatrix[u][mi];
             Data dataJ = userItemMatrix[u][mj];
-            // If not withSession, add all score differences. Otherwise, check the time difference
-            // and add only score diffs for the movies rated within 24 hours
-
+            
             int cuij = dataI.Rating - dataJ.Rating;
             // personalized case
             if (userID != -1) {

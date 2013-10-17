@@ -42,10 +42,16 @@
 		
 		<div class="pagination"></div>
         
-		@if((user != null) && !user.stage1Done) {			
+		@if(!user.stage1Done) {			
 			<div class="row">
 				<div class="span2 offset5">
-					<a id="add-prefs-btn" class="btn btn-primary" href="@routes.Application.answerQuestions()">I am finished with the preferences</a>
+					<a class="btn btn-primary add-prefs-btn" href="@routes.Application.answerQuestions()">I am finished with the preferences</a>
+				</div>
+			</div>
+		} else {
+			<div class="row">
+				<div class="span2 offset5">
+					<a class="btn btn-primary add-prefs-btn" href="@routes.Recommender.recommend()">Continue</a>
 				</div>
 			</div>
 		}
@@ -146,10 +152,11 @@
 			}
 			$('.pagination').bootstrapPaginator(options);
 			
-			$('#add-prefs-btn').on('click', function() {
+			$('.add-prefs-btn').on('click', function() {
 				var lst = $('#pair_list li').filter(function (){
 				    return $(this).text() != 'none';
 				});
+				console.log(lst);
 				var array = [];
 				$.each(lst, function( index, elem ) {
 					var pref = {};
@@ -161,7 +168,7 @@
 				console.log(array);
 				$.ajax({
 					type: "POST",
-					url: "users/addPreferences",
+					url: "/users/addPreferences",
 					data: JSON.stringify({"prefs" : array}),
 					contentType: 'application/json'
 				});
