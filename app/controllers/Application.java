@@ -9,10 +9,11 @@ import views.html.*;
 import views.html.movies.*;
 import com.avaje.ebean.*;
 import java.util.*;
+import play.Application.*;
 
 public class Application extends Controller {
 	
-	public static int stage = 2;
+	public static int stage = Integer.parseInt(play.Play.application().configuration().getString("experiment.stage"));
 		
 	public static class Login {
 		public String email;

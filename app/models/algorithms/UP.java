@@ -201,6 +201,7 @@ public class UP {
         mid = m_mMovieIds.size();
         m_mMovieIds.put(movieId, mid);
         Movie movie = new Movie();
+        movie.MovieId = movieId;
         movie.RatingCount = 0;
         movie.RatingSum = 0;
         // add the user that rated the movie to the list in the Movie object
@@ -256,6 +257,7 @@ public class UP {
         m1id = m_mMovieIds.size();
         m_mMovieIds.put(movie1Id, m1id);
         Movie movie = new Movie();
+        movie.MovieId = movie1Id;
         movie.RatingCount = 0;
         movie.RatingSum = 0;
         // add the user that rated the movie to the list in the Movie object
@@ -267,6 +269,7 @@ public class UP {
         m2id = m_mMovieIds.size();
         m_mMovieIds.put(movie2Id, m2id);
         Movie movie = new Movie();
+        movie.MovieId = movie2Id;
         movie.RatingCount = 0;
         movie.RatingSum = 0;
         // add the user that rated the movie to the list in the Movie object
@@ -367,15 +370,17 @@ public class UP {
 
     for (int u = 0; u < number_of_customers; u++) {
       Customer c1 = m_aCustomers[u];
+      int cust1Id = c1.CustomerId;
       ArrayList<Integer> u_movies = c1.MoviesRatedBy;
       double ru = m_aCustomers[u].RatingAvg;
       int[][] u_calcRatingDiffs = calcRatingDiffs(u);
       for (int v = 0; v < number_of_customers; v++) {
-        if (u == v) {
+        Customer c2 = m_aCustomers[v];
+        int cust2Id = c2.CustomerId;
+        if (cust1Id == cust2Id) {
           similarities[u][v] = 1;
           signSimilarities[u][v] = 1;
-        } else if (u < v) {
-          Customer c2 = m_aCustomers[v];
+        } else if (cust1Id < cust2Id) {
           ArrayList<Integer> v_movies = c2.MoviesRatedBy;
           if (c1.newCust) {
             int[][] u_ratingDiffs = userItemItemMatrix[u];
@@ -409,8 +414,8 @@ public class UP {
                   int rum = userItemMatrix[u][j].Rating;
                   int rvm = userItemMatrix[v][j].Rating;
                   numeratorSum += (rum - ru) * (rvm - rv);
-                  denominatorSumU += Math.pow(userItemMatrix[u][j].Rating - ru, 2);
-                  denominatorSumV += Math.pow(userItemMatrix[v][j].Rating - rv, 2);
+                  denominatorSumU += Math.pow(rum - ru, 2);
+                  denominatorSumV += Math.pow(rvm - rv, 2);
                 }
                 double denominator = Math.sqrt(denominatorSumU * denominatorSumV);
                 if (denominator == 0) {
@@ -423,14 +428,27 @@ public class UP {
               }
             }
           }
+          writeSimilarityToDB(c1.CustomerId, c2.CustomerId, similarities[u][v], signSimilarities[u][v]);
         } else {
           similarities[u][v] = similarities[v][u];
           signSimilarities[u][v] = signSimilarities[v][u];
         }
+        
       }
     }
     this.similarities = similarities;
     this.signSimilarities = signSimilarities;
+  }
+  
+  private void writeSimilarityToDB(int user1, int user2, float sim, float signSim) {
+		String sqlString = String.format(
+			"insert into similarities values (%d, %d, %f, %f)", user1, user2, sim, signSim
+		);
+		SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+		int modifiedCount = Ebean.execute(update);
+	 	String msg = "There where " + modifiedCount + "rows updated";
+		System.out.println(msg); 
+    
   }
 
   private float binarySimilarity(int[][] arr1, int[][] arr2) {
@@ -486,7 +504,7 @@ public class UP {
     * @param userID : If userID = -1, non-personalized, otherwise user specific K matrix for user userID.
     * @param signCorrected : If signCorrected, then uses significance corrected similarities.
     */
-  public void calculateKMatrix(int userID, boolean signCorrected) {
+  private void calculateKMatrix(int userID, boolean signCorrected) {
     // in a non-personalized case userID is -1
     if (userID != -1) {
       // get the compact id of the user
@@ -502,35 +520,44 @@ public class UP {
       ArrayList<Integer> u_movies = m_aCustomers[u].MoviesRatedBy;
       for (int i = 0; i < u_movies.size(); i++) {
         for (int j = 0; j < u_movies.size(); j++) {
-          if (i != j) {
-            int mi = u_movies.get(i);
-            int mj = u_movies.get(j);
-
-            Data dataI = userItemMatrix[u][mi];
-            Data dataJ = userItemMatrix[u][mj];
+          
+          int mi = u_movies.get(i);
+          int mj = u_movies.get(j);
+          
+          int movie1Id = m_aMovies[mi].MovieId;
+          int movie2Id = m_aMovies[mj].MovieId;
+          
+          if (movie1Id != movie2Id) {
+            if (movie1Id < movie2Id) {
+              Data dataI = userItemMatrix[u][mi];
+              Data dataJ = userItemMatrix[u][mj];
             
-            int cuij = dataI.Rating - dataJ.Rating;
-            // personalized case
-            if (userID != -1) {
-              double sim;
-              // depending on signCorrected argument get the similarity
-              if (signCorrected) {
-                sim = signSimilarities[userID][u];
-              } else {
-                sim = similarities[userID][u];
+              int cuij = dataI.Rating - dataJ.Rating;
+              // personalized case
+              if (userID != -1) {
+                double sim;
+                // depending on signCorrected argument get the similarity
+                if (signCorrected) {
+                  sim = signSimilarities[userID][u];
+                } else {
+                  sim = similarities[userID][u];
+                }
+                // add only those weighted score differences for which the user-user similarity is > 0
+                if (sim > 0) {
+                  wMatrix[mi][mj] += sim;
+                  cMatrix[mi][mj] += cuij * sim;
+                }
               }
-              // add only those weighted score differences for which the user-user similarity is > 0
-              if (sim > 0) {
-                wMatrix[dataI.MovieId][dataJ.MovieId] += sim;
-                cMatrix[dataI.MovieId][dataJ.MovieId] += cuij * sim;
+              // non-personalized case
+              else {
+                wMatrix[mi][mj] += 1;
+                cMatrix[mi][mj] += cuij;
               }
+              insertKValueToDB(userId, movie1Id, movie2Id, cMatrix[mi][mj], wMatrix[mi][mj]);
+            } else {
+              wMatrix[mi][mj] = wMatrix[mj][mi];
+              cMatrix[mi][mj] = -cMatrix[mj][mi];
             }
-            // non-personalized case
-            else {
-              wMatrix[dataI.MovieId][dataJ.MovieId] += 1;
-              cMatrix[dataI.MovieId][dataJ.MovieId] += cuij;
-            }
-
           }
         }
       }
@@ -548,8 +575,18 @@ public class UP {
       }
     }
   }
+  
+  private void insertKValueToDB(int userId, int movie1Id, int movie2Id, float c, float w) {
+		String sqlString = String.format(
+			"insert into kmatrix values (%d, %d, %d, %f, %f)", movie1Id, movie2Id, c, w
+		);
+		SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+		int modifiedCount = Ebean.execute(update);
+	 	String msg = "There where " + modifiedCount + "rows updated";
+		System.out.println(msg); 
+  }
 
-  public void updateKMatrixWithPrefs(int userID, boolean signCorrected) {
+  private void updateKMatrixWithPrefs(int userID, boolean signCorrected) {
 
     // in a non-personalized case userID is -1
     if (userID != -1) {
@@ -564,33 +601,40 @@ public class UP {
         for (int i = 0; i < u_moviePairs.size(); i++) {
           List<Integer> pair = u_moviePairs.get(i);
 
-          int m1 = pair.get(0);
-          int m2 = pair.get(1);
+          int mi = pair.get(0);
+          int mj = pair.get(1);
 
-          int cuij = userItemItemMatrix[u][m1][m2];
-          // personalized case
-          if (userID != -1) {
-            double sim;
-            // depending on signCorrected argument get the similarity
-            if (signCorrected) {
-              sim = signSimilarities[userID][u];
+          int movie1Id = m_aMovies[mi].MovieId;
+          int movie2Id = m_aMovies[mj].MovieId;
+          
+          if (movie1Id != movie2Id) {
+            if (movie1Id < movie2Id) {
+              int cuij = userItemItemMatrix[u][m1][m2];
+              // personalized case
+              if (userID != -1) {
+                double sim;
+                // depending on signCorrected argument get the similarity
+                if (signCorrected) {
+                  sim = signSimilarities[userID][u];
+                } else {
+                  sim = similarities[userID][u];
+                }
+                // add only those weighted score differences for which the user-user similarity is > 0
+                if (sim > 0) {
+                  wMatrix[mi][mj] += sim;
+                  cMatrix[mi][mj] += cuij * sim;
+                }
+              }
+              // non-personalized case
+              else {
+                wMatrix[mi][mj] += 1;
+                cMatrix[mi][mj] += cuij;
+              }
+              updateKValueInDB(movie1Id, movie2Id, cMatrix[mi][mj], wMatrix[mi][mj]);
             } else {
-              sim = similarities[userID][u];
+              wMatrix[mi][mj] += wMatrix[mj][mi];
+              cMatrix[mi][mj] -= cMatrix[mj][mi];
             }
-            // add only those weighted score differences for which the user-user similarity is > 0
-            if (sim > 0) {
-              wMatrix[m1][m2] += sim;
-              wMatrix[m2][m1] += sim;
-              cMatrix[m1][m2] += cuij * sim;
-              cMatrix[m2][m1] -= cuij * sim;
-            }
-          }
-          // non-personalized case
-          else {
-            wMatrix[m1][m2] += 1;
-            wMatrix[m2][m1] += 1;
-            cMatrix[m1][m2] += cuij;
-            cMatrix[m2][m1] -= cuij;
           }
         }
       }
@@ -626,8 +670,10 @@ public class UP {
     // in a non-personalized case, calculate global K matrix, otherwise user specific K matrix
     if (userId != -1) {
       calculateKMatrix(userId, signCorrected);
+			updateKMatrixWithPrefs(userId, signCorrected);
     } else {
       calculateKMatrix(-1, signCorrected);
+			updateKMatrixWithPrefs(userId, signCorrected);
     }
     for (Integer m : unratedMovies) {
       Integer mid = m_mMovieIds.get(m);

@@ -59,13 +59,12 @@ public class Recommender extends Controller {
 				return ok(recommend.render(bestMovies, user));
 			}
 			case 2: {
-				List<Preference> prefs = UP.loadMLPreferences();
-				List<BinaryPreference> comps = UP.loadComparisons();
-				UP up = new UP(prefs, comps);
-				up.initialize();
-				boolean signCorrected = false;
-				up.calculateKMatrix(user.id, signCorrected);
-				up.updateKMatrixWithPrefs(user.id, signCorrected);
+				//List<Preference> prefs = UP.loadMLPreferences();
+				//List<BinaryPreference> comps = UP.loadComparisons();
+				//UP up = new UP(prefs, comps);
+				//up.initialize();
+				//boolean signCorrected = false;
+        /*
 				List<Integer> unpreferedMovieIds = user.getUnpreferedMovieIds();
 				List<Integer> list = up.predictRankingList(user.id, unpreferedMovieIds, signCorrected).subList(0, 10);
 				boolean updated = user.afterUpdate;
@@ -80,6 +79,8 @@ public class Recommender extends Controller {
 				}
 				System.out.println("10 best movies");
 				System.out.println(bestMovies);
+          */
+        List<Movie> bestMovies = new ArrayList<Movie>();
 				return ok(recommend.render(bestMovies, user));
 			}
 			default: return ok();

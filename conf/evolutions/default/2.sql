@@ -13,7 +13,7 @@ create table ml_ratings (
 	value											integer not null,
   time											bigint)
 as select *
-from csvread('data/pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
+from csvread('data/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 ;
 
 create table comparisons (
@@ -24,7 +24,24 @@ create table comparisons (
 	constraint pk_comparisons primary key (user_id, question, list_nr))
 ;
 
- ALTER SEQUENCE user_seq RESTART WITH 7000;
+create table similarities (
+	user1_id									integer not null,
+	user2_id									integer not null,
+	similarity								float,
+	signSimilarity						float,
+constraint pk_similarities primary key (user1_id, user2_id)
+);
+
+create table kmatrix (
+  user_id                   integer not null,
+	movie1_id									integer not null,
+	movie2_id									integer not null,
+	cValue										float,
+	wValue										float,
+constraint pk_kmatrix primary key (user_id, movie1_id, movie2_id)
+);
+
+ALTER SEQUENCE user_seq RESTART WITH 7000;
 	
 # --- !Downs
 
@@ -33,5 +50,7 @@ SET REFERENTIAL_INTEGRITY FALSE;
 drop table if exists moviePairs;
 drop table if exists ml_ratings;
 drop table if exists comparisons;
+drop table if exists similarities;
+drop table if exists kmatrix;
 
 SET REFERENTIAL_INTEGRITY TRUE;

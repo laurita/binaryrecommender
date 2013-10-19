@@ -1,15 +1,16 @@
 SUMMARY
 ================================================================================
 
-These files contain 67,524 anonymous ratings of 100 movies
-made by 5,664 MovieLens users who joined MovieLens in 2000. 
+These file very_pop_ratings.dat contains 36,539 anonymous ratings of 100 movies
+made by 1,128 MovieLens users who joined MovieLens in 2000. 
 It is a subset of MovieLens 1M dataset, filtered by taking
-100 movies with highest log(popularity)*variance.
+100 movies with highest log(popularity)*variance and all the users who have rated
+>=20 movies.
 
 RATINGS FILE DESCRIPTION
 ================================================================================
 
-All ratings are contained in the file "pop_ratings.dat" and are in the
+All ratings are contained in the file "very_pop_ratings.dat" and are in the
 following format:
 
 UserID,MovieID,Rating,Timestamp
