@@ -1,0 +1,148 @@
+@(movies: List[Movie], user: User	)
+
+@import models.User
+
+@main("Movies list") {	
+	<div class="container">
+		<h4>Rate the movies that you marked as seen.</h4>
+		<div class="row">
+			<div class="span12">
+				<div id="list-movie" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@for(movie <- movies) {
+								@defining(user.getMovieRating(movie.id)) { rating =>
+									<tr class="movie-id-@{movie.id} @{if(rating != 0) rating + "stars"}">
+										<td>
+											<div class="hero-unit">
+												<div class="row">
+													<div class="span3">
+														<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+													</div>
+													<div class="span5 offset1">
+														<div class="row">
+															<h4>
+																<a href="@routes.Movies.details(movie.id)">
+																	@movie.title
+																</a>
+															</h4>
+														</div>
+														<div class="row">
+															<div class="span2">
+																@movie.length Min
+															</div>
+															<div class="span1">
+																<a href="@movie.imdbLink" target="_blank">
+																	IMDb
+																</a>
+															</div>
+															<div class="span2">
+																<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
+															</div>
+														</div>
+					
+														<div class="row top-buffer">
+															<div class="stars">
+																<span class="1">*</span>
+																<span class="2">*</span>
+																<span class="3">*</span>
+																<span class="4">*</span>
+																<span class="5">*</span>
+															</div>
+														</div>
+													
+														<div class="row">
+															@movie.description
+														</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+		</div>
+		
+		@if(movies.length > 10) {
+			<div class="pagination"></div>
+		}
+		  
+		<div class="row">
+			<div class="span2 offset5">
+				<form action="@routes.Experiment.handle_post()" method="POST">
+					<input type="submit" class="btn btn-primary btn-large" href="@routes.Experiment.handle_post()" value="I finished rating"></input>
+				</form>					
+			</div>
+		</div>
+		
+		
+		
+	}
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function () {
+		$('.table tbody tr').hide();
+		$('.table tbody tr').slice(0, 10).show();
+				
+
+		var options = {
+			currentPage: 1,
+			totalPages: Math.ceil("@movies.length" / 10),
+			alignment: "center",
+			onPageChanged:
+			function (event, oldPage, newPage) {
+				$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
+				$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
+			}
+		}
+
+		$('.pagination').bootstrapPaginator(options);
+
+		if (/stage1aDone/.test($("tbody").attr("class"))) {
+			$(".stars span").unbind();
+		} 
+		$(".stars").each(function() {
+			if (/(\d)stars/.test( $(this).parents("tr").attr("class"))) {
+				var rating = parseInt($(this).parents("tr").attr("class").match(/(\d)stars/)[1]);
+				for (var i=1; i<=rating; i++) {
+					$(this).children().filter("."+i.toString()).addClass("clicked");
+				}
+			}
+		})
+		if (!/stage1aDone/.test($("tbody").attr("class"))) {
+			$(".stars span").mouseenter( function() {
+				$(this).addClass("hover");
+				$(this).prevAll().addClass("hover");
+			}).mouseleave( function() {
+				$(this).removeClass("hover");
+				$(this).prevAll().removeClass("hover");
+			}).click( function() {
+				$(this).parent().children().removeClass("clicked").removeClass("hover");
+				$(this).addClass("clicked");
+				$(this).prevAll().addClass("clicked");
+				var movieId = $(this).parents("tr").attr("class").match(/movie-id-(\d+)/)[1];
+				var rating = $(this).parent().children().filter(".clicked").last().attr("class").match(/\d+/)[0];
+				$.ajax({
+					type: "POST",
+					url: "/ajax",
+					data: {
+						"movieId" : movieId,
+						"rating" : rating
+					}
+				});
+			})
+		}
+	});
+	</script>
+

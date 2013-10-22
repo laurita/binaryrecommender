@@ -14,6 +14,8 @@ public class Rating extends Model {
 	
 	@Constraints.Required
 	public int value;
+  
+  public boolean additional = false;
 	
 	@ManyToOne
 	public User user;

@@ -8,21 +8,6 @@ import play.mvc.*;
 
 public class Movies extends Controller {
 	
-	@Security.Authenticated(Secured.class)
-	public static Result list() {
-		List<Movie> movies = Movie.find.orderBy("logpopvar desc").findList();
-		User user = User.find.byId(session().get("userId"));
-		System.out.println("stge1Done: "+ user.stage1Done);
-		return ok(list.render(movies, user));
-	}
-	
-	@Security.Authenticated(Secured.class)
-	public static Result preferences() {
-		List<List<Integer>> moviePairs = Movie.selectBestMoviePairs(30);
-		User user = User.find.byId(session().get("userId"));
-		return ok(preferences.render(moviePairs, user));
-	}
-	
 	public static Result details(int id) {
 		final Movie movie = Movie.findById(id);
 		if (movie == null) {

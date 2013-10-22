@@ -1,0 +1,122 @@
+@(form: Form[Experiment.AnswerQuestions])
+
+@main("Answer Questions") {
+	@helper.form(routes.Experiment.handle_post(), 'method -> "post") {
+		<h2 class="form-signin-heading">Answer the questions</h2>
+		<div class="row">
+			<div class="span3">1. I have fun using the system</div>
+			<div class="span8">
+				@defining("likertScaleRadios" + 1) { name =>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+						Strongly agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="agree" value="agree">
+						Agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="neutral" value="neutral" checked>
+						Neutral
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="disagree" value="disagree">
+						Disagree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+						Strongly disagree
+					</label>
+				}
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">2. Using the system is a pleasant experience</div>
+			<div class="span8">
+				@defining("likertScaleRadios" + 2) { name =>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+						Strongly agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="agree" value="agree">
+						Agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="neutral" value="neutral" checked>
+						Neutral
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="disagree" value="disagree">
+						Disagree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+						Strongly disagree
+					</label>
+				}
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">3. The system makes me more aware of my choice options</div>
+			<div class="span8">
+				@defining("likertScaleRadios" + 3) { name =>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+						Strongly agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="agree" value="agree">
+						Agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="neutral" value="neutral" checked>
+						Neutral
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="disagree" value="disagree">
+						Disagree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+						Strongly disagree
+					</label>
+				}
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3	">4. I feel bored when I am using the system</div>
+			<div class="span8">
+				@defining("likertScaleRadios" + 4) { name =>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyAgree" value="stronglyAgree">
+						Strongly agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="agree" value="agree">
+						Agree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="neutral" value="neutral" checked>
+						Neutral
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="disagree" value="disagree">
+						Disagree
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="@name" id="stronglyDisagree" value="stronglyDisagree">
+						Strongly disagree
+					</label>
+				}
+			</div>
+		</div>
+		<div class="row">
+			<div class="span2 offset5">
+				<form action="@routes.Experiment.handle_post()" request="POST">
+					<input class="btn btn-large btn-primary" type="submit" value="Finish"></input>
+				</form>
+			</div>
+		</div>
+	}
+}

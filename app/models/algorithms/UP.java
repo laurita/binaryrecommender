@@ -121,6 +121,13 @@ public class UP {
     calcUserItemMatrix();
     calcUserItemItemMatrix();
     calcSimilarities();
+    for (Customer customer : m_aCustomers) {
+      if (customer.newCust) {
+        calculateKMatrix(customer.CustomerId, false);
+        updateKMatrixWithPrefs(customer.CustomerId, false);
+        writeKMatrixToDB(customer.CustomerId);
+      }
+    }
   }
 
   /**
@@ -441,14 +448,14 @@ public class UP {
   }
   
   private void writeSimilarityToDB(int user1, int user2, float sim, float signSim) {
-		String sqlString = String.format(
-			"insert into similarities values (%d, %d, %f, %f)", user1, user2, sim, signSim
-		);
-		SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-		int modifiedCount = Ebean.execute(update);
-	 	String msg = "There where " + modifiedCount + "rows updated";
-		System.out.println(msg); 
-    
+    //System.out.println("similarity: " + user1 + ", " + user2); 
+    String sqlString = String.format(
+      "insert into similarities values (%d, %d, %f, %f)", user1, user2, sim, signSim
+        );
+    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+    int modifiedCount = Ebean.execute(update);
+    String msg = "There were " + modifiedCount + " rows inserted";
+    //System.out.println(msg); 
   }
 
   private float binarySimilarity(int[][] arr1, int[][] arr2) {
@@ -501,14 +508,17 @@ public class UP {
 
   /**
     * Calculates K matrix.
-    * @param userID : If userID = -1, non-personalized, otherwise user specific K matrix for user userID.
+    * @param userId : If userId = -1, non-personalized, otherwise user specific K matrix for user userId.
     * @param signCorrected : If signCorrected, then uses significance corrected similarities.
     */
-  private void calculateKMatrix(int userID, boolean signCorrected) {
-    // in a non-personalized case userID is -1
-    if (userID != -1) {
+  private void calculateKMatrix(int userId, boolean signCorrected) {
+    
+    System.out.println("calculating kmatrix for user " + userId + " ...");
+    
+    // in a non-personalized case userId is -1
+    if (userId != -1) {
       // get the compact id of the user
-      userID = m_mCustIds.get(userID);
+      userId = m_mCustIds.get(userId);
     }
 
     cMatrix = new float[number_of_movies][number_of_movies];
@@ -523,24 +533,21 @@ public class UP {
           
           int mi = u_movies.get(i);
           int mj = u_movies.get(j);
-          
-          int movie1Id = m_aMovies[mi].MovieId;
-          int movie2Id = m_aMovies[mj].MovieId;
-          
-          if (movie1Id != movie2Id) {
-            if (movie1Id < movie2Id) {
+                    
+          if (mi != mj) {
+            if (mi < mj) {
               Data dataI = userItemMatrix[u][mi];
               Data dataJ = userItemMatrix[u][mj];
             
               int cuij = dataI.Rating - dataJ.Rating;
               // personalized case
-              if (userID != -1) {
+              if (userId != -1) {
                 double sim;
                 // depending on signCorrected argument get the similarity
                 if (signCorrected) {
-                  sim = signSimilarities[userID][u];
+                  sim = signSimilarities[userId][u];
                 } else {
-                  sim = similarities[userID][u];
+                  sim = similarities[userId][u];
                 }
                 // add only those weighted score differences for which the user-user similarity is > 0
                 if (sim > 0) {
@@ -553,7 +560,6 @@ public class UP {
                 wMatrix[mi][mj] += 1;
                 cMatrix[mi][mj] += cuij;
               }
-              insertKValueToDB(userId, movie1Id, movie2Id, cMatrix[mi][mj], wMatrix[mi][mj]);
             } else {
               wMatrix[mi][mj] = wMatrix[mj][mi];
               cMatrix[mi][mj] = -cMatrix[mj][mi];
@@ -575,23 +581,13 @@ public class UP {
       }
     }
   }
-  
-  private void insertKValueToDB(int userId, int movie1Id, int movie2Id, float c, float w) {
-		String sqlString = String.format(
-			"insert into kmatrix values (%d, %d, %d, %f, %f)", movie1Id, movie2Id, c, w
-		);
-		SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-		int modifiedCount = Ebean.execute(update);
-	 	String msg = "There where " + modifiedCount + "rows updated";
-		System.out.println(msg); 
-  }
 
-  private void updateKMatrixWithPrefs(int userID, boolean signCorrected) {
+  private void updateKMatrixWithPrefs(int userId, boolean signCorrected) {
 
-    // in a non-personalized case userID is -1
-    if (userID != -1) {
+    // in a non-personalized case userId is -1
+    if (userId != -1) {
       // get the compact id of the user
-      userID = m_mCustIds.get(userID);
+      userId = m_mCustIds.get(userId);
     }
 
     for (int u : m_mCustIds.values()) {
@@ -604,20 +600,20 @@ public class UP {
           int mi = pair.get(0);
           int mj = pair.get(1);
 
-          int movie1Id = m_aMovies[mi].MovieId;
-          int movie2Id = m_aMovies[mj].MovieId;
+          //int movie1Id = m_aMovies[mi].MovieId;
+          //int movie2Id = m_aMovies[mj].MovieId;
           
-          if (movie1Id != movie2Id) {
-            if (movie1Id < movie2Id) {
-              int cuij = userItemItemMatrix[u][m1][m2];
+          if (mi != mj) {
+            if (mi < mj) {
+              int cuij = userItemItemMatrix[u][mi][mj];
               // personalized case
-              if (userID != -1) {
+              if (userId != -1) {
                 double sim;
                 // depending on signCorrected argument get the similarity
                 if (signCorrected) {
-                  sim = signSimilarities[userID][u];
+                  sim = signSimilarities[userId][u];
                 } else {
-                  sim = similarities[userID][u];
+                  sim = similarities[userId][u];
                 }
                 // add only those weighted score differences for which the user-user similarity is > 0
                 if (sim > 0) {
@@ -630,7 +626,7 @@ public class UP {
                 wMatrix[mi][mj] += 1;
                 cMatrix[mi][mj] += cuij;
               }
-              updateKValueInDB(movie1Id, movie2Id, cMatrix[mi][mj], wMatrix[mi][mj]);
+              //updateKValueInDB(userId, movie1Id, movie2Id, cMatrix[mi][mj], wMatrix[mi][mj]);
             } else {
               wMatrix[mi][mj] += wMatrix[mj][mi];
               cMatrix[mi][mj] -= cMatrix[mj][mi];
@@ -652,6 +648,62 @@ public class UP {
       }
     }
   }
+  
+  private void writeKMatrixToDB(int userId) {
+    System.out.println("writing kmatrix to db for user " + userId + " ...");
+    for (int i = 0; i < number_of_movies; i++) {
+      for (int j = 0; j < number_of_movies; j++) {
+        int movie1Id = m_aMovies[i].MovieId;
+        int movie2Id = m_aMovies[j].MovieId;
+        if (movie1Id < movie2Id) {
+          insertKValueToDB(userId, movie1Id, movie2Id, cMatrix[i][j], wMatrix[i][j]);
+        }
+      }
+    }
+  }
+  
+  private void insertKValueToDB(int userId, int movie1Id, int movie2Id, float c, float w) {
+    //System.out.println("kvalue: " + userId + ", " + movie1Id + ", " + movie2Id); 
+    String sqlString = String.format(
+      "insert into kmatrix values (%d, %d, %d, %f, %f)", userId, movie1Id, movie2Id, c, w
+        );
+    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+    int modifiedCount = Ebean.execute(update);
+    String msg = "There were " + modifiedCount + " rows inserted";
+    //System.out.println(msg); 
+  }
+  
+  public static void updateKValueInDB(int userId, int movie1Id, int movie2Id, float c, float w) {
+    System.out.println("updateing K value for user " + userId + ", movie1 " + movie1Id + ", movie2 " + movie2Id);
+    String sqlString = String.format(
+      "update kmatrix set cvalue = cvalue + %f, wvalue = wvalue + %f " +
+        "where user_id = %d and movie1_id =  %d and movie2_id = %d;", c, w, userId, movie1Id, movie2Id 
+          );
+    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
+    int modifiedCount = Ebean.execute(update);
+    String msg = "There were " + modifiedCount + " rows updated";
+    //System.out.println(msg);
+  }
+  
+  public static List<Integer> predictRankingListFromDB(int userId) {
+    String sqlString = String.format(
+      "select a.id, (a.c - b.c) / (a.w + b.w) k from " +
+        "(select movie.id id, sum(cvalue) c, sum(wvalue) w " +
+          "FROM movie, kmatrix where user_id = %d and movie1_id=id group by id) as a, " +
+            "(select movie.id id, sum(cvalue) c, sum(wvalue) w " +
+              "FROM movie, kmatrix where user_id = %d and movie2_id=id group by id) as b " +
+                "where a.id = b.id and a.id not in " +
+                  "(select distinct(id) from " +
+                    "(SELECT movie1_id id FROM PREFERENCE) UNION " +
+                      "(SELECT movie2_id id FROM PREFERENCE))order by k desc limit 10;", userId, userId);
+    SqlQuery sqlQuery = Ebean.createSqlQuery(sqlString);
+    List<SqlRow> rows = sqlQuery.findList();
+    List<Integer> list = new ArrayList<Integer>();
+    for (SqlRow row : rows) {
+      list.add(row.getInteger("id"));
+    }
+    return list;
+  }
 
   private float nullAvg(float array[]) {
     float sum = 0.0f;
@@ -670,10 +722,10 @@ public class UP {
     // in a non-personalized case, calculate global K matrix, otherwise user specific K matrix
     if (userId != -1) {
       calculateKMatrix(userId, signCorrected);
-			updateKMatrixWithPrefs(userId, signCorrected);
+      updateKMatrixWithPrefs(userId, signCorrected);
     } else {
       calculateKMatrix(-1, signCorrected);
-			updateKMatrixWithPrefs(userId, signCorrected);
+      updateKMatrixWithPrefs(userId, signCorrected);
     }
     for (Integer m : unratedMovies) {
       Integer mid = m_mMovieIds.get(m);

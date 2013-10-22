@@ -9,7 +9,7 @@ public class Preference implements Comparable<Preference>{
 	private double value;
 	
 	private double realValue;
-			
+  			
 	public int getUserId() {
 		return userId;
 	}

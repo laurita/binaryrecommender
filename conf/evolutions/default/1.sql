@@ -18,6 +18,7 @@ create table movie (
 create table preference (
   id                        bigint not null,
   value                     integer,
+  additional                boolean,
   user_id                   integer,
   movie1_id                 integer,
   movie2_id                 integer,
@@ -27,6 +28,7 @@ create table preference (
 create table rating (
   id                        integer not null,
   value                     integer,
+  additional                boolean,
   user_id                   integer,
   movie_id                  integer,
   constraint pk_rating primary key (id))
@@ -47,6 +49,7 @@ create table user (
   id                        integer not null,
   email                     varchar(255),
   created_at                timestamp,
+  state                     varchar(255),
   experiment_group          integer,
   stage1done                boolean,
   stage2done                boolean,

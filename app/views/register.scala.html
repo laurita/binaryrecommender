@@ -1,20 +1,12 @@
 @(form: Form[Application.Register])
 
-@import controllers.Application
-
 @main("Register") {
 	<div class="container">
-		@if(Application.stage == 1){
-			@helper.form(routes.Application.submit(), 'class -> "form-signin", 'method -> "post") {
-				<h2 class="form-signin-heading">Please register</h2>
-				<input type="email" name="email" class="input-block-level" placeholder="Email" value="@form("email").value">
-				<button class="btn btn-large btn-primary" type="submit">Register</button>
-				<a href="@routes.Application.login()"> Login, if registered</a>
-			}
-		} else {
-			<div class="hero-unit">
-				<p>The first stage of the experiment is now finished. Sorry, but it is too late to regsiter now.</p>
-			</div>
-		}
-	</div>
+		<form class="form-signin" action="@routes.Application.register()" method="POST">
+			<h2 class="form-signin-heading">Please register</h2>
+			<input type="email" name="email" class="input-block-level" placeholder="Email" value="@form("email").value">
+			<input class="btn btn-large btn-primary" type="submit" value="Register">
+			<a href="@routes.Application.login()"> Login, if registered</a>
+		</div>
+	</form>
 }

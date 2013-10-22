@@ -1,0 +1,89 @@
+@(recs: List[Recommendation], user: User)
+
+@main("Recommended list of movies") {	
+	@helper.form(routes.Experiment.handle_post()) {
+		<div class="container">
+			<div class="hero-unit">
+				These are the movies recommended for you in the order that is important.
+				<ol>
+					<li>Please mark the movies that you consider good recommendations, i.e. you haven't seen the movie and you would like to watch it, or you have seen the movie and you would like to watch it again. 
+					</li>
+				</ol>
+			</div>
+			<div class="row">
+				<div class="span8 offset2">
+					<div id="list-movie" class="content scaffold-list" role="main">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(rec <- recs) {
+									<tr class="movie-id-@{rec.movie.id}">
+										<td>
+											<h4>@{rec.rank}</h4>
+										</td>
+										<td>
+											<div class="row-fluid">
+												<div class="span3">
+													<img class="thumbnail" src="@routes.Assets.at("images/movies/" + rec.movie.id + ".jpg")" />
+												</div>
+												<div class="span8 offset1">
+													<div class="row">
+														<h4>
+															<a href="@routes.Movies.details(rec.movie.id)">
+																@rec.movie.title
+															</a>
+														</h4>
+													</div>
+													<div class="row">
+														<div class="span3">
+															@rec.movie.length Min
+														</div>
+														<div class="span3">
+															<a href="@rec.movie.imdbLink" target="_blank">
+																IMDb
+															</a>
+														</div>
+														<div class="span6">
+															<a class="various fancybox" href="@rec.movie.trailerLink">Watch trailer</a>
+														</div>
+													</div>
+													<div class="row">
+														<label class="checkbox">
+															<input type="checkbox" name="good" value="@rec.movie.id"> Good recommendation
+														</label>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row-fluid">
+												<div class="span12">
+													@rec.movie.description
+												</div>
+											</div>
+											
+										</td>
+									</tr>
+								}
+							
+							</tbody>
+						</table>
+					
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="span2 offset5">
+						<input type="submit" class="btn btn-large btn-primary" value="Continue"></button>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	}
+}
+

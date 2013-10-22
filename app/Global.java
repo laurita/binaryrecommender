@@ -1,7 +1,7 @@
 import play.*;
 import play.libs.*;
 import com.avaje.ebean.Ebean;
-import models.User;
+import models.Movie;
 import java.util.*;
 import models.algorithms.*;
 import models.algorithms.helpers.*;
@@ -13,7 +13,7 @@ public class Global extends GlobalSettings {
 	public void onStart(Application app) {
 				
 		// Check if the database is empty
-		if (User.find.findRowCount() == 0) {
+		if (Movie.find.findRowCount() == 0) {
 						
 			Yaml yaml = new Yaml();
 			
@@ -31,6 +31,7 @@ public class Global extends GlobalSettings {
 		}
 	}
   
+  /*
 	@Override
 	public void onStop(Application app) {
 		System.out.println("stop");
@@ -43,4 +44,5 @@ public class Global extends GlobalSettings {
 		UP up = new UP(prefs, comps);
 		up.initialize();
 	}
+  */
 }

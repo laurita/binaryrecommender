@@ -3,40 +3,68 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET			/experiment									controllers.Experiment.handle_get()
+POST		/experiment									controllers.Experiment.handle_post()
+POST		/ajax												controllers.Experiment.handle_ajax()
+
+
 GET     /login                  		controllers.Application.login()
-POST    /login                      controllers.Application.authenticate()
+POST    /login                      controllers.Application.login()
+
 GET     /logout                     controllers.Application.logout()
+POST    /logout                     controllers.Application.logout()
+
 GET			/register										controllers.Application.register()
-POST		/submit											controllers.Application.submit()
-GET			/answerQuestions						controllers.Application.answerQuestions()
-POST		/submitAnswers							controllers.Application.submitAnswers()
-GET			/startExperiment						controllers.Application.startExperiment()
-GET			/start2Stage								controllers.Application.start2Stage()
+POST		/register										controllers.Application.register()
 
-
-GET			/recommendation							controllers.Recommender.recommend()
-POST		/recommendation/update			controllers.Recommender.update()			
-GET			/recommendation/compare			controllers.Recommender.compare()
-POST		/recommendation/submitComparisons			controllers.Recommender.submitComparisons()			
-
-
-# Movies
-GET			/movies											controllers.Movies.list()
-GET			/preferences								controllers.Movies.preferences()
-GET			/movies/:id									controllers.Movies.details(id:Integer)
-
-# Users
-GET			/users											controllers.Users.list()
-GET			/users/:id									controllers.Users.details(id:String)
-POST		/users/rateMovie						controllers.Users.rateMovie()
-POST		/users/addPreferences				controllers.Users.addPreferences()
-
-# Ratings
-GET			/ratings										controllers.Ratings.list()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Javascript routes
-GET     /javascripts  controllers.Application.javascriptRoutes()
+GET			/javascripts								controllers.Experiment.javascriptRoutes()
+
+# Movies
+GET			/movies/:id									controllers.Movies.details(id:Integer)
+
+
+
+
+
+# After the first stage finishes
+GET			/updateToNextStage					controllers.Application.updateToNextStage()
+
+
+
+
+
+
+
+
+#GET			/answerQuestions						controllers.Application.answerQuestions()
+#POST		/submitAnswers							controllers.Application.submitAnswers()
+#GET			/startExperiment						controllers.Application.startExperiment()
+#GET			/start2Stage								controllers.Application.start2Stage()
+
+
+#GET			/recommendation							controllers.Recommender.recommend()
+#POST		/recommendation/update			controllers.Recommender.update()			
+#GET			/recommendation/compare			controllers.Recommender.compare()
+#POST		/recommendation/submitComparisons			controllers.Recommender.submitComparisons()			
+
+
+# Movies
+#GET			/movies											controllers.Movies.list()
+#GET			/preferences								controllers.Movies.preferences()
+#GET			/movies/:id									controllers.Movies.details(id:Integer)
+
+# Users
+#GET			/users											controllers.Users.list()
+#GET			/users/:id									controllers.Users.details(id:String)
+
+#POST		/users/addPreferences				controllers.Users.addPreferences()
+
+# Ratings
+#GET			/ratings										controllers.Ratings.list()
+
+

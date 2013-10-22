@@ -1,26 +1,4 @@
-10-18 21:39:01 jdbc[2]: exception
+10-22 14:35:46 jdbc[2]: exception
 org.h2.jdbc.JdbcSQLException: Table "PLAY_EVOLUTIONS" not found; SQL statement:
 select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%' [42102-172]
-10-18 21:40:02 pageStore: Transaction log could not be truncated; size: 16 MB
-10-18 21:43:53 jdbc[2]: exception
-org.h2.jdbc.JdbcSQLException: Column "USER_ID" not found; SQL statement:
-SELECT count(distinct user_id) FROM user [42122-172]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
-	at org.h2.message.DbException.get(DbException.java:169)
-	at org.h2.message.DbException.get(DbException.java:146)
-	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
-	at org.h2.expression.Aggregate.optimize(Aggregate.java:364)
-	at org.h2.command.dml.Select.prepare(Select.java:808)
-	at org.h2.command.Parser.prepareCommand(Parser.java:219)
-	at org.h2.engine.Session.prepareLocal(Session.java:425)
-	at org.h2.engine.Session.prepareCommand(Session.java:374)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:167)
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:155)
-	at org.h2.server.web.WebApp.getResult(WebApp.java:1316)
-	at org.h2.server.web.WebApp.query(WebApp.java:1005)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:967)
-	at org.h2.server.web.WebApp$1.next(WebApp.java:954)
-	at org.h2.server.web.WebThread.process(WebThread.java:167)
-	at org.h2.server.web.WebThread.run(WebThread.java:94)
-	at java.lang.Thread.run(Thread.java:680)
+10-22 14:50:39 pageStore: Transaction log could not be truncated; size: 16 MB

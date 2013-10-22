@@ -80,7 +80,7 @@ public class Movie extends Model {
 		}
 		return null;
 	}
-	
+  
 	public static List<List<Integer>> selectBestMoviePairs(int n) {
 		String sql = String.format("select movie1_id, movie2_id from moviePairs limit %d", n);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
