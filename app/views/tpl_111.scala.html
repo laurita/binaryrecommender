@@ -108,6 +108,7 @@
 			function (event, oldPage, newPage) {
 				$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();
 				$('.table tbody tr').slice((oldPage - 1) * 10, oldPage * 10).hide();
+				window.scrollTo(0,0);
 			}
 		}
 

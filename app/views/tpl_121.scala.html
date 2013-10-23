@@ -265,6 +265,7 @@
 				function (event, oldPage, newPage) {
 					create_table_rows((newPage - 1) * 10, newPage * 10);
 					start_slider();
+					window.scrollTo(0,0);
 				}
 			}
 			$('.pagination').bootstrapPaginator(options);
