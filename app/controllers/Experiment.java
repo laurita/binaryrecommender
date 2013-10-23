@@ -46,9 +46,7 @@ public class Experiment extends Controller {
         x.printStackTrace();
       }
     }
-    
-    return ok();
-
+    return redirect(routes.Application.logout());
   }
   
   public static Result handle_get_0() {
@@ -75,7 +73,7 @@ public class Experiment extends Controller {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<List<Integer>> moviePairs = Movie.selectBestMoviePairs(30);
+    List<List<Integer>> moviePairs = Movie.selectBestMoviePairs(4950);
     return ok(tpl_121.render(moviePairs, user));
   }
   
