@@ -298,8 +298,47 @@
 			
 			$('.hideIt').on('click', function() {
 				var id = $(this).attr('class').match(/(\d+)/)[1];
+				var id1 = $($(this).parentsUntil('tbody').last().find('.hideIt')[0]).attr('class').match(/(\d+)/)[1];
+				var id2 = $($(this).parentsUntil('tbody').last().find('.hideIt')[1]).attr('class').match(/(\d+)/)[1];
+				console.log("id is " + id);
+				
+				// index of the pair for which Hide was clicked in the hidden list (starting from 1)
+				var list_index = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').prevUntil('ul').size() + 1;
+				var prev_count_1 = $('#pair_list li:nth-child(' + list_index + ')').prevUntil('.ul', '[data-movie_1=' + id + ']').size();
+				var prev_count_2 = $('#pair_list li:nth-child(' + list_index + ')').prevUntil('.ul', '[data-movie_2=' + id + ']').size();
+				
+				console.log("list index is " + list_index);
+				
+				// number of li's before the current movie pair that have to be deleted
+				var prev_count = prev_count_1 + prev_count_2;
+				console.log("prev_count is " + prev_count);
+				
 				// delete the pairs in list that contain movie with this id
 				// update pagination
+				$('#pair_list li[data-movie_1=' + id + ']').remove();
+				$('#pair_list li[data-movie_2=' + id + ']').remove();
+				var current_page = $('.pagination ul li.active a').text();
+				var first = (current_page - 1) * 10 - prev_count;
+				var last = first + 10;
+				
+				console.log("i will show from " + first + " to " + last);
+				
+				create_table_rows(first, last);
+				start_slider();
+				
+				var options = {
+					currentPage: current_page,
+					totalPages: Math.ceil($('#pair_list li').length / 10),
+					alignment: "center",
+					onPageChanged:
+					function (event, oldPage, newPage) {
+						create_table_rows((newPage - 1) * 10, newPage * 10);
+						start_slider();
+						window.scrollTo(0,0);
+					}
+				}
+				$('.pagination').bootstrapPaginator(options);
+				
 			});
 		});
 		
