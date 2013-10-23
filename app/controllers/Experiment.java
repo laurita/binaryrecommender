@@ -246,7 +246,7 @@ public class Experiment extends Controller {
         x.printStackTrace();
       }
     }    
-    return ok();
+    return redirect(routes.Application.logout());
   }
   
   public static Result handle_post_110() {

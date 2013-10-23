@@ -3,8 +3,14 @@
 @import models.Movie
 
 @main("Movies Pair list") {	
-	<div class="container">		
-		<h4>Give preferences for as many movies as you can.</h4>
+	<div class="container">	
+		
+		<div class="hero-unit">
+			<p>
+				Please compare the movies that you marked as seen.
+			</p>
+		</div>
+			
 		<ul id="pair_list" style="display: none">
 			@for(moviePair <- moviePairs) {
 				@defining(moviePair.get(0)) { m1 =>
