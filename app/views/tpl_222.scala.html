@@ -9,13 +9,24 @@
 			@for(moviePair <- moviePairs) {
 				@defining(moviePair.get(0)) { m1 =>
 					@defining(moviePair.get(1)) { m2 =>
-						<li data-movie_1="@{m1}"
-						data-title_1="@Movie.find.byId(m1).title" 
-						data-descr_1="@Movie.find.byId(m1).description" 
-						data-movie_2="@{m2}" 
-						data-title_2="@Movie.find.byId(m2).title"
-						data-descr_2="@Movie.find.byId(m2).description"
-						>none</li>
+						@defining(Movie.find.byId(m1)) { movie1 =>
+							@defining(Movie.find.byId(m2)) { movie2 =>
+								<li 
+								data-movie_1="@{m1}"
+								data-title_1="@movie1.title" 
+								data-descr_1="@movie1.description" 
+								data-length_1="@movie1.length"
+								data-imdb_1="@movie1.imdbLink"
+								data-trailer_1="@movie1.trailerLink"
+								data-movie_2="@{m2}" 
+								data-title_2="@movie2.title"
+								data-descr_2="@movie2.description"
+								data-length_2="@movie2.length"
+								data-imdb_2="@movie2.imdbLink"
+								data-trailer_2="@movie2.trailerLink"
+								>none</li>
+							}
+						}
 					}
 				}
 			}
@@ -40,7 +51,9 @@
 			</div>
 		</div>
 		
-		<div class="pagination"></div>
+		@if(moviePairs.length > 10) {
+			<div class="pagination"></div>
+		}
         
 		<div class="row">
 			<div class="span2 offset5">
@@ -52,18 +65,87 @@
 				
 		<script type="text/javascript">
 		
-		function create_movie_td(id, title, descr) {
+		function create_movie_td(id, title, descr, length, imdbLink, trailerLink) {
 			var td = $("<td></td>");
+			var div_hero = $("<div></div>");
+			div_hero.attr('class', 'hero-unit');
+			
+			var div_row_outer = $("<div></div>");
+			div_row_outer.attr('class', 'row');
+			
+			var div_span1 = $("<div></div>");
+			div_span1.attr('class', 'span2');
+			
 			var img = $("<img></img>");
 			img.attr('class', 'thumbnail').attr('src', "/assets/images/movies/" + id + ".jpg")
-			var a = $("<a></a>");
-			a.attr('href', "movies/" + id);
-			a.text(title);
-			var span = $("<span></span>");
-			span.text(descr);
-			td = td.append(img);
-			td = td.append(a);
-			td = td.append(span);
+			div_span1 = div_span1.append(img);
+			div_row_outer = div_row_outer.append(div_span1);
+			
+			var div_span2 = $("<div></div>");
+			div_span2.attr('class', 'span4');
+			
+			var div_row1 = $("<div></div>");
+			div_row1.attr('class', 'row'); 
+			
+			var div_h4 = $("<h4></h4>");
+
+			var a_title = $("<a></a>");
+			a_title.attr('href', "movies/" + id);
+			a_title.text(title);
+			
+			div_h4 = div_h4.append(a_title);
+			div_row1 = div_row1.append(div_h4);
+			div_span2 = div_span2.append(div_row1);
+			
+			var div_row2 = $("<div></div>");
+			div_row2.attr('class', 'row'); 
+			
+			var div_span21 = $("<div></div>");
+			div_span21.attr('class', 'span2');
+			
+			div_span21.text(length + " Min");
+			div_row2 = div_row2.append(div_span21);
+			
+			var div_span22 = $("<div></div>");
+			div_span22.attr('class', 'span2');
+			
+			var a_imdb = $("<a></a>");
+			a_imdb.attr('href', imdbLink).attr('target', '_blank');
+			a_imdb.text("IMDb");
+
+			div_span22 = div_span22.append(a_imdb);
+			div_row2 = div_row2.append(div_span22);
+			
+			var div_span23 = $("<div></div>");
+			div_span23.attr('class', 'span2');
+			
+			var a_trailer = $("<a></a>");
+			a_trailer.attr('class', 'various fancybox').attr('href', trailerLink);
+			a_trailer.text("Watch trailer");
+			
+			div_span23 = div_span23.append(a_trailer);
+			div_row2 = div_row2.append(div_span23);
+			
+			var div_span24 = $("<div></div>");
+			div_span24.attr('class', 'span2');
+			
+			var btn = $("<button></button>");
+			btn.attr('class', 'btn btn-primary btn-small hideIt ' + id);
+			btn.text("I don't know it");
+			
+			div_span24 = div_span24.append(btn);
+			div_row2 = div_row2.append(div_span24);
+			div_span2 = div_span2.append(div_row2);
+			
+			var div_row3 = $("<div></div>");
+			div_row3.attr('class', 'row'); 
+			div_row3.text(descr);
+			
+			div_span2 = div_span2.append(div_row3);
+			div_row_outer = div_row_outer.append(div_span2);
+			div_hero = div_hero.append(div_row_outer);
+			td = td.append(div_hero);
+			
 			return td;
 		}
 		
@@ -93,12 +175,18 @@
 					var title2 = $(elem).attr('data-title_2');
 					var descr1 = $(elem).attr('data-descr_1');
 					var descr2 = $(elem).attr('data-descr_2');
+					var length1 = $(elem).attr('data-length_1');
+					var length2 = $(elem).attr('data-length_2');
+					var imdbLink1 = $(elem).attr('data-imdb_1');
+					var imdbLink2 = $(elem).attr('data-imdb_2');
+					var trailerLink1 = $(elem).attr('data-trailer_1');
+					var trailerLink2 = $(elem).attr('data-trailer_2');
 					var tr = $("<tr></tr>");
 					tr.attr('data-movie_1', m1);
 					tr.attr('data-movie_2', m2);
-					tr = tr.append(create_movie_td(m1, title1, descr1));
+					tr = tr.append(create_movie_td(m1, title1, descr1, length1, imdbLink1, trailerLink1));
 					tr = tr.append(create_slider_td(m1, title1, m2, title2));
-					tr = tr.append(create_movie_td(m2, title2, descr2));
+					tr = tr.append(create_movie_td(m2, title2, descr2, length2, imdbLink2, trailerLink2));
 					$new = $new.add( tr );
 				});
 				return $new;
@@ -133,6 +221,26 @@
 		$(document).ready(function () {
 			create_table_rows(0, 10);
 			start_slider();
+			
+			$(".fancybox").click(function() {
+				$.fancybox({
+						'padding'		: 0,
+						'autoScale'		: false,
+						'transitionIn'	: 'none',
+						'transitionOut'	: 'none',
+						'title'			: this.title,
+						'width'		: 680,
+						'height'		: 495,
+						'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+						'type'			: 'swf',
+						'swf'			: {
+						   	 'wmode'		: 'transparent',
+							'allowfullscreen'	: 'true'
+						}
+					});
+
+				return false;
+			});
 	
 			var options = {
 				currentPage: 1,
