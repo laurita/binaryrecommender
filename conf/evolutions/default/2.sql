@@ -41,6 +41,12 @@ create table kmatrix (
 constraint pk_kmatrix primary key (user_id, movie1_id, movie2_id)
 );
 
+create table recommendation_comparisons (
+  user_id                   integer not null,
+	comparison                integer not null,
+constraint pk_recommendation_comparisons primary key (user_id)
+);
+
 ALTER SEQUENCE user_seq RESTART WITH 7000;
 	
 # --- !Downs
@@ -52,5 +58,6 @@ drop table if exists ml_ratings;
 drop table if exists comparisons;
 drop table if exists similarities;
 drop table if exists kmatrix;
+drop table if exists recommendation_comparisons;
 
 SET REFERENTIAL_INTEGRITY TRUE;

@@ -695,6 +695,29 @@ public class Experiment extends Controller {
     return ok();
   }
   
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_214() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      int recImprovement = request().body().asJson().get("rec_improvement").asInt();
+      user.addRecommendationComparison(recImprovement);
+    }
+    return ok();
+  }
+  
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_224() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      int recImprovement = request().body().asJson().get("rec_improvement").asInt();
+      user.addRecommendationComparison(recImprovement);
+    }
+    return ok();
+  }
+  
+  
   public static Result javascriptRoutes() {
     response().setContentType("text/javascript");
     return ok(

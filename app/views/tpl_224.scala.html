@@ -133,6 +133,19 @@
 			</div>
 			
 		</div>
+		
+		<div class="row">
+			<div class="hero-unit">
+				<p>
+					Which recommendation list is more useful for you, i.e. contains more useful movies which are higher than the less usefull ones in the list? And how much?
+				</p>
+				<p>
+					<div class="slider slider-horizontal" style="width: 200px;">
+					</div>
+				</p>
+				
+			</div>
+		</div>
 			
 		@helper.form(routes.Experiment.handle_post(), 'method -> "post") {
 			<div class="row">
@@ -671,6 +684,33 @@
 			return false;
 		});
 	});
+	
+	$('.slider').slider({
+		min: -4,
+		max: 4,
+		step: 1,
+		tooltip: 'show',
+		value: 0,
+		formater:
+		function (value) {						
+			if (value < 0) {
+				return "I like Original list more than Adjusted list";
+			}
+			else if (value > 0) {
+				return "I like Adjusted list more than Original list";		
+			}
+			return "The lists are equally useful";
+		}
+	}).on('slideStop', function() {
+		var rec_improvement = $(this).data('slider').getValue();
+		$.ajax({
+			type: "POST",
+			url: "/ajax",
+			data: JSON.stringify({"rec_improvement" : rec_improvement}),
+			contentType: 'application/json'
+		});
+	});
+	
 	</script>
 }
 

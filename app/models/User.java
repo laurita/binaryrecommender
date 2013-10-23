@@ -191,6 +191,30 @@ public class User extends Model {
     return moviePairs;
   }
   
+  public void addRecommendationComparison(int value) {
+    
+    String sql;
+    SqlUpdate update;
+    
+    sql = String.format("SELECT * FROM recommendation_comparisons where user_id=%d;", this.id);
+    SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+    List<SqlRow> rows = sqlQuery.findList();
+    
+    if (rows.size() != 0) {
+      sql = String.format("DELETE FROM recommendation_comparisons WHERE user_id=%d", this.id);
+      update = Ebean.createSqlUpdate(sql);
+      int modifiedCount = Ebean.execute(update);
+    }
+    
+    sql = String.format(
+      "INSERT INTO recommendation_comparisons values (%d, %d);",
+      this.id, value
+    );
+		update = Ebean.createSqlUpdate(sql);
+    int modifiedCount = Ebean.execute(update);
+    //String msg = "There were " + modifiedCount + " rows inserted";
+  }
+  
   public static void updateAllUserStates() {
     System.out.println("updateing user states ...");
     String sqlString, msg;
