@@ -51,7 +51,9 @@
 			</div>
 		</div>
 		
-		<div class="pagination"></div>
+		@if(moviePairs.length > 10) {
+			<div class="pagination"></div>
+		}
         
 		<div class="row">
 			<div class="span2 offset5">
@@ -219,6 +221,26 @@
 		$(document).ready(function () {
 			create_table_rows(0, 10);
 			start_slider();
+			
+			$(".fancybox").click(function() {
+				$.fancybox({
+						'padding'		: 0,
+						'autoScale'		: false,
+						'transitionIn'	: 'none',
+						'transitionOut'	: 'none',
+						'title'			: this.title,
+						'width'		: 680,
+						'height'		: 495,
+						'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+						'type'			: 'swf',
+						'swf'			: {
+						   	 'wmode'		: 'transparent',
+							'allowfullscreen'	: 'true'
+						}
+					});
+
+				return false;
+			});
 	
 			var options = {
 				currentPage: 1,
