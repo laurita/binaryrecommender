@@ -54,10 +54,10 @@ create table user (
   stage1done                boolean,
   stage2done                boolean,
   after_update              boolean,
-  question1                 varchar(255),
-  question2                 varchar(255),
-  question3                 varchar(255),
-  question4                 varchar(255),
+  question1                 integer,
+  question2                 integer,
+  question3                 integer,
+  question4                 integer,
   constraint pk_user primary key (id))
 ;
 

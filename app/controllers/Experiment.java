@@ -287,10 +287,10 @@ public class Experiment extends Controller {
     
     Form<AnswerQuestions> answerForm = form(AnswerQuestions.class).bindFromRequest();
     user.stage1Done = true;
-    user.question1 = answerForm.field("likertScaleRadios1").value();
-    user.question2 = answerForm.field("likertScaleRadios2").value();
-    user.question3 = answerForm.field("likertScaleRadios3").value();
-    user.question4 = answerForm.field("likertScaleRadios4").value();		
+    user.question1 = Integer.parseInt(answerForm.field("likertScaleRadios1").value());
+    user.question2 = Integer.parseInt(answerForm.field("likertScaleRadios2").value());
+    user.question3 = Integer.parseInt(answerForm.field("likertScaleRadios3").value());
+    user.question4 = Integer.parseInt(answerForm.field("likertScaleRadios4").value());		
     user.state = "113";
     user.update();
     return redirect(routes.Experiment.handle_get());
@@ -302,10 +302,10 @@ public class Experiment extends Controller {
     
     Form<AnswerQuestions> answerForm = form(AnswerQuestions.class).bindFromRequest();
     user.stage1Done = true;
-    user.question1 = answerForm.field("likertScaleRadios1").value();
-    user.question2 = answerForm.field("likertScaleRadios2").value();
-    user.question3 = answerForm.field("likertScaleRadios3").value();
-    user.question4 = answerForm.field("likertScaleRadios4").value();		
+    user.question1 = Integer.parseInt(answerForm.field("likertScaleRadios1").value());
+    user.question2 = Integer.parseInt(answerForm.field("likertScaleRadios2").value());
+    user.question3 = Integer.parseInt(answerForm.field("likertScaleRadios3").value());
+    user.question4 = Integer.parseInt(answerForm.field("likertScaleRadios4").value());		
     user.state = "123";
     user.update();
     return redirect(routes.Experiment.handle_get());
@@ -705,10 +705,10 @@ public class Experiment extends Controller {
   // Classes for forms
   
   public static class AnswerQuestions {
-    public String q1Answer;
-    public String q2Answer;
-    public String q3Answer;
-    public String q4Answer;
+    public int q1Answer;
+    public int q2Answer;
+    public int q3Answer;
+    public int q4Answer;
   }
   
 	public static class Comparisons {

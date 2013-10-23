@@ -42,10 +42,10 @@ public class User extends Model {
 	// 1st or 2nd list of recommendations
 	public boolean afterUpdate = false;
 	
-	public String question1;
-	public String question2;
-	public String question3;
-	public String question4;
+	public int question1;
+	public int question2;
+	public int question3;
+	public int question4;
 	
 	public User(String email) {
 		this.email = email;

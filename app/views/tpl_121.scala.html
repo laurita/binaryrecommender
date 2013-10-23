@@ -3,8 +3,23 @@
 @import models.Movie
 
 @main("Movies Pair list") {	
-	<div class="container">		
-		<h4>Give preferences for as many movies as you can.</h4>
+	<div class="container">	
+		<div class="hero-unit">
+			<p>
+				Please give preferences for as many movie pairs as you think is enough. You do not have to compare all the movie pairs that you have seen. 
+				<ul>
+					<li>
+						The slider between every pair of movies is for you to indicate how much you like one movie than the other. Drag the tooltip closer to the movie that you prefer. You will see your preference in words appearing above. e.g. I like 'Movie X' more than 'Movie Y'. If you like them both equally, click on the tooltip. You will see 'The same' appearing.
+					</li>
+					<li>
+					The button <button class="btn btn-primary btn-small">I don't know it</button> is there to help you find the pairs that you are able to compare faster. If you press the button, the pairs that contain the corresponding movie will not be shown later. The slider between every pair of movies is for you to indicate how much you like one movie than the other.
+				</li>
+				<li>
+					If you do not remember the movie, you can click on <a href="">Watch trailer</a> or <a href="">IMDb</a> to see the trailer or check the movie on IMDb respectively.
+				</li>
+				</ul>
+			</p>
+		</div>	
 		<ul id="pair_list" style="display: none">
 			@for(moviePair <- moviePairs) {
 				@defining(moviePair.get(0)) { m1 =>

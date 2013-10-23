@@ -2,6 +2,13 @@
 
 @main("Register") {
 	<div class="container">
+		
+		<div class="hero-unit">
+			<p>
+				Please register here. You will be guided by the instructions throughout the experiment. Use the existing email. We need it to notify you when the second stage of the experiment starts.
+			</p>
+		</div>
+		
 		<form class="form-signin" action="@routes.Application.register()" method="POST">
 			<h2 class="form-signin-heading">Please register</h2>
 			<input type="email" name="email" class="input-block-level" placeholder="Email" value="@form("email").value">
