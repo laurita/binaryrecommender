@@ -94,6 +94,17 @@ public class Application extends Controller {
     }
   }
   
+  // About
+  
+  public static Result about() {
+    return ok(about.render());
+  }
+  
+  // Contact
+  
+  public static Result contact() {
+    return ok(contact.render());
+  }
   
   // Update for second stage
   
