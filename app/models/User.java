@@ -93,6 +93,14 @@ public class User extends Model {
 	public List<Rating> getRatings() {
 		return Rating.find.where().eq("user", this).findList();
 	}
+  
+	public ExpressionList<Preference> getPreferenceFilter() {
+		return Preference.find.where().eq("user", this);
+	}
+  
+	public List<Preference> getPreferences() {
+		return Preference.find.where().eq("user", this).findList();
+	}
 		
 	public int getMovieRating(int movieId) {
 		Rating rating = Rating.find.where()
@@ -148,10 +156,6 @@ public class User extends Model {
 		}
 		allIds.removeAll(this.getPreferedMovieIds());
 		return allIds;
-	}
-		
-	public List<Preference> getPreferences() {
-		return Preference.find.where().eq("user", this).findList();
 	}
   
   public List<Movie> getSeenMoviesRecommendedOriginally() {

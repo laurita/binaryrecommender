@@ -26,20 +26,21 @@
 					@defining(moviePair.get(1)) { m2 =>
 						@defining(Movie.find.byId(m1)) { movie1 =>
 							@defining(Movie.find.byId(m2)) { movie2 =>
-								<li 
-								data-movie_1="@{m1}"
-								data-title_1="@movie1.title" 
-								data-descr_1="@movie1.description" 
-								data-length_1="@movie1.length"
-								data-imdb_1="@movie1.imdbLink"
-								data-trailer_1="@movie1.trailerLink"
-								data-movie_2="@{m2}" 
-								data-title_2="@movie2.title"
-								data-descr_2="@movie2.description"
-								data-length_2="@movie2.length"
-								data-imdb_2="@movie2.imdbLink"
-								data-trailer_2="@movie2.trailerLink"
-								>none</li>
+								@defining(user.getPreferenceFilter().eq("movie1", movie1).eq("movie2", movie2).findUnique()) { pref =>
+									<li 
+										data-movie_1="@{m1}"
+										data-title_1="@movie1.title" 
+										data-descr_1="@movie1.description" 
+										data-length_1="@movie1.length"
+										data-imdb_1="@movie1.imdbLink"
+										data-trailer_1="@movie1.trailerLink"
+										data-movie_2="@{m2}" 
+										data-title_2="@movie2.title"
+										data-descr_2="@movie2.description"
+										data-length_2="@movie2.length"
+										data-imdb_2="@movie2.imdbLink"
+										data-trailer_2="@movie2.trailerLink">@if(pref == null) {none} else {@pref.value}</li>
+								}
 							}
 						}
 					}
@@ -165,6 +166,11 @@
 		}
 		
 		function create_slider_td(id1, title1, id2, title2) {
+			
+			var value = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').text();
+			value = (value == "none") ? 0 : value;
+			console.log("creating slider with value " + value);
+			
 			var td = $("<td></td>");
 			var div = $("<div></div>");
 			div.attr({
@@ -173,6 +179,7 @@
 				'data-title_1': title1,
 				'data-movie_2': id2,
 				'data-title_2': title2,
+				'data-slider-value': value,
 				'style': "width: 200px;"
 			});
 			td = td.append(div);
