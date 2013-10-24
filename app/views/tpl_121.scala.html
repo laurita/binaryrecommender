@@ -12,11 +12,11 @@
 						The slider between every pair of movies is for you to indicate how much you like one movie than the other. Drag the tooltip closer to the movie that you prefer. You will see your preference in words appearing above. e.g. I like 'Movie X' more than 'Movie Y'. If you like them both equally, click on the tooltip. You will see 'The same' appearing.
 					</li>
 					<li>
-					The button <button class="btn btn-primary btn-small">I don't know it</button> is there to help you find the pairs that you are able to compare faster. If you press the button, the pairs that contain the corresponding movie will not be shown later. The slider between every pair of movies is for you to indicate how much you like one movie than the other.
-				</li>
-				<li>
-					If you do not remember the movie, you can click on <a href="">Watch trailer</a> or <a href="">IMDb</a> to see the trailer or check the movie on IMDb respectively.
-				</li>
+						The button <button class="btn btn-primary btn-small">I don't know it</button> is there to help you find the pairs that you are able to compare faster. If you press the button, the pairs that contain the corresponding movie will not be shown later. The slider between every pair of movies is for you to indicate how much you like one movie than the other.
+					</li>
+					<li>
+						If you do not remember the movie, you can click on <a href="">Watch trailer</a> or <a href="">IMDb</a> to see the trailer or check the movie on IMDb respectively.
+					</li>
 				</ul>
 			</p>
 		</div>	
@@ -28,18 +28,18 @@
 							@defining(Movie.find.byId(m2)) { movie2 =>
 								@defining(user.getPreferenceFilter().eq("movie1", movie1).eq("movie2", movie2).findUnique()) { pref =>
 									<li 
-										data-movie_1="@{m1}"
-										data-title_1="@movie1.title" 
-										data-descr_1="@movie1.description" 
-										data-length_1="@movie1.length"
-										data-imdb_1="@movie1.imdbLink"
-										data-trailer_1="@movie1.trailerLink"
-										data-movie_2="@{m2}" 
-										data-title_2="@movie2.title"
-										data-descr_2="@movie2.description"
-										data-length_2="@movie2.length"
-										data-imdb_2="@movie2.imdbLink"
-										data-trailer_2="@movie2.trailerLink">@if(pref == null) {none} else {@pref.value}</li>
+									data-movie_1="@{m1}"
+									data-title_1="@movie1.title" 
+									data-descr_1="@movie1.description" 
+									data-length_1="@movie1.length"
+									data-imdb_1="@movie1.imdbLink"
+									data-trailer_1="@movie1.trailerLink"
+									data-movie_2="@{m2}" 
+									data-title_2="@movie2.title"
+									data-descr_2="@movie2.description"
+									data-length_2="@movie2.length"
+									data-imdb_2="@movie2.imdbLink"
+									data-trailer_2="@movie2.trailerLink">@if(pref == null) {none} else {@pref.value}</li>
 								}
 							}
 						}
@@ -169,7 +169,6 @@
 			
 			var value = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').text();
 			value = (value == "none") ? 0 : value;
-			console.log("creating slider with value " + value);
 			
 			var td = $("<td></td>");
 			var div = $("<div></div>");
@@ -262,7 +261,6 @@
 				var id = $(this).attr('class').match(/(\d+)/)[1];
 				var id1 = $($(this).parentsUntil('tbody').last().find('.hideIt')[0]).attr('class').match(/(\d+)/)[1];
 				var id2 = $($(this).parentsUntil('tbody').last().find('.hideIt')[1]).attr('class').match(/(\d+)/)[1];
-				console.log("id is " + id);
 				// index of the pair for which Hide was clicked in the hidden list (starting from 1)
 				var list_index = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').prevUntil('ul').size() + 1;
 				
@@ -273,12 +271,8 @@
 				var prev_count_1 = $('#pair_list li:nth-child(' + first_in_page_list_index + ')').prevUntil('.ul', '[data-movie_1=' + id + ']').size();
 				var prev_count_2 = $('#pair_list li:nth-child(' + first_in_page_list_index + ')').prevUntil('.ul', '[data-movie_2=' + id + ']').size();
 				
-				console.log("list index is " + list_index);
-				console.log("first in page list index is " + first_in_page_list_index);
-				
 				// number of li's before the current movie pair that have to be deleted
 				var prev_count = prev_count_1 + prev_count_2;
-				console.log("prev_count is " + prev_count);
 				
 				// delete the pairs in list that contain movie with this id
 				// update pagination
@@ -290,11 +284,8 @@
 				var last = first + 10;
 				last = (last <= $('#pair_list li').length) ? last : ($('#pair_list li').length + 1);
 				
-				console.log("i will show from " + first + " to " + last);
-				
 				// check current_page
 				current_page = Math.ceil((first+1) / 10);
-				console.log("current page " + current_page);
 				
 				create_table_rows(first, last);
 				start_slider();
@@ -310,20 +301,20 @@
 			
 			$(".fancybox").click(function() {
 				$.fancybox({
-						'padding'		: 0,
-						'autoScale'		: false,
-						'transitionIn'	: 'none',
-						'transitionOut'	: 'none',
-						'title'			: this.title,
-						'width'		: 680,
-						'height'		: 495,
-						'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
-						'type'			: 'swf',
-						'swf'			: {
-						   	 'wmode'		: 'transparent',
-							'allowfullscreen'	: 'true'
-						}
-					});
+					'padding'		: 0,
+					'autoScale'		: false,
+					'transitionIn'	: 'none',
+					'transitionOut'	: 'none',
+					'title'			: this.title,
+					'width'		: 680,
+					'height'		: 495,
+					'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+					'type'			: 'swf',
+					'swf'			: {
+						'wmode'		: 'transparent',
+						'allowfullscreen'	: 'true'
+					}
+				});
 
 				return false;
 			});
@@ -335,7 +326,6 @@
 				var lst = $('#pair_list li').filter(function (){
 					return $(this).text() != 'none';
 				});
-				console.log(lst);
 				var array = [];
 				$.each(lst, function( index, elem ) {
 					var pref = {};
@@ -344,7 +334,6 @@
 					pref.value = $(elem).text();
 					array.push(pref)
 				});
-				console.log(array);
 				$.ajax({
 					type: "POST",
 					url: "/ajax",
