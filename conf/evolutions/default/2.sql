@@ -3,8 +3,9 @@
 create table moviePairs (
 	movie1_id                 integer not null,
 	movie2_id                 integer not null,
+  logpopcorr                float,
 	constraint pk_moviePairs primary key (movie1_id, movie2_id))
-as select * from csvread('data/moviePairs.dat', 'fieldSeparator=,')
+as select * from csvread('data/data1/moviePairs.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 ;
 
 create table ml_ratings (
@@ -13,7 +14,7 @@ create table ml_ratings (
 	value											integer not null,
   time											bigint)
 as select *
-from csvread('data/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
+from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 ;
 
 create table comparisons (

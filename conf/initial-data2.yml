@@ -1,0 +1,901 @@
+movies:
+
+    - !!models.Movie
+        id:         2858
+        title:      'American Beauty (1999)'
+        description:  'Lester Burnham, a depressed suburban father in a mid-life crisis, decides to turn his hectic life around after developing an infatuation for his daughter''s attractive friend.'
+        logpopvar:  7.739951
+        trailerLink:  'http://www.youtube.com/watch?v=6Q3ltyPJJMQ'
+        length:  122
+        imdbLink:    'http://www.imdb.com/title/tt0169547'
+        genres:  'Comedy|Drama'
+
+    - !!models.Movie
+        id:         2628
+        title:      'Star Wars: Episode I - The Phantom Menace (1999)'
+        description:  'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
+        logpopvar:  9.7819
+        trailerLink:  'http://www.youtube.com/watch?v=qV1T2DJBwIs'
+        length:  136
+        imdbLink:    'http://www.imdb.com/title/tt0120915'
+        genres:  'Action|Adventure|Fantasy|Sci-Fi'
+
+    - !!models.Movie
+        id:         480
+        title:      'Jurassic Park (1993)'
+        description:  'During a preview tour, a theme park suffers a major power breakdown that allows its cloned dinosaur exhibits to run amok.'
+        logpopvar:  7.420833
+        trailerLink:  'http://www.youtube.com/watch?v=Bim7RtKXv90'
+        length:  127
+        imdbLink:    'http://www.imdb.com/title/tt0107290'
+        genres:  'Action|Adventure|Sci-Fi'
+
+    - !!models.Movie
+        id:         2028
+        title:      'Saving Private Ryan (1998)'
+        description:  'Following the Normandy Landings, a group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action.'
+        logpopvar:  5.639305
+        trailerLink:  'http://www.youtube.com/watch?v=zwhP5b4tD6g'
+        length:  169
+        imdbLink:    'http://www.imdb.com/title/tt0120815'
+        genres:  'Action|Drama|War'
+
+    - !!models.Movie
+        id:         1240
+        title:      'Terminator, The (1984)'
+        description:  'A robotic assassin from a post-apocalyptic future travels back in time to eliminate a waitress, whose son will grow up and lead humanity in a war against machines.'
+        logpopvar:  5.560551
+        trailerLink:  'http://www.youtube.com/watch?v=lHz95RYUbik'
+        length:  107
+        imdbLink:    'http://www.imdb.com/title/tt0088247'
+        genres:  'Action|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         2571
+        title:      'Matrix, The (1999)'
+        description:  'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.'
+        logpopvar:  6.811039
+        trailerLink:  'http://www.youtube.com/watch?v=Q8g9zL-JL8E'
+        length:  136
+        imdbLink:    'http://www.imdb.com/title/tt0133093'
+        genres:  'Action|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         1270
+        title:      'Back to the Future (1985)'
+        description:  'A teenager is accidentally sent 30 years into the past in a time-traveling DeLorean invented by his friend, Dr. Emmett Brown, and must make sure his high-school-age parents unite in order to save his own existence.'
+        logpopvar:  5.881144
+        trailerLink:  'http://www.youtube.com/watch?v=yosuvf7Unmg'
+        length:  116
+        imdbLink:    'http://www.imdb.com/title/tt0088763'
+        genres:  'Comedy|Sci-Fi'
+
+    - !!models.Movie
+        id:         593
+        title:      'Silence of the Lambs, The (1991)'
+        description:  'A young F.B.I. cadet must confide in an incarcerated and manipulative killer to receive his help on catching another serial killer who skins his victims.'
+        logpopvar:  5.431271
+        trailerLink:  'http://www.youtube.com/watch?v=lQKs169Sl0I'
+        length:  118
+        imdbLink:    'http://www.imdb.com/title/tt0102926'
+        genres:  'Drama|Thriller'
+
+    - !!models.Movie
+        id:         1580
+        title:      'Men in Black (1997)'
+        description:  'A streetwise NYPD detective joins a secret organization that polices extraterrestrial affairs on Earth.'
+        logpopvar:  6.805147
+        trailerLink:  'http://www.youtube.com/watch?v=zv35TyeRb9M'
+        length:  98
+        imdbLink:    'http://www.imdb.com/title/tt0119654'
+        genres:  'Action|Adventure|Comedy|Sci-Fi'
+
+    - !!models.Movie
+        id:         1198
+        title:      'Raiders of the Lost Ark (1981)'
+        description:  'Archeologist and adventurer Indiana Jones is hired by the US government to find the Ark of the Covenant before the Nazis.'
+        logpopvar:  4.122793
+        trailerLink:  'http://www.youtube.com/watch?v=4uABsht2bgY'
+        length:  115
+        imdbLink:    'http://www.imdb.com/title/tt0082971'
+        genres:  'Action|Adventure'
+
+    - !!models.Movie
+        id:         608
+        title:      'Fargo (1996)'
+        description:  'Jerry Lundegaard''s inept crime falls apart due to his and his henchmen''s bungling and the persistent police work of the quite pregnant Marge Gunderson.'
+        logpopvar:  7.059423
+        trailerLink:  'http://www.youtube.com/watch?v=h2tY82z3xXU'
+        length:  98
+        imdbLink:    'http://www.imdb.com/title/tt0116282'
+        genres:  'Crime|Drama|Thriller'
+
+    - !!models.Movie
+        id:         2762
+        title:      'Sixth Sense, The (1999)'
+        description:  'A boy who communicates with spirits that don''t know they''re dead seeks the help of a disheartened child psychologist.'
+        logpopvar:  5.009587
+        trailerLink:  'http://www.youtube.com/watch?v=VG9AGf66tXM'
+        length:  107
+        imdbLink:    'http://www.imdb.com/title/tt0167404'
+        genres:  'Thriller'
+
+    - !!models.Movie
+        id:         110
+        title:      'Braveheart (1995)'
+        description:  'When his secret bride is executed for assaulting an English soldier who tried to rape her, a commoner begins a revolt and leads Scottish warriors against the cruel English tyrant who rules Scotland with an iron fist.'
+        logpopvar:  6.737642
+        trailerLink:  'http://www.youtube.com/watch?v=vbnGDeq40hI'
+        length:  177
+        imdbLink:    'http://www.imdb.com/title/tt0112573'
+        genres:  'Action|Drama|War'
+
+    - !!models.Movie
+        id:         2396
+        title:      'Shakespeare in Love (1998)'
+        description:  'A young Shakespeare, out of ideas and short of cash, meets his ideal woman and is inspired to write one of his most famous plays.'
+        logpopvar:  6.869498
+        trailerLink:  'http://www.youtube.com/watch?v=gk1rTKB6ZF8'
+        length:  123
+        imdbLink:    'http://www.imdb.com/title/tt0138097'
+        genres:  'Comedy|Romance'
+
+    - !!models.Movie
+        id:         1197
+        title:      'Princess Bride, The (1987)'
+        description:  'A classic fairy tale, with swordplay, giants, an evil prince, a beautiful princess, and yes, some kissing (as read by a kindly grandfather).'
+        logpopvar:  5.598783
+        trailerLink:  'http://www.youtube.com/watch?v=VYgcrny2hRs'
+        length:  98
+        imdbLink:    'http://www.imdb.com/title/tt0093779'
+        genres:  'Action|Adventure|Comedy|Romance'
+
+    - !!models.Movie
+        id:         527
+        title:      'Schindler''s List (1993)'
+        description:  'In Poland during World War II, Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.'
+        logpopvar:  4.517522
+        trailerLink:  'http://www.youtube.com/watch?v=GUJt7ZvC6Ac'
+        length:  195
+        imdbLink:    'http://www.imdb.com/title/tt0108052'
+        genres:  'Drama|War'
+
+    - !!models.Movie
+        id:         1617
+        title:      'L.A. Confidential (1997)'
+        description:  'As corruption grows in 1950s LA, three policemen - the straight-laced, the brutal, and the sleazy - investigate a series of murders with their own brand of justice.'
+        logpopvar:  5.512751
+        trailerLink:  'http://www.youtube.com/watch?v=gg0VF_EnFI4'
+        length:  138
+        imdbLink:    'http://www.imdb.com/title/tt0119488'
+        genres:  'Crime|Film-Noir|Mystery|Thriller'
+
+    - !!models.Movie
+        id:         1265
+        title:      'Groundhog Day (1993)'
+        description:  'A weatherman finds himself living the same day over and over again.'
+        logpopvar:  6.675033
+        trailerLink:  'http://www.youtube.com/watch?v=Xo-R7vvjk6g'
+        length:  101
+        imdbLink:    'http://www.imdb.com/title/tt0107048'
+        genres:  'Comedy|Romance'
+
+    - !!models.Movie
+        id:         1097
+        title:      'E.T. the Extra-Terrestrial (1982)'
+        description:  'A troubled child summons the courage to help a friendly alien escape Earth and return to his home-world.'
+        logpopvar:  6.937518
+        trailerLink:  'http://www.youtube.com/watch?v=_7-2PB4jj2o'
+        length:  115
+        imdbLink:    'http://www.imdb.com/title/tt0083866'
+        genres:  'Children''s|Drama|Fantasy|Sci-Fi'
+
+    - !!models.Movie
+        id:         2997
+        title:      'Being John Malkovich (1999)'
+        description:  'A puppeteer discovers a portal that leads literally into the head of the movie star, John Malkovich.'
+        logpopvar:  8.003170
+        trailerLink:  'http://www.youtube.com/watch?v=oMXnka6XfXc'
+        length:  112
+        imdbLink:    'http://www.imdb.com/title/tt0120601'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         318
+        title:      'Shawshank Redemption, The (1994)'
+        description:  'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.'
+        logpopvar:  3.781904
+        trailerLink:  'http://www.youtube.com/watch?v=6hB3S9bIaco'
+        length:  142
+        imdbLink:    'http://www.imdb.com/title/tt0111161'
+        genres:  'Drama'
+
+    - !!models.Movie
+        id:         858
+        title:      'Godfather, The (1972)'
+        description:  'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.'
+        logpopvar:  4.697373
+        trailerLink:  'http://www.youtube.com/watch?v=5DO-nDW43Ik'
+        length:  175
+        imdbLink:    'http://www.imdb.com/title/tt0068646'
+        genres:  'Action|Crime|Drama'
+
+    - !!models.Movie
+        id:         356
+        title:      'Forrest Gump (1994)'
+        description:  'Forrest Gump, while not intelligent, has accidentally been present at many historic moments, but his true love, Jenny Curran, eludes him.'
+        logpopvar:  7.858445
+        trailerLink:  'http://www.youtube.com/watch?v=YNh9Es8Ut6U'
+        length:  142
+        imdbLink:    'http://www.imdb.com/title/tt0109830'
+        genres:  'Comedy|Romance|War'
+
+    - !!models.Movie
+        id:         2716
+        title:      'Ghostbusters (1984)'
+        description:  'Three unemployed parapsychology professors set up shop as a unique ghost removal service.'
+        logpopvar:  6.010890
+        trailerLink:  'http://www.youtube.com/watch?v=cyRqR56aCKc'
+        length:  105
+        imdbLink:    'http://www.imdb.com/title/tt0087332'
+        genres:  'Comedy|Horror'
+
+    - !!models.Movie
+        id:         296
+        title:      'Pulp Fiction (1994)'
+        description:  'The lives of two mob hit men, a boxer, a gangster''s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.'
+        logpopvar:  7.378314
+        trailerLink:  'http://www.youtube.com/watch?v=s7EdQ4FqbhY'
+        length:  154
+        imdbLink:    'http://www.imdb.com/title/tt0110912'
+        genres:  'Crime|Drama'
+
+    - !!models.Movie
+        id:         1
+        title:      'Toy Story (1995)'
+        description:  'A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy''s room.'
+        logpopvar:  5.549493
+        trailerLink:  'http://www.youtube.com/watch?v=KYz2wyBy3kc'
+        length:  81
+        imdbLink:    'http://www.imdb.com/title/tt0114709'
+        genres:  'Animation|Children''s|Comedy'
+
+    - !!models.Movie
+        id:         1214
+        title:      'Alien (1979)'
+        description:  'The space vessel Nostromo and its crew receive a distress call from an alien planet. After searching for survivors, they head back home only to realize that a deadly alien life form has joined them.'
+        logpopvar:  6.350125
+        trailerLink:  'http://www.youtube.com/watch?v=LjLamj-b0I8'
+        length:  117
+        imdbLink:    'http://www.imdb.com/title/tt0078748'
+        genres:  'Action|Horror|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         2916
+        title:      'Total Recall (1990)'
+        description:  'When a man goes for virtual vacation memories of the planet Mars, an unexpected and harrowing series of events forces him to go to the planet for real, or does he?'
+        logpopvar:  6.652825
+        trailerLink:  'http://www.youtube.com/watch?v=WFMLGEHdIjE'
+        length:  113
+        imdbLink:    'http://www.imdb.com/title/tt0100802'
+        genres:  'Action|Adventure|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         457
+        title:      'Fugitive, The (1993)'
+        description:  'Dr. Richard Kimble, unjustly accused of murdering his wife, must find the real killer while being the target of a nationwide manhunt.'
+        logpopvar:  4.537429
+        trailerLink:  'http://www.youtube.com/watch?v=lnBc4TvYPMo'
+        length:  130
+        imdbLink:    'http://www.imdb.com/title/tt0106977'
+        genres:  'Action|Thriller'
+
+    - !!models.Movie
+        id:         3578
+        title:      'Gladiator (2000)'
+        description:  'When a Roman general is betrayed and his family murdered by an emperor''s corrupt son, he comes to Rome as a gladiator to seek revenge.'
+        logpopvar:  6.608024
+        trailerLink:  'http://www.youtube.com/watch?v=uwTKRz-WmHU'
+        length:  155
+        imdbLink:    'http://www.imdb.com/title/tt0172495'
+        genres:  'Action|Drama'
+
+    - !!models.Movie
+        id:         1200
+        title:      'Aliens (1986)'
+        description:  'The planet from Alien has been colonized, but contact is lost. This time, the rescue team has impressive firepower, but will it be enough?'
+        logpopvar:  6.413767
+        trailerLink:  'http://www.youtube.com/watch?v=XKSQmYUaIyE'
+        length:  137
+        imdbLink:    'http://www.imdb.com/title/tt0090605'
+        genres:  'Action|Sci-Fi|Thriller|War'
+
+    - !!models.Movie
+        id:         541
+        title:      'Blade Runner (1982)'
+        description:  'Deckard, a blade runner, has to track down and terminate 4 replicants who hijacked a ship in space and have returned to Earth seeking their maker.'
+        logpopvar:  5.739444
+        trailerLink:  'http://www.youtube.com/watch?v=uNxNqvpaat0'
+        length:  117
+        imdbLink:    'http://www.imdb.com/title/tt0083658'
+        genres:  'Film-Noir|Sci-Fi'
+
+    - !!models.Movie
+        id:         2987
+        title:      'Who Framed Roger Rabbit? (1988)'
+        description:  'A toon hating detective is a cartoon rabbit''s only hope to prove his innocence when he is accused of murder.'
+        logpopvar:  6.976330
+        trailerLink:  'http://www.youtube.com/watch?v=OFCIaMyMORg'
+        length:  104
+        imdbLink:    'http://www.imdb.com/title/tt0096438'
+        genres:  'Adventure|Animation|Film-Noir'
+
+    - !!models.Movie
+        id:         1259
+        title:      'Stand by Me (1986)'
+        description:  'After the death of a friend, a writer recounts a boyhood journey to find the body of a missing boy.'
+        logpopvar:  4.751808
+        trailerLink:  'http://www.youtube.com/watch?v=lnY_j85MidU'
+        length:  89
+        imdbLink:    'http://www.imdb.com/title/tt0092005'
+        genres:  'Adventure|Comedy|Drama'
+
+    - !!models.Movie
+        id:         50
+        title:      'Usual Suspects, The (1995)'
+        description:  'A boat has been destroyed, criminals are dead, and the key to this mystery lies with the only survivor and his twisted, convoluted story beginning with five career crooks in a seemingly random police lineup.'
+        logpopvar:  4.197685
+        trailerLink:  'http://www.youtube.com/watch?v=oiXdPolca5w'
+        length:  106
+        imdbLink:    'http://www.imdb.com/title/tt0114814'
+        genres:  'Crime|Thriller'
+
+    - !!models.Movie
+        id:         34
+        title:      'Babe (1995)'
+        description:  'Babe, a pig raised by sheepdogs, learns to herd sheep with a little help from Farmer Hoggett.'
+        logpopvar:  8.045676
+        trailerLink:  'http://www.youtube.com/watch?v=1dIQvlb2h8k'
+        length:  89
+        imdbLink:    'http://www.imdb.com/title/tt0112431'
+        genres:  'Children''s|Comedy|Drama'
+
+    - !!models.Movie
+        id:         2791
+        title:      'Airplane! (1980)'
+        description:  'An airplane crew takes ill. Surely the only person capable of landing the plane is an ex-pilot afraid to fly. But don''t call him Shirley.'
+        logpopvar:  7.217485
+        trailerLink:  'http://www.youtube.com/watch?v=07pPmCfKi3U'
+        length:  88
+        imdbLink:    'http://www.imdb.com/title/tt0080339'
+        genres:  'Comedy'
+
+    - !!models.Movie
+       id:          780
+       title:       'Independence Day (ID4) (1996)'
+       description:  'The aliens are coming and their goal is to invade and destroy. Fighting superior technology, Man''s best weapon is the will to survive.'
+       logpopvar:  9.15
+       trailerLink:  'http://www.youtube.com/watch?v=NZZvtQtdbzM'
+       length:  145
+       imdbLink:    'http://www.imdb.com/title/tt0116629'
+       genres:  'Action|Sci-Fi|War'
+
+    - !!models.Movie
+        id:         3175
+        title:      'Galaxy Quest (1999)'
+        description:  'The alumni cast of a cult space TV show have to play their roles as the real thing when an alien race needs their help.'
+        logpopvar:  6.823239
+        trailerLink:  'http://www.youtube.com/watch?v=r8XkFqpqHm0'
+        length:  102
+        imdbLink:    'http://www.imdb.com/title/tt0177789'
+        genres:  'Adventure|Comedy|Sci-Fi'
+
+    - !!models.Movie
+        id:         1193
+        title:      'One Flew Over the Cuckoo''s Nest (1975)'
+        description:  'Upon admittance to a mental institution, a brash rebel rallies the patients to take on the oppressive head nurse.'
+        logpopvar:  4.645800
+        trailerLink:  'http://www.youtube.com/watch?v=2WSyJgydTsA'
+        length:  133
+        imdbLink:    'http://www.imdb.com/title/tt0073486'
+        genres:  'Drama'
+
+    - !!models.Movie
+        id:         919
+        title:      'Wizard of Oz, The (1939)'
+        description:  'Dorothy Gale is swept away to a magical land in a tornado and embarks on a quest to see the Wizard who can help her return home.'
+        logpopvar:  5.979817
+        trailerLink:  'http://www.youtube.com/watch?v=VNugTWHnSfw'
+        length:  102
+        imdbLink:    'http://www.imdb.com/title/tt0032138'
+        genres:  'Adventure|Children''s|Drama|Musical'
+
+    - !!models.Movie
+        id:         924
+        title:      '2001: A Space Odyssey (1968)'
+        description:  'Humanity finds a mysterious, obviously artificial, object buried beneath the Lunar surface and, with the intelligent computer H.A.L. 9000, sets off on a quest.'
+        logpopvar:  8.094319
+        trailerLink:  'http://www.youtube.com/watch?v=E8TABIFAN4o'
+        length:  160
+        imdbLink:    'http://www.imdb.com/title/tt0062622'
+        genres:  'Drama|Mystery|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         1127
+        title:      'Abyss, The (1989)'
+        description:  'A civilian diving team are enlisted to search for a lost nuclear submarine and face danger while encountering an alien aquatic species.'
+        logpopvar:  6.694235
+        trailerLink:  'http://www.youtube.com/watch?v=WYPcLYPoaxo'
+        length:  139
+        imdbLink:    'http://www.imdb.com/title/tt0096754'
+        genres:  'Action|Adventure|Sci-Fi|Thriller'
+
+    - !!models.Movie
+        id:         2355
+        title:      'Bug''s Life, A (1998)'
+        description:  'A misfit ant, looking for "warriors" to save his colony from greedy grasshoppers, recruits a group of bugs that turn out to be an inept circus troupe.'
+        logpopvar:  5.752278
+        trailerLink:  'http://www.youtube.com/watch?v=aIS9U6zYvUo'
+        length:  95
+        imdbLink:    'http://www.imdb.com/title/tt0120623'
+        genres:  'Animation|Children''s|Comedy'
+
+    - !!models.Movie
+        id:         1387
+        title:      'Jaws (1975)'
+        description:  'When a gigantic great white shark begins to menace the small island community of Amity, a police chief, a marine scientist and grizzled fisherman set out to stop it.'
+        logpopvar:  6.649043
+        trailerLink:  'http://www.youtube.com/watch?v=U1fu_sA7XhE'
+        length:  124
+        imdbLink:    'http://www.imdb.com/title/tt0073195'
+        genres:  'Action|Horror'
+
+    - !!models.Movie
+        id:         912
+        title:      'Casablanca (1942)'
+        description:  'Set in unoccupied Africa during the early days of World War II: An American expatriate meets a former lover, with unforeseen complications.'
+        logpopvar:  5.082622
+        trailerLink:  'http://www.youtube.com/watch?v=TLU41jUnWM4'
+        length:  102
+        imdbLink:    'http://www.imdb.com/title/tt0034583'
+        genres:  'Drama|Romance|War'
+
+    - !!models.Movie
+        id:         1036
+        title:      'Die Hard (1988)'
+        description:  'John McClane, officer of the NYPD, tries to save wife Holly Gennaro and several others, taken hostage by German terrorist Hans Gruber during a Christmas party at the Nakatomi Plaza in Los Angeles.'
+        logpopvar:  5.499098
+        trailerLink:  'http://www.youtube.com/watch?v=-qxBXm7ZUTM'
+        length:  131
+        imdbLink:    'http://www.imdb.com/title/tt0095016'
+        genres:  'Action|Thriller'
+
+    - !!models.Movie
+        id:         1213
+        title:      'GoodFellas (1990)'
+        description:  'Henry Hill and his friends work their way up through the mob hierarchy.'
+        logpopvar:  5.642432
+        trailerLink:  'http://www.youtube.com/watch?v=qo5jJpHtI1Y'
+        length:  146
+        imdbLink:    'http://www.imdb.com/title/tt0099685'
+        genres:  'Crime|Drama'
+
+    - !!models.Movie
+        id:         1610
+        title:      'Hunt for Red October, The (1990)'
+        description:  'In 1984, the USSR''s best submarine captain in their newest sub violates orders and heads for the USA. Is he trying to defect, or to start a war?'
+        logpopvar:  5.042408
+        trailerLink:  'http://www.youtube.com/watch?v=3C2tE7vjdHk'
+        length:  134
+        imdbLink:    'http://www.imdb.com/title/tt0099810'
+        genres:  'Action|Thriller'
+
+    - !!models.Movie
+        id:         377
+        title:      'Speed (1994)'
+        description:  'A young cop must prevent a bomb exploding aboard a city bus by keeping its speed above 50 mph.'
+        logpopvar:  6.898294
+        trailerLink:  'http://www.youtube.com/watch?v=aRmhneo5A48'
+        length:  116
+        imdbLink:    'http://www.imdb.com/title/tt0111257'
+        genres:  'Action|Romance|Thriller'
+
+    - !!models.Movie
+        id:         1291
+        title:      'Indiana Jones and the Last Crusade (1989)'
+        description:  'When Dr. Henry Jones Sr. suddenly goes missing while pursuing the Holy Grail, eminent archaeologist Indiana Jones must follow in his father''s footsteps and stop the Nazis.'
+        logpopvar:  4.945566
+        trailerLink:  'http://www.youtube.com/watch?v=WGpq-LDV6jU'
+        length:  127
+        imdbLink:    'http://www.imdb.com/title/tt0097576'
+        genres:  'Action|Adventure'
+
+    - !!models.Movie
+        id:         2000
+        title:      'Lethal Weapon (1987)'
+        description:  'A veteran cop, Murtaugh, is partnered with a young suicidal cop, Riggs. Both having one thing in common; hating working in pairs. Now they must learn to work with one another to stop a gang of drug smugglers.'
+        logpopvar:  5.553561
+        trailerLink:  'http://www.youtube.com/watch?v=GUorM4nTX7k'
+        length:  110
+        imdbLink:    'http://www.imdb.com/title/tt0093409'
+        genres:  'Action|Comedy|Crime|Drama'
+
+    - !!models.Movie
+        id:         1136
+        title:      'Monty Python and the Holy Grail (1975)'
+        description:  'King Arthur and his knights embark on a low-budget search for the Grail, encountering many very silly obstacles.'
+        logpopvar:  5.633617
+        trailerLink:  'http://www.youtube.com/watch?v=Wz1xG_tDklY'
+        length:  91
+        imdbLink:    'http://www.imdb.com/title/tt0071853'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         1307
+        title:      'When Harry Met Sally... (1989)'
+        description:  'Harry and Sally have known each other for years, and are very good friends, but they fear sex would ruin the friendship.'
+        logpopvar:  5.712157
+        trailerLink:  'http://www.youtube.com/watch?v=V8DgDmUHVto'
+        length:  96
+        imdbLink:    'http://www.imdb.com/title/tt0098635'
+        genres:  'Comedy|Romance'
+
+    - !!models.Movie
+        id:         1704
+        title:      'Good Will Hunting (1997)'
+        description:  'Will Hunting, a janitor at MIT, has a gift for mathematics but needs help from a psychologist to find direction in his life.'
+        logpopvar:  5.084115
+        trailerLink:  'http://www.youtube.com/watch?v=z02M3NRtkAA'
+        length:  126
+        imdbLink:    'http://www.imdb.com/title/tt0119217'
+        genres:  'Drama'
+
+    - !!models.Movie
+        id:         1721
+        title:      'Titanic (1997)'
+        description:  'A seventeen-year-old aristocrat, expecting to be married to a rich claimant by her mother, falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.'
+        logpopvar:  10.01
+        trailerLink:  'http://www.youtube.com/watch?v=zCy5WQ9S4c0'
+        length:  194
+        imdbLink:    'http://www.imdb.com/title/tt0120338'
+        genres:  'Drama|Romance'
+
+    - !!models.Movie
+        id:         1968
+        title:      'Breakfast Club, The (1985)'
+        description:  'Five high school students, all different stereotypes, meet in detention, where they pour their hearts out to each other, and discover how they have a lot more in common than they thought.'
+        logpopvar:  6.092334
+        trailerLink:  'http://www.youtube.com/watch?v=BSXBvor47Zs'
+        length:  97
+        imdbLink:    'http://www.imdb.com/title/tt0088847'
+        genres:  'Comedy|Drama'
+
+    - !!models.Movie
+        id:         648
+        title:      'Mission: Impossible (1996)'
+        description:  'An American agent, under false suspicion of disloyalty, must discover and expose the real spy without the help of his organization.'
+        logpopvar:  6.998951
+        trailerLink:  'http://www.youtube.com/watch?v=WYdCGGfyWIg'
+        length:  110
+        imdbLink:    'http://www.imdb.com/title/tt0117060'
+        genres:  'Action|Adventure|Mystery'
+
+    - !!models.Movie
+        id:         2599
+        title:      'Election (1999)'
+        description:  'A high school teacher''s personal life becomes complicated as he works with students during the school elections.'
+        logpopvar:  6.294942
+        trailerLink:  'http://www.youtube.com/watch?v=tBgM_Kw6PSM'
+        length:  103
+        imdbLink:    'http://www.imdb.com/title/tt0126886'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         32
+        title:      'Twelve Monkeys (1995)'
+        description:  'In a future world devastated by disease, a convict is sent back in time to gather information about the man-made virus that wiped out most of the human population on the planet.'
+        logpopvar:  6.804454
+        trailerLink:  'http://www.youtube.com/watch?v=15s4Y9ffW_o'
+        length:  129
+        imdbLink:    'http://www.imdb.com/title/tt0114746'
+        genres:  'Drama|Sci-Fi'
+
+    - !!models.Movie
+        id:         3793
+        title:      'X-Men (2000)'
+        description:  'Two mutants come to a private academy for their kind whose resident superhero team must oppose a terrorist organization with similar powers.'
+        logpopvar:  6.129830
+        trailerLink:  'http://www.youtube.com/watch?v=Vi43Vr2yJqI'
+        length:  104
+        imdbLink:    'http://www.imdb.com/title/tt0120903'
+        genres:  'Action|Sci-Fi'
+
+    - !!models.Movie
+        id:         2174
+        title:      'Beetlejuice (1988)'
+        description:  'A couple of recently deceased ghosts contract the services of a "bio-exorcist" in order to remove the obnoxious new owners of their house.'
+        logpopvar:  6.854158
+        trailerLink:  'http://www.youtube.com/watch?v=9XiIt1ZoiP8'
+        length:  92
+        imdbLink:    'http://www.imdb.com/title/tt0094721'
+        genres:  'Comedy|Fantasy'
+
+    - !!models.Movie
+        id:         2797
+        title:      'Big (1988)'
+        description:  'When a boy wishes to be big at a magic wish machine, he wakes up the next morning and finds himself in an adult body literally overnight.'
+        logpopvar:  5.728049
+        trailerLink:  'http://www.youtube.com/watch?v=J62jciQ1PbY'
+        length:  104
+        imdbLink:    'http://www.imdb.com/title/tt0094737'
+        genres:  'Comedy|Fantasy'
+
+    - !!models.Movie
+        id:         2291
+        title:      'Edward Scissorhands (1990)'
+        description:  'An uncommonly gentle young man, who happens to have scissors for hands, falls in love with a beautiful adolescent girl.'
+        logpopvar:  6.847049
+        trailerLink:  'http://www.youtube.com/watch?v=eq2PPFUhfpo'
+        length:  105
+        imdbLink:    'http://www.imdb.com/title/tt0099487'
+        genres:  'Drama|Romance'
+
+    - !!models.Movie
+        id:         2918
+        title:      'Ferris Bueller''s Day Off (1986)'
+        description:  'A high school wise guy is determined to have a day off from school, despite of what the principal thinks of that.'
+        logpopvar:  5.425111
+        trailerLink:  'http://www.youtube.com/watch?v=R-P6p86px6U'
+        length:  103
+        imdbLink:    'http://www.imdb.com/title/tt0091042'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         590
+        title:      'Dances with Wolves (1990)'
+        description:  'Lt. John Dunbar, exiled to a remote western Civil War outpost, befriends wolves and Indians, making him an intolerable aberration in the military.'
+        logpopvar:  7.574087
+        trailerLink:  'http://www.youtube.com/watch?v=zMOQORiWn80'
+        length:  181
+        imdbLink:    'http://www.imdb.com/title/tt0099348'
+        genres:  'Adventure|Drama|Western'
+
+    - !!models.Movie
+       id:          2959
+       title:       'Fight Club (1999)'
+       description:  'An insomniac office worker looking for a way to change his life crosses paths with a devil-may-care soap maker and they form an underground fight club that evolves into something much, much more...'
+       logpopvar:  8.50
+       trailerLink:  'http://www.youtube.com/watch?v=klKekX-VXmA'
+       length:  139
+       imdbLink:    'http://www.imdb.com/title/tt0137523'
+       genres:  'Drama'
+
+    - !!models.Movie
+        id:         3471
+        title:      'Close Encounters of the Third Kind (1977)'
+        description:  'After an encounter with UFOs, a line worker feels undeniably drawn to an isolated area in the wilderness where something spectacular is about to happen.'
+        logpopvar:  5.897791
+        trailerLink:  'http://www.youtube.com/watch?v=Fxp32VHaYdE'
+        length:  137
+        imdbLink:    'http://www.imdb.com/title/tt0075860'
+        genres:  'Drama|Sci-Fi'
+
+    - !!models.Movie
+        id:         1374
+        title:      'Star Trek: The Wrath of Khan (1982)'
+        description:  'With the aid of the Enterprise crew, Admiral Kirk must stop an old nemesis, Khan Noonien Singh, from using his son''s life-generating device, the Genesis Device, as the ultimate weapon.'
+        logpopvar:  6.741427
+        trailerLink:  'http://www.youtube.com/watch?v=vOIYaRb6XpQ'
+        length:  113
+        imdbLink:    'http://www.imdb.com/title/tt0084726'
+        genres:  'Action|Adventure|Sci-Fi'
+
+    - !!models.Movie
+        id:         1394
+        title:      'Raising Arizona (1987)'
+        description:  'When a childless couple of an ex-con and an ex-cop decide to help themselves to one of another family''s quintupelets, their lives get more complicated than they anticipated.'
+        logpopvar:  7.087519
+        trailerLink:  'http://www.youtube.com/watch?v=2AIfVoGUs6c'
+        length:  94
+        imdbLink:    'http://www.imdb.com/title/tt0093822'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         2683
+        title:      'Austin Powers: The Spy Who Shagged Me (1999)'
+        description:  'Dr. Evil is back...and has invented a new time machine that allows him to go back to the 60''s and steal Austin Powers''s mojo, inadvertently leaving him "shagless".'
+        logpopvar:  9.63
+        trailerLink:  'http://www.youtube.com/watch?v=tZCkksmJ0YI'
+        length:  95
+        imdbLink:    'http://www.imdb.com/title/tt0145660'
+        genres:  'Comedy'
+
+    - !!models.Movie
+        id:         592
+        title:      'Batman (1989)'
+        description:  'The Dark Knight of Gotham City begins his war on crime with his first major enemy being the clownishly homicidal Joker.'
+        logpopvar:  7.017956
+        trailerLink:  'http://www.youtube.com/watch?v=HlsM2_8u_mk'
+        length:  126
+        imdbLink:    'http://www.imdb.com/title/tt0096895'
+        genres:  'Action|Adventure|Crime|Drama'
+
+    - !!models.Movie
+        id:         1784
+        title:      'As Good As It Gets (1997)'
+        description:  'A single mother/waitress, a misanthropic author, and a gay artist form an unlikely friendship after the artist is in an accident.'
+        logpopvar:  6.549186
+        trailerLink:  'http://www.youtube.com/watch?v=nux_b1SB8Rg'
+        length:  139
+        imdbLink:    'http://www.imdb.com/title/tt0119822'
+        genres:  'Comedy|Drama'
+
+    - !!models.Movie
+       id:          1573
+       title:       'Face/Off (1997)'
+       description:  'To foil an extortion plot, an FBI agent undergoes a face-transplant surgery and assumes the identity and physical appearance of a ruthless terrorist, but the plan backfires when the same criminal impersonates the cop with the same method.'
+       logpopvar:  9.372
+       trailerLink:  'http://www.youtube.com/watch?v=YiwA3C2qeRo'
+       length:  138
+       imdbLink:    'http://www.imdb.com/title/tt0119094'
+       genres:  'Action|Sci-Fi|Thriller'
+
+    - !!models.Movie
+       id:          1304
+       title:       'Butch Cassidy and the Sundance Kid (1969)'
+       description:  'Two Western bank/train robbers flee to Bolivia when the law gets too close.'
+       logpopvar:  4.698637
+       trailerLink:  'http://www.youtube.com/watch?v=xRzbq9aN5Vk'
+       length:  110
+       imdbLink:    'http://www.imdb.com/title/tt0064115'
+       genres:  'Action|Comedy|Western'
+
+    - !!models.Movie
+       id:          3418
+       title:       'Thelma & Louise (1991)'
+       description:  'An Arkansas waitress and a housewife shoot a rapist and take off in a ''66 Thunderbird.'
+       logpopvar:  6.765271
+       trailerLink:  'http://www.youtube.com/watch?v=OXT3k4PTmSw'
+       length:  130
+       imdbLink:    'http://www.imdb.com/title/tt0103074'
+       genres:  'Action|Drama'
+
+    - !!models.Movie
+       id:          223
+       title:       'Clerks (1994)'
+       description:  'A day in the lives of two convenience clerks named Dante and Randal as they annoy customers, discuss movies, and play hockey on the store roof.'
+       logpopvar:  7.427612
+       trailerLink:  'http://www.youtube.com/watch?v=Mlfn5n-E2WE'
+       length:  92
+       imdbLink:    'http://www.imdb.com/title/tt0109445'
+       genres:  'Comedy'
+
+    - !!models.Movie
+       id:          380
+       title:       'True Lies (1994)'
+       description:  'Harry Tasker is a secret agent for the United States Government. For years, he has kept his job from his wife, but is forced to reveal his identity and try to stop nuclear terrorists when he and his wife are kidnapped by the terrorists.'
+       logpopvar:  6.383383
+       trailerLink:  'http://www.youtube.com/watch?v=3B7HG8_xbDw'
+       length:  141
+       imdbLink:    'http://www.imdb.com/title/tt0111503'
+       genres:  'Action|Adventure|Comedy|Romance'
+
+    - !!models.Movie
+       id:          2706
+       title:       'American Pie (1999)'
+       description:  'Four teenage boys enter a pact to lose their virginity by prom night.'
+       logpopvar:  8.55
+       trailerLink:  'http://www.youtube.com/watch?v=iUZ3Yxok6N8'
+       length:  95
+       imdbLink:    'http://www.imdb.com/title/tt0163651'
+       genres:  'Comedy'
+
+    - !!models.Movie
+       id:          1225
+       title:       'Amadeus (1984)'
+       description:  'The incredible story of Wolfgang Amadeus Mozart, told by his peer and secret rival Antonio Salieri - now confined to an insane asylum.'
+       logpopvar:  4.903087
+       trailerLink:  'http://www.youtube.com/watch?v=VgxOYNCo_Xw'
+       length:  160
+       imdbLink:    'http://www.imdb.com/title/tt0086879'
+       genres:  'Drama'
+
+    - !!models.Movie
+       id:          1584
+       title:       'Contact (1997)'
+       description:  'Dr. Ellie Arroway, after years of searching, finds conclusive radio proof of intelligent aliens, who send plans for a mysterious machine.'
+       logpopvar:  7.351221
+       trailerLink:  'http://www.youtube.com/watch?v=SRoj3jK37Vc'
+       length:  150
+       imdbLink:    'http://www.imdb.com/title/tt0118884'
+       genres:  'Drama|Sci-Fi'
+
+    - !!models.Movie
+       id:          1527
+       title:       'Fifth Element, The (1997)'
+       description:  'In the colorful future, a cab driver unwittingly becomes the central figure in the search for a legendary cosmic weapon to keep Evil and Mr Zorg at bay.'
+       logpopvar:  8.59
+       trailerLink:  'http://www.youtube.com/watch?v=aB-AUTGqUCU'
+       length:  126
+       imdbLink:    'http://www.imdb.com/title/tt0119116'
+       genres:  'Action|Sci-Fi'
+
+    - !!models.Movie
+       id:          3481
+       title:       'High Fidelity (2000)'
+       description:  'Rob, a record store owner and compulsive list maker, recounts his top five breakups, including the one in progress.'
+       logpopvar:  6.503358
+       trailerLink:  'http://www.youtube.com/watch?v=q8DIm_47xPU'
+       length:  113
+       imdbLink:    'http://www.imdb.com/title/tt0146882'
+       genres:  'Comedy'
+
+    - !!models.Movie
+       id:          1923
+       title:       'There''s Something About Mary (1998)'
+       description:  'A man gets a chance to meet up with his dream girl from highschool, even though his date with her back then was a complete disaster.'
+       logpopvar:  8.69
+       trailerLink:  'http://www.youtube.com/watch?v=eGjXwDYpOLE'
+       length:  119
+       imdbLink:    'http://www.imdb.com/title/tt0129387'
+       genres:  'Comedy'
+
+    - !!models.Movie
+       id:          750
+       title:       'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1963)'
+       description:  'An insane general starts a process to nuclear holocaust that a war room of politicians and generals frantically try to stop.'
+       logpopvar:  4.684878
+       trailerLink:  'http://www.youtube.com/watch?v=KdJS1iatxmY'
+       length:  95
+       imdbLink:    'http://www.imdb.com/title/tt0057012'
+       genres:  'Sci-Fi|War'
+
+    - !!models.Movie
+       id:          2699
+       title:       'Arachnophobia (1990)'
+       description:  'South American killer spider hitches a lift to the US in a coffin and starts to breed and kill.'
+       logpopvar:  6.818593
+       trailerLink:  'http://www.youtube.com/watch?v=4aQ6vg3JB2U'
+       length:  103
+       imdbLink:    'http://www.imdb.com/title/tt0099052'
+       genres:  'Action|Comedy|Sci-Fi|Thriller'
+
+    - !!models.Movie
+       id:          39
+       title:       'Clueless (1995)'
+       description:  'A parody of Jane Austen''s novel Emma, about Cher, a popular girl who spends her days playing matchmaker, helping friends with fashion choices, advising the new girl at school on a makeover, and looking for a boyfriend.'
+       logpopvar:  6.701187
+       trailerLink:  'http://www.youtube.com/watch?v=RgRUQlaSasA'
+       length:  97
+       imdbLink:    'http://www.imdb.com/title/tt0112697'
+       genres:  'Comedy|Romance'
+
+    - !!models.Movie
+       id:          21
+       title:       'Get Shorty (1995)'
+       description:  'A mobster travels to Hollywood to collect a debt and discovers that the movie business is much the same as his current job.'
+       logpopvar:  6.303097
+       trailerLink:  'http://www.youtube.com/watch?v=yNLaTtpovys'
+       length:  105
+       imdbLink:    'http://www.imdb.com/title/tt0113161'
+       genres:  'Action|Comedy|Drama'
+
+    - !!models.Movie
+       id:          1393
+       title:       'Jerry Maguire (1996)'
+       description:  'When a sports agent has a moral epiphany and is fired for expressing it, he decides to put his new philosophy to the test as an independent with the only athlete who stays with him.'
+       logpopvar:  5.980588
+       trailerLink:  'http://www.youtube.com/watch?v=OKoKYk4jC84'
+       length:  139
+       imdbLink:    'http://www.imdb.com/title/tt0116695'
+       genres:  'Drama|Romance'
+
+    - !!models.Movie
+       id:          2804
+       title:       'Christmas Story, A (1983)'
+       description:  'Ralphie has to convince his parents, teachers, and Santa that a Red Ryder B.B. gun really is the perfect gift for the 1940s.'
+       logpopvar:  5.847696
+       trailerLink:  'http://www.youtube.com/watch?v=uvMLfSQrHKE'
+       length:  94
+       imdbLink:    'http://www.imdb.com/title/tt0085334'
+       genres:  'Comedy|Drama'

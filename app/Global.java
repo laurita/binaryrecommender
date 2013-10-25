@@ -18,7 +18,7 @@ public class Global extends GlobalSettings {
 			Yaml yaml = new Yaml();
 			
 			@SuppressWarnings("unchecked")
-			Map<String,List<Object>> all = (Map<String,List<Object>>) yaml.load("initial-data.yml");
+			Map<String,List<Object>> all = (Map<String,List<Object>>) yaml.load("initial-data1.yml");
 			
 			// Insert movies
 			Ebean.save(all.get("movies"));

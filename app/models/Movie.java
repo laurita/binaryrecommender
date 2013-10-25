@@ -82,7 +82,7 @@ public class Movie extends Model {
 	}
   
 	public static List<List<Integer>> selectBestMoviePairs(int n) {
-		String sql = String.format("select movie1_id, movie2_id from moviePairs limit %d", n);
+		String sql = String.format("select movie1_id, movie2_id from moviePairs order by logpopcorr desc limit %d", n);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();
 		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
@@ -96,7 +96,7 @@ public class Movie extends Model {
 	}
 	
 	public static List<List<Integer>> selectMoviePairsInList(List<Integer> lst) {
-		String sql = "select movie1_id, movie2_id from moviePairs";
+		String sql = "select movie1_id, movie2_id from moviePairs order by logpopcorr desc";
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> list = sqlQuery.findList();
 		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
