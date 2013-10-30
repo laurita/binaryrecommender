@@ -695,7 +695,7 @@ public class UP {
                 "where a.id = b.id and a.id not in " +
                   "(select distinct(id) from " +
                     "(SELECT movie1_id id FROM PREFERENCE) UNION " +
-                      "(SELECT movie2_id id FROM PREFERENCE))order by k desc limit 10;", userId, userId);
+                      "(SELECT movie2_id id FROM PREFERENCE))order by k desc limit 5;", userId, userId);
     SqlQuery sqlQuery = Ebean.createSqlQuery(sqlString);
     List<SqlRow> rows = sqlQuery.findList();
     List<Integer> list = new ArrayList<Integer>();

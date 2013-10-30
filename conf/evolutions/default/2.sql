@@ -20,9 +20,8 @@ from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSens
 create table comparisons (
 	user_id										integer not null,
 	question									integer not null,
-	list_nr										integer not null,
   answer										integer not null,
-	constraint pk_comparisons primary key (user_id, question, list_nr))
+	constraint pk_comparisons primary key (user_id, question))
 ;
 
 create table similarities (

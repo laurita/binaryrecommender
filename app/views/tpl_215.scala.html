@@ -1,9 +1,322 @@
-@main("Experiment is over") {
+@main("Compare recommendations") {	
+	
 	<div class="container">
 		<div class="hero-unit">
-			<h1>Thank you!</h1>
-			<p>The experiment is now finished. By participating in this experiment you support the research community in the Faculty of Computer Science in the Free University of Bolzano. The information you provided helps us improve our algorithms and do research in this field.</p>
-			<p><a href="@routes.Application.logout()" class="btn btn-primary btn-large">Log out</a></p>
+			Please answer the questions about the recommendations you got.
 		</div>
+			
+		@helper.form(routes.Experiment.handle_post(), 'method -> "post") {
+			<div class="row">
+				<div class="span6 offset3">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td>
+									Strongly agree
+								</td>
+								<td>
+									Agree
+								</td>
+								<td>
+									Neutral
+								</td>
+								<td>
+									Disagree
+								</td>
+								<td>
+									Strongly disagree
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="5">1. I liked the items recommended by the system</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios1") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">2. The recommended items fitted my preference</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios2") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">3. The recommended items were well chosen</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios3") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">4. The recommended items were relevant</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios4") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">5. The system recommended too many bad items</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios5") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">6. I didn't like any of the recommended items</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios6") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+							<tr>
+								<td colspan="5">7. The items I selected were "the best among the worst"</td>
+							</tr>
+							<tr>
+								@defining("likertScaleRadios7") { name =>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyAgree" value=1>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="agree" value=2>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="neutral" value=3 checked>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="disagree" value=4>
+										</label>
+									</td>
+									<td>
+										<label class="radio inline">
+											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+										</label>
+									</td>
+								}
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+	
+		
+			<div class="row">
+				<div class="span2 offset5">
+					<input class="btn btn-large btn-primary" type="submit" value="Finish"></input>
+				</div>
+			</div>
+		}
+		
 	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$(".fancybox").click(function() {
+			$.fancybox({
+				'padding'		: 0,
+				'autoScale'		: false,
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none',
+				'title'			: this.title,
+				'width'		: 680,
+				'height'		: 495,
+				'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+				'type'			: 'swf',
+				'swf'			: {
+					'wmode'		: 'transparent',
+					'allowfullscreen'	: 'true'
+				}
+			});
+
+			return false;
+		});
+		
+		$('.slider').slider({
+			min: -4,
+			max: 4,
+			step: 1,
+			tooltip: 'show',
+			value: 0,
+			formater:
+			function (value) {						
+				if (value < 0) {
+					return "I like Original list more than Adjusted list";
+				}
+				else if (value > 0) {
+					return "I like Adjusted list more than Original list";		
+				}
+				return "The lists are equally useful";
+			}
+		}).on('slideStop', function() {
+			var rec_improvement = $(this).data('slider').getValue();
+			$.ajax({
+				type: "POST",
+				url: "/ajax",
+				data: JSON.stringify({"rec_improvement" : rec_improvement}),
+				contentType: 'application/json'
+			});
+		});
+	});
+	</script>
 }
+

@@ -6,16 +6,16 @@
 	<div class="container">	
 		<div class="hero-unit">
 			<p>
-				Please give preferences for as many movie pairs as you think is enough. You do not have to compare all the movie pairs that you have seen. 
+				Please give preferences for as many movie pairs as you can.
 				<ul>
 					<li>
-						The slider between every pair of movies is for you to indicate how much you like one movie than the other. Drag the tooltip closer to the movie that you prefer. You will see your preference in words appearing above. e.g. I like 'Movie X' more than 'Movie Y'. If you like them both equally, click on the tooltip. You will see 'The same' appearing.
+						Move the slider towards the mvoie that you like more. You will see how much more stars you give for one movie than for the other in a 5 star scale.
 					</li>
 					<li>
-						The button <button class="btn btn-primary btn-small">I don't know it</button> is there to help you find the pairs that you are able to compare faster. If you press the button, the pairs that contain the corresponding movie will not be shown later. The slider between every pair of movies is for you to indicate how much you like one movie than the other.
+						If you do not know the movie, click the button <button class="btn btn-primary btn-small">I don't know it</button>.
 					</li>
 					<li>
-						If you do not remember the movie, you can click on <a href="">Watch trailer</a> or <a href="">IMDb</a> to see the trailer or check the movie on IMDb respectively.
+						<a href="">Watch trailer</a> or see the movie on <a href="">IMDb</a> to get more information about it.
 					</li>
 				</ul>
 			</p>
@@ -224,10 +224,10 @@
 				formater:
 				function (value) {						
 					if (value < 0) {
-						return "I like " + $(this.element).attr("data-title_1") + " more than " + $(this.element).attr("data-title_2");
+						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
 					}
 					else if (value > 0) {
-						return "I like " + $(this.element).attr("data-title_2") + " more than " + $(this.element).attr("data-title_1");		
+						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");		
 					}
 					return "The same";
 				}
@@ -237,6 +237,16 @@
 				var value = $(this).data('slider').getValue();
 				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
 			});
+		}
+		
+		function repeat(pattern, count) {
+		    if (count < 1) return '';
+		    var result = '';
+		    while (count > 0) {
+		        if (count & 1) result += pattern;
+		        count >>= 1, pattern += pattern;
+		    }
+		    return result;
 		}
 		
 		function create_pagination(current_page) {

@@ -131,3 +131,12 @@ span.clicked { color: #FF0000; }
     float:left;
     width:50%;
 }
+
+/* Preference table with slider in the middle of cell
+-------------------------------------------------- */
+
+#pref_table td 
+{
+    text-align:center; 
+    vertical-align:middle;
+}
