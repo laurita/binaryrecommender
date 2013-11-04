@@ -52,6 +52,14 @@
 															<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
 														</div>
 													</div>
+													@if(rec.good) {
+														<div class="row">
+															<div>
+																<img src="@routes.Assets.at("images/green-check-mark-th.png")" 
+																		 width="20" height="20"/>Good recommendation<br/>
+															</div> 
+														</div>
+													}
 												</div>
 											</div>
 										
@@ -114,6 +122,14 @@
 															<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
 														</div>
 													</div>
+													@if(rec.good) {
+														<div class="row">
+															<div>
+																<img src="@routes.Assets.at("images/green-check-mark-th.png")" 
+																		 width="20" height="20"/>Good recommendation<br/>
+															</div> 
+														</div>
+													}
 												</div>
 											</div>
 										

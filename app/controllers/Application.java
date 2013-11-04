@@ -109,27 +109,6 @@ public class Application extends Controller {
   // Update for second stage
   
   public static Result updateToNextStage() {
-    // build UP model
-    // write similarities to db
-    // write kmatrix to db
-		//List<Preference> prefs = UP.loadMLPreferences();
-		//List<BinaryPreference> comps = UP.loadComparisons();
-		//UP up = new UP(prefs, comps);
-		//up.initialize();
-		
-    // make 10 best recommendations
-    // write them to DB
-    /*
-    for (User user : User.find.where().eq("experimentGroup", 2).findList()) {
-      List<Integer> list = UP.predictRankingListFromDB(user.id);
-      for (int i = 0; i < list.size(); i++) {
-        Movie movie = Movie.find.byId(list.get(i));
-        Recommendation rec = Recommendation.create(user, movie, i+1, false);
-        System.out.println(rec);
-      }
-    }
-    */
-    
     User.updateAllUserStates();
     return ok();
   }
