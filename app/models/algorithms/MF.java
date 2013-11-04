@@ -66,6 +66,12 @@ public class MF extends Model {
 		calcMetrics();
 		calcFeatures();
 	}
+  
+	public void initialize(int userId) {   
+		loadArrays();    	
+		calcMetrics();
+		calcFeatures(userId);
+	}
 	
 	public static List<Preference> loadMLPreferences() {
 		List<Preference> prefs = new ArrayList<Preference>();
@@ -92,7 +98,8 @@ public class MF extends Model {
 			int userId = row.getInteger("user_id");
 			int movieId = row.getInteger("movie_id");
 			Double value = row.getDouble("value");
-			Preference pref = new Preference(userId, movieId, value);
+      boolean additional = row.getBoolean("additional");
+			Preference pref = new Preference(userId, movieId, value, additional);
 			prefs.add(pref);
 		}
 		return prefs;
@@ -203,9 +210,66 @@ public class MF extends Model {
 					cf = m_aCustFeatures[f][custId];
 					mf = m_aMovieFeatures[f][movieId];
 
+          double bias = 1.0;
+          //if (rating.Additional && ) {
+          //  bias = 5.0;
+          //}
+
 					// Cross-train the features
-					m_aCustFeatures[f][custId] += (float)(LRATE * (err * mf - K * cf));
-					m_aMovieFeatures[f][movieId] += (float)(LRATE * (err * cf - K * mf));
+					m_aCustFeatures[f][custId] += (float)(bias * LRATE * (err * mf - K * cf));
+					m_aMovieFeatures[f][movieId] += (float)(bias * LRATE * (err * cf - K * mf));
+				}
+				rmse = Math.sqrt(sq/m_nRatingCount);
+			}
+			// Cache off old predictions
+			for (i=0; i<m_nRatingCount; i++) {
+				rating = m_aRatings[i];
+				rating.Cache = (float) predictRating(rating.MovieId, rating.CustId, f, rating.Cache, false);
+			}            
+		}
+	}
+  
+	// CalcFeatures
+	// - Iteratively train each feature on the entire data set
+	// - Once sufficient progress has been made, move on
+	//
+	private void calcFeatures(int userId) {
+		int f, e, i, custId, cnt = 0;
+		Data rating;
+		double err, p, sq, rmse_last = 0, rmse = 2.0;
+		int movieId;
+		float cf, mf;
+
+		for (f=0; f<max_features; f++) {
+			// Keep looping until you have passed a minimum number 
+			// of epochs or have stopped making significant progress
+			for (e=0; (e < MIN_EPOCHS) || (rmse <= rmse_last - MIN_IMPROVEMENT); e++) {
+				cnt++;
+				sq = 0;
+				rmse_last = rmse;
+
+				for (i=0; i<m_nRatingCount; i++) {
+					rating = m_aRatings[i];
+					movieId = rating.MovieId;
+					custId = rating.CustId;
+
+					// Predict rating and calc error
+					p = predictRating(movieId, custId, f, rating.Cache, true);
+					err = (1.0 * rating.Rating - p);
+					sq += err*err;
+	                
+					// Cache off old feature values
+					cf = m_aCustFeatures[f][custId];
+					mf = m_aMovieFeatures[f][movieId];
+
+          double bias = 1.0;
+          if (rating.Additional && m_aCustomers[custId].CustomerId == userId) {
+            bias = 5.0;
+          }
+
+					// Cross-train the features
+					m_aCustFeatures[f][custId] += (float)(bias * LRATE * (err * mf - K * cf));
+					m_aMovieFeatures[f][movieId] += (float)(bias * LRATE * (err * cf - K * mf));
 				}
 				rmse = Math.sqrt(sq/m_nRatingCount);
 			}
@@ -310,6 +374,7 @@ public class MF extends Model {
 			int movieId = pref.getItemId();
 			int custId = pref.getUserId();
 			int rating = (int) pref.getValue();
+      boolean additional = pref.additional;
 
 			movieIds.add(movieId);
 			customerIds.add(custId);
@@ -321,7 +386,8 @@ public class MF extends Model {
 			m_aRatings[m_nRatingCount].MovieId = (short)movieId;
 			m_aRatings[m_nRatingCount].CustId = custId;
 			m_aRatings[m_nRatingCount].Rating = (byte) rating;
-			m_aRatings[m_nRatingCount].Cache = 0;
+			m_aRatings[m_nRatingCount].Additional = additional;
+      m_aRatings[m_nRatingCount].Cache = 0;
 			m_nRatingCount++;
 		}
 		

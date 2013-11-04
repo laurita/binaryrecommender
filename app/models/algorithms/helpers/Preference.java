@@ -9,6 +9,8 @@ public class Preference implements Comparable<Preference>{
 	private double value;
 	
 	private double realValue;
+  
+  public boolean additional;
   			
 	public int getUserId() {
 		return userId;
@@ -26,6 +28,14 @@ public class Preference implements Comparable<Preference>{
 		this.userId = userId;
 		this.itemId = itemId;
 		this.value = value;
+    this.additional = false;
+	}
+  
+	public Preference(int userId, int itemId, double value, boolean additional) {
+		this.userId = userId;
+		this.itemId = itemId;
+		this.value = value;
+    this.additional = additional;
 	}
 	
 	public Preference(int userId, int itemId, double value, double realValue) {
@@ -33,6 +43,7 @@ public class Preference implements Comparable<Preference>{
 		this.itemId = itemId;
 		this.value = value;
 		this.realValue = realValue;
+    this.additional = false;
 	}
 
 	public Preference copy() {		

@@ -1,6 +1,12 @@
-11-04 13:46:06 jdbc[2]: exception
+11-04 16:09:17 jdbc[2]: exception
 org.h2.jdbc.JdbcSQLException: Table "PLAY_EVOLUTIONS" not found; SQL statement:
 select id, hash, apply_script, revert_script, state, last_problem from play_evolutions where state like 'applying_%' [42102-172]
-11-04 13:57:52 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "STATE" not found; SQL statement:
-update state = 224 where state = 225 [42102-172]
+11-04 16:33:40 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE USER STET STATE[*] = 212 WHERE STATE  213 "; expected "SET"; SQL statement:
+update user stet state = 212 where state  213 [42001-172]
+11-04 16:33:48 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE USER SET STATE = 212 WHERE STATE  213[*] "; SQL statement:
+update user set state = 212 where state  213 [42000-172]
+11-04 16:56:52 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "UPDATE USER SET STATE = 212 WHERE STATE 213[*] "; SQL statement:
+update user set state = 212 where state 213 [42000-172]

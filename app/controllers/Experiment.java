@@ -333,7 +333,7 @@ public class Experiment extends Controller {
     
     // create MF model and write recommendation list to db
     MF mf = new MF(MF.addNewPreferencesToList(MF.loadMLPreferences()));
-    mf.initialize();
+    mf.initialize(userId);
     List<Integer> unratedMovieIds = user.getUnratedMovieIdsFromGroup(0);
     List<Integer> mfRankings = mf.rank(user.id, unratedMovieIds).subList(0, 5);
     
@@ -473,7 +473,7 @@ public class Experiment extends Controller {
     
     // create MF model and write recommendation list to db
     MF mf = new MF(MF.addNewPreferencesToList(MF.loadMLPreferences()));
-    mf.initialize();
+    mf.initialize(userId);
     List<Integer> unratedMovieIds = user.getUnratedMovieIdsFromGroup(1);
     List<Integer> mfRankings = mf.rank(user.id, unratedMovieIds).subList(0, 5);
     for (int i = 0; i < mfRankings.size(); i++) {

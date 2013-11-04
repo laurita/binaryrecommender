@@ -6,6 +6,7 @@ public class Data {
     public int          MovieId;
     public byte         Rating;
     public float        Cache;
+    public boolean      Additional;
 
     @Override
     public String toString() {
