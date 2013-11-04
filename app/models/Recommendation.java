@@ -39,7 +39,7 @@ public class Recommendation extends Model {
 	}
 	
 	public static Recommendation create(User user, Movie movie, int rank, boolean updated) {
-		Recommendation r = Recommendation.find.where().eq("user", user).eq("movie", movie)
+		Recommendation r = Recommendation.find.where().eq("user", user).eq("rank", rank)
 			.eq("updated", updated).findUnique();
 		if (r != null) {
 			r.delete();

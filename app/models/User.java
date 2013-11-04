@@ -135,6 +135,20 @@ public class User extends Model {
 		return allIds;
 	}
   
+	public List<Integer> getUnratedMovieIdsFromGroup(int group) {
+		String sql = String.format("SELECT id FROM (SELECT ROWNUM r, * " +
+      "FROM(SELECT * FROM movie ORDER BY LOGPOPVAR desc) t) " +
+      "WHERE r %% 2 = %d;", group);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+		List<Integer> allIds = new ArrayList<Integer>();
+		for (SqlRow row : rows) {
+			allIds.add(row.getInteger("id"));
+		}
+		allIds.removeAll(this.getRatedMovieIds());
+		return allIds;
+	}
+  
 	public List<Integer> getPreferedMovieIds() {
 		List<Preference> userPrefs = Preference.find.fetch("movie1")
       .fetch("movie2").where().eq("user", this).findList();
@@ -153,6 +167,20 @@ public class User extends Model {
 		List<Integer> allIds = new ArrayList<Integer>();
 		for (Movie m : all) {
 			allIds.add(m.id);
+		}
+		allIds.removeAll(this.getPreferedMovieIds());
+		return allIds;
+	}
+  
+	public List<Integer> getUnpreferedMovieIdsFromGroup(int group) {
+		String sql = String.format("SELECT id FROM (SELECT ROWNUM r, * " +
+      "FROM(SELECT * FROM movie ORDER BY LOGPOPVAR desc) t) " +
+      "WHERE r %% 2 = %d;", group);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+		List<Integer> allIds = new ArrayList<Integer>();
+		for (SqlRow row : rows) {
+			allIds.add(row.getInteger("id"));
 		}
 		allIds.removeAll(this.getPreferedMovieIds());
 		return allIds;

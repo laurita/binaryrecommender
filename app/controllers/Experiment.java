@@ -334,8 +334,9 @@ public class Experiment extends Controller {
     // create MF model and write recommendation list to db
     MF mf = new MF(MF.addNewPreferencesToList(MF.loadMLPreferences()));
     mf.initialize();
-    List<Integer> unratedMovieIds = user.getUnratedMovieIds();
+    List<Integer> unratedMovieIds = user.getUnratedMovieIdsFromGroup(0);
     List<Integer> mfRankings = mf.rank(user.id, unratedMovieIds).subList(0, 5);
+    
     for (int i = 0; i < mfRankings.size(); i++) {
       Movie movie = Movie.find.byId(mfRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, false);
@@ -350,7 +351,18 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     
-    // ratings for UP model are already prepared in DB
+    // create UP model and write recommendation list to db
+   UP up = new UP(UP.loadMLPreferences(), UP.loadComparisons());
+    up.initialize(userId);
+    
+    List<Integer> unpreferedMovieIds = user.getUnpreferedMovieIdsFromGroup(0);
+    List<Integer> upRankings = up.predictRankingList(userId, unpreferedMovieIds, false).subList(0, 5);
+    
+    for (int i = 0; i < upRankings.size(); i++) {
+      Movie movie = Movie.find.byId(upRankings.get(i));
+      Recommendation rec = Recommendation.create(user, movie, i+1, false);
+      System.out.println(rec);
+    }
     
     user.state = "221";
     user.update();
@@ -397,6 +409,12 @@ public class Experiment extends Controller {
     
     user.state = "212";
     user.update();
+    
+    // skip rating of seen movies if there is 0 movies seen 
+    if (seenOnes.length == 0) {
+      return handle_post();
+    }
+        
     return redirect(routes.Experiment.handle_get());
   }
   
@@ -440,6 +458,12 @@ public class Experiment extends Controller {
     
     user.state = "222";
     user.update();
+    
+    // skip comparisons of seen movies if there is 1 or less movies seen 
+    if (seenOnes.length <= 1) {
+      return handle_post();
+    }
+    
     return redirect(routes.Experiment.handle_get());
   }
   
@@ -450,7 +474,7 @@ public class Experiment extends Controller {
     // create MF model and write recommendation list to db
     MF mf = new MF(MF.addNewPreferencesToList(MF.loadMLPreferences()));
     mf.initialize();
-    List<Integer> unratedMovieIds = user.getUnratedMovieIds();
+    List<Integer> unratedMovieIds = user.getUnratedMovieIdsFromGroup(1);
     List<Integer> mfRankings = mf.rank(user.id, unratedMovieIds).subList(0, 5);
     for (int i = 0; i < mfRankings.size(); i++) {
       Movie movie = Movie.find.byId(mfRankings.get(i));
@@ -466,20 +490,15 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     
-    // get new preferences from db
-    // update kmatrix by adding new preferences
-    // write new recommendation list to db
+    // create UP model and write recommendation list to db
+    UP up = new UP(UP.loadMLPreferences(), UP.loadComparisons());
+    up.initialize(userId);
     
-    List<Preference> newPrefs = Preference.find.where()
-      .eq("user", user).eq("additional", true).findList();
+    List<Integer> unpreferedMovieIds = user.getUnpreferedMovieIdsFromGroup(1);
+    List<Integer> upRankings = up.predictRankingList(userId, unpreferedMovieIds, false).subList(0, 5);
     
-    for (Preference pref : newPrefs) {
-        UP.updateKValueInDB(pref.user.id, pref.movie1.id, pref.movie2.id, (float)pref.value, 1f);
-    }
-    
-    List<Integer> list = UP.predictRankingListFromDB(user.id);
-    for (int i = 0; i < list.size(); i++) {
-      Movie movie = Movie.find.byId(list.get(i));
+    for (int i = 0; i < upRankings.size(); i++) {
+      Movie movie = Movie.find.byId(upRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, true);
       System.out.println(rec);
     }

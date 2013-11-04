@@ -27,8 +27,12 @@ public class UP {
 
   public Data userItemMatrix[][];         // user-item matrix of ratings
   public int userItemItemMatrix[][][];         // user-item-item matrix of rating differences
-  public float similarities[][];          // user-user similarities (matrix of Pearson correlations)
-  public float signSimilarities[][];      // significance corrected user-user similarities [Herlocker et al., 1999]
+  //public float similarities[][];          // user-user similarities (matrix of Pearson correlations)
+  //public float signSimilarities[][];      // significance corrected user-user similarities [Herlocker et al., 1999]
+  
+  public float similarities[];        // user similarities (array of Pearson correlations)
+  public float signSimilarities[];    // significance corrected user similarities [Herlocker et al., 1999]
+  
   public float kMatrix[][];               // K matrix (either personalized or non-personalized, as specified)
   public float cMatrix[][];               // K matrix numerators
   public float wMatrix[][];               // K matrix denominators
@@ -112,22 +116,14 @@ public class UP {
     return prefs;
   }
 
-  /**
-    * Initializes the model: load the arrays, calculate metrics, user-item matrix and user-user similarities
-    */
-  public void initialize() {
+  public void initialize(int userId) {
     loadArrays();
     calcMetrics();
     calcUserItemMatrix();
     calcUserItemItemMatrix();
-    calcSimilarities();
-    for (Customer customer : m_aCustomers) {
-      if (customer.newCust) {
-        calculateKMatrix(customer.CustomerId, false);
-        updateKMatrixWithPrefs(customer.CustomerId, false);
-        writeKMatrixToDB(customer.CustomerId);
-      }
-    }
+    calcSimilarities(userId);
+    calculateKMatrix(userId, false);
+    updateKMatrixWithPrefs(userId, false);
   }
 
   /**
@@ -330,7 +326,7 @@ public class UP {
   }
 
   /**
-    * Calculated user x item matrix containing Data objects.
+    * Calculate user x item matrix containing Data objects.
     */
   public void calcUserItemMatrix() {
     Data[][] userItemMatrix = new Data[number_of_customers][number_of_movies];
@@ -344,7 +340,7 @@ public class UP {
   }
 
   /**
-    * Calculated user x item matrix containing Data objects.
+    * Calculate user x item x item matrix containing rating differences.
     */
   public void calcUserItemItemMatrix() {
     int[][][] userItemItemMatrix = new int[number_of_customers][number_of_movies][number_of_movies];
@@ -364,98 +360,76 @@ public class UP {
     this.userItemItemMatrix = userItemItemMatrix;
   }
 
-  /**
-    * Calculates similarities between users.
-    * If a pair of users has not rated any movies in common, the similarity is 0.
-    * If a user has rated only one movie (which is equal to user's avg rating),
-    * the denominator is 0 => similarity would be NaN, but I make it = 0.
-    */
-  public void calcSimilarities() {
-    float[][] similarities = new float[number_of_customers][number_of_customers];
-    float[][] signSimilarities = new float[number_of_customers][number_of_customers];
+  public void calcSimilarities(int userId) {
+    float[] similarities = new float[number_of_customers];
+    float[] signSimilarities = new float[number_of_customers];
     int commonPairs;
 
-    for (int u = 0; u < number_of_customers; u++) {
-      Customer c1 = m_aCustomers[u];
-      int cust1Id = c1.CustomerId;
-      ArrayList<Integer> u_movies = c1.MoviesRatedBy;
-      double ru = m_aCustomers[u].RatingAvg;
-      int[][] u_calcRatingDiffs = calcRatingDiffs(u);
-      for (int v = 0; v < number_of_customers; v++) {
-        Customer c2 = m_aCustomers[v];
-        int cust2Id = c2.CustomerId;
-        if (cust1Id == cust2Id) {
-          similarities[u][v] = 1;
-          signSimilarities[u][v] = 1;
-        } else if (cust1Id < cust2Id) {
-          ArrayList<Integer> v_movies = c2.MoviesRatedBy;
-          if (c1.newCust) {
-            int[][] u_ratingDiffs = userItemItemMatrix[u];
-            int[][] v_ratingDiffs;
-            if (c2.newCust) {
-              v_ratingDiffs = userItemItemMatrix[v];
-            } else {
-              v_ratingDiffs = calcRatingDiffs(v);
-            }
-            similarities[u][v] = binarySimilarity(u_ratingDiffs, v_ratingDiffs);
-            commonPairs = commonPairs(u_ratingDiffs, v_ratingDiffs);
-            signSimilarities[u][v] = similarities[u][v] * Math.min(commonPairs, gamma) / gamma;
+    int u = m_mCustIds.get(userId);
+    Customer c1 = m_aCustomers[u];
+    int cust1Id = c1.CustomerId;
+    ArrayList<Integer> u_movies = c1.MoviesRatedBy;
+    double ru = m_aCustomers[u].RatingAvg;
+    int[][] u_calcRatingDiffs = calcRatingDiffs(u);
+    for (int v = 0; v < number_of_customers; v++) {
+      Customer c2 = m_aCustomers[v];
+      int cust2Id = c2.CustomerId;
+      if (cust1Id == cust2Id) {
+        similarities[v] = 1;
+        signSimilarities[v] = 1;
+      } else {
+        ArrayList<Integer> v_movies = c2.MoviesRatedBy;
+        if (c1.newCust) {
+          int[][] u_ratingDiffs = userItemItemMatrix[u];
+          int[][] v_ratingDiffs;
+          if (c2.newCust) {
+            v_ratingDiffs = userItemItemMatrix[v];
           } else {
-            if (c2.newCust) {
-              int[][] v_ratingDiffs = userItemItemMatrix[v];
-              similarities[u][v] = binarySimilarity(u_calcRatingDiffs, v_ratingDiffs);
-              commonPairs = commonPairs(u_calcRatingDiffs, v_ratingDiffs);
-              signSimilarities[u][v] = similarities[u][v] * Math.min(commonPairs, gamma) / gamma;
+            v_ratingDiffs = calcRatingDiffs(v);
+          }
+          similarities[v] = binarySimilarity(u_ratingDiffs, v_ratingDiffs);
+          commonPairs = commonPairs(u_ratingDiffs, v_ratingDiffs);
+          signSimilarities[v] = similarities[v] * Math.min(commonPairs, gamma) / gamma;
+        } else {
+          if (c2.newCust) {
+            int[][] v_ratingDiffs = userItemItemMatrix[v];
+            similarities[v] = binarySimilarity(u_calcRatingDiffs, v_ratingDiffs);
+            commonPairs = commonPairs(u_calcRatingDiffs, v_ratingDiffs);
+            signSimilarities[v] = similarities[v] * Math.min(commonPairs, gamma) / gamma;
+          } else {
+            double rv = m_aCustomers[v].RatingAvg;
+            ArrayList<Integer> uv_movies = new ArrayList<Integer>(u_movies);
+            uv_movies.retainAll(v_movies);
+            if (uv_movies.isEmpty()) {
+              similarities[v] = 0;
+              signSimilarities[v] = 0;
             } else {
-              double rv = m_aCustomers[v].RatingAvg;
-              ArrayList<Integer> uv_movies = new ArrayList<Integer>(u_movies);
-              uv_movies.retainAll(v_movies);
-              if (uv_movies.isEmpty()) {
-                similarities[u][v] = 0;
-                signSimilarities[u][v] = 0;
+              float numeratorSum = 0;
+              float denominatorSumU = 0;
+              float denominatorSumV = 0;
+              for (int j : uv_movies) {
+                int rum = userItemMatrix[u][j].Rating;
+                int rvm = userItemMatrix[v][j].Rating;
+                numeratorSum += (rum - ru) * (rvm - rv);
+                denominatorSumU += Math.pow(rum - ru, 2);
+                denominatorSumV += Math.pow(rvm - rv, 2);
+              }
+              double denominator = Math.sqrt(denominatorSumU * denominatorSumV);
+              if (denominator == 0) {
+                similarities[v] = 0;
+                signSimilarities[v] = 0;
               } else {
-                float numeratorSum = 0;
-                float denominatorSumU = 0;
-                float denominatorSumV = 0;
-                for (int j : uv_movies) {
-                  int rum = userItemMatrix[u][j].Rating;
-                  int rvm = userItemMatrix[v][j].Rating;
-                  numeratorSum += (rum - ru) * (rvm - rv);
-                  denominatorSumU += Math.pow(rum - ru, 2);
-                  denominatorSumV += Math.pow(rvm - rv, 2);
-                }
-                double denominator = Math.sqrt(denominatorSumU * denominatorSumV);
-                if (denominator == 0) {
-                  similarities[u][v] = 0;
-                  signSimilarities[u][v] = 0;
-                } else {
-                  similarities[u][v] = (float) (numeratorSum / denominator);
-                  signSimilarities[u][v] = similarities[u][v] * Math.min(uv_movies.size(), gamma) / gamma;
-                }
+                similarities[v] = (float) (numeratorSum / denominator);
+                signSimilarities[v] = similarities[v] * Math.min(uv_movies.size(), gamma) / gamma;
               }
             }
           }
-          writeSimilarityToDB(c1.CustomerId, c2.CustomerId, similarities[u][v], signSimilarities[u][v]);
-        } else {
-          similarities[u][v] = similarities[v][u];
-          signSimilarities[u][v] = signSimilarities[v][u];
         }
-        
+        //writeSimilarityToDB(c1.CustomerId, c2.CustomerId, similarities[u][v], signSimilarities[u][v]);
       }
     }
     this.similarities = similarities;
     this.signSimilarities = signSimilarities;
-  }
-  
-  private void writeSimilarityToDB(int user1, int user2, float sim, float signSim) {
-    //System.out.println("similarity: " + user1 + ", " + user2); 
-    String sqlString = String.format(
-      "insert into similarities values (%d, %d, %f, %f)", user1, user2, sim, signSim
-        );
-    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-    int modifiedCount = Ebean.execute(update);
-    String msg = "There were " + modifiedCount + " rows inserted";
-    //System.out.println(msg); 
   }
 
   private float binarySimilarity(int[][] arr1, int[][] arr2) {
@@ -545,9 +519,9 @@ public class UP {
                 double sim;
                 // depending on signCorrected argument get the similarity
                 if (signCorrected) {
-                  sim = signSimilarities[userId][u];
+                  sim = signSimilarities[u];
                 } else {
-                  sim = similarities[userId][u];
+                  sim = similarities[u];
                 }
                 // add only those weighted score differences for which the user-user similarity is > 0
                 if (sim > 0) {
@@ -611,9 +585,9 @@ public class UP {
                 double sim;
                 // depending on signCorrected argument get the similarity
                 if (signCorrected) {
-                  sim = signSimilarities[userId][u];
+                  sim = signSimilarities[u];
                 } else {
-                  sim = similarities[userId][u];
+                  sim = similarities[u];
                 }
                 // add only those weighted score differences for which the user-user similarity is > 0
                 if (sim > 0) {
@@ -647,62 +621,6 @@ public class UP {
         }
       }
     }
-  }
-  
-  private void writeKMatrixToDB(int userId) {
-    System.out.println("writing kmatrix to db for user " + userId + " ...");
-    for (int i = 0; i < number_of_movies; i++) {
-      for (int j = 0; j < number_of_movies; j++) {
-        int movie1Id = m_aMovies[i].MovieId;
-        int movie2Id = m_aMovies[j].MovieId;
-        if (movie1Id < movie2Id) {
-          insertKValueToDB(userId, movie1Id, movie2Id, cMatrix[i][j], wMatrix[i][j]);
-        }
-      }
-    }
-  }
-  
-  private void insertKValueToDB(int userId, int movie1Id, int movie2Id, float c, float w) {
-    //System.out.println("kvalue: " + userId + ", " + movie1Id + ", " + movie2Id); 
-    String sqlString = String.format(
-      "insert into kmatrix values (%d, %d, %d, %f, %f)", userId, movie1Id, movie2Id, c, w
-        );
-    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-    int modifiedCount = Ebean.execute(update);
-    String msg = "There were " + modifiedCount + " rows inserted";
-    //System.out.println(msg); 
-  }
-  
-  public static void updateKValueInDB(int userId, int movie1Id, int movie2Id, float c, float w) {
-    System.out.println("updateing K value for user " + userId + ", movie1 " + movie1Id + ", movie2 " + movie2Id);
-    String sqlString = String.format(
-      "update kmatrix set cvalue = cvalue + %f, wvalue = wvalue + %f " +
-        "where user_id = %d and movie1_id =  %d and movie2_id = %d;", c, w, userId, movie1Id, movie2Id 
-          );
-    SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-    int modifiedCount = Ebean.execute(update);
-    String msg = "There were " + modifiedCount + " rows updated";
-    //System.out.println(msg);
-  }
-  
-  public static List<Integer> predictRankingListFromDB(int userId) {
-    String sqlString = String.format(
-      "select a.id, (a.c - b.c) / (a.w + b.w) k from " +
-        "(select movie.id id, sum(cvalue) c, sum(wvalue) w " +
-          "FROM movie, kmatrix where user_id = %d and movie1_id=id group by id) as a, " +
-            "(select movie.id id, sum(cvalue) c, sum(wvalue) w " +
-              "FROM movie, kmatrix where user_id = %d and movie2_id=id group by id) as b " +
-                "where a.id = b.id and a.id not in " +
-                  "(select distinct(id) from " +
-                    "(SELECT movie1_id id FROM PREFERENCE) UNION " +
-                      "(SELECT movie2_id id FROM PREFERENCE))order by k desc limit 5;", userId, userId);
-    SqlQuery sqlQuery = Ebean.createSqlQuery(sqlString);
-    List<SqlRow> rows = sqlQuery.findList();
-    List<Integer> list = new ArrayList<Integer>();
-    for (SqlRow row : rows) {
-      list.add(row.getInteger("id"));
-    }
-    return list;
   }
 
   private float nullAvg(float array[]) {
