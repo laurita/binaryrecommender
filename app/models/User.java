@@ -219,6 +219,30 @@ public class User extends Model {
     //String msg = "There were " + modifiedCount + " rows inserted";
   }
   
+  public void addComparison(int question, int value) {
+    
+    String sql;
+    SqlUpdate update;
+    
+    sql = String.format("SELECT * FROM comparisons where user_id=%d and question=%d;", this.id, question);
+    SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+    List<SqlRow> rows = sqlQuery.findList();
+    
+    if (rows.size() != 0) {
+      sql = String.format("DELETE FROM comparisons WHERE user_id=%d and question=%d;", this.id, question);
+      update = Ebean.createSqlUpdate(sql);
+      int modifiedCount = Ebean.execute(update);
+    }
+    
+    sql = String.format(
+      "INSERT INTO comparisons values (%d, %d, %d);",
+      this.id, question, value
+    );
+		update = Ebean.createSqlUpdate(sql);
+    int modifiedCount = Ebean.execute(update);
+    //String msg = "There were " + modifiedCount + " rows inserted";
+  }
+  
   public static void updateAllUserStates() {
     System.out.println("updateing user states ...");
     String sqlString, msg;

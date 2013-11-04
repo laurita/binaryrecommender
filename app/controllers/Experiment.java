@@ -599,13 +599,7 @@ public class Experiment extends Controller {
 
     for (int i = 1; i <= 7; i++) {
       int answer = Integer.parseInt(compareForm.field("likertScaleRadios"+ i).value());
-      String sqlString = String.format(
-        "insert into comparisons values (%d, %d, %d)", user.id, i, answer
-          );
-      SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-      int modifiedCount = Ebean.execute(update);
-      String msg = "There where " + modifiedCount + "rows updated";
-      //System.out.println(msg); 
+      user.addComparison(i, answer);
       user.stage2Done = true;
       user.update();
     }
@@ -623,13 +617,7 @@ public class Experiment extends Controller {
 
     for (int i = 1; i <= 7; i++) {
       int answer = Integer.parseInt(compareForm.field("likertScaleRadios"+ i).value());
-      String sqlString = String.format(
-        "insert into comparisons values (%d, %d, %d)", user.id, i, answer
-          );
-      SqlUpdate update = Ebean.createSqlUpdate(sqlString);
-      int modifiedCount = Ebean.execute(update);
-      String msg = "There where " + modifiedCount + "rows updated";
-      //System.out.println(msg); 
+      user.addComparison(i, answer);
       user.stage2Done = true;
       user.update();
     }
