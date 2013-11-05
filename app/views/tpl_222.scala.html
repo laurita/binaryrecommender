@@ -224,10 +224,10 @@
 				formater:
 				function (value) {						
 					if (value < 0) {
-						return "I like " + $(this.element).attr("data-title_1") + " more than " + $(this.element).attr("data-title_2");
+						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
 					}
 					else if (value > 0) {
-						return "I like " + $(this.element).attr("data-title_2") + " more than " + $(this.element).attr("data-title_1");		
+						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");	
 					}
 					return "The same";
 				}
@@ -237,6 +237,16 @@
 				var value = $(this).data('slider').getValue();
 				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
 			});
+		}
+		
+		function repeat(pattern, count) {
+		    if (count < 1) return '';
+		    var result = '';
+		    while (count > 0) {
+		        if (count & 1) result += pattern;
+		        count >>= 1, pattern += pattern;
+		    }
+		    return result;
 		}
 		
 		function create_pagination(current_page) {

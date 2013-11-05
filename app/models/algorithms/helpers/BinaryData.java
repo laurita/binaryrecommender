@@ -6,6 +6,7 @@ public class BinaryData {
     public int          Movie2Id;
     public byte         RatingDiff;
     public float        Cache;
+    public boolean      Additional;
 
     @Override
     public String toString() {

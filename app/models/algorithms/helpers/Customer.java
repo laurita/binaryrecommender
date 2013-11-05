@@ -8,7 +8,7 @@ public class Customer {
     public int         CustomerId;
     public int         RatingCount;
     public int         RatingSum;
-    public int          OffsetSum = 0;
+    public int         OffsetSum = 0;
     public boolean     newCust = false;
 
     public double      RatingAvg;
@@ -16,6 +16,7 @@ public class Customer {
 
     // I added this
     public ArrayList<Integer>   MoviesRatedBy;
-    public ArrayList<List<Integer>> MoviePairsPreferedBy;
+    public ArrayList<BinaryData> MoviePairsPreferedBy;
+    public ArrayList<BinaryData> AdditionalPrefs;
 
 }

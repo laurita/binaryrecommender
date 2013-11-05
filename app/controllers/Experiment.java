@@ -411,7 +411,7 @@ public class Experiment extends Controller {
     user.update();
     
     // skip rating of seen movies if there is 0 movies seen 
-    if (seenOnes.length == 0) {
+    if (seenOnes == null) {
       return handle_post();
     }
         
@@ -460,7 +460,7 @@ public class Experiment extends Controller {
     user.update();
     
     // skip comparisons of seen movies if there is 1 or less movies seen 
-    if (seenOnes.length <= 1) {
+    if (seenOnes == null || seenOnes.length <= 1) {
       return handle_post();
     }
     

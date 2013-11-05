@@ -11,6 +11,8 @@ public class BinaryPreference implements Comparable<BinaryPreference>{
     private double value;
 
     private double realValue;
+    
+    public boolean additional;
 
     public int getUserId() {
         return userId;
@@ -33,7 +35,17 @@ public class BinaryPreference implements Comparable<BinaryPreference>{
         this.item1Id = item1Id;
         this.item2Id = item2Id;
         this.value = value;
+        this.additional = false;
     }
+
+    public BinaryPreference(int userId, int item1Id, int item2Id, double value, boolean additional) {
+        this.userId = userId;
+        this.item1Id = item1Id;
+        this.item2Id = item2Id;
+        this.value = value;
+        this.additional = additional;
+    }
+    
 
     public BinaryPreference(int userId, int item1Id, int item2Id, double value, double realValue) {
         this.userId = userId;
@@ -41,6 +53,7 @@ public class BinaryPreference implements Comparable<BinaryPreference>{
         this.item2Id = item2Id;
         this.value = value;
         this.realValue = realValue;
+        this.additional = false;
     }
 
     public BinaryPreference copy() {
