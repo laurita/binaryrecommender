@@ -7,7 +7,7 @@ create table moviePairs (
 	constraint pk_moviePairs primary key (movie1_id, movie2_id))
   ;
   
--- COPY moviePairs FROM 'data/data1/moviePairs.dat' DELIMITER ',' CSV;
+COPY moviePairs FROM '/Users/laura/Sandbox/play/movies/data/data1/moviePairs.dat' DELIMITER ',' CSV;
 
 -- as select * from csvread('data/data1/moviePairs.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
 -- ;
@@ -19,7 +19,7 @@ create table ml_ratings (
   time											bigint)
   ;
   
--- COPY ml_ratings FROM 'data/data1/very_pop_ratings.dat' DELIMITER ',' CSV;
+COPY ml_ratings FROM '/Users/laura/Sandbox/play/movies/data/data1/very_pop_ratings.dat' DELIMITER ',' CSV;
 
 -- as select *
 -- from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')

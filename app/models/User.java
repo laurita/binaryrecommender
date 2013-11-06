@@ -136,8 +136,8 @@ public class User extends Model {
 	}
   
 	public List<Integer> getUnratedMovieIdsFromGroup(int group) {
-		String sql = String.format("SELECT id FROM (SELECT ROWNUM r, * " +
-      "FROM(SELECT * FROM movie ORDER BY LOGPOPVAR desc) t) " +
+		String sql = String.format("SELECT id FROM (SELECT *, ROW_NUMBER() OVER " +
+      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) AS tbl2 " +
       "WHERE r %% 2 = %d;", group);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
@@ -173,8 +173,8 @@ public class User extends Model {
 	}
   
 	public List<Integer> getUnpreferedMovieIdsFromGroup(int group) {
-		String sql = String.format("SELECT id FROM (SELECT ROWNUM r, * " +
-      "FROM(SELECT * FROM movie ORDER BY LOGPOPVAR desc) t) " +
+		String sql = String.format("SELECT id FROM (SELECT *, ROW_NUMBER() OVER " +
+      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) AS tbl2 " +
       "WHERE r %% 2 = %d;", group);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
@@ -279,7 +279,7 @@ public class User extends Model {
       
     System.out.println("from 113 to 210");
     sqlString = 
-      "update user set state = 210 where state = 113;";
+      "update users set state = '210' where state = '113';";
     update = Ebean.createSqlUpdate(sqlString);
     modifiedCount = Ebean.execute(update);
     msg = "There were " + modifiedCount + " rows updated";
@@ -287,7 +287,7 @@ public class User extends Model {
     
     System.out.println("from 123 to 220");
     sqlString = 
-      "update user set state = 220 where state = 123;";
+      "update users set state = '220' where state = '123';";
     update = Ebean.createSqlUpdate(sqlString);
     modifiedCount = Ebean.execute(update);
     msg = "There were " + modifiedCount + " rows updated";
@@ -295,7 +295,7 @@ public class User extends Model {
     
     System.out.println("from all other to 000");
     sqlString = 
-      "update user set state = 000 where state != 210 and state != 220;";
+      "update users set state = '000' where state != '210' and state != '220';";
     update = Ebean.createSqlUpdate(sqlString);
     modifiedCount = Ebean.execute(update);
     msg = "There were " + modifiedCount + " rows updated";

@@ -49,7 +49,7 @@ public class Experiment extends Controller {
     return redirect(routes.Application.logout());
   }
   
-  public static Result handle_get_0() {
+  public static Result handle_get_000() {
     return ok(tpl_000.render());
   }
   
