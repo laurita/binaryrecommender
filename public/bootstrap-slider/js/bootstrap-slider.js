@@ -212,7 +212,7 @@
 			}
 
 			this.percentage[this.dragged] = percentage;
-			this.layout();
+			//this.layout();
 
 			if (this.touchCapable) {
 				// Touch: Bind touch events:
@@ -229,6 +229,8 @@
 
 			this.inDrag = true;
 			var val = this.calculateValue();
+      this.layout();
+      this.showTooltip();
 			this.element.trigger({
 					type: 'slideStart',
 					value: val
