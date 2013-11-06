@@ -2,14 +2,12 @@
 	
 	<div class="container">
 		<div class="hero-unit">
-			These are the two recommendation lists recommended personally for you in the order that is important.
-			Please answer the questions below. Use links <a href="">IMDb</a> and <a href="">Watch trailer</a> to know more about the movies.
+			Please answer the questions about the recommendations you got.
 		</div>
 			
 		@helper.form(routes.Experiment.handle_post(), 'method -> "post") {
 			<div class="row">
 				<div class="span6 offset3">
-					<h4 class="form-signin-heading">Please answer the questions about the Original list</h4>
 					<table class="table table-striped">
 						<thead>
 							<tr>

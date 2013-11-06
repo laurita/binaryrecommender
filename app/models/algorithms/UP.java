@@ -396,7 +396,6 @@ public class UP {
             } else {
               v_ratingDiffs = calcRatingDiffs(v);
             }
-            System.out.println("binary similarity between " + u + " and " + v);
             similarities[v] = binarySimilarity(u_ratingDiffs, v_ratingDiffs, strongerBiasFor);
             commonPairs = commonPairs(u_ratingDiffs, v_ratingDiffs);
             signSimilarities[v] = similarities[v] * Math.min(commonPairs, gamma) / gamma;
@@ -404,7 +403,6 @@ public class UP {
             u_ratingDiffs = calcRatingDiffs(u);
             if (c2.newCust) {
               int[][] v_ratingDiffs = userItemItemMatrix[v];
-              System.out.println("similarity between " + u + " and " + v);
               similarities[v] = binarySimilarity(u_ratingDiffs, v_ratingDiffs, strongerBiasFor);
               commonPairs = commonPairs(u_ratingDiffs, v_ratingDiffs);
               signSimilarities[v] = similarities[v] * Math.min(commonPairs, gamma) / gamma;
@@ -420,12 +418,9 @@ public class UP {
     }
     this.similarities = similarities;
     this.signSimilarities = signSimilarities;
-    System.out.println("similarities");
-    System.out.println(Arrays.toString(similarities));
   }
   
   private float similarity(int u, int v, ArrayList<Integer> uv_movies) {
-    System.out.println("similarity between " + u + " and " + v);
     float similarity = 0;
     
     double ru = m_aCustomers[u].RatingAvg;
@@ -442,9 +437,6 @@ public class UP {
         int rum = userItemMatrix[u][j].Rating;
         int rvm = userItemMatrix[v][j].Rating;
         
-        System.out.println("rum " + rum);
-        System.out.println("rvm " + rvm);
-        
         numeratorSum += (rum - ru) * (rvm - rv);
         denominatorSumU += Math.pow(rum - ru, 2);
         denominatorSumV += Math.pow(rvm - rv, 2);
@@ -456,7 +448,6 @@ public class UP {
         similarity = (float) (numeratorSum / denominator);
       }
     }
-    System.out.println(similarity);
     return similarity;
   }
 
@@ -471,8 +462,6 @@ public class UP {
           mag1 += arr1[i][j] * arr1[i][j];
           mag2 += arr2[i][j] * arr2[i][j];
           corr += arr1[i][j] * arr2[i][j];
-          System.out.println("diff1 " + arr1[i][j]);
-          System.out.println("diff2 " + arr2[i][j]);
         }
       }
     }
@@ -483,18 +472,14 @@ public class UP {
       j = pref.Movie2Id;
       // -7 stands for null
       if ((arr1[i][j] != -7) && (arr2[i][j] != -7)) {
-        System.out.println("additional prefs stronger");
         mag1 += 5 * arr1[i][j] * arr1[i][j];
         mag2 += 5 * arr2[i][j] * arr2[i][j];
         corr += 5 * arr1[i][j] * arr2[i][j];
-        System.out.println("diff1 " + arr1[i][j]);
-        System.out.println("diff2 " + arr2[i][j]);
       }
     }
     
     float denom = (float)Math.sqrt(mag1*mag2);
     if (denom != 0) { corr /= denom; }
-    System.out.println(corr);
     return corr;
   }
 
