@@ -59,7 +59,6 @@ ALTER SEQUENCE users_seq RESTART WITH 7000;
 	
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists moviePairs;
 drop table if exists ml_ratings;
@@ -67,5 +66,3 @@ drop table if exists comparisons;
 drop table if exists similarities;
 drop table if exists kmatrix;
 drop table if exists recommendation_comparisons;
-
-SET REFERENTIAL_INTEGRITY TRUE;
