@@ -10,7 +10,7 @@ import com.avaje.ebean.Expr;
 import com.avaje.ebean.*;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User extends Model {
 	
 	@Id

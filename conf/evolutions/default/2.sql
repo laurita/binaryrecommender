@@ -5,17 +5,25 @@ create table moviePairs (
 	movie2_id                 integer not null,
   logpopcorr                float,
 	constraint pk_moviePairs primary key (movie1_id, movie2_id))
-as select * from csvread('data/data1/moviePairs.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
-;
+  ;
+  
+COPY moviePairs FROM 'data/data1/moviePairs.dat' DELIMITER ',' CSV;
+
+-- as select * from csvread('data/data1/moviePairs.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
+-- ;
 
 create table ml_ratings (
 	user_id										integer not null,
 	movie_id									integer not null,
 	value											integer not null,
   time											bigint)
-as select *
-from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
-;
+  ;
+  
+COPY ml_ratings FROM 'data/data1/very_pop_ratings.dat' DELIMITER ',' CSV;
+
+-- as select *
+-- from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
+-- ;
 
 create table comparisons (
 	user_id										integer not null,
@@ -47,7 +55,7 @@ create table recommendation_comparisons (
 constraint pk_recommendation_comparisons primary key (user_id)
 );
 
-ALTER SEQUENCE user_seq RESTART WITH 7000;
+ALTER SEQUENCE users_seq RESTART WITH 7000;
 	
 # --- !Downs
 
