@@ -3,6 +3,7 @@
 # ~~~~
 
 # Home page
+GET			/														controllers.Experiment.handle_get()
 GET			/experiment									controllers.Experiment.handle_get()
 POST		/experiment									controllers.Experiment.handle_post()
 POST		/ajax												controllers.Experiment.handle_ajax()

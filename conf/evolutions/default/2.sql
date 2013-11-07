@@ -32,22 +32,22 @@ create table comparisons (
 	constraint pk_comparisons primary key (user_id, question))
 ;
 
-create table similarities (
-	user1_id									integer not null,
-	user2_id									integer not null,
-	similarity								float,
-	signSimilarity						float,
-constraint pk_similarities primary key (user1_id, user2_id)
-);
+--create table similarities (
+--	user1_id									integer not null,
+--	user2_id									integer not null,
+--	similarity								float,
+--	signSimilarity						float,
+--constraint pk_similarities primary key (user1_id, user2_id)
+--);
 
-create table kmatrix (
-  user_id                   integer not null,
-	movie1_id									integer not null,
-	movie2_id									integer not null,
-	cValue										float,
-	wValue										float,
-constraint pk_kmatrix primary key (user_id, movie1_id, movie2_id)
-);
+--create table kmatrix (
+--  user_id                   integer not null,
+--	movie1_id									integer not null,
+--	movie2_id									integer not null,
+--	cValue										float,
+--	wValue										float,
+--constraint pk_kmatrix primary key (user_id, movie1_id, movie2_id)
+--);
 
 create table recommendation_comparisons (
   user_id                   integer not null,
@@ -63,6 +63,6 @@ ALTER SEQUENCE users_seq RESTART WITH 7000;
 drop table if exists moviePairs;
 drop table if exists ml_ratings;
 drop table if exists comparisons;
-drop table if exists similarities;
-drop table if exists kmatrix;
+--drop table if exists similarities;
+--drop table if exists kmatrix;
 drop table if exists recommendation_comparisons;
