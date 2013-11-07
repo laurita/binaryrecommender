@@ -18,7 +18,9 @@ import static play.libs.Json.toJson;
 import com.fasterxml.jackson.databind.JsonNode;           
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.algorithms.*;
-//import models.algorithms.helpers.*;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class Experiment extends Controller {
 	
@@ -37,9 +39,10 @@ public class Experiment extends Controller {
       try {
         Class expClass = Class.forName("controllers.Experiment");
         Class[] noparams = new Class[]{};
-        System.out.println("handle_get_" + userState);
+        debug_print("handle_get_" + userState);
         Method method = expClass.getMethod("handle_get_" + userState, noparams);
         Result res = (Result) method.invoke(null);
+        debug_print("handle_get_" + userState + " DONE!");
         return res;      
       }
       catch (Exception x) {
@@ -47,6 +50,12 @@ public class Experiment extends Controller {
       }
     }
     return redirect(routes.Application.logout());
+  }
+  
+  public static void debug_print(String arg) {
+  	 java.util.Date date= new java.util.Date();
+  	 System.out.print(new Timestamp(date.getTime()));
+     System.out.println(" > " + arg);
   }
   
   public static Result handle_get_000() {
@@ -70,10 +79,14 @@ public class Experiment extends Controller {
   }
   
   public static Result handle_get_121() {
+    debug_print("Inside handle_get_121");
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<List<Integer>> moviePairs = Movie.selectBestMoviePairs(4950);
+    List<SqlRow> moviePairs = Movie.selectBestMoviePairs(userId, 4950);    
+    
+    debug_print(String.format("elements count: %d", moviePairs.size()));
+    debug_print("handle_get_121 rendering");
     return ok(tpl_121.render(moviePairs, user));
   }
   

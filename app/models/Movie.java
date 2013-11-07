@@ -81,18 +81,25 @@ public class Movie extends Model {
 		return null;
 	}
   
-	public static List<List<Integer>> selectBestMoviePairs(int n) {
-		String sql = String.format("select movie1_id, movie2_id from moviePairs " +
-      "order by logpopcorr * (0.8 + random() * (1 - 0.8)) desc limit %d", n);
+	public static List<SqlRow> selectBestMoviePairs(int userId, int n) {
+		String sql = String.format("select tbl1.movie1_id, tbl1.movie1_title, tbl1.movie1_description, " +
+		"tbl1.movie1_length, tbl1.movie1_imdbLink, tbl1.movie1_trailerLink, " +
+		"tbl1.movie2_id, tbl1.movie2_title, tbl1.movie2_description, tbl1.movie2_length, " +
+		"tbl1.movie2_imdbLink, tbl1.movie2_trailerLink, tbl2.value from " +
+	  "(select c.movie1_id, a.title movie1_title, a.description movie1_description, " +
+		"a.length movie1_length, a.imdb_link movie1_imdbLink, a.trailer_link movie1_trailerLink, " +
+		"c.movie2_id, b.title movie2_title, b.description movie2_description, b.length movie2_length, " +
+		"b.imdb_link movie2_imdbLink, b.trailer_link movie2_trailerLink " +
+		"from moviePairs as c, movie as a, movie as b " +
+		"where c.movie1_id = a.id and c.movie2_id = b.id " +
+		"order by c.logpopcorr * (0.8 + random() * (1 - 0.8)) desc " +
+	  ") as tbl1 left outer join " +
+    "(select * from preference where user_id = %d) as tbl2 " +
+    "on (tbl1.movie1_id = tbl2.movie1_id and tbl1.movie2_id = tbl2.movie2_id) limit %d", userId, n);
+    
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
-		List<SqlRow> list = sqlQuery.findList();
-		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
-		for (SqlRow row : list) {
-			List<Integer> l = new ArrayList<Integer>();
-			l.add(row.getInteger("movie1_id"));
-			l.add(row.getInteger("movie2_id"));
-			moviePairs.add(l);
-		}
+		List<SqlRow> moviePairs = sqlQuery.findList();
+		
 		return moviePairs;
 	}
 	
