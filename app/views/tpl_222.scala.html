@@ -1,6 +1,6 @@
-@(moviePairs: List[List[Integer]], user: User)
+@(moviePairs: List[com.avaje.ebean.SqlRow])
 
-@import models.Movie
+@import com.avaje.ebean.SqlRow
 
 @main("Movie comparisons") {	
 	<div class="container">	
@@ -22,28 +22,21 @@
 		</div>
 		<ul id="pair_list" style="display: none">
 			@for(moviePair <- moviePairs) {
-				@defining(moviePair.get(0)) { m1 =>
-					@defining(moviePair.get(1)) { m2 =>
-						@defining(Movie.find.byId(m1)) { movie1 =>
-							@defining(Movie.find.byId(m2)) { movie2 =>
-								@defining(user.getPreferenceFilter().eq("movie1", movie1).eq("movie2", movie2).findUnique()) { pref =>
-									<li 
-									data-movie_1="@{m1}"
-									data-title_1="@movie1.title" 
-									data-descr_1="@movie1.description" 
-									data-length_1="@movie1.length"
-									data-imdb_1="@movie1.imdbLink"
-									data-trailer_1="@movie1.trailerLink"
-									data-movie_2="@{m2}" 
-									data-title_2="@movie2.title"
-									data-descr_2="@movie2.description"
-									data-length_2="@movie2.length"
-									data-imdb_2="@movie2.imdbLink"
-									data-trailer_2="@movie2.trailerLink">@if(pref == null) {none} else {@pref.value}</li>
-								}
-							}
-						}
-					}
+				@defining(moviePair.getInteger("value")) { pref =>
+					<li 
+					data-movie_1="@{moviePair.getInteger("movie1_id")}"
+					data-title_1="@{moviePair.getString("movie1_title")}" 
+					data-descr_1="@{moviePair.getString("movie1_description")}" 
+					data-length_1="@{moviePair.getInteger("movie1_length")}"
+					data-imdb_1="@{moviePair.getString("movie1_imdbLink")}"
+					data-trailer_1="@{moviePair.getString("movie1_trailerLink")}"
+					data-movie_2="@{moviePair.getInteger("movie2_id")}"
+					data-title_2="@{moviePair.getString("movie2_title")}" 
+					data-descr_2="@{moviePair.getString("movie2_description")}" 
+					data-length_2="@{moviePair.getInteger("movie2_length")}"
+					data-imdb_2="@{moviePair.getString("movie2_imdbLink")}"
+					data-trailer_2="@{moviePair.getString("movie2_trailerLink")}"
+					>@if(pref == null) {none} else {@pref}</li>
 				}
 			}
 		</ul>

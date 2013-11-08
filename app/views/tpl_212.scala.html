@@ -1,6 +1,6 @@
-@(movies: List[Movie], user: User	)
+@(rows: List[com.avaje.ebean.SqlRow])
 
-@import models.User
+@import com.avaje.ebean.SqlRow
 
 @main("Movie ratings") {	
 	<div class="container">
@@ -20,34 +20,34 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for(movie <- movies) {
-								@defining(user.getMovieRating(movie.id)) { rating =>
-									<tr class="movie-id-@{movie.id} @{if(rating != 0) rating + "stars"}">
+							@for(row <- rows) {
+								@defining(row.getInteger("id")) { movie_id =>
+									<tr class="movie-id-@{movie_id} @defining(row.getInteger("value")) { rating => @{if(rating != null) rating + "stars"}}">
 										<td>
 											<div class="hero-unit">
 												<div class="row">
 													<div class="span3">
-														<img src="@routes.Assets.at("images/movies/" + movie.id + ".jpg")" />
+														<img src="@routes.Assets.at("images/movies/" + movie_id + ".jpg")" />
 													</div>
 													<div class="span5 offset1">
 														<div class="row">
 															<h4>
-																<a href="@routes.Movies.details(movie.id)">
-																	@movie.title
+																<a href="@routes.Movies.details(movie_id)">
+																	@row.getString("title")
 																</a>
 															</h4>
 														</div>
 														<div class="row">
 															<div class="span2">
-																@movie.length Min
+																@row.getInteger("length") Min
 															</div>
 															<div class="span1">
-																<a href="@movie.imdbLink" target="_blank">
+																<a href="@row.getString("imdb_link")" target="_blank">
 																	IMDb
 																</a>
 															</div>
 															<div class="span2">
-																<a class="various fancybox" href="@movie.trailerLink">Watch trailer</a>
+																<a class="various fancybox" href="@row.getString("trailer_link")">Watch trailer</a>
 															</div>
 														</div>
 					
@@ -62,7 +62,7 @@
 														</div>
 													
 														<div class="row">
-															@movie.description
+															@row.getString("description")
 														</div>
 													</div>
 												</div>
@@ -78,7 +78,7 @@
 			</div>
 		</div>
 		
-		@if(movies.length > 10) {
+		@if(rows.length > 10) {
 			<div class="pagination"></div>
 		}
 		  
@@ -103,7 +103,7 @@
 
 		var options = {
 			currentPage: 1,
-			totalPages: Math.ceil("@movies.length" / 10),
+			totalPages: Math.ceil("@rows.length" / 10),
 			alignment: "center",
 			onPageChanged:
 			function (event, oldPage, newPage) {

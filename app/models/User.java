@@ -186,41 +186,57 @@ public class User extends Model {
 		return allIds;
 	}
   
-  public List<Movie> getSeenMoviesRecommendedOriginally() {
+  public List<SqlRow> getSeenMoviesRecommendedOriginally() {
 		String sql = String.format(
-      "select recommendation.movie_id as movie_id from movie, recommendation " +
-      "where recommendation.user_id = %d and " +
-      "movie.id = movie_id and " +
-      "updated = false and " +
-      "seen = true " +
-      "order by movie.logpopvar;", this.id);
+      "select tbl1.id, tbl1.title, tbl1.description, tbl1.length, tbl1.imdb_link, " +
+      "tbl1.trailer_link, tbl2.value from " +
+	    "(select movie.id, title, description, length, imdb_link, " +
+		  "trailer_link from movie, recommendation " +
+		  "where user_id = %d and movie.id = movie_id and " +
+		  "updated = false and seen = true order by movie.logpopvar " +
+	    ") as tbl1 left outer join " +
+	    "(select * from rating where user_id = %d) as tbl2 " +
+	    "on (tbl1.id = tbl2.movie_id);", this.id, this.id);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
-		List<Movie> movies = new ArrayList<Movie>();
-		for (SqlRow row : rows) {
-      movies.add(Movie.find.byId(row.getInteger("movie_id")));
-		}
-		return movies;
+		return rows;
   }
   
-  public List<List<Integer>> getSeenMoviePairsRecommendedOriginally() {
+  public List<SqlRow> getSeenMoviePairsRecommendedOriginally() {
 		String sql = String.format(
-      "SELECT * FROM MOVIEPAIRS " + 
-      "WHERE movie1_id IN " + 
-      "(SELECT movie_id FROM RECOMMENDATION WHERE user_id = %d AND updated=false AND seen=true) " +
-      "AND movie2_id IN " +
-      "(SELECT movie_id FROM RECOMMENDATION WHERE user_id = %d AND updated=false AND seen=true);",
-        this.id, this.id);
+      "select tbl1.movie1_id, tbl1.movie1_title, tbl1.movie1_description, " +
+		  "tbl1.movie1_length, tbl1.movie1_imdbLink, tbl1.movie1_trailerLink, " +
+		  "tbl1.movie2_id, tbl1.movie2_title, tbl1.movie2_description, tbl1.movie2_length, " +
+		  "tbl1.movie2_imdbLink, tbl1.movie2_trailerLink, tbl2.value from	" +
+	    "(SELECT a.id movie1_id, a.title movie1_title, a.description movie1_description, " +
+		  "a.length movie1_length, a.imdb_link movie1_imdbLink, a.trailer_link movie1_trailerLink, " +
+		  "b.id movie2_id, b.title movie2_title, b.description movie2_description, b.length movie2_length, " +
+		  "b.imdb_link movie2_imdbLink, b.trailer_link movie2_trailerLink " +
+		  "FROM movie a, movie b, MOVIEPAIRS c " +
+	    "WHERE movie1_id IN " +
+			"(SELECT movie_id FROM RECOMMENDATION WHERE user_id = %d AND updated=false AND seen=true) " +
+		  "AND movie2_id IN " +
+			"(SELECT movie_id FROM RECOMMENDATION WHERE user_id = %d AND updated=false AND seen=true) " +
+	    "AND a.id = movie1_id AND b.id = movie2_id " +
+	    ") as tbl1 " +
+	    "left outer join (select * from preference where user_id = %d) as tbl2 " +
+	    "on (tbl1.movie1_id = tbl2.movie1_id and tbl1.movie2_id = tbl2.movie2_id);",
+        this.id, this.id, this.id);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
-		List<List<Integer>> moviePairs = new ArrayList<List<Integer>>();
-		for (SqlRow row : rows) {
-      List<Integer> pair = new ArrayList<Integer>();
-      pair.add(Movie.find.byId(row.getInteger("movie1_id")).id);
-      pair.add(Movie.find.byId(row.getInteger("movie2_id")).id);
-      moviePairs.add(pair);
-		}
-    return moviePairs;
+    return rows;
+  }
+  
+  public List<SqlRow> getAllMoviesAndTheirRatings() {
+		String sql = String.format(
+      "select tbl1.id, tbl1.title, tbl1.description, tbl1.length, tbl1.imdb_link, " +
+		  "tbl1.trailer_link, tbl2.value from (select * from movie) as tbl1 " +
+      "left outer join (select * from rating where user_id = %d) as tbl2 " +
+      "on (tbl1.id = tbl2.movie_id) order by tbl1.logpopvar desc;",
+        this.id);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+    return rows;
   }
   
   public void addRecommendationComparison(int value) {

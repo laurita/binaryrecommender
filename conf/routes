@@ -36,38 +36,3 @@ GET			/movies/:id									controllers.Movies.details(id:Integer)
 
 # After the first stage finishes
 GET			/updateToNextStage					controllers.Application.updateToNextStage()
-
-
-
-
-
-
-
-
-#GET			/answerQuestions						controllers.Application.answerQuestions()
-#POST		/submitAnswers							controllers.Application.submitAnswers()
-#GET			/startExperiment						controllers.Application.startExperiment()
-#GET			/start2Stage								controllers.Application.start2Stage()
-
-
-#GET			/recommendation							controllers.Recommender.recommend()
-#POST		/recommendation/update			controllers.Recommender.update()			
-#GET			/recommendation/compare			controllers.Recommender.compare()
-#POST		/recommendation/submitComparisons			controllers.Recommender.submitComparisons()			
-
-
-# Movies
-#GET			/movies											controllers.Movies.list()
-#GET			/preferences								controllers.Movies.preferences()
-#GET			/movies/:id									controllers.Movies.details(id:Integer)
-
-# Users
-#GET			/users											controllers.Users.list()
-#GET			/users/:id									controllers.Users.details(id:String)
-
-#POST		/users/addPreferences				controllers.Users.addPreferences()
-
-# Ratings
-#GET			/ratings										controllers.Ratings.list()
-
-

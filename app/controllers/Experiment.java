@@ -74,8 +74,8 @@ public class Experiment extends Controller {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<Movie> movies = Movie.find.orderBy("logpopvar desc").findList();
-    return ok(tpl_111.render(movies, user));
+    List<SqlRow> movies = user.getAllMoviesAndTheirRatings();
+    return ok(tpl_111.render(movies));
   }
   
   public static Result handle_get_121() {
@@ -87,7 +87,7 @@ public class Experiment extends Controller {
     
     debug_print(String.format("elements count: %d", moviePairs.size()));
     debug_print("handle_get_121 rendering");
-    return ok(tpl_121.render(moviePairs, user));
+    return ok(tpl_121.render(moviePairs));
   }
   
   public static Result handle_get_112() {
@@ -152,16 +152,16 @@ public class Experiment extends Controller {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<Movie> seenMoviesFromRecList = user.getSeenMoviesRecommendedOriginally();
-    return ok(tpl_212.render(seenMoviesFromRecList, user));
+    List<SqlRow> seenMoviesFromRecList = user.getSeenMoviesRecommendedOriginally();
+    return ok(tpl_212.render(seenMoviesFromRecList));
   }
   
   public static Result handle_get_222() {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<List<Integer>> seenPairsFromRecList = user.getSeenMoviePairsRecommendedOriginally();
-    return ok(tpl_222.render(seenPairsFromRecList, user));
+    List<SqlRow> seenPairsFromRecList = user.getSeenMoviePairsRecommendedOriginally();
+    return ok(tpl_222.render(seenPairsFromRecList));
   }
   
   public static Result handle_get_213() {
