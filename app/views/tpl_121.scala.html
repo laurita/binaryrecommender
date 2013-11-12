@@ -60,9 +60,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<div>@pairsTotal</div>
-		
+				
 		@if(pairsTotal > 10) {
 			<div class="pagination"></div>
 		}
@@ -185,32 +183,18 @@
 		
 		function create_table_rows() {
 			console.log('create_table_rows starts');
-			//console.log($( '#pair_list li' ));
 			
 			var $lst = $( '#pair_list li' );
 			
-			//console.log('$lst');
-			//console.log($lst);
-			
 			$('#pref_table tbody').html(function() {
-				
 				var $new = $();
 				
 				$.each($lst, function( index, elem ) {
-					
-					//console.log('elem');
-					//console.log(elem);
 					
 					var m1 = $(elem).attr('data-movie_1');
 					var m2 = $(elem).attr('data-movie_2');
 					var title1 = $(elem).attr('data-title_1');
 					var title2 = $(elem).attr('data-title_2');
-					
-					//console.log('$(elem).attr("data-title_2")');
-					//console.log($(elem).attr('data-title_2'));
-					
-					
-					
 					var descr1 = $(elem).attr('data-descr_1');
 					var descr2 = $(elem).attr('data-descr_2');
 					var length1 = $(elem).attr('data-length_1');
@@ -222,14 +206,11 @@
 					var tr = $("<tr></tr>");
 					tr.attr('data-movie_1', m1);
 					tr.attr('data-movie_2', m2);
-					
-					//console.log(title2);
-					
+										
 					tr = tr.append(create_movie_td(m1, title1, descr1, length1, imdbLink1, trailerLink1));
 					tr = tr.append(create_slider_td(m1, title1, m2, title2));
 					tr = tr.append(create_movie_td(m2, title2, descr2, length2, imdbLink2, trailerLink2));
 					$new = $new.add( tr );
-					//console.log(tr);
 				});
 				return $new;
 			});
@@ -282,7 +263,6 @@
 		}
 		
 		function create_pagination(current_page) {
-			//console.log($('ul#pair_list').attr('data-pairs-total'));
 			var options = {
 				currentPage: current_page,
 				totalPages: Math.ceil($('ul#pair_list').attr('data-pairs-total') / 10),
@@ -327,7 +307,6 @@
 				elem.setAttribute('data-imdb_2', m2.imdbLink);
 				elem.setAttribute('data-trailer_2', m2.trailerLink);
 				
-				//console.log(pref.value);
 				if (pref.value == null) {
 					$(elem).text("none");
 				}
@@ -337,7 +316,6 @@
 			}
 			
 			for(var i = prefs.length; i < list_size; i++){
-				//console.log(list_size);
 			  $('#pair_list li')[prefs.length].remove();
 			}
 			create_table_rows();
@@ -363,7 +341,30 @@
 					update_total(data.total);
 					create_pagination(current_page);
 					create_hide_it();
+					start_fancybox();
 				}
+			});
+		}
+		
+		function start_fancybox() {
+			$(".fancybox").click(function() {
+				$.fancybox({
+					'padding'		: 0,
+					'autoScale'		: false,
+					'transitionIn'	: 'none',
+					'transitionOut'	: 'none',
+					'title'			: this.title,
+					'width'		: 680,
+					'height'		: 495,
+					'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+					'type'			: 'swf',
+					'swf'			: {
+						'wmode'		: 'transparent',
+						'allowfullscreen'	: 'true'
+					}
+				});
+
+				return false;
 			});
 		}
 		
@@ -392,6 +393,7 @@
 						update_total(data.total);
 						create_pagination(current_page);
 						create_hide_it();
+						start_fancybox();
 					}
 				});
 			});
@@ -400,29 +402,9 @@
 		$(document).ready(function () {
 			create_table_rows();
 			start_slider();
-			
-			$(".fancybox").click(function() {
-				$.fancybox({
-					'padding'		: 0,
-					'autoScale'		: false,
-					'transitionIn'	: 'none',
-					'transitionOut'	: 'none',
-					'title'			: this.title,
-					'width'		: 680,
-					'height'		: 495,
-					'href'			: this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
-					'type'			: 'swf',
-					'swf'			: {
-						'wmode'		: 'transparent',
-						'allowfullscreen'	: 'true'
-					}
-				});
-
-				return false;
-			});
-	
 			create_pagination(1);
 			create_hide_it();
+			start_fancybox();
 		});
 		</script>
 	}
