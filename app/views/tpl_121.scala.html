@@ -284,7 +284,7 @@
 			var list_size = lis.size();
 			
 			for(var i=0; i<prefs.length; i++){
-			  var pref = prefs[i];
+				var pref = prefs[i];
 				
 				if (i >= list_size) {
 					list = $('#pair_list');
@@ -316,7 +316,7 @@
 			}
 			
 			for(var i = prefs.length; i < list_size; i++){
-			  $('#pair_list li')[prefs.length].remove();
+				$('#pair_list li')[prefs.length].remove();
 			}
 			create_table_rows();
 			start_slider();
@@ -399,7 +399,19 @@
 			});
 		}
 		
+		function start_spinner() {
+			$("#spinner").bind("ajaxSend", function() {
+				console.log('spinning');
+				$(this).show();
+			}).bind("ajaxStop", function() {
+				$(this).hide();
+			}).bind("ajaxError", function() {
+				$(this).hide();
+			});
+		}
+		
 		$(document).ready(function () {
+			start_spinner();
 			create_table_rows();
 			start_slider();
 			create_pagination(1);

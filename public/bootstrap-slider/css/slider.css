@@ -71,6 +71,7 @@
 }
 .slider .tooltip-inner {
   white-space: nowrap;
+  font-size: 14px;
 }
 .slider-track {
   position: absolute;

@@ -46,6 +46,10 @@
 
 <body>
 	
+	<div id="spinner" class="spinner" style="display:none;">
+	    <img id="img-spinner" src="@routes.Assets.at("images/ajax-loader.gif")" alt="Loading"/>
+	</div>
+	
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -97,3 +101,12 @@
 	
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	
+  $('#load-btn').click(function() {
+      $('#spinner').show();
+  });
+});
+</script>

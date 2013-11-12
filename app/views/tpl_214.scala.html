@@ -168,7 +168,7 @@
 		<div class="row">
 			<div class="span2 offset5">
 				<form action="@routes.Experiment.handle_post()" method="POST">
-					<input class="btn btn-primary btn-large" type="submit" value="Finish"></input>
+					<input class="btn btn-primary btn-large" id="load-btn" type="submit" value="Finish"></input>
 				</form>
 			</div>
 		</div>
@@ -177,7 +177,8 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
-		$(".fancybox").click(function() {
+		
+    $(".fancybox").click(function() {
 			$.fancybox({
 				'padding'		: 0,
 				'autoScale'		: false,

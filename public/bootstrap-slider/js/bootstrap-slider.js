@@ -62,7 +62,7 @@
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
 				this.sizePos = 'offsetWidth';
-				this.tooltip.addClass('top')[0].style.top = -this.tooltip.outerHeight() - 14 + 'px';
+				this.tooltip.addClass('top')[0].style.top = -this.tooltip.outerHeight() - 18 + 'px';
 				break;
 		}
 
