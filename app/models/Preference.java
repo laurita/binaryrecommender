@@ -85,9 +85,10 @@ public class Preference extends Model {
     
 		if (prefs.size() != 0) {
       
-      sql = String.format("update preference where " +
-        "user_id = %d and movie1_id = %d and movie2_id = %d " +
-        "set value = %d and additional = %b", user.id, movie1.id, movie2.id, value, additional);
+      sql = String.format("update preference " +
+        "set value = %d, additional = %b " +
+        "where user_id = %d and movie1_id = %d and movie2_id = %d ", 
+        value, additional, user.id, movie1.id, movie2.id);
 		  SqlUpdate update = Ebean.createSqlUpdate(sql);
       int modifiedCount = Ebean.execute(update);
       

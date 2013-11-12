@@ -102,7 +102,7 @@ public class UP {
 	
   public static List<BinaryPreference> loadComparisons() {
     List<BinaryPreference> prefs = new ArrayList<BinaryPreference>();
-    String sql = "select * from preference";
+    String sql = "select * from preference where value is not null";
     SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
     List<SqlRow> list = sqlQuery.findList();
     for (SqlRow row : list) {

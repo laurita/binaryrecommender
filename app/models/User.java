@@ -151,27 +151,26 @@ public class User extends Model {
 		return allIds;
 	}
   
-	public List<Integer> getPreferedMovieIds() {
-		List<Preference> userPrefs = Preference.find.fetch("movie1")
-      .fetch("movie2").where().eq("user", this).findList();
-		Set<Integer> movieIds = new TreeSet<Integer>();
-    List<Integer> movieIdList = new ArrayList<Integer>();
-		for (Preference p : userPrefs) {
-			movieIds.add(p.movie1.id);
-      movieIds.add(p.movie2.id);
-		}
-    movieIdList.addAll(movieIds);
-		return movieIdList;
+	public List<SqlRow> getPreferedMovieIds() {
+    String sql = String.format("select distinct(movie1_id) from preference " +
+      "where user_id = %d and value is not null union select distinct(movie2_id) " +
+      "from preference where user_id = %d and value is not null;", this.id, this.id);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> movieIds = sqlQuery.findList();
+		return movieIds;
 	}
 		
 	public List<Integer> getUnpreferedMovieIds() {
-		List<Movie> all = Movie.find.all();
-		List<Integer> allIds = new ArrayList<Integer>();
-		for (Movie m : all) {
-			allIds.add(m.id);
-		}
-		allIds.removeAll(this.getPreferedMovieIds());
-		return allIds;
+    String sql = String.format("select distinct(movie1_id) from preference " +
+      "where user_id = %d and value is null union select distinct(movie2_id) " +
+      "from preference where user_id = %d and value not null;", this.id, this.id);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+    List<Integer> ids = new ArrayList<Integer>();
+    for (SqlRow row : rows) {
+      ids.add(row.getInteger("id"));
+    }
+		return ids;
 	}
   
 	public List<Integer> getUnpreferedMovieIdsFromGroup(int group) {
@@ -180,12 +179,12 @@ public class User extends Model {
       "WHERE r %% 2 = %d;", group);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
-		List<Integer> allIds = new ArrayList<Integer>();
-		for (SqlRow row : rows) {
-			allIds.add(row.getInteger("id"));
-		}
-		allIds.removeAll(this.getPreferedMovieIds());
-		return allIds;
+    List<Integer> ids = new ArrayList<Integer>();
+    for (SqlRow row : rows) {
+      ids.add(row.getInteger("id"));
+    }
+		ids.removeAll(this.getPreferedMovieIds());
+		return ids;
 	}
   
   public List<SqlRow> getSeenMoviesRecommendedOriginally() {

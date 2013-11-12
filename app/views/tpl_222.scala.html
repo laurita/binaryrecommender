@@ -66,9 +66,9 @@
         
 		<div class="row">
 			<div class="span2 offset5">
-				<form action="@routes.Experiment.handle_post()" method="POST" id="121_form">
+				<form action="@routes.Experiment.handle_post()" method="POST">
+					<input class="btn btn-primary btn-small add-prefs-btn" type="submit" value="I finished giving preferences"></input>
 				</form>
-				<button class="btn btn-primary btn-large add-prefs-btn">I finished giving preferences</button>
 			</div>
 		</div>
 				
@@ -229,6 +229,13 @@
 				var $m2 = $(this).attr('data-movie_2');
 				var value = $(this).data('slider').getValue();
 				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
+				$.ajax({
+					type: "POST",
+					url: "/ajax",
+					data: JSON.stringify({"movie1_id": $m1, "movie2_id": $m2, "value": value}),
+					contentType: 'application/json',
+					success: function(data) {}
+				});
 			});
 		}
 		
@@ -324,30 +331,6 @@
 	
 			create_pagination(1);
 			create_hide_it();
-			
-			$('.add-prefs-btn').on('click', function() {
-				var lst = $('#pair_list li').filter(function (){
-					return $(this).text() != 'none';
-				});
-				var array = [];
-				$.each(lst, function( index, elem ) {
-					var pref = {};
-					pref.movie1 = $(elem).attr('data-movie_1');
-					pref.movie2 = $(elem).attr('data-movie_2');
-					pref.value = $(elem).text();
-					array.push(pref)
-				});
-				$.ajax({
-					type: "POST",
-					url: "/ajax",
-					data: JSON.stringify({"prefs" : array}),
-					contentType: 'application/json',
-					success: function() {
-						$('#121_form').submit();
-					}
-				});
-				console.log(JSON.stringify({"prefs" : array}))
-			});
 		});
 		</script>
 	}

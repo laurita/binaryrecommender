@@ -86,8 +86,7 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     List<SqlRow> moviePairs = Movie.selectMoviePairs(userId, 10, 0);    
     
-    // TODO: change hard coded total
-    int prefsCount = Preference.countForUser(userId);;
+    int prefsCount = Preference.countForUser(userId);
     
     debug_print(String.format("elements count: %d", moviePairs.size()));
     debug_print("handle_get_121 rendering");
@@ -745,7 +744,7 @@ public class Experiment extends Controller {
         Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
         int value = json.get("value").asInt();
         
-        Preference.create(user, movie1, movie2, value);
+        Preference.create(user, movie1, movie2, value, false);
       }
       else if (aim.equals("hide")) {
         
@@ -847,13 +846,12 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     if (user != null) {
-      JsonNode jsonPrefs = request().body().asJson().get("prefs");
-      for(JsonNode jsonPref : jsonPrefs) {
-        Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
-        Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
-        int value = jsonPref.get("value").asInt();
-        Preference.create(user, movie1, movie2, value, true);
-      }
+      JsonNode json = request().body().asJson();
+      System.out.println(json);
+      Movie movie1 = Movie.find.byId(json.get("movie1_id").asInt());
+      Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
+      int value = json.get("value").asInt();
+      Preference.create(user, movie1, movie2, value, true);
     }
     return ok();
   }
