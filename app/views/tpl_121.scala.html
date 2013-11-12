@@ -328,12 +328,14 @@
 		
 		function next_page(from, to) {
 			console.log('next_page starts');
+			$('#spinner').show();
 			$.ajax({
 				type: "POST",
 				url: "/ajax",
 				data: JSON.stringify({"aim": "paginate", "from": from, "to": to}),
 				contentType: 'application/json',
 				success: function(data) {
+					$('#spinner').hide();
 					var prefs = data.prefs; 
 					update_page(prefs);
 					// check current_page
@@ -342,6 +344,9 @@
 					create_pagination(current_page);
 					create_hide_it();
 					start_fancybox();
+				},
+				error: function() {
+					$('#spinner').hide();
 				}
 			});
 		}
@@ -372,6 +377,8 @@
 			console.log('create_hide_it');
 			
 			$('.hideIt').on('click', function() {
+				
+				$('#spinner').show();
 				var id = $(this).attr('class').match(/(\d+)/)[1];
 				var id1 = $($(this).parentsUntil('tbody').last().find('.hideIt')[0]).attr('class').match(/(\d+)/)[1];
 				var id2 = $($(this).parentsUntil('tbody').last().find('.hideIt')[1]).attr('class').match(/(\d+)/)[1];
@@ -386,6 +393,7 @@
 					"first_in_page_id2": first_in_page_id2, "current_page": current_page}),
 					contentType: 'application/json',
 					success: function(data) {
+						$('#spinner').hide();
 						var prefs = data.prefs; 
 						update_page(prefs);
 						// check current_page
@@ -394,24 +402,15 @@
 						create_pagination(current_page);
 						create_hide_it();
 						start_fancybox();
+					},
+					error: function() {
+						$('#spinner').hide();
 					}
 				});
 			});
 		}
 		
-		function start_spinner() {
-			$("#spinner").bind("ajaxSend", function() {
-				console.log('spinning');
-				$(this).show();
-			}).bind("ajaxStop", function() {
-				$(this).hide();
-			}).bind("ajaxError", function() {
-				$(this).hide();
-			});
-		}
-		
 		$(document).ready(function () {
-			start_spinner();
 			create_table_rows();
 			start_slider();
 			create_pagination(1);
