@@ -96,6 +96,64 @@ public class Preference extends Model {
 		  p.save();
     }
 	}
+  
+  public static int findRowNumberOfPref(int user_id, int movie1_id, int movie2_id) {
+    String sql = String.format("select rownum from (select movie1_id, movie2_id, row_number() " +
+      "over (order by logpopcorrrand desc) as rownum from " +
+      "(select * from preference where user_id = %d) as a) as b " +
+      "where movie1_id = %d and movie2_id = %d;", user_id, movie1_id, movie2_id);
+		SqlQuery query = Ebean.createSqlQuery(sql);
+    List<SqlRow> rowNumbers = query.findList();
+    int rowNumber;
+		if (rowNumbers.size() != 0) {
+      rowNumber = rowNumbers.get(0).getInteger("rownum");
+      
+		} else {
+      rowNumber = 0;
+    }
+    return rowNumber;
+  }
+  
+  public static int findRowCountUntil(int user_id, int movie1_id, int movie2_id, int id) {
+    String sql = String.format("select count(*) from (select *, row_number() " +
+      "over(order by logpopcorrrand desc) as rownum from preference where user_id = %d) as a " +
+      "join (select rownum from (select movie1_id, movie2_id, row_number() over (order by logpopcorrrand desc) as rownum " +
+      "from (select * from preference where user_id = %d) as a) as b where movie1_id = %d and movie2_id = %d) as c " +
+      "on (a.rownum < c.rownum) where movie1_id = %d or movie2_id = %d;", user_id, user_id, movie1_id, movie2_id, id, id);
+		SqlQuery query = Ebean.createSqlQuery(sql);
+    List<SqlRow> rowCounts = query.findList();
+    int rowCount;
+		if (rowCounts.size() != 0) {
+      rowCount = rowCounts.get(0).getInteger("count");
+		} else {
+      rowCount = 0;
+    }
+    return rowCount;
+  }
+  
+  public static void deletePrefs(int user_id, int id) {
+    String sql = String.format("delete from preference where user_id = %d " +
+      "and (movie1_id = %d or movie2_id = %d);", user_id, id, id);
+		SqlUpdate update = Ebean.createSqlUpdate(sql);
+    int modifiedCount = Ebean.execute(update);
+    System.out.println("deleted " + modifiedCount + " preferences");
+  }
+  
+  public static int countForUser(int user_id) {
+    String sql = String.format("select count(*) from preference " +
+      "where user_id = %d", user_id);
+		SqlQuery query = Ebean.createSqlQuery(sql);
+    List<SqlRow> rowCounts = query.findList();
+    int rowCount;
+		if (rowCounts.size() != 0) {
+      rowCount = rowCounts.get(0).getInteger("count");
+      
+		} else {
+      rowCount = 0;
+    }
+    return rowCount;
+    
+  }
 	
 	public static Finder<Long,Preference> find = new Finder<Long,Preference>(
 		Long.class, Preference.class);

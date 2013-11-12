@@ -299,42 +299,53 @@
 			$('.pagination').bootstrapPaginator(options);
 		}
 		
-		function update_page(data) {
-			var prefs = data.prefs; 
-			var $lst = $( '#pair_list li' );
-			$.each($lst, function( index, elem ) {
-				var pref = prefs[index];
-				console.log(pref);
-				if (pref == null) {
-					console.log('pref is null');
+		function update_page(prefs) {
+			var lis = $('#pair_list li');
+			var list_size = lis.size();
+			
+			for(var i=0; i<prefs.length; i++){
+			  var pref = prefs[i];
+				
+				if (i >= list_size) {
+					list = $('#pair_list');
+					var li = $("<li></li>");
+					list = list.append(li);
+				}
+				var elem = $('#pair_list li')[i];
+				var m1 = pref.movie1;
+				elem.setAttribute('data-movie_1', m1.id);
+				elem.setAttribute('data-title_1', m1.title);
+				elem.setAttribute('data-length_1', m1.length);
+				elem.setAttribute('data-descr_1', m1.description);
+				elem.setAttribute('data-imdb_1', m1.imdbLink);
+				elem.setAttribute('data-trailer_1', m1.trailerLink);
+				var m2 = pref.movie2;
+				elem.setAttribute('data-movie_2', m2.id);
+				elem.setAttribute('data-title_2', m2.title);
+				elem.setAttribute('data-length_2', m2.length);
+				elem.setAttribute('data-descr_2', m2.description);
+				elem.setAttribute('data-imdb_2', m2.imdbLink);
+				elem.setAttribute('data-trailer_2', m2.trailerLink);
+				
+				//console.log(pref.value);
+				if (pref.value == null) {
+					$(elem).text("none");
 				}
 				else {
-					var m1 = pref.movie1;
-					elem.setAttribute('data-movie_1', m1.id);
-					elem.setAttribute('data-title_1', m1.title);
-					elem.setAttribute('data-length_1', m1.length);
-					elem.setAttribute('data-descr_1', m1.description);
-					elem.setAttribute('data-imdb_1', m1.imdbLink);
-					elem.setAttribute('data-trailer_1', m1.trailerLink);
-					var m2 = pref.movie2;
-					elem.setAttribute('data-movie_2', m2.id);
-					elem.setAttribute('data-title_2', m2.title);
-					elem.setAttribute('data-length_2', m2.length);
-					elem.setAttribute('data-descr_2', m2.description);
-					elem.setAttribute('data-imdb_2', m2.imdbLink);
-					elem.setAttribute('data-trailer_2', m2.trailerLink);
-					
-					//console.log(pref.value);
-					if (pref.value == null) {
-						$(elem).text("none");
-					}
-					else {
-						$(elem).text(pref.value);
-					}
+					$(elem).text(pref.value);
 				}
-			});
+			}
+			
+			for(var i = prefs.length; i < list_size; i++){
+				//console.log(list_size);
+			  $('#pair_list li')[prefs.length].remove();
+			}
 			create_table_rows();
 			start_slider();
+		}
+		
+		function update_total(total) {
+			$('ul#pair_list').attr('data-pairs-total', total);
 		}
 		
 		function next_page(from, to) {
@@ -345,47 +356,44 @@
 				data: JSON.stringify({"aim": "paginate", "from": from, "to": to}),
 				contentType: 'application/json',
 				success: function(data) {
-					update_page(data);
+					var prefs = data.prefs; 
+					update_page(prefs);
+					// check current_page
+					var current_page = $('.pagination ul li.active a').text();
+					update_total(data.total);
+					create_pagination(current_page);
+					create_hide_it();
 				}
 			});
 		}
 		
 		function create_hide_it() {
+			console.log('create_hide_it');
+			
 			$('.hideIt').on('click', function() {
 				var id = $(this).attr('class').match(/(\d+)/)[1];
 				var id1 = $($(this).parentsUntil('tbody').last().find('.hideIt')[0]).attr('class').match(/(\d+)/)[1];
 				var id2 = $($(this).parentsUntil('tbody').last().find('.hideIt')[1]).attr('class').match(/(\d+)/)[1];
-				// index of the pair for which Hide was clicked in the hidden list (starting from 1)
-				var list_index = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').prevUntil('ul').size() + 1;
-				
 				var first_in_page_id1 = $('tbody tr:nth-child(1)').attr('data-movie_1');
 				var first_in_page_id2 = $('tbody tr:nth-child(1)').attr('data-movie_2');
-				var first_in_page_list_index = $('#pair_list li[data-movie_1=' + first_in_page_id1 + '][data-movie_2=' + first_in_page_id2 + ']').prevUntil('ul').size() + 1;
-				
-				var prev_count_1 = $('#pair_list li:nth-child(' + first_in_page_list_index + ')').prevUntil('.ul', '[data-movie_1=' + id + ']').size();
-				var prev_count_2 = $('#pair_list li:nth-child(' + first_in_page_list_index + ')').prevUntil('.ul', '[data-movie_2=' + id + ']').size();
-				
-				// number of li's before the current movie pair that have to be deleted
-				var prev_count = prev_count_1 + prev_count_2;
-				
-				// delete the pairs in list that contain movie with this id
-				// update pagination
-				$('#pair_list li[data-movie_1=' + id + ']').remove();
-				$('#pair_list li[data-movie_2=' + id + ']').remove();
 				var current_page = $('.pagination ul li.active a').text();
-				var first = (current_page - 1) * 10 - prev_count;
-				first = (first >= 0) ? first : 0;
-				var last = first + 10;
-				last = (last <= $('#pair_list li').length) ? last : ($('#pair_list li').length + 1);
 				
-				// check current_page
-				current_page = Math.ceil((first+1) / 10);
-				
-				create_table_rows(first, last);
-				start_slider();
-				
-				create_pagination(current_page);
-				create_hide_it();
+				$.ajax({
+					type: "POST",
+					url: "/ajax",
+					data: JSON.stringify({"aim" : 'hide', "id": id, "id1": id1, "id2": id2, "first_in_page_id1": first_in_page_id1,
+					"first_in_page_id2": first_in_page_id2, "current_page": current_page}),
+					contentType: 'application/json',
+					success: function(data) {
+						var prefs = data.prefs; 
+						update_page(prefs);
+						// check current_page
+						var current_page = Math.ceil((data.first+1) / 10);
+						update_total(data.total);
+						create_pagination(current_page);
+						create_hide_it();
+					}
+				});
 			});
 		}
 		
@@ -415,30 +423,6 @@
 	
 			create_pagination(1);
 			create_hide_it();
-			
-			$('.add-prefs-btn').on('click', function() {
-				var lst = $('#pair_list li').filter(function (){
-					return $(this).text() != 'none';
-				});
-				var array = [];
-				$.each(lst, function( index, elem ) {
-					var pref = {};
-					pref.movie1 = $(elem).attr('data-movie_1');
-					pref.movie2 = $(elem).attr('data-movie_2');
-					pref.value = $(elem).text();
-					array.push(pref)
-				});
-				$.ajax({
-					type: "POST",
-					url: "/ajax",
-					data: JSON.stringify({"prefs" : array}),
-					contentType: 'application/json',
-					success: function() {
-						$('#121_form').submit();
-					}
-				});
-				console.log(JSON.stringify({"prefs" : array}))
-			});
 		});
 		</script>
 	}

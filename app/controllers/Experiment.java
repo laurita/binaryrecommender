@@ -87,11 +87,11 @@ public class Experiment extends Controller {
     List<SqlRow> moviePairs = Movie.selectMoviePairs(userId, 10, 0);    
     
     // TODO: change hard coded total
-    int pairsTotal = 4950;
+    int prefsCount = Preference.countForUser(userId);;
     
     debug_print(String.format("elements count: %d", moviePairs.size()));
     debug_print("handle_get_121 rendering");
-    return ok(tpl_121.render(moviePairs, pairsTotal));
+    return ok(tpl_121.render(moviePairs, prefsCount));
   }
   
   public static Result handle_get_112() {
@@ -709,6 +709,8 @@ public class Experiment extends Controller {
   
   @BodyParser.Of(BodyParser.Json.class)
   public static Result handle_ajax_121() {
+    ObjectNode result = Json.newObject();
+     
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     if (user != null) {
@@ -719,38 +721,22 @@ public class Experiment extends Controller {
       
       if (aim.equals("paginate")) {
         
-        int from = json.get("from").asInt();
-        int to = json.get("to").asInt();
-        List<SqlRow> prefs = Movie.selectMoviePairs(userId, to - from, from);
+        int first = json.get("from").asInt();
+        first = (first >= 0) ? first : 0;
         
-        ObjectNode result = Json.newObject();
-        ArrayNode prefsArray = result.putArray("prefs");
-                
-        for (SqlRow pref : prefs) {
-          ObjectNode prefNode = Json.newObject();
-          
-          ObjectNode m1 = Json.newObject();
-          m1.put("id", pref.getInteger("movie1_id"));
-          m1.put("title", pref.getString("movie1_title"));
-          m1.put("description", pref.getString("movie1_description"));
-          m1.put("length", pref.getInteger("movie1_length"));
-          m1.put("imdbLink", pref.getString("movie1_imdbLink"));
-          m1.put("trailerLink", pref.getString("movie1_trailerLink"));
-          
-          ObjectNode m2 = Json.newObject();
-          m2.put("id", pref.getInteger("movie2_id"));
-          m2.put("title", pref.getString("movie2_title"));
-          m2.put("description", pref.getString("movie2_description"));
-          m2.put("length", pref.getInteger("movie2_length"));
-          m2.put("imdbLink", pref.getString("movie2_imdbLink"));
-          m2.put("trailerLink", pref.getString("movie2_trailerLink"));
-          
-          prefNode.put("movie1", m1);
-          prefNode.put("movie2", m2);
-          prefNode.put("value", pref.getInteger("value"));
-                    
-          prefsArray.add(prefNode);
-        }
+        int last = json.get("to").asInt();
+        int prefsCount = Preference.countForUser(userId);
+        last = (last <= prefsCount) ? last : (prefsCount + 1);
+        
+        System.out.println("first " + first + ", last " + last);
+        
+        List<SqlRow> prefs = Movie.selectMoviePairs(userId, last - first, first);
+        
+        
+        
+        addPrefsArrayToResult(result, prefs);
+        result.put("total", prefsCount);
+        
         System.out.println(result);        
         return ok(result);
       }
@@ -759,21 +745,81 @@ public class Experiment extends Controller {
         Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
         int value = json.get("value").asInt();
         
-        System.out.println("user_id " + userId);
-        
-        System.out.println("movie1_id " + json.get("movie1_id").asInt());
-        
-        System.out.println("movie2_id " + json.get("movie2_id").asInt());
-        
-        System.out.println("value " + value);
-        
         Preference.create(user, movie1, movie2, value);
       }
       else if (aim.equals("hide")) {
         
+        System.out.println(json);
+        
+        int id = json.get("id").asInt();
+        int id1 = json.get("id1").asInt();
+        int id2 = json.get("id2").asInt();
+        int first_in_page_id1 = json.get("first_in_page_id1").asInt();
+        int first_in_page_id2 = json.get("first_in_page_id2").asInt();
+        int current_page = json.get("current_page").asInt();
+        
+				// find first in page table row number
+				int prev_count = Preference.findRowCountUntil(userId, first_in_page_id1, first_in_page_id2, id);
+        
+        System.out.println("prev_count " + prev_count);
+				
+				// delete the pairs in list that contain movie with this id
+				Preference.deletePrefs(userId, id);
+        
+        // calculate the first row number
+				int first = (current_page - 1) * 10 - prev_count;
+        first = (first >= 0) ? first : 0;
+        
+				// calculate the last row number
+				int last = first + 10;
+        int prefsCount = Preference.countForUser(userId);
+        last = (last <= prefsCount) ? last : (prefsCount + 1);
+        
+        System.out.println("first " + first + ", last " + last);
+        
+        List<SqlRow> prefs = Movie.selectMoviePairs(userId, last - first, first);
+        
+        addPrefsArrayToResult(result, prefs);
+        
+        result.put("first", first);
+        result.put("last", last);
+        result.put("total", prefsCount);
+        
+        return ok(result);
       }
     }
     return ok();
+  }
+  
+  public static ObjectNode addPrefsArrayToResult(ObjectNode result, List<SqlRow> prefs) {
+    ArrayNode prefsArray = result.putArray("prefs");
+            
+    for (SqlRow pref : prefs) {
+      ObjectNode prefNode = Json.newObject();
+      
+      ObjectNode m1 = Json.newObject();
+      m1.put("id", pref.getInteger("movie1_id"));
+      m1.put("title", pref.getString("movie1_title"));
+      m1.put("description", pref.getString("movie1_description"));
+      m1.put("length", pref.getInteger("movie1_length"));
+      m1.put("imdbLink", pref.getString("movie1_imdbLink"));
+      m1.put("trailerLink", pref.getString("movie1_trailerLink"));
+      
+      ObjectNode m2 = Json.newObject();
+      m2.put("id", pref.getInteger("movie2_id"));
+      m2.put("title", pref.getString("movie2_title"));
+      m2.put("description", pref.getString("movie2_description"));
+      m2.put("length", pref.getInteger("movie2_length"));
+      m2.put("imdbLink", pref.getString("movie2_imdbLink"));
+      m2.put("trailerLink", pref.getString("movie2_trailerLink"));
+      
+      prefNode.put("movie1", m1);
+      prefNode.put("movie2", m2);
+      prefNode.put("value", pref.getInteger("value"));
+                
+      prefsArray.add(prefNode);
+    }
+    return result;
   }
   
   @BodyParser.Of(BodyParser.Json.class)
