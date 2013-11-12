@@ -57,13 +57,6 @@ public class Movie extends Model {
 	public List<Rating> getRatings() {
 		return Rating.find.where().eq("movie", this).findList();
 	}
-		
-	public List<Preference> getPreferences() {
-		return Preference.find.where().or(
-			Expr.eq("movie1", this),
-				Expr.eq("movie2", this)
-					).findList();
-	}
 	
 	public static Finder<Integer,Movie> find = new Finder<Integer,Movie>(
 		Integer.class, Movie.class);

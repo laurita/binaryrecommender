@@ -96,15 +96,7 @@ public class User extends Model {
 		return Rating.find.where().eq("user", this).findList();
 	}
   
-	public ExpressionList<Preference> getPreferenceFilter() {
-		return Preference.find.where().eq("user", this);
-	}
-  
-	public List<Preference> getPreferences() {
-		return Preference.find.where().eq("user", this).findList();
-	}
-		
-	public int getMovieRating(int movieId) {
+  public int getMovieRating(int movieId) {
 		Rating rating = Rating.find.where()
 			.eq("user", this)
 				.eq("movie", Movie.find.byId(movieId))
