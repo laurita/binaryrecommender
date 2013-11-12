@@ -1,8 +1,9 @@
-@(moviePairs: List[com.avaje.ebean.SqlRow])
+@(moviePairs: List[com.avaje.ebean.SqlRow], pairsTotal: Integer)
 
 @import com.avaje.ebean.SqlRow
 
 @main("Movie comparisons") {	
+	
 	<div class="container">	
 		<div class="hero-unit">
 			<p>
@@ -20,7 +21,7 @@
 				</ul>
 			</p>
 		</div>	
-		<ul id="pair_list" style="display: none">
+		<ul id="pair_list" style="display: none" data-pairs-total="@pairsTotal">
 			@for(moviePair <- moviePairs) {
 				@defining(moviePair.getInteger("value")) { pref =>
 					<li 
@@ -60,7 +61,9 @@
 			</div>
 		</div>
 		
-		@if(moviePairs.length > 10) {
+		<div>@pairsTotal</div>
+		
+		@if(pairsTotal > 10) {
 			<div class="pagination"></div>
 		}
         
@@ -160,6 +163,8 @@
 		
 		function create_slider_td(id1, title1, id2, title2) {
 			
+			console.log('create_slider_td');
+			
 			var value = $('#pair_list li[data-movie_1=' + id1 + '][data-movie_2=' + id2 + ']').text();
 			value = (value == "none") ? 0 : value;
 			
@@ -178,15 +183,34 @@
 			return td;
 		}
 		
-		function create_table_rows(from, to) {
+		function create_table_rows() {
+			console.log('create_table_rows starts');
+			//console.log($( '#pair_list li' ));
+			
+			var $lst = $( '#pair_list li' );
+			
+			//console.log('$lst');
+			//console.log($lst);
+			
 			$('#pref_table tbody').html(function() {
+				
 				var $new = $();
-				var $lst = $( '#pair_list li' ).slice(from, to);
+				
 				$.each($lst, function( index, elem ) {
+					
+					//console.log('elem');
+					//console.log(elem);
+					
 					var m1 = $(elem).attr('data-movie_1');
 					var m2 = $(elem).attr('data-movie_2');
 					var title1 = $(elem).attr('data-title_1');
 					var title2 = $(elem).attr('data-title_2');
+					
+					//console.log('$(elem).attr("data-title_2")');
+					//console.log($(elem).attr('data-title_2'));
+					
+					
+					
 					var descr1 = $(elem).attr('data-descr_1');
 					var descr2 = $(elem).attr('data-descr_2');
 					var length1 = $(elem).attr('data-length_1');
@@ -198,13 +222,18 @@
 					var tr = $("<tr></tr>");
 					tr.attr('data-movie_1', m1);
 					tr.attr('data-movie_2', m2);
+					
+					//console.log(title2);
+					
 					tr = tr.append(create_movie_td(m1, title1, descr1, length1, imdbLink1, trailerLink1));
 					tr = tr.append(create_slider_td(m1, title1, m2, title2));
 					tr = tr.append(create_movie_td(m2, title2, descr2, length2, imdbLink2, trailerLink2));
 					$new = $new.add( tr );
+					//console.log(tr);
 				});
 				return $new;
 			});
+			console.log('create_table_rows ends');
 		}
 		
 		function start_slider() {
@@ -243,13 +272,14 @@
 		}
 		
 		function create_pagination(current_page) {
+			//console.log($('ul#pair_list').attr('data-pairs-total'));
 			var options = {
 				currentPage: current_page,
-				totalPages: Math.ceil($('#pair_list li').length / 10),
+				totalPages: Math.ceil($('ul#pair_list').attr('data-pairs-total') / 10),
 				alignment: "center",
 				onPageChanged:
 				function (event, oldPage, newPage) {
-					create_table_rows((newPage - 1) * 10, newPage * 10);
+					next_page((newPage - 1) * 10, newPage * 10);
 					start_slider();
 					create_pagination(newPage);
 					create_hide_it();
@@ -257,6 +287,54 @@
 				}
 			}
 			$('.pagination').bootstrapPaginator(options);
+		}
+		
+		function update_page(data) {
+			var prefs = data.prefs; 
+			var $lst = $( '#pair_list li' );
+			$.each($lst, function( index, elem ) {
+				var pref = prefs[index];
+				if (pref == null) {
+					console.log('pref is null');
+				}
+				else {
+					var m1 = pref.movie1;
+					elem.setAttribute('data-movie_1', m1.id);
+					elem.setAttribute('data-title_1', m1.title);
+					elem.setAttribute('data-length_1', m1.length);
+					elem.setAttribute('data-descr_1', m1.description);
+					elem.setAttribute('data-imdb_1', m1.imdbLink);
+					elem.setAttribute('data-trailer_1', m1.trailerLink);
+					var m2 = pref.movie2;
+					elem.setAttribute('data-movie_2', m2.id);
+					elem.setAttribute('data-title_2', m2.title);
+					elem.setAttribute('data-length_2', m2.length);
+					elem.setAttribute('data-descr_2', m2.description);
+					elem.setAttribute('data-imdb_2', m2.imdbLink);
+					elem.setAttribute('data-trailer_2', m2.trailerLink);
+					if (pref.value == null) {
+						$(elem).text("none");
+					}
+					else {
+						$(elem).text(pref.value);
+					}
+				}
+			});
+			create_table_rows();
+			start_slider();
+		}
+		
+		function next_page(from, to) {
+			console.log('next_page starts');
+			$.ajax({
+				type: "POST",
+				url: "/ajax",
+				data: JSON.stringify({"aim": "paginate", "from": from, "to": to}),
+				contentType: 'application/json',
+				success: function(data) {
+					update_page(data);
+				}
+			});
 		}
 		
 		function create_hide_it() {
@@ -299,7 +377,7 @@
 		}
 		
 		$(document).ready(function () {
-			create_table_rows(0, 10);
+			create_table_rows();
 			start_slider();
 			
 			$(".fancybox").click(function() {

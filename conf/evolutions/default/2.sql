@@ -9,9 +9,6 @@ create table moviePairs (
   
 COPY moviePairs FROM '/Users/laura/Sandbox/play/movies/data/data1/moviePairs.dat' DELIMITER ',' CSV;
 
--- as select * from csvread('data/data1/moviePairs.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
--- ;
-
 create table ml_ratings (
 	user_id										integer not null,
 	movie_id									integer not null,
@@ -21,10 +18,6 @@ create table ml_ratings (
   
 COPY ml_ratings FROM '/Users/laura/Sandbox/play/movies/data/data1/very_pop_ratings.dat' DELIMITER ',' CSV;
 
--- as select *
--- from csvread('data/data1/very_pop_ratings.dat', null, 'fieldSeparator=, caseSensitiveColumnNames=true')
--- ;
-
 create table comparisons (
 	user_id										integer not null,
 	question									integer not null,
@@ -32,22 +25,19 @@ create table comparisons (
 	constraint pk_comparisons primary key (user_id, question))
 ;
 
---create table similarities (
---	user1_id									integer not null,
---	user2_id									integer not null,
---	similarity								float,
---	signSimilarity						float,
---constraint pk_similarities primary key (user1_id, user2_id)
---);
+drop table if exists preference;
 
---create table kmatrix (
---  user_id                   integer not null,
---	movie1_id									integer not null,
---	movie2_id									integer not null,
---	cValue										float,
---	wValue										float,
---constraint pk_kmatrix primary key (user_id, movie1_id, movie2_id)
---);
+create table preference (
+  id                        serial,
+  value                     integer,
+  additional                boolean,
+  user_id                   integer,
+  movie1_id                 integer,
+  movie2_id                 integer,
+  logpopcorrrand            float,
+  constraint pk_preference primary key (id),
+  constraint unique_pref unique (user_id, movie1_id, movie2_id))
+;
 
 create table recommendation_comparisons (
   user_id                   integer not null,
@@ -63,6 +53,4 @@ ALTER SEQUENCE users_seq RESTART WITH 7000;
 drop table if exists moviePairs;
 drop table if exists ml_ratings;
 drop table if exists comparisons;
---drop table if exists similarities;
---drop table if exists kmatrix;
 drop table if exists recommendation_comparisons;

@@ -15,7 +15,8 @@ import play.mvc.BodyParser;
 import play.libs.Json;
 import play.libs.Json.*;                        
 import static play.libs.Json.toJson;
-import com.fasterxml.jackson.databind.JsonNode;           
+import com.fasterxml.jackson.databind.JsonNode; 
+import com.fasterxml.jackson.databind.node.ArrayNode;          
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.algorithms.*;
 
@@ -83,11 +84,14 @@ public class Experiment extends Controller {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    List<SqlRow> moviePairs = Movie.selectBestMoviePairs(userId, 4950);    
+    List<SqlRow> moviePairs = Movie.selectMoviePairs(userId, 10, 0);    
+    
+    // TODO: change hard coded total
+    int pairsTotal = 4950;
     
     debug_print(String.format("elements count: %d", moviePairs.size()));
     debug_print("handle_get_121 rendering");
-    return ok(tpl_121.render(moviePairs));
+    return ok(tpl_121.render(moviePairs, pairsTotal));
   }
   
   public static Result handle_get_112() {
@@ -708,12 +712,58 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     if (user != null) {
-      JsonNode jsonPrefs = request().body().asJson().get("prefs");
-      for(JsonNode jsonPref : jsonPrefs) {
-        Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
-        Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
-        int value = jsonPref.get("value").asInt();
-        Preference pref = Preference.create(user, movie1, movie2, value);
+      String aim = request().body().asJson().get("aim").asText();
+      
+      System.out.println("aim is " + aim);
+      
+      if (aim.equals("paginate")) {
+        
+        int from = request().body().asJson().get("from").asInt();
+        int to = request().body().asJson().get("to").asInt();
+        List<SqlRow> prefs = Movie.selectMoviePairs(userId, to - from, from);
+        
+        ObjectNode result = Json.newObject();
+        ArrayNode prefsArray = result.putArray("prefs");
+                
+        for (SqlRow pref : prefs) {
+          ObjectNode prefNode = Json.newObject();
+          
+          ObjectNode m1 = Json.newObject();
+          m1.put("id", pref.getInteger("movie1_id"));
+          m1.put("title", pref.getString("movie1_title"));
+          m1.put("description", pref.getString("movie1_description"));
+          m1.put("length", pref.getInteger("movie1_length"));
+          m1.put("imdbLink", pref.getString("movie1_imdbLink"));
+          m1.put("trailerLink", pref.getString("movie1_trailerLink"));
+          
+          ObjectNode m2 = Json.newObject();
+          m2.put("id", pref.getInteger("movie2_id"));
+          m2.put("title", pref.getString("movie2_title"));
+          m2.put("description", pref.getString("movie2_description"));
+          m2.put("length", pref.getInteger("movie2_length"));
+          m2.put("imdbLink", pref.getString("movie2_imdbLink"));
+          m2.put("trailerLink", pref.getString("movie2_trailerLink"));
+          
+          prefNode.put("movie1", m1);
+          prefNode.put("movie2", m2);
+          prefNode.put("value", pref.getInteger("value"));
+                    
+          prefsArray.add(prefNode);
+        }
+        System.out.println(result);        
+        return ok(result);
+      }
+      else if (aim.equals("addPrefs")) {
+        JsonNode jsonPrefs = request().body().asJson().get("prefs");
+        for(JsonNode jsonPref : jsonPrefs) {
+          Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
+          Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
+          int value = jsonPref.get("value").asInt();
+          Preference pref = Preference.create(user, movie1, movie2, value);
+        }
+      }
+      else if (aim.equals("hide")) {
+        
       }
     }
     return ok();

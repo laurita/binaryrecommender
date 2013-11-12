@@ -55,22 +55,15 @@ public class User extends Model {
 	public void save() {
 		createdAt();
 		addExperimentGroup();
-		super.save();
-		//increaseId();
-		//super.update(this.id + 6040);
+    super.save();
+    createPreferences();
+    super.update();
 	}
 	
 	void createdAt() {
 		this.createdAt = new Date();
 	}
 		
-	/*
-		void increaseId() {
-		System.out.println(this.id);
-		this.id = this.id + 6040;
-		}
-		*/
-	
 	private void addExperimentGroup() {
 		int experimentGroup = 1;
 		User lastUser = User.find.orderBy().desc("createdAt").setMaxRows(1).findUnique();
@@ -78,9 +71,18 @@ public class User extends Model {
 		if (lastExperimentGroup != 0) {
 			experimentGroup = (lastExperimentGroup == 1) ? 2 : 1;
 		}
-    //String state = (experimentGroup == 1) ? "010" : "020";
 		this.experimentGroup = experimentGroup;
-    //this.state = state;
+	}
+  
+	private void createPreferences() {
+    if (this.experimentGroup == 2) {
+	    String sql = String.format(
+        "insert into preference (user_id, movie1_id, movie2_id, logpopcorrrand) " +
+        "select %d, movie1_id, movie2_id, logpopcorr * (0.8 + random() * (1 - 0.8)) as x " +
+        "from moviepairs order by x desc;", this.id);
+		  SqlUpdate update = Ebean.createSqlUpdate(sql);
+      int modifiedCount = Ebean.execute(update);
+    }
 	}
 	
 	public static Finder<Integer,User> find = new Finder<Integer,User>(
