@@ -712,14 +712,15 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     if (user != null) {
-      String aim = request().body().asJson().get("aim").asText();
+      JsonNode json = request().body().asJson();
+      String aim = json.get("aim").asText();
       
       System.out.println("aim is " + aim);
       
       if (aim.equals("paginate")) {
         
-        int from = request().body().asJson().get("from").asInt();
-        int to = request().body().asJson().get("to").asInt();
+        int from = json.get("from").asInt();
+        int to = json.get("to").asInt();
         List<SqlRow> prefs = Movie.selectMoviePairs(userId, to - from, from);
         
         ObjectNode result = Json.newObject();
@@ -753,14 +754,20 @@ public class Experiment extends Controller {
         System.out.println(result);        
         return ok(result);
       }
-      else if (aim.equals("addPrefs")) {
-        JsonNode jsonPrefs = request().body().asJson().get("prefs");
-        for(JsonNode jsonPref : jsonPrefs) {
-          Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
-          Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
-          int value = jsonPref.get("value").asInt();
-          Preference pref = Preference.create(user, movie1, movie2, value);
-        }
+      else if (aim.equals("add_pref")) {
+        Movie movie1 = Movie.find.byId(json.get("movie1_id").asInt());
+        Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
+        int value = json.get("value").asInt();
+        
+        System.out.println("user_id " + userId);
+        
+        System.out.println("movie1_id " + json.get("movie1_id").asInt());
+        
+        System.out.println("movie2_id " + json.get("movie2_id").asInt());
+        
+        System.out.println("value " + value);
+        
+        Preference.create(user, movie1, movie2, value);
       }
       else if (aim.equals("hide")) {
         
@@ -799,9 +806,7 @@ public class Experiment extends Controller {
         Movie movie1 = Movie.find.byId(jsonPref.get("movie1").asInt());
         Movie movie2 = Movie.find.byId(jsonPref.get("movie2").asInt());
         int value = jsonPref.get("value").asInt();
-        Preference pref = Preference.create(user, movie1, movie2, value);
-        pref.additional = true;
-        pref.update();
+        Preference.create(user, movie1, movie2, value, true);
       }
     }
     return ok();

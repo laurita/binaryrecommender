@@ -25,20 +25,6 @@ create table comparisons (
 	constraint pk_comparisons primary key (user_id, question))
 ;
 
-drop table if exists preference;
-
-create table preference (
-  id                        serial,
-  value                     integer,
-  additional                boolean,
-  user_id                   integer,
-  movie1_id                 integer,
-  movie2_id                 integer,
-  logpopcorrrand            float,
-  constraint pk_preference primary key (id),
-  constraint unique_pref unique (user_id, movie1_id, movie2_id))
-;
-
 create table recommendation_comparisons (
   user_id                   integer not null,
 	comparison                integer not null,
@@ -46,6 +32,10 @@ constraint pk_recommendation_comparisons primary key (user_id)
 );
 
 ALTER SEQUENCE users_seq RESTART WITH 7000;
+
+ALTER TABLE preference ALTER COLUMN id SET DEFAULT nextval('preference_seq');
+ALTER TABLE preference ALTER COLUMN id SET NOT NULL;
+ALTER SEQUENCE preference_seq OWNED BY preference.id;
 	
 # --- !Downs
 

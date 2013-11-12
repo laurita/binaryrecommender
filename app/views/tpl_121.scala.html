@@ -257,7 +257,17 @@
 				var $m1 = $(this).attr('data-movie_1');
 				var $m2 = $(this).attr('data-movie_2');
 				var value = $(this).data('slider').getValue();
+				
+				
 				$("#pair_list li[data-movie_1=" + $m1 + "][data-movie_2=" + $m2 + "]").text(value);
+				$.ajax({
+					type: "POST",
+					url: "/ajax",
+					data: JSON.stringify({"aim": "add_pref", "movie1_id": $m1, "movie2_id": $m2, "value": value}),
+					contentType: 'application/json',
+					success: function(data) {}
+				});
+				
 			});
 		}
 		
