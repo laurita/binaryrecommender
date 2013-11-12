@@ -290,7 +290,7 @@
 				onPageChanged:
 				function (event, oldPage, newPage) {
 					next_page((newPage - 1) * 10, newPage * 10);
-					start_slider();
+					
 					create_pagination(newPage);
 					create_hide_it();
 					window.scrollTo(0,0);
@@ -304,6 +304,7 @@
 			var $lst = $( '#pair_list li' );
 			$.each($lst, function( index, elem ) {
 				var pref = prefs[index];
+				console.log(pref);
 				if (pref == null) {
 					console.log('pref is null');
 				}
@@ -322,6 +323,8 @@
 					elem.setAttribute('data-descr_2', m2.description);
 					elem.setAttribute('data-imdb_2', m2.imdbLink);
 					elem.setAttribute('data-trailer_2', m2.trailerLink);
+					
+					//console.log(pref.value);
 					if (pref.value == null) {
 						$(elem).text("none");
 					}

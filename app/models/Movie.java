@@ -86,7 +86,7 @@ public class Movie extends Model {
 		String sql = String.format("select c.movie1_id, a.title movie1_title, a.description movie1_description, " +
 		"a.length movie1_length, a.imdb_link movie1_imdbLink, a.trailer_link movie1_trailerLink, " +
 		"c.movie2_id, b.title movie2_title, b.description movie2_description, b.length movie2_length, " +
-		"b.imdb_link movie2_imdbLink, b.trailer_link movie2_trailerLink " +
+		"b.imdb_link movie2_imdbLink, b.trailer_link movie2_trailerLink, c.value " +
 		"from preference as c, movie as a, movie as b " +
 		"where c.user_id = %d and c.movie1_id = a.id and c.movie2_id = b.id " +
 		"order by c.logpopcorrrand desc limit %d offset %d", userId, limit, offset);
