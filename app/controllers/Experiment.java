@@ -230,7 +230,9 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
     
-    return ok(tpl_215.render());
+    Map<Integer, Integer> answers = user.getAnswers();
+    
+    return ok(tpl_215.render(answers));
   }
   
   public static Result handle_get_225() {
@@ -238,7 +240,9 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
     
-    return ok(tpl_225.render());
+    Map<Integer, Integer> answers = user.getAnswers();
+
+    return ok(tpl_225.render(answers));
   }
   
   public static Result handle_get_216() {

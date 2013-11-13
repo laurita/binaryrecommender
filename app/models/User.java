@@ -245,6 +245,18 @@ public class User extends Model {
     return res;
   }
   
+  public Map<Integer, Integer> getAnswers() {
+		String sql = String.format(
+      "select question, answer from comparisons where user_id = %d;", this.id);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+    Map<Integer, Integer> answers = new HashMap<Integer, Integer>();
+    for (SqlRow row : rows) {
+      answers.put(row.getInteger("question"), row.getInteger("answer"));
+    }
+    return answers;
+  }
+  
   public void addRecommendationComparison(int value) {
     
     String sql;

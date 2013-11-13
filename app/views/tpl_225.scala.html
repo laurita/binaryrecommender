@@ -1,3 +1,5 @@
+@(answers: Map[Integer, Integer])
+
 @main("Compare recommendations") {	
 	
 	<div class="container">
@@ -34,31 +36,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios1") { name =>
+									@defining(if (answers.get(1) == null) {0} else {answers.get(1)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -66,31 +70,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios2") { name =>
+									@defining(if (answers.get(2) == null) {0} else {answers.get(2)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree"  @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree"  @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral"  @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree"  @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree"  @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -98,31 +104,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios3") { name =>
+									@defining(if (answers.get(3) == null) {0} else {answers.get(3)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -130,31 +138,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios4") { name =>
+									@defining(if (answers.get(4) == null) {0} else {answers.get(4)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -162,31 +172,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios5") { name =>
+									@defining(if (answers.get(5) == null) {0} else {answers.get(5)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -194,31 +206,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios6") { name =>
+									@defining(if (answers.get(6) == null) {0} else {answers.get(6)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 							<tr>
@@ -226,31 +240,33 @@
 							</tr>
 							<tr>
 								@defining("likertScaleRadios7") { name =>
+									@defining(if (answers.get(7) == null) {0} else {answers.get(7)}) { answer =>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" value=1>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" value=2>
+											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="neutral" value=3 checked>
+											<input type="radio" name="@name" id="neutral" @{if(answer == 3 || answer == 0) "checked"} value=3>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" value=4>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" value=5>
+											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
+								}
 								}
 							</tr>
 						</tbody>
