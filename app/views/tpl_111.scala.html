@@ -78,7 +78,7 @@
 		</div>
 		
 		@if(rows.length > 10) {
-			<div class="pagination"></div>
+			<div class="pagination pagination-large"></div>
 		}
 		  
 		<div class="row">
@@ -104,6 +104,7 @@
 			currentPage: 1,
 			totalPages: Math.ceil("@rows.length" / 10),
 			alignment: "center",
+			size: "large",
 			onPageChanged:
 			function (event, oldPage, newPage) {
 				$('.table tbody tr').slice((newPage - 1) * 10, newPage * 10).show();

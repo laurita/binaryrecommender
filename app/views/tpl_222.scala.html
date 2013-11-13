@@ -61,7 +61,7 @@
 		</div>
 		
 		@if(moviePairs.length > 10) {
-			<div class="pagination"></div>
+			<div class="pagination pagination-large"></div>
 		}
         
 		<div class="row">
@@ -254,6 +254,7 @@
 				currentPage: current_page,
 				totalPages: Math.ceil($('#pair_list li').length / 10),
 				alignment: "center",
+				size: "large",
 				onPageChanged:
 				function (event, oldPage, newPage) {
 					create_table_rows((newPage - 1) * 10, newPage * 10);

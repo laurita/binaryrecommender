@@ -62,7 +62,7 @@
 		</div>
 				
 		@if(pairsTotal > 10) {
-			<div class="pagination"></div>
+			<div class="pagination pagination-large"></div>
 		}
         
 		<div class="row">
@@ -267,6 +267,7 @@
 				currentPage: current_page,
 				totalPages: Math.ceil($('ul#pair_list').attr('data-pairs-total') / 10),
 				alignment: "center",
+				size: "large",
 				onPageChanged:
 				function (event, oldPage, newPage) {
 					next_page((newPage - 1) * 10, newPage * 10);
