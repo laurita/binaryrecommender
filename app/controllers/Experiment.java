@@ -205,7 +205,9 @@ public class Experiment extends Controller {
     List<Recommendation> secondList = Recommendation.find.fetch("movie")
       .where().eq("user", user).eq("updated", true).orderBy("rank").findList(); 
     
-    return ok(tpl_214.render(firstList, secondList, user));
+    int comparison = user.getRecommendationComparison();
+    
+    return ok(tpl_214.render(firstList, secondList, user, comparison));
   }
   
   public static Result handle_get_224() {
@@ -218,7 +220,9 @@ public class Experiment extends Controller {
     List<Recommendation> secondList = Recommendation.find.fetch("movie")
       .where().eq("user", user).eq("updated", true).orderBy("rank").findList(); 
     
-    return ok(tpl_224.render(firstList, secondList, user));
+    int comparison = user.getRecommendationComparison();
+    
+    return ok(tpl_224.render(firstList, secondList, user, comparison));
   }
   
   public static Result handle_get_215() {

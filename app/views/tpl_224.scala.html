@@ -1,4 +1,4 @@
-@(firstList: List[Recommendation], secondList: List[Recommendation], user: User)
+@(firstList: List[Recommendation], secondList: List[Recommendation], user: User, comparison: Integer)
 
 @main("Compare recommendations") {	
 	
@@ -156,7 +156,7 @@
 					Which recommendation list is more useful for you, i.e. contains more useful movies which are higher than the less usefull ones in the list? And how much?
 				</p>
 				<div class="span4 offset3">
-					<div class="slider slider-horizontal" style="width: 200px;">
+					<div class="slider slider-horizontal" data-slider-value=@comparison style="width: 200px;">
 					</div>
 				</div>
 					

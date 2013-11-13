@@ -232,6 +232,19 @@ public class User extends Model {
     return rows;
   }
   
+  public int getRecommendationComparison() {
+		String sql = String.format(
+      "select comparison from recommendation_comparisons " +
+      "where user_id = %d;", this.id);
+		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
+		List<SqlRow> rows = sqlQuery.findList();
+    int res = 0;
+    if (rows.size() != 0) {
+      res = rows.get(0).getInteger("comparison");
+    }
+    return res;
+  }
+  
   public void addRecommendationComparison(int value) {
     
     String sql;
