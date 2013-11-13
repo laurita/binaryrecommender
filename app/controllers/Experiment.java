@@ -97,14 +97,14 @@ public class Experiment extends Controller {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    return ok(tpl_112.render(form(AnswerQuestions.class)));
+    return ok(tpl_112.render(form(AnswerQuestions.class), user));
   }
   
   public static Result handle_get_122() {
     String userIdFromSession = session().get("userId");
     int userId = Integer.parseInt(userIdFromSession);
     User user = User.find.byId(userId);
-    return ok(tpl_122.render(form(AnswerQuestions.class)));
+    return ok(tpl_122.render(form(AnswerQuestions.class), user));
   }
   
   public static Result handle_get_113() {
