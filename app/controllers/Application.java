@@ -61,7 +61,8 @@ public class Application extends Controller {
       Form<Register> registerForm = form(Register.class).bindFromRequest();
       String email = registerForm.field("email").value();
       if (registerForm.hasErrors()) {
-        flash("error", String.format("User %s already exists.", email));
+        String errorMsg = registerForm.globalError().message();
+        flash("error", errorMsg);
         return badRequest(register.render(registerForm));
       }
       User user = new User(email);
@@ -86,9 +87,12 @@ public class Application extends Controller {
 
     public String validate() {
       System.out.println("Register.validate called");
+      if (email.equals("")) {
+        return "Please provide non-empty email";
+      }
       if (User.authenticate(email) != null) {
         System.out.println("User.authenticate != null");
-        return "Email already exists";
+        return String.format("User %s already exists.", email);
       }
       return null;
     }
