@@ -3,12 +3,13 @@
 @main("Answer Questions") {
 	
 	<div class="container">
+		<div class="hero-unit">
+			<p>
+				Please answer the questions below.
+			</p>
+		</div>
+		
 		@helper.form(routes.Experiment.handle_post(), 'method -> "post") {
-			<div class="hero-unit">
-				<p>
-					Please answer the questions below.
-				</p>
-			</div>
 		
 			<div class="span8 offset2">
 				<table class="table table-striped">
@@ -17,23 +18,23 @@
 							<td>
 							</td>
 							<td>
-								Strongly agree
+								Strongly disagree
 							</td>
 							<td>
-								Agree
+								Disgree
 							</td>
 							<td>
 								Neutral
 							</td>
 							<td>
-								Disagree
+								Agree
 							</td>
 							<td>
-								Strongly disagree
+								Strongly agree
 							</td>
 						</tr>
 					</thead>
-		
+			
 					<tbody>
 
 						<tr>
@@ -42,12 +43,12 @@
 									<td>1. I have fun using the system</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
+											<input type="radio" name="@name" id="stronglyDisgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
@@ -57,12 +58,12 @@
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
+											<input type="radio" name="@name" id="agree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
 								}
@@ -75,12 +76,12 @@
 									<td>2. Using the system is a pleasant experience</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
+											<input type="radio" name="@name" id="stronglyDisgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
@@ -90,12 +91,12 @@
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
+											<input type="radio" name="@name" id="agree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
 								}
@@ -108,12 +109,12 @@
 									<td>3. The system makes me more aware of my choice options</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
+											<input type="radio" name="@name" id="stronglyDisgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
@@ -123,12 +124,12 @@
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
+											<input type="radio" name="@name" id="agree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
 								}
@@ -141,12 +142,12 @@
 									<td>4. I feel bored when I am using the system</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 1) "checked"} value=1>
+											<input type="radio" name="@name" id="stronglyDisgree" @{if(answer == 1) "checked"} value=1>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="agree" @{if(answer == 2) "checked"} value=2>
+											<input type="radio" name="@name" id="disagree" @{if(answer == 2) "checked"} value=2>
 										</label>
 									</td>
 									<td>
@@ -156,20 +157,20 @@
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="disagree" @{if(answer == 4) "checked"} value=4>
+											<input type="radio" name="@name" id="agree" @{if(answer == 4) "checked"} value=4>
 										</label>
 									</td>
 									<td>
 										<label class="radio inline">
-											<input type="radio" name="@name" id="stronglyDisagree" @{if(answer == 5) "checked"} value=5>
+											<input type="radio" name="@name" id="stronglyAgree" @{if(answer == 5) "checked"} value=5>
 										</label>
 									</td>
 								}
 							}
 						</tr>
-			
+				
 					</tbody>
-		
+			
 				</table>
 			</div>
 		
