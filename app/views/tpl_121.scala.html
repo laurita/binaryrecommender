@@ -227,12 +227,14 @@
 				formater:
 				function (value) {						
 					if (value < 0) {
-						return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
+						//return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
+						return "<div class='tooltip-text-html'>+ " + repeat("<div class='star'>*</div>", Math.abs(value)) + " for " + $(this.element).attr("data-title_1") + "</div>";
 					}
 					else if (value > 0) {
-						return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");		
+						//return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");	
+						return "<div class='tooltip-text-html'>+ " + repeat("<div class='star'>*</div>", Math.abs(value)) + " for " + $(this.element).attr("data-title_2")+ "</div>";		
 					}
-					return "The same";
+					return "<div class='tooltip-text-html'>The same<div class='star'></div></div>";
 				}
 			}).on('slideStop', function() {
 				var $m1 = $(this).attr('data-movie_1');
