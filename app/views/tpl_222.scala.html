@@ -217,10 +217,10 @@
 				formater:
 				function (value) {						
 					if (value < 0) {
-						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
+						return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_1");
 					}
 					else if (value > 0) {
-						return "+ " + repeat("*", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");	
+						return "+ " + repeat("<img src='@routes.Assets.at("images/star.png")' />", Math.abs(value)) + " for " + $(this.element).attr("data-title_2");	
 					}
 					return "The same";
 				}
