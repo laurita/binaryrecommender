@@ -176,7 +176,6 @@ public class Experiment extends Controller {
         .eq("user", user).eq("updated", true)
           .orderBy("rank asc").findList();
     for (Recommendation rec : recs) {
-      System.out.println(rec);
     }
     return ok(tpl_213.render(recs, user));
   }
@@ -190,7 +189,6 @@ public class Experiment extends Controller {
         .eq("user", user).eq("updated", true)
           .orderBy("rank asc").findList();
     for (Recommendation rec : recs) {
-      System.out.println(rec);
     }
     return ok(tpl_223.render(recs, user));
   }
@@ -364,7 +362,6 @@ public class Experiment extends Controller {
     for (int i = 0; i < mfRankings.size(); i++) {
       Movie movie = Movie.find.byId(mfRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, false);
-      System.out.println(rec);
     }
     user.state = "211";
     user.update();
@@ -380,12 +377,12 @@ public class Experiment extends Controller {
     up.initialize(userId);
     
     List<Integer> unpreferedMovieIds = user.getUnpreferedMovieIdsFromGroup(0);
+    
     List<Integer> upRankings = up.predictRankingList(userId, unpreferedMovieIds, false).subList(0, 5);
     
     for (int i = 0; i < upRankings.size(); i++) {
       Movie movie = Movie.find.byId(upRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, false);
-      System.out.println(rec);
     }
     
     user.state = "221";
@@ -443,7 +440,6 @@ public class Experiment extends Controller {
     for (int i = 0; i < mfRankings.size(); i++) {
       Movie movie = Movie.find.byId(mfRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, true);
-      System.out.println(rec);
     }
     user.state = "213";
     user.update();
@@ -464,7 +460,6 @@ public class Experiment extends Controller {
     for (int i = 0; i < upRankings.size(); i++) {
       Movie movie = Movie.find.byId(upRankings.get(i));
       Recommendation rec = Recommendation.create(user, movie, i+1, true);
-      System.out.println(rec);
     }
     
     user.state = "223";
@@ -597,9 +592,7 @@ public class Experiment extends Controller {
     if (user != null) {
       JsonNode json = request().body().asJson();
       String aim = json.get("aim").asText();
-      
-      System.out.println("aim is " + aim);
-      
+            
       if (aim.equals("paginate")) {
         
         int first = json.get("from").asInt();
@@ -608,9 +601,7 @@ public class Experiment extends Controller {
         int last = json.get("to").asInt();
         int prefsCount = Preference.countForUser(userId);
         last = (last <= prefsCount) ? last : (prefsCount + 1);
-        
-        System.out.println("first " + first + ", last " + last);
-        
+                
         List<SqlRow> prefs = Movie.selectMoviePairs(userId, last - first, first);
         
         
@@ -618,7 +609,6 @@ public class Experiment extends Controller {
         addPrefsArrayToResult(result, prefs);
         result.put("total", prefsCount);
         
-        System.out.println(result);        
         return ok(result);
       }
       else if (aim.equals("add_pref")) {
@@ -629,9 +619,7 @@ public class Experiment extends Controller {
         Preference.create(user, movie1, movie2, value, false);
       }
       else if (aim.equals("hide")) {
-        
-        System.out.println(json);
-        
+                
         int id = json.get("id").asInt();
         int id1 = json.get("id1").asInt();
         int id2 = json.get("id2").asInt();
@@ -641,9 +629,7 @@ public class Experiment extends Controller {
         
 				// find first in page table row number
 				int prev_count = Preference.findRowCountUntil(userId, first_in_page_id1, first_in_page_id2, id);
-        
-        System.out.println("prev_count " + prev_count);
-				
+        				
 				// delete the pairs in list that contain movie with this id
 				Preference.deletePrefs(userId, id);
         
@@ -655,9 +641,7 @@ public class Experiment extends Controller {
 				int last = first + 10;
         int prefsCount = Preference.countForUser(userId);
         last = (last <= prefsCount) ? last : (prefsCount + 1);
-        
-        System.out.println("first " + first + ", last " + last);
-        
+                
         List<SqlRow> prefs = Movie.selectMoviePairs(userId, last - first, first);
         
         addPrefsArrayToResult(result, prefs);
@@ -709,7 +693,6 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     if (user != null) {
       JsonNode json = request().body().asJson();
-      System.out.println(json);
       boolean isChecked = json.get("is_checked").asBoolean();
       int movieId = json.get("movie_id").asInt();
       String name = json.get("name").asText();
@@ -727,7 +710,6 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     if (user != null) {
       JsonNode json = request().body().asJson();
-      System.out.println(json);
       boolean isChecked = json.get("is_checked").asBoolean();
       int movieId = json.get("movie_id").asInt();
       String name = json.get("name").asText();
@@ -765,7 +747,6 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     if (user != null) {
       JsonNode json = request().body().asJson();
-      System.out.println(json);
       Movie movie1 = Movie.find.byId(json.get("movie1_id").asInt());
       Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
       int value = json.get("value").asInt();
@@ -780,7 +761,6 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     if (user != null) {
       JsonNode json = request().body().asJson();
-      System.out.println(json);
       boolean isChecked = json.get("is_checked").asBoolean();
       int movieId = json.get("movie_id").asInt();
       String name = json.get("name").asText();
@@ -798,7 +778,6 @@ public class Experiment extends Controller {
     User user = User.find.byId(userId);
     if (user != null) {
       JsonNode json = request().body().asJson();
-      System.out.println(json);
       boolean isChecked = json.get("is_checked").asBoolean();
       int movieId = json.get("movie_id").asInt();
       String name = json.get("name").asText();

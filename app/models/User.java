@@ -313,10 +313,8 @@ public class User extends Model {
     String sql = String.format("update recommendation set %s = %b " +
       "where user_id = %d and movie_id = %d and updated = %b;",
       name, isChecked, this.id, movieId, updated);
-    System.out.println(sql);
     SqlUpdate update = Ebean.createSqlUpdate(sql);
     int modifiedCount = Ebean.execute(update);
-    System.out.println(modifiedCount + " rows updated");
   }
   
   public static void updateAllUserStates() {
