@@ -398,44 +398,14 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     
-    Map<String, String[]> map = request().body().asFormUrlEncoded();
-    System.out.println(map);
-    System.out.println(map.keySet());
-    String[] goodOnes = map.get("good");
-    String[] seenOnes = map.get("seen");
-			
-    List<Integer> good = new ArrayList<Integer>();
-    List<Integer> seen = new ArrayList<Integer>();
-		
-    if (goodOnes != null) {
-      for (String g : goodOnes) {
-        good.add(Integer.parseInt(g));
-      }
-    }
-    if (seenOnes != null) {
-      for (String s : seenOnes) {
-        seen.add(Integer.parseInt(s));
-      }
-    }
-
-    List<Recommendation> recs = Recommendation.find.fetch("movie")
-      .where().eq("user", user).eq("updated", false).findList();
-    
-    // write good and seen recommendations to db
-    System.out.println("updating");
-    for (Recommendation rec : recs) {
-      Movie m = rec.movie;
-      rec.good = good.contains(m.id);
-      rec.seen = seen.contains(m.id);
-      rec.update();
-      System.out.println(rec);
-    }
+    List<Recommendation> seenRecs = Recommendation.find
+      .where().eq("user", user).eq("updated", false).eq("seen", true).findList();
     
     user.state = "212";
     user.update();
     
     // skip rating of seen movies if there is 0 movies seen 
-    if (seenOnes == null) {
+    if (seenRecs == null || seenRecs.size() == 0) {
       return handle_post();
     }
         
@@ -447,44 +417,14 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     
-    Map<String, String[]> map = request().body().asFormUrlEncoded();
-    System.out.println(map);
-    System.out.println(map.keySet());
-    String[] goodOnes = map.get("good");
-    String[] seenOnes = map.get("seen");
-			
-    List<Integer> good = new ArrayList<Integer>();
-    List<Integer> seen = new ArrayList<Integer>();
-		
-    if (goodOnes != null) {
-      for (String g : goodOnes) {
-        good.add(Integer.parseInt(g));
-      }
-    }
-    if (seenOnes != null) {
-      for (String s : seenOnes) {
-        seen.add(Integer.parseInt(s));
-      }
-    }
-
-    List<Recommendation> recs = Recommendation.find.fetch("movie")
-      .where().eq("user", user).eq("updated", false).findList();
-    
-    // write good and seen recommendations to db
-    System.out.println("updating");
-    for (Recommendation rec : recs) {
-      Movie m = rec.movie;
-      rec.good = good.contains(m.id);
-      rec.seen = seen.contains(m.id);
-      rec.update();
-      System.out.println(rec);
-    }
+    List<Recommendation> seenRecs = Recommendation.find
+      .where().eq("user", user).eq("updated", false).eq("seen", true).findList();
     
     user.state = "222";
     user.update();
     
     // skip comparisons of seen movies if there is 1 or less movies seen 
-    if (seenOnes == null || seenOnes.length <= 1) {
+    if (seenRecs == null || seenRecs.size() <= 1) {
       return handle_post();
     }
     
@@ -536,39 +476,6 @@ public class Experiment extends Controller {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
     
-    Map<String, String[]> map = request().body().asFormUrlEncoded();
-    System.out.println(map);
-    System.out.println(map.keySet());
-    String[] goodOnes = map.get("good");
-    String[] seenOnes = map.get("seen");
-			
-    List<Integer> good = new ArrayList<Integer>();
-    List<Integer> seen = new ArrayList<Integer>();
-		
-    if (goodOnes != null) {
-      for (String g : goodOnes) {
-        good.add(Integer.parseInt(g));
-      }
-    }
-    if (seenOnes != null) {
-      for (String s : seenOnes) {
-        seen.add(Integer.parseInt(s));
-      }
-    }
-
-    List<Recommendation> recs = Recommendation.find.fetch("movie")
-      .where().eq("user", user).eq("updated", true).findList();
-    
-    // write good and seen recommendations to db
-    System.out.println("updating");
-    for (Recommendation rec : recs) {
-      Movie m = rec.movie;
-      rec.good = good.contains(m.id);
-      rec.seen = seen.contains(m.id);
-      rec.update();
-      System.out.println(rec);
-    }
-    
     user.state = "214";
     user.update();
     return redirect(routes.Experiment.handle_get());
@@ -577,39 +484,6 @@ public class Experiment extends Controller {
   public static Result handle_post_223() {
     int userId = Integer.parseInt(session().get("userId"));
     User user = User.find.byId(userId);
-    
-    Map<String, String[]> map = request().body().asFormUrlEncoded();
-    System.out.println(map);
-    System.out.println(map.keySet());
-    String[] goodOnes = map.get("good");
-    String[] seenOnes = map.get("seen");
-			
-    List<Integer> good = new ArrayList<Integer>();
-    List<Integer> seen = new ArrayList<Integer>();
-		
-    if (goodOnes != null) {
-      for (String g : goodOnes) {
-        good.add(Integer.parseInt(g));
-      }
-    }
-    if (seenOnes != null) {
-      for (String s : seenOnes) {
-        seen.add(Integer.parseInt(s));
-      }
-    }
-
-    List<Recommendation> recs = Recommendation.find.fetch("movie")
-      .where().eq("user", user).eq("updated", true).findList();
-    
-    // write good and seen recommendations to db
-    System.out.println("updating");
-    for (Recommendation rec : recs) {
-      Movie m = rec.movie;
-      rec.good = good.contains(m.id);
-      rec.seen = seen.contains(m.id);
-      rec.update();
-      System.out.println(rec);
-    }
     
     user.state = "224";
     user.update();
@@ -830,6 +704,42 @@ public class Experiment extends Controller {
   }
   
   @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_211() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      JsonNode json = request().body().asJson();
+      System.out.println(json);
+      boolean isChecked = json.get("is_checked").asBoolean();
+      int movieId = json.get("movie_id").asInt();
+      String name = json.get("name").asText();
+      boolean updated = false;
+      
+      // update recommendation in db
+      user.updateRecommendation(movieId, name, isChecked, updated);
+    }
+    return ok();
+  }
+  
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_221() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      JsonNode json = request().body().asJson();
+      System.out.println(json);
+      boolean isChecked = json.get("is_checked").asBoolean();
+      int movieId = json.get("movie_id").asInt();
+      String name = json.get("name").asText();
+      boolean updated = false;
+      
+      // update recommendation in db
+      user.updateRecommendation(movieId, name, isChecked, updated);
+    }
+    return ok();
+  }
+  
+  @BodyParser.Of(BodyParser.Json.class)
   public static Result handle_ajax_212() {
     if (request().method() == "POST") {
       int value = Integer.parseInt(request().body().asFormUrlEncoded().get("rating")[0]);
@@ -860,6 +770,42 @@ public class Experiment extends Controller {
       Movie movie2 = Movie.find.byId(json.get("movie2_id").asInt());
       int value = json.get("value").asInt();
       Preference.create(user, movie1, movie2, value, true);
+    }
+    return ok();
+  }
+  
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_213() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      JsonNode json = request().body().asJson();
+      System.out.println(json);
+      boolean isChecked = json.get("is_checked").asBoolean();
+      int movieId = json.get("movie_id").asInt();
+      String name = json.get("name").asText();
+      boolean updated = true;
+      
+      // update recommendation in db
+      user.updateRecommendation(movieId, name, isChecked, updated);
+    }
+    return ok();
+  }
+  
+  @BodyParser.Of(BodyParser.Json.class)
+  public static Result handle_ajax_223() {
+    int userId = Integer.parseInt(session().get("userId"));
+    User user = User.find.byId(userId);
+    if (user != null) {
+      JsonNode json = request().body().asJson();
+      System.out.println(json);
+      boolean isChecked = json.get("is_checked").asBoolean();
+      int movieId = json.get("movie_id").asInt();
+      String name = json.get("name").asText();
+      boolean updated = true;
+      
+      // update recommendation in db
+      user.updateRecommendation(movieId, name, isChecked, updated);
     }
     return ok();
   }

@@ -305,6 +305,16 @@ public class User extends Model {
     //String msg = "There were " + modifiedCount + " rows inserted";
   }
   
+  public void updateRecommendation(int movieId, String name, boolean isChecked, boolean updated) {
+    String sql = String.format("update recommendation set %s = %b " +
+      "where user_id = %d and movie_id = %d and updated = %b;",
+      name, isChecked, this.id, movieId, updated);
+    System.out.println(sql);
+    SqlUpdate update = Ebean.createSqlUpdate(sql);
+    int modifiedCount = Ebean.execute(update);
+    System.out.println(modifiedCount + " rows updated");
+  }
+  
   public static void updateAllUserStates() {
     System.out.println("updateing user states ...");
     String sqlString, msg;

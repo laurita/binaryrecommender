@@ -1,26 +1,27 @@
 @(recs: List[Recommendation], user: User)
 
 @main("Recommended list of movies") {	
-	@helper.form(routes.Experiment.handle_post()) {
-		<div class="container">
-			<div class="hero-unit">
-				These are the movies recommended for you in the order that is important.
-				<ol>
-					<li>Please mark the movies that you consider good recommendations, i.e. you haven't seen the movie and you would like to watch it, or you have seen the movie and you would like to watch it again. 
-					</li>
-				</ol>
-			</div>
-			<div class="row">
-				<div class="span8 offset2">
-					<div id="list-movie" class="content scaffold-list" role="main">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
+	
+	<div class="container">
+		<div class="hero-unit">
+			These are the movies recommended for you in the order that is important.
+			<ol>
+				<li>Please mark the movies that you consider good recommendations, i.e. you haven't seen the movie and you would like to watch it, or you have seen the movie and you would like to watch it again. 
+				</li>
+			</ol>
+		</div>
+		<div class="row">
+			<div class="span8 offset2">
+				<div id="list-movie" class="content scaffold-list" role="main">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@helper.form(routes.Experiment.handle_post()) {
 								@for(rec <- recs) {
 									<tr class="movie-id-@{rec.movie.id}">
 										<td>
@@ -54,10 +55,10 @@
 													</div>
 													<div class="row">
 														<label class="checkbox">
-															<input type="checkbox" name="good" value="@rec.movie.id"> Good recommendation
+															<input type="checkbox" name="good" @{if(rec.good) "checked"} value="@rec.movie.id"> Good recommendation
 														</label>
 														<label class="checkbox">
-															<input type="checkbox" name="seen" value="@rec.movie.id"> I have seen it
+															<input type="checkbox" name="seen" @{if(rec.seen) "checked"} value="@rec.movie.id"> I have seen it
 														</label> 
 													</div>
 												</div>
@@ -72,22 +73,24 @@
 										</td>
 									</tr>
 								}
-							
-							</tbody>
-						</table>
+							}
+						</tbody>
+					</table>
 					
-					</div>
 				</div>
-			
-				<div class="row">
-					<div class="span2 offset5">
-						<input type="submit" class="btn btn-large btn-primary" id="load-btn" value="Continue"></button>
-					</div>
-				</div>
-			
 			</div>
+			
+			<div class="row">
+				<div class="span2 offset5">
+					<form action="@routes.Experiment.handle_post()" method="POST">
+						<input class="btn btn-primary btn-large add-prefs-btn" type="submit" value="Continue"></input>
+					</form>
+				</div>
+			</div>
+			
 		</div>
-	}
+	</div>
+	
 	
 	<script type="text/javascript">
 	$(document).ready(function () {
@@ -109,6 +112,21 @@
 			});
 
 			return false;
+		});
+		
+		$(":checkbox").change(function(){
+			console.log(this);
+			var is_checked = $(this).is(':checked') ? true : false; 
+			var name = this.getAttribute('name');
+			var movie_id = this.getAttribute('value');
+			
+			$.ajax({
+				type: "POST",
+				url: "/ajax",
+				data: JSON.stringify({"is_checked": is_checked, "movie_id": movie_id, "name": name}),
+				contentType: 'application/json',
+				success: function(data) {}
+			});
 		});
 	});
 	</script>
