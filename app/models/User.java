@@ -131,8 +131,9 @@ public class User extends Model {
   
 	public List<Integer> getUnratedMovieIdsFromGroup(int group) {
 		String sql = String.format("SELECT id FROM (SELECT *, ROW_NUMBER() OVER " +
-      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) AS tbl2 " +
-      "WHERE r %% 2 = %d;", group);
+      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) as tbl2 where r %% 2 = %d and id not in " +
+      "(select distinct(movie_id) from rating where user_id = %d and additional = false);",
+      group, this.id);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
 		List<Integer> allIds = new ArrayList<Integer>();
@@ -167,8 +168,11 @@ public class User extends Model {
   
 	public List<Integer> getUnpreferedMovieIdsFromGroup(int group) {
 		String sql = String.format("SELECT id FROM (SELECT *, ROW_NUMBER() OVER " +
-      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) AS tbl2 " +
-      "WHERE r %% 2 = %d;", group);
+      "(ORDER BY LOGPOPVAR desc) AS r FROM movie) as tbl2 where r %% 2 = %d and id not in " +
+      "(select distinct(movie1_id) from preference where user_id = %d and value is not null " + 
+      "and additional = false union select distinct(movie2_id) from preference where user_id = %d " + 
+      "and value is not null and additional = false);", 
+      group, this.id, this.id);
 		SqlQuery sqlQuery = Ebean.createSqlQuery(sql);
 		List<SqlRow> rows = sqlQuery.findList();
     List<Integer> ids = new ArrayList<Integer>();
