@@ -25,3 +25,7 @@ MOVIES FILE DESCRIPTION
 ================================================================================
 
 Movie id's filtered by log(popularity)*variance are listed in file "bestMovieIds.dat".
+
+moviePairs.dat contains the moviepairs with their log(pop1) * log(pop2) * (1-corr(1,2))
+
+moviePairs3.dat contains the moviepairs with their log(pop1)^2 * log(pop2)^2 * (1-corr(1,2))
