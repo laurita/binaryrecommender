@@ -78,19 +78,23 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div id="wrap">
+		<div class="container">
 				
-		@if(flash.containsKey("success")){
-			<div class="alert alert-success">
-				@flash.get("success")
-			</div>
-		}
-		@if(flash.containsKey("error")){
-			<div class="alert alert-error">
-				@flash.get("error")
-			</div>
-		}
-		@content
+			@if(flash.containsKey("success")){
+				<div class="alert alert-success">
+					@flash.get("success")
+				</div>
+			}
+			@if(flash.containsKey("error")){
+				<div class="alert alert-error">
+					@flash.get("error")
+				</div>
+			}
+			@content
+		</div>
+		
+		<div id="push"></div>
 	</div>
 	
 	<div id="footer">
