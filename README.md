@@ -1,4 +1,4 @@
-This is your new Play application
+binaryrecommender
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+The code of the online experiment that I conducted in order to perform A/B testing for my masters [thesis](http://laura.lambda.lt/assets/MSc.pdf). It consists of two recommender systems: one based on an algorithms developed for the thesis that incorporates pairwise preferences, the other based on matrix factorization - a state of the art in collaborative filtering. The website implemented using Play framework. Backend written in Java, frontend - in Javascript. DB used - PostgreSQL. Currently [deployed on Heroku](http://binaryrecommender.herokuapp.com) but the experiment is finished and it will be closed soon. 
