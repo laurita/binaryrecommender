@@ -18,7 +18,6 @@ public class Application extends Controller {
   
 
   // Login
-  
   public static Result login() {
     if (request().method() == "POST") {
       Form<Login> loginForm = form(Login.class).bindFromRequest();
@@ -47,7 +46,6 @@ public class Application extends Controller {
   }
   
   // Logout
-  
   public static Result logout() {
     session().clear();
     flash("success", "You've been logged out");
@@ -55,7 +53,6 @@ public class Application extends Controller {
   }
   
   // Register
-  
   public static Result register() {
     if (request().method() == "POST") {
       Form<Register> registerForm = form(Register.class).bindFromRequest();
@@ -99,19 +96,16 @@ public class Application extends Controller {
   }
   
   // About
-  
   public static Result about() {
     return ok(about.render());
   }
   
   // Contact
-  
   public static Result contact() {
     return ok(contact.render());
   }
   
   // Update for second stage
-  
   public static Result updateToNextStage() {
     User.updateAllUserStates();
     return ok();

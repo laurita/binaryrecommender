@@ -3,15 +3,10 @@ package models.algorithms.helpers;
 import java.util.*;
 
 /*************************************************************************
- *  Compilation:  javac KendallTau.java
- *  Execution:    java KendallTau N
  *
- *  Generate two random permutations of size N, then compute the
- *  Kendall tau distance between them.
+ *  Ccomputes the Kendall tau distance between two ranking lists.
  *
  *************************************************************************/
-
-
 public class KendallTau {
 
     public static double kendalTau(int[] p, int[] q) {
@@ -81,37 +76,6 @@ public class KendallTau {
         }
         return N == 1 ? 0 : (n_c - n_d);
     }
-
-    /**
-    public static double kendalTauWithTies(int[] p, int[] q, double p_correction, double q_correction) {
-
-        int N = p.length;
-
-        try {
-            assert N == q.length;
-        } catch (Exception e) {
-            System.err.println("Lengths of arrays must be equal");
-            e.printStackTrace();
-        }
-
-        // inverse of 2nd permutation
-        Map<Integer,Integer> inv = new HashMap<Integer, Integer>();
-
-        for (int i = 0; i < N; i++) {
-            inv.put(q[i], i);
-        }
-
-        // calculate Kendall tau distance
-        int tau = 0;
-        for (int i = 0; i < N; i++) {
-            for (int j = i+1; j < N; j++) {
-                // check if p[i] and p[j] are inverted
-                if (inv.get(p[i]) > inv.get(p[j])) tau++;
-            }
-        }
-        return N == 1 ? 0 : tau / Math.sqrt(((N * (N - 1) - p_correction) / 2.0) * ((N * (N - 1) - q_correction) / 2.0));
-    }
-    **/
 
     public static double kendalTauWithTies(List<List<Integer>> p, List<List<Integer>> q) {
         List<Integer>  pList = new ArrayList<Integer>();

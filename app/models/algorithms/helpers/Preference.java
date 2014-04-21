@@ -73,7 +73,7 @@ public class Preference implements Comparable<Preference>{
 	/**
 		* Sorts in a descending order if sorted with Collections.sort()
 		*/
-		@Override
+	@Override
 	public int compareTo(Preference o) {
 		return Double.compare(o.value, value);
 	}

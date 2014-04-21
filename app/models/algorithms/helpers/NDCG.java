@@ -3,13 +3,6 @@ package models.algorithms.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: laura
- * Date: 5/15/13
- * Time: 5:13 PM
- * To change this template use File | Settings | File Templates.
- */
 public class NDCG {
 
     /**
@@ -53,12 +46,12 @@ public class NDCG {
         return dcg / idcg;
     }
 
-    /// <summary>Computes the ideal DCG given the number of positive items.</summary>
-    /// <remarks>
-    /// See http://recsyswiki.com/wiki/Discounted_Cumulative_Gain
-    /// </remarks>
-    /// <returns>the ideal DCG</returns>
-    /// <param name='n'>the number of positive items</param>
+    /**
+     * Computes the ideal DCG given the number of positive items
+     * See http://recsyswiki.com/wiki/Discounted_Cumulative_Gain
+     * @param n : the number of positive items
+     * @return : the ideal DCG
+     */
     static double getIDCG(int n) {
         double idcg = 0;
         for (int i = 0; i < n; i++) {

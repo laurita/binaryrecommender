@@ -1,6 +1,5 @@
 logs
-project/project
-project/target
+project/
 target
 tmp
 .history
@@ -13,3 +12,4 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+remoteDBpasswd.txt

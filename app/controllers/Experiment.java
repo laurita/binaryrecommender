@@ -26,7 +26,6 @@ import java.util.Date;
 public class Experiment extends Controller {
 	
   // GET request actions
-  
   @Security.Authenticated(Secured.class)
   public static Result handle_get() {
     System.out.println("handle_get");
@@ -260,7 +259,6 @@ public class Experiment extends Controller {
   }
   
   // POST request actions
-    
   public static Result handle_post() {
     System.out.println("handle_post");
     String userIdFromSession = session().get("userId");
@@ -820,7 +818,6 @@ public class Experiment extends Controller {
   }
   
   // Classes for forms
-  
   public static class AnswerQuestions {
     public int q1Answer;
     public int q2Answer;
